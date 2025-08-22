@@ -16,6 +16,15 @@
             --bg-soft: #ffffff;
             --text-color: #333;
         }
+        [data-theme="dark"] {
+            --primary-color: #5d9cec;
+            --secondary-color: #2a2a2a;
+            --accent-color: #f8f9fa;
+            --highlight-color: #e63946;
+            --bg-light: #121212;
+            --bg-soft: #1e1e1e;
+            --text-color: #f1f1f1;
+        }
         * {
             box-sizing: border-box;
             scroll-behavior: smooth;
@@ -182,6 +191,60 @@
         .hamburger-menu.open span:nth-child(3) {
             transform: translateY(-11px) rotate(-45deg);
         }
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+        }
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: var(--accent-color);
+            transition: .4s;
+            border-radius: 34px;
+        }
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: var(--bg-soft);
+            transition: .4s;
+            border-radius: 50%;
+        }
+        .slider:after {
+            content: "\2600";
+            color: yellow;
+            font-size: 18px;
+            position: absolute;
+            left: 32px;
+            top: 50%;
+            transform: translateY(-50%);
+            transition: .4s;
+        }
+        input:checked + .slider {
+            background-color: #6a6a6a;
+        }
+        input:checked + .slider:before {
+            transform: translateX(26px);
+        }
+        input:checked + .slider:after {
+            content: "\1F315";
+            color: white;
+            left: 8px;
+        }
         .sidebar {
             height: 100%;
             width: 0;
@@ -264,6 +327,86 @@
             pointer-events: none;
             user-select: none;
         }
+        .nav-controls {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            gap: 15px;
+            flex-grow: 1;
+            padding-right: 20px;
+        }
+        #navSearchInput, #navCategorySelect, #nav-lang-select {
+            padding: 8px 12px;
+            font-size: 14px;
+            border: 1px solid #ddd;
+            border-radius: 20px;
+            background-color: var(--bg-soft);
+            color: var(--text-color);
+            width: 180px;
+            transition: all 0.3s;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+        #navSearchInput:focus, #navCategorySelect:focus, #nav-lang-select:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.2), 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .nav-controls label {
+            display: none;
+        }
+        #category-controls {
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+            margin: 20px auto;
+            padding: 10px 0;
+            z-index: 999;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            border-radius: 8px;
+            max-width: 700px;
+            background: none;
+            box-shadow: none;
+        }
+        #main-content #searchInput, #main-content #categorySelect {
+            display: block;
+            width: 100%;
+            max-width: 300px;
+            padding: 10px 20px;
+            font-size: 15px;
+            border: 2px solid var(--primary-color);
+            border-radius: 30px;
+            background-color: var(--bg-soft);
+            color: var(--text-color);
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.08);
+        }
+        #main-content #searchInput:focus, #main-content #categorySelect:focus {
+            outline: none;
+            box-shadow: 0 6px 12px rgba(0, 123, 255, 0.25);
+        }
+        #back-to-all-btn {
+            display: none;
+            background-color: var(--highlight-color);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        #back-to-all-btn.visible {
+            display: inline-block;
+        }
+        #back-to-all-btn:hover {
+            background-color: #c92f39;
+            transform: translateY(-2px);
+        }
         section {
             padding: 40px 0;
             margin-bottom: 10px;
@@ -336,6 +479,13 @@
             transition: background-color 0.3s ease, color 0.3s ease;
             cursor: pointer;
             font-weight: 600;
+        }
+        .product-category h3.highlight {
+            background-color: var(--highlight-color);
+            color: white;
+            border-left-color: rgb(250, 0, 0);
+            padding: 10px 15px;
+            border-radius: 0 8px 8px 0;
         }
         .gallery {
             display: grid;
@@ -1020,7 +1170,46 @@
         #google_translate_element {
             display: none;
         }
-        
+        .language-dropdown-container {
+            position: relative;
+            z-index: 100;
+        }
+        #nav-lang-select {
+            appearance: none;
+            background-image: url('data:image/svg+xml;utf8,<svg fill="black" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>');
+            background-repeat: no-repeat;
+            background-position: right 12px center;
+            padding-right: 30px;
+            cursor: pointer;
+        }
+        /* Mobile-specific menu styles */
+        .mobile-menu-container {
+            position: fixed;
+            top: 60px; /* Adjust based on nav height */
+            left: 0;
+            right: 0;
+            background-color: var(--bg-soft);
+            padding: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            transition: transform 0.3s ease-in-out;
+            transform: translateY(-150%);
+        }
+        .mobile-menu-container.open {
+            transform: translateY(0);
+        }
+        .mobile-menu-container #mobileSearchInput,
+        .mobile-menu-container #mobileCategorySelect,
+        .mobile-menu-container #mobile-lang-select {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+        }
         /* Media Queries */
         @media (min-width: 768px) {
             .contact-content {
@@ -1029,7 +1218,10 @@
             .nav-controls {
                 display: flex;
             }
-            .sidebar-controls {
+            #category-controls {
+                display: none;
+            }
+            .mobile-menu-container {
                 display: none;
             }
             #main-nav {
@@ -1056,6 +1248,9 @@
             }
             .hamburger-box {
                 padding: 8px 12px;
+            }
+            #category-controls {
+                display: none; /* Hide the desktop-style controls on mobile */
             }
             .gallery {
                 grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
@@ -1090,6 +1285,10 @@
         @media (max-width: 480px) {
             header h1 {
                 font-size: 1.5em;
+            }
+            #category-controls {
+                padding-left: 10px;
+                padding-right: 10px;
             }
             .gallery {
                 grid-template-columns: 1fr;
@@ -1135,8 +1334,6 @@
                 <h3 class="product-title notranslate" id="modal-product-title"></h3>
                 <p class="product-detail notranslate" id="modal-product-detail"></p>
                 <div id="modal-product-description" class="product-description-box"></div>
-                <button id="recipe-btn" class="cta-btn primary-btn" style="margin-top: 15px;">✨ Get a Recipe Idea</button>
-                <div id="recipe-container" style="margin-top: 15px; text-align: left; white-space: pre-wrap;"></div>
                 <a href="#" class="whatsapp-btn" id="modal-whatsapp-btn" onclick="sendWhatsAppMessageFromModal(event)">
                     <i class="fab fa-whatsapp"></i> Order on WhatsApp
                 </a>
@@ -1195,7 +1392,35 @@
             <span class="company-name notranslate">Serial Enterprise Foods</span>
         </div>
         <div class="nav-controls">
-           
+            <select id="nav-lang-select" onchange="doGTranslate(this.value)">
+                <option value="en" selected>English</option>
+                <option value="hi">हिंदी</option>
+                <option value="mr">मराठी</option>
+            </select>
+            <input
+                type="text"
+                id="navSearchInput"
+                placeholder="Search for a product..."
+                aria-label="Search for products"
+            />
+            <select id="navCategorySelect" aria-label="Select product category">
+                <option value="all">All Categories</option>
+                <option value="soya-chunks">Soya Chunks</option>
+                <option value="pastes">Pastes</option>
+                <option value="seviyan">Seviyan</option>
+                <option value="bakery">Bakery & Dry Items</option>
+                <option value="ready-cook">Ready to Cook</option>
+                <option value="tofu">Tofu (Soya Paneer)</option>
+                <option value="pickles">Pickles</option>
+                <option value="pudding">Pudding</option>
+                <option value="frozen">Frozen Treats</option>
+                <option value="chocolates">Chocolates</option>
+                <option value="beverages">Beverages</option>
+            </select>
+            <label class="switch">
+                <input type="checkbox" id="theme-toggle" />
+                <span class="slider"></span>
+            </label>
         </div>
         <div id="google_translate_element"></div>
     </nav>
@@ -1214,6 +1439,29 @@
             <i class="fas fa-paper-plane"></i>
             <span>Make an Enquiry</span>
         </a>
+        <div id="category-controls" aria-label="Product search and category filter">
+            <input
+                type="text"
+                id="searchInput"
+                placeholder="Search for a product..."
+                aria-label="Search for products"
+            />
+            <select id="categorySelect" aria-label="Select product category">
+                <option value="all">All Categories</option>
+                <option value="soya-chunks">Soya Chunks</option>
+                <option value="pastes">Pastes</option>
+                <option value="seviyan">Seviyan</option>
+                <option value="bakery">Bakery & Dry Items</option>
+                <option value="ready-cook">Ready to Cook</option>
+                <option value="tofu">Tofu (Soya Paneer)</option>
+                <option value="pickles">Pickles</option>
+                <option value="pudding">Pudding</option>
+                <option value="frozen">Frozen Treats</option>
+                <option value="chocolates">Chocolates</option>
+                <option value="beverages">Beverages</option>
+            </select>
+            <button id="back-to-all-btn" onclick="showAllProducts()">Back to All Products</button>
+        </div>
         <section id="home">
             <div class="welcome-content animate-on-scroll">
                 <h2>Welcome to <span class="notranslate">Serial Enterprise Foods Private Limited</span></h2>
@@ -1872,6 +2120,10 @@
             }
         }
 
+        const searchInput = document.getElementById("searchInput");
+        const categorySelect = document.getElementById("categorySelect");
+        const navSearchInput = document.getElementById("navSearchInput");
+        const navCategorySelect = document.getElementById("navCategorySelect");
         const productCategories = document.querySelectorAll(".product-category");
         const homeSection = document.getElementById("home");
         const categoryHeaders = document.querySelectorAll(".product-category h3");
@@ -1888,16 +2140,36 @@
         const galleryItems = document.querySelectorAll('.gallery-item');
         const htmlEl = document.documentElement;
         const mainNav = document.getElementById('main-nav');
+        const backToAllBtn = document.getElementById('back-to-all-btn');
+        const themeToggle = document.getElementById("theme-toggle");
         const contactForm = document.getElementById("contactForm");
         const formStatusMessage = document.getElementById("formStatusMessage");
+        const navLangSelect = document.getElementById("nav-lang-select");
+        const mobileLangSelect = document.getElementById("mobile-lang-select");
+        const mobileMenuContainer = document.getElementById("mobile-menu-container");
+        const mobileSearchInput = document.getElementById("mobileSearchInput");
+        const mobileCategorySelect = document.getElementById("mobileCategorySelect");
         const mainContent = document.getElementById("main-content");
-        const recipeBtn = document.getElementById("recipe-btn");
-        const recipeContainer = document.getElementById("recipe-container");
 
         window.onload = function() {
             window.scrollTo(0, 0);
+            updateLangSelects(navLangSelect.value);
         };
         
+        function doGTranslate(lang) {
+            const googTr = document.querySelector('#google_translate_element select');
+            if (googTr) {
+                googTr.value = lang;
+                googTr.dispatchEvent(new Event('change'));
+            }
+            updateLangSelects(lang);
+        }
+
+        function updateLangSelects(lang) {
+            navLangSelect.value = lang;
+            mobileLangSelect.value = lang;
+        }
+
         function openNav() {
             sideMenu.style.width = "250px";
             hamburgerMenu.classList.add('open');
@@ -1929,6 +2201,136 @@
             }
         });
         
+        function syncSearchInputs(sourceInput, targetInput) {
+            targetInput.value = sourceInput.value;
+        }
+
+        function syncCategorySelects(sourceSelect, targetSelect) {
+            targetSelect.value = sourceSelect.value;
+        }
+
+        function updateBackButtonVisibility() {
+            const hasSearchTerm = searchInput.value.trim().length > 0 || navSearchInput.value.trim().length > 0 || mobileSearchInput.value.trim().length > 0;
+            const hasCategorySelected = categorySelect.value !== 'all' || navCategorySelect.value !== 'all' || mobileCategorySelect.value !== 'all';
+            if (hasSearchTerm || hasCategorySelected) {
+                backToAllBtn.classList.add('visible');
+            } else {
+                backToAllBtn.classList.remove('visible');
+            }
+        }
+        
+        function filterProducts() {
+            const isMobile = window.innerWidth <= 767;
+            const currentSearchInput = isMobile ? mobileSearchInput : navSearchInput;
+            const currentCategorySelect = isMobile ? mobileCategorySelect : navCategorySelect;
+            const searchTerm = currentSearchInput.value.trim().toLowerCase();
+            const categoryId = currentCategorySelect.value;
+            
+            let firstMatchFound = false;
+
+            productCategories.forEach(category => {
+                let categoryHasMatch = false;
+                const isCategoryMatch = categoryId === "all" || category.id === categoryId;
+                
+                if (!isCategoryMatch && searchTerm.length === 0) {
+                    category.style.display = "none";
+                    return;
+                }
+                category.querySelectorAll(".gallery-item").forEach(item => {
+                    const title = item.querySelector(".product-title").textContent.toLowerCase();
+                    const description = item.querySelector(".product-description-box p").textContent.toLowerCase();
+                    const matchesSearch = title.includes(searchTerm) || description.includes(searchTerm);
+                    
+                    if (matchesSearch && isCategoryMatch) {
+                        item.style.display = "flex";
+                        categoryHasMatch = true;
+                    } else {
+                        item.style.display = "none";
+                    }
+                });
+                category.style.display = categoryHasMatch ? "" : "none";
+                if (isCategoryMatch && categoryHasMatch && !firstMatchFound && (searchTerm.length > 0 || categoryId !== 'all')) {
+                    firstMatchFound = true;
+                    setTimeout(() => {
+                        const offset = mainNav.offsetHeight + 20;
+                        const targetPosition = category.offsetTop - offset;
+                        window.scrollTo({
+                            top: targetPosition,
+                            behavior: "smooth"
+                        });
+                    }, 50);
+                }
+            });
+            highlightCategory(categoryId);
+            updateHomeVisibility();
+            updateBackButtonVisibility();
+        }
+
+        function showAllProducts() {
+            document.getElementById("categorySelect").value = "all";
+            document.getElementById("navCategorySelect").value = "all";
+            document.getElementById("mobileCategorySelect").value = "all";
+            document.getElementById("searchInput").value = "";
+            document.getElementById("navSearchInput").value = "";
+            document.getElementById("mobileSearchInput").value = "";
+            filterProducts();
+        }
+
+        navSearchInput.addEventListener("input", () => {
+            // When typing in search, reset the category dropdown
+            navCategorySelect.value = 'all';
+            mobileCategorySelect.value = 'all';
+            syncSearchInputs(navSearchInput, mobileSearchInput);
+            filterProducts();
+        });
+
+        navCategorySelect.addEventListener("change", () => {
+            // When selecting a category, reset the search input
+            navSearchInput.value = '';
+            mobileSearchInput.value = '';
+            syncCategorySelects(navCategorySelect, mobileCategorySelect);
+            filterProducts();
+        });
+
+        mobileSearchInput.addEventListener("input", () => {
+            // When typing in mobile search, reset the category dropdown
+            navCategorySelect.value = 'all';
+            mobileCategorySelect.value = 'all';
+            syncSearchInputs(mobileSearchInput, navSearchInput);
+            filterProducts();
+        });
+
+        mobileCategorySelect.addEventListener("change", () => {
+            // When selecting a category on mobile, reset the search input
+            navSearchInput.value = '';
+            mobileSearchInput.value = '';
+            syncCategorySelects(mobileCategorySelect, navCategorySelect);
+            filterProducts();
+        });
+        
+        // These listeners are for the controls inside the main content, which are hidden on larger screens.
+        // We'll apply the same logic for consistency.
+        searchInput.addEventListener("input", () => {
+            categorySelect.value = 'all';
+            filterProducts();
+        });
+        categorySelect.addEventListener("change", () => {
+            searchInput.value = '';
+            filterProducts();
+        });
+
+        backToAllBtn.addEventListener("click", showAllProducts);
+        filterProducts();
+
+        if (themeToggle) {
+            themeToggle.addEventListener("change", () => {
+                if (themeToggle.checked) {
+                    htmlEl.setAttribute("data-theme", "dark");
+                } else {
+                    htmlEl.setAttribute("data-theme", "light");
+                }
+            });
+        }
         if (fixedEnquiryBtn) {
             fixedEnquiryBtn.addEventListener('click', function(e) {
                 e.preventDefault();
@@ -1943,6 +2345,8 @@
             });
         }
         function navigateToHome() {
+            showAllProducts();
+            updateHomeVisibility();
             window.scrollTo({
                 top: 0,
                 behavior: 'smooth'
@@ -1953,6 +2357,30 @@
         }
         if (companyNameLink) {
             companyNameLink.addEventListener("click", navigateToHome);
+        }
+        function highlightCategory(categoryId) {
+            categoryHeaders.forEach(h3 => {
+                if (categoryId === "all") {
+                    h3.classList.remove("highlight");
+                } else {
+                    h3.classList.toggle("highlight", h3.parentElement.id === categoryId);
+                }
+            });
+        }
+        function updateHomeVisibility() {
+            const searchVal = searchInput.value.trim() || navSearchInput.value.trim() || mobileSearchInput.value.trim();
+            const catVal = categorySelect.value || navCategorySelect.value || mobileCategorySelect.value;
+            if (searchVal.length > 0 || (catVal !== "all" && catVal !== "")) {
+                homeSection.style.opacity = 0;
+                homeSection.style.height = "0";
+                homeSection.style.padding = "0";
+                homeSection.style.overflow = "hidden";
+            } else {
+                homeSection.style.opacity = 1;
+                homeSection.style.height = "auto";
+                homeSection.style.padding = "40px 0";
+                homeSection.style.overflow = "visible";
+            }
         }
         
         const animateElements = document.querySelectorAll('.animate-on-scroll');
@@ -1979,7 +2407,6 @@
             modalTitle.textContent = title;
             modalDetail.textContent = detail;
             modalDescription.textContent = description;
-            recipeContainer.innerHTML = ''; // Clear previous recipe
             productModal.classList.add('visible');
         }
         function closeProductModal() {
@@ -2089,44 +2516,6 @@
             const whatsappUrl = `https://wa.me/918850401035?text=${encodedMessage}`;
             window.open(whatsappUrl, '_blank');
         }
-
-        recipeBtn.addEventListener('click', async () => {
-            const productName = modalTitle.textContent;
-            const prompt = `Provide a simple, vegetarian recipe using ${productName}.`;
-            recipeContainer.textContent = 'Generating recipe...';
-
-            try {
-                let chatHistory = [];
-                chatHistory.push({ role: "user", parts: [{ text: prompt }] });
-                const payload = { contents: chatHistory };
-                const apiKey = ""; 
-                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
-                
-                const response = await fetch(apiUrl, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(payload)
-                });
-
-                if (!response.ok) {
-                    throw new Error(`API request failed with status ${response.status}`);
-                }
-
-                const result = await response.json();
-                
-                if (result.candidates && result.candidates.length > 0 &&
-                    result.candidates[0].content && result.candidates[0].content.parts &&
-                    result.candidates[0].content.parts.length > 0) {
-                    const text = result.candidates[0].content.parts[0].text;
-                    recipeContainer.textContent = text;
-                } else {
-                    recipeContainer.textContent = 'Sorry, I could not generate a recipe at this time.';
-                }
-            } catch (error) {
-                console.error("Error fetching recipe:", error);
-                recipeContainer.textContent = 'Sorry, there was an error generating the recipe. Please try again.';
-            }
-        });
     </script>
 </body>
 </html>

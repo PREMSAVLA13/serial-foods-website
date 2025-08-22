@@ -1182,34 +1182,7 @@
             padding-right: 30px;
             cursor: pointer;
         }
-        /* Mobile-specific menu styles */
-        .mobile-menu-container {
-            position: fixed;
-            top: 60px; /* Adjust based on nav height */
-            left: 0;
-            right: 0;
-            background-color: var(--bg-soft);
-            padding: 15px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            z-index: 1000;
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            transition: transform 0.3s ease-in-out;
-            transform: translateY(-150%);
-        }
-        .mobile-menu-container.open {
-            transform: translateY(0);
-        }
-        .mobile-menu-container #mobileSearchInput,
-        .mobile-menu-container #mobileCategorySelect,
-        .mobile-menu-container #mobile-lang-select {
-            width: 100%;
-            padding: 10px;
-            font-size: 16px;
-            border-radius: 8px;
-            border: 1px solid #ccc;
-        }
+        
         /* Media Queries */
         @media (min-width: 768px) {
             .contact-content {
@@ -1334,6 +1307,8 @@
                 <h3 class="product-title notranslate" id="modal-product-title"></h3>
                 <p class="product-detail notranslate" id="modal-product-detail"></p>
                 <div id="modal-product-description" class="product-description-box"></div>
+                <button id="recipe-btn" class="cta-btn primary-btn" style="margin-top: 15px;">✨ Get a Recipe Idea</button>
+                <div id="recipe-container" style="margin-top: 15px; text-align: left; white-space: pre-wrap;"></div>
                 <a href="#" class="whatsapp-btn" id="modal-whatsapp-btn" onclick="sendWhatsAppMessageFromModal(event)">
                     <i class="fab fa-whatsapp"></i> Order on WhatsApp
                 </a>
@@ -2150,6 +2125,8 @@
         const mobileSearchInput = document.getElementById("mobileSearchInput");
         const mobileCategorySelect = document.getElementById("mobileCategorySelect");
         const mainContent = document.getElementById("main-content");
+        const recipeBtn = document.getElementById("recipe-btn");
+        const recipeContainer = document.getElementById("recipe-container");
 
         window.onload = function() {
             window.scrollTo(0, 0);
@@ -2407,6 +2384,7 @@
             modalTitle.textContent = title;
             modalDetail.textContent = detail;
             modalDescription.textContent = description;
+            recipeContainer.innerHTML = ''; // Clear previous recipe
             productModal.classList.add('visible');
         }
         function closeProductModal() {
@@ -2516,6 +2494,44 @@
             const whatsappUrl = `https://wa.me/918850401035?text=${encodedMessage}`;
             window.open(whatsappUrl, '_blank');
         }
+
+        recipeBtn.addEventListener('click', async () => {
+            const productName = modalTitle.textContent;
+            const prompt = `Provide a simple, vegetarian recipe using ${productName}.`;
+            recipeContainer.textContent = 'Generating recipe...';
+
+            try {
+                let chatHistory = [];
+                chatHistory.push({ role: "user", parts: [{ text: prompt }] });
+                const payload = { contents: chatHistory };
+                const apiKey = ""; 
+                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
+                
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                if (!response.ok) {
+                    throw new Error(`API request failed with status ${response.status}`);
+                }
+
+                const result = await response.json();
+                
+                if (result.candidates && result.candidates.length > 0 &&
+                    result.candidates[0].content && result.candidates[0].content.parts &&
+                    result.candidates[0].content.parts.length > 0) {
+                    const text = result.candidates[0].content.parts[0].text;
+                    recipeContainer.textContent = text;
+                } else {
+                    recipeContainer.textContent = 'Sorry, I could not generate a recipe at this time.';
+                }
+            } catch (error) {
+                console.error("Error fetching recipe:", error);
+                recipeContainer.textContent = 'Sorry, there was an error generating the recipe. Please try again.';
+            }
+        });
     </script>
 </body>
 </html>

@@ -4,1423 +4,370 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Serial Enterprise Foods Private Limited</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <style>
+        /* ========================================
+         FINAL STYLESHEET
+         ======================================== */
         :root {
-            --primary-color: #007bff;
-            --secondary-color: #f8f9fa;
-            --accent-color: #212529;
-            --highlight-color: #e63946;
-            --bg-light: #f4f7f9;
-            --bg-soft: #ffffff;
-            --text-color: #333;
+            --primary-color: #2E7D32; /* Deep Forest Green */
+            --secondary-color: #fdfaf5; /* Earthy Beige/Off-white */
+            --accent-color: #FFC107; /* Warm Gold */
+            --text-color: #333333; /* Dark Charcoal */
+            --bg-light: #FBF9F6; /* Light Background */
+            --bg-soft: #FFFFFF;
+            --highlight-color: #D32F2F;
+            --font-heading: 'Playfair Display', serif;
+            --font-body: 'Lato', sans-serif;
         }
-        [data-theme="dark"] {
-            --primary-color: #5d9cec;
-            --secondary-color: #2a2a2a;
-            --accent-color: #f8f9fa;
-            --highlight-color: #e63946;
-            --bg-light: #121212;
-            --bg-soft: #1e1e1e;
-            --text-color: #f1f1f1;
-        }
-        * {
-            box-sizing: border-box;
-            scroll-behavior: smooth;
-        }
-        body {
-            margin: 0;
-            font-family: 'Poppins', sans-serif;
-            background-color: var(--bg-light);
-            color: var(--text-color);
-            transition: background 0.5s, color 0.5s;
-        }
-        .container {
-            max-width: 1200px;
-            margin: auto;
-            padding: 0 15px;
-        }
-        header {
+
+        * { box-sizing: border-box; scroll-behavior: smooth; }
+        body { margin: 0; font-family: var(--font-body); background-color: var(--bg-light); color: var(--text-color); }
+        .container { max-width: 1200px; margin: auto; padding: 0 15px; }
+        
+        /* Header */
+        header { background-color: var(--bg-light); padding: 120px 20px 60px; display: flex; align-items: center; justify-content: center; animation: fadeIn 1s ease-out; }
+        .header-content { display: flex; flex-direction: row; align-items: center; justify-content: center; padding: 30px 60px; border: 2px solid var(--primary-color); border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); background-color: var(--secondary-color); gap: 40px; max-width: 800px; animation: scaleUpAndFadeIn 1s ease-out; transition: transform 0.3s ease, box-shadow 0.3s ease; }
+        .header-content:hover { transform: scale(1.05); box-shadow: 0 15px 40px rgba(0,0,0,0.15); }
+        header .header-content img { width: 150px; height: 150px; border-radius: 15px; border: 4px solid var(--text-color); box-shadow: 0 4px 10px rgba(0,0,0,0.15); animation: slideInLeft 1s ease-out 0.5s backwards; }
+        .company-details-box { text-align: left; animation: slideInRight 1s ease-out 0.5s backwards; }
+        .company-details-box h1 { font-family: var(--font-heading); font-size: 2.8em; margin: 0; font-weight: 700; color: var(--primary-color); }
+        .company-details-box .tagline { font-size: 1.3em; margin-top: 10px; font-style: italic; color: var(--text-color); font-weight: 400; opacity: 0.8; }
+        
+        /* Navigation */
+        nav { position: fixed; top: 0; left: 0; right: 0; display: flex; justify-content: space-between; align-items: center; padding: 10px 20px; background-color: rgba(255, 255, 255, 0.8); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid rgba(0,0,0,0.05); z-index: 2000; }
+        .nav-left { display: flex; align-items: center; gap: 15px; }
+        .nav-brand { display: flex; align-items: center; gap: 15px; cursor: pointer; }
+        .nav-brand img { width: 48px; height: 48px; border-radius: 8px; border: 2px solid var(--primary-color); transition: transform 0.3s ease; }
+        .nav-brand img:hover { transform: scale(1.1) rotate(5deg); }
+        .nav-brand .company-name { font-size: 1.2em; font-weight: 600; color: var(--text-color); }
+        
+        /* General Section & Headings */
+        section { padding: 60px 0; margin-bottom: 20px; }
+        h2 { text-align: center; font-family: var(--font-heading); font-size: 2.8em; color: var(--primary-color); margin-bottom: 40px; position: relative; font-weight: 700; }
+        h2::after { content: ''; width: 80px; height: 3px; background: var(--accent-color); position: absolute; left: 50%; transform: translateX(-50%); bottom: -15px; border-radius: 5px; }
+        h3 { font-family: var(--font-heading); }
+
+        /* Welcome Section */
+        .welcome-content { background-color: var(--bg-soft); padding: 40px; border-radius: 15px; box-shadow: 0 8px 25px rgba(0,0,0,0.05); text-align: center; transition: transform 0.3s ease, box-shadow 0.3s ease; }
+        .welcome-content:hover { transform: scale(1.05); box-shadow: 0 15px 30px rgba(0,0,0,0.12); }
+        .welcome-content p { max-width: 800px; margin: 30px auto 0; font-size: 1.2em; line-height: 1.8; }
+
+        /* Product Section */
+        #gallery h2 { margin-bottom: 60px; }
+        .product-category { 
             background-color: var(--bg-soft);
-            color: var(--accent-color);
-            padding: 40px 20px 30px;
-            text-align: center;
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding-top: 100px;
-            animation: fadeIn 1s ease-out;
-        }
-        .header-content {
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            justify-content: center;
-            padding: 30px 60px;
-            border: 2px solid var(--primary-color);
-            border-radius: 20px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-            background-color: #e9f5ff;
-            transition: transform 0.3s ease;
-            gap: 40px;
-            max-width: 800px;
-            animation: scaleUpAndFadeIn 1s ease-out;
-        }
-        header .header-content img {
-            width: 250px;
-            height: 250px;
+            padding: 30px; 
+            margin-bottom: 40px; 
+            scroll-margin-top: 80px;
             border-radius: 15px;
-            border: 4px solid black;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-            transition: transform 0.3s ease;
-            animation: slideInLeft 1s ease-out 0.5s backwards;
-        }
-        .header-content:hover {
-            transform: translateY(-10px);
-        }
-        .company-details-box {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            gap: 10px;
-            text-align: left;
-            animation: slideInRight 1s ease-out 0.5s backwards;
-        }
-        .company-details-box h1 {
-            font-size: 2.8em;
-            margin: 0;
-            font-weight: 700;
-            color: var(--accent-color);
-        }
-        .company-details-box .tagline {
-            font-size: 1.4em;
-            margin: 0;
-            font-style: italic;
-            color: var(--text-color);
-            font-weight: 300;
-        }
-        header h1 {
-            font-size: 3.5em;
-            margin-top: 20px;
-            margin-bottom: 5px;
-            font-weight: 700;
-            text-shadow: none;
-            color: var(--accent-color);
-        }
-        .tagline {
-            font-size: 1.2em;
-            margin-top: 0;
-            font-style: italic;
-            color: var(--text-color);
-            font-weight: 300;
-        }
-        nav {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px 20px;
-            background-color: var(--bg-soft);
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-            z-index: 2000;
-        }
-        .nav-brand {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-        }
-        .nav-brand img {
-            width: 48px;
-            height: 48px;
-            border-radius: 20%;
-            border: 2px solid var(--primary-color);
-            cursor: pointer;
-            transition: transform 0.3s ease;
-        }
-        .nav-brand img:hover {
-            transform: scale(1.1);
-        }
-        .nav-brand .company-name {
-            font-size: 1.2em;
-            font-weight: 600;
-            color: var(--accent-color);
-            cursor: pointer;
-        }
-        .hamburger-box {
-            background-color: transparent;
-            padding: 0;
-            border-radius: 0;
-            display: flex;
-            align-items: center;
-            transition: background 0.5s;
-            box-shadow: none;
-        }
-        .hamburger-menu {
-            cursor: pointer;
-            width: 30px;
-            height: 25px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-        .hamburger-menu span {
-            display: block;
-            height: 3px;
-            background-color: var(--accent-color);
-            border-radius: 3px;
-            transition: transform 0.3s, opacity 0.3s;
-        }
-        .hamburger-menu.open span {
-            background-color: white;
-        }
-        .hamburger-menu.open span:nth-child(1) {
-            transform: translateY(11px) rotate(45deg);
-        }
-        .hamburger-menu.open span:nth-child(2) {
-            opacity: 0;
-        }
-        .hamburger-menu.open span:nth-child(3) {
-            transform: translateY(-11px) rotate(-45deg);
-        }
-        .switch {
-            position: relative;
-            display: inline-block;
-            width: 60px;
-            height: 34px;
-        }
-        .switch input {
-            opacity: 0;
-            width: 0;
-            height: 0;
-        }
-        .slider {
-            position: absolute;
-            cursor: pointer;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: var(--accent-color);
-            transition: .4s;
-            border-radius: 34px;
-        }
-        .slider:before {
-            position: absolute;
-            content: "";
-            height: 26px;
-            width: 26px;
-            left: 4px;
-            bottom: 4px;
-            background-color: var(--bg-soft);
-            transition: .4s;
-            border-radius: 50%;
-        }
-        .slider:after {
-            content: "\2600";
-            color: yellow;
-            font-size: 18px;
-            position: absolute;
-            left: 32px;
-            top: 50%;
-            transform: translateY(-50%);
-            transition: .4s;
-        }
-        input:checked + .slider {
-            background-color: #6a6a6a;
-        }
-        input:checked + .slider:before {
-            transform: translateX(26px);
-        }
-        input:checked + .slider:after {
-            content: "\1F315";
-            color: white;
-            left: 8px;
-        }
-        .sidebar {
-            height: 100%;
-            width: 0;
-            position: fixed;
-            z-index: 3000;
-            top: 0;
-            left: 0;
-            backdrop-filter: blur(5px);
-            -webkit-backdrop-filter: blur(5px);
-            overflow-x: hidden;
-            transition: 0.5s;
-            padding-top: 60px;
-            box-shadow: 2px 0 8px rgba(0,0,0,0.2);
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-start;
-            align-items: center;
-            background-color: var(--accent-color);
-            color: white;
-            box-shadow: 2px 0 8px rgba(0,0,0,0.4);
-        }
-        .sidebar a {
-            color: white;
-            font-size: 1.2em;
-            padding: 10px 25px;
-            margin: 5px 0;
-            width: 90%;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 8px;
-            transition: background-color 0.3s, transform 0.3s;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-        .sidebar a:hover {
-            background-color: rgba(255, 255, 255, 0.1);
-            transform: translateX(5px);
-        }
-        .sidebar a i {
-            width: 20px;
-            text-align: center;
-        }
-        .sidebar-header {
-            color: white;
-            font-size: 1.5em;
-            margin-bottom: 20px;
-        }
-        .sidebar .close-btn {
-            position: absolute;
-            top: 20px;
-            right: 25px;
-            font-size: 36px;
-            color: white;
-            cursor: pointer;
-        }
-        .sidebar-controls {
-            width: 90%;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            margin-bottom: 20px;
-            padding-bottom: 20px;
-            border-bottom: 1px solid rgba(255,255,255,0.2);
-        }
-        .sidebar-controls select, .sidebar-controls input {
-            width: 100%;
-            padding: 10px;
-            border-radius: 8px;
-            border: 1px solid #ccc;
-            background-color: var(--bg-soft);
-            color: var(--text-color);
-            font-size: 1em;
-        }
-        @keyframes slideIn {
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .main-content-blurred {
-            filter: blur(5px);
-            pointer-events: none;
-            user-select: none;
-        }
-        .nav-controls {
-            display: flex;
-            justify-content: flex-end;
-            align-items: center;
-            gap: 15px;
-            flex-grow: 1;
-            padding-right: 20px;
-        }
-        #navSearchInput, #navCategorySelect, #nav-lang-select {
-            padding: 8px 12px;
-            font-size: 14px;
-            border: 1px solid #ddd;
-            border-radius: 20px;
-            background-color: var(--bg-soft);
-            color: var(--text-color);
-            width: 180px;
-            transition: all 0.3s;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-        }
-        #navSearchInput:focus, #navCategorySelect:focus, #nav-lang-select:focus {
-            outline: none;
-            border-color: var(--primary-color);
-            box-shadow: 0 0 5px rgba(0, 123, 255, 0.2), 0 2px 4px rgba(0,0,0,0.1);
-        }
-        .nav-controls label {
-            display: none;
-        }
-        #category-controls {
-            display: flex;
-            flex-direction: column;
-            text-align: center;
-            margin: 20px auto;
-            padding: 10px 0;
-            z-index: 999;
-            justify-content: center;
-            align-items: center;
-            gap: 15px;
-            flex-wrap: wrap;
-            border-radius: 8px;
-            max-width: 700px;
-            background: none;
-            box-shadow: none;
-        }
-        #main-content #searchInput, #main-content #categorySelect {
-            display: block;
-            width: 100%;
-            max-width: 300px;
-            padding: 10px 20px;
-            font-size: 15px;
-            border: 2px solid var(--primary-color);
-            border-radius: 30px;
-            background-color: var(--bg-soft);
-            color: var(--text-color);
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.08);
-        }
-        #main-content #searchInput:focus, #main-content #categorySelect:focus {
-            outline: none;
-            box-shadow: 0 6px 12px rgba(0, 123, 255, 0.25);
-        }
-        #back-to-all-btn {
-            display: none;
-            background-color: var(--highlight-color);
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 30px;
-            font-size: 14px;
-            font-weight: 500;
-            cursor: pointer;
-            transition: background-color 0.3s, transform 0.3s;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-        }
-        #back-to-all-btn.visible {
-            display: inline-block;
-        }
-        #back-to-all-btn:hover {
-            background-color: #c92f39;
-            transform: translateY(-2px);
-        }
-        section {
-            padding: 40px 0;
-            margin-bottom: 10px;
-        }
-        h2 {
-            text-align: center;
-            font-size: 2.2em;
-            color: var(--primary-color);
-            margin-bottom: 20px;
-            position: relative;
-            font-weight: 700;
-        }
-        h2::after {
-            content: '';
-            width: 70px;
-            height: 3px;
-            background: var(--highlight-color);
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-            bottom: -10px;
-            border-radius: 5px;
-        }
-        .about-content {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: 30px;
-            max-width: 900px;
-            margin: auto;
-            text-align: center;
-        }
-        .about-text {
-            max-width: 600px;
-            text-align: center;
-            line-height: 1.8;
-            font-weight: 400;
-        }
-        .about-text p {
-            margin-bottom: 1em;
-        }
-        .product-category {
-            padding: 20px;
-            border-radius: 15px;
-            box-shadow: 0 6px 15px rgba(0,0,0,0.08);
-            margin-bottom: 30px;
-            scroll-margin-top: 150px;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-            background-color: var(--bg-soft);
-        }
-        .product-category:nth-of-type(odd) {
-            background-color: var(--bg-soft);
-        }
-        .product-category:nth-of-type(even) {
-            background-color: var(--secondary-color);
-        }
-        .product-category.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        .product-category h3 {
-            color: var(--primary-color);
-            margin-bottom: 25px;
-            font-size: 1.6em;
-            border-left: 6px solid var(--highlight-color);
-            padding-left: 15px;
-            transition: background-color 0.3s ease, color 0.3s ease;
-            cursor: pointer;
-            font-weight: 600;
-        }
-        .product-category h3.highlight {
-            background-color: var(--highlight-color);
-            color: white;
-            border-left-color: rgb(250, 0, 0);
-            padding: 10px 15px;
-            border-radius: 0 8px 8px 0;
-        }
-        .gallery {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            justify-content: center;
-            gap: 25px;
-        }
-        .gallery-item {
-            background-color: var(--bg-soft);
-            border-radius: 15px;
-            box-shadow: 0 6px 15px rgba(0,0,0,0.08);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            text-align: center;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            position: relative;
-            overflow: hidden;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-            min-height: auto;
-            border: 2px solid var(--primary-color);
-        }
-        .gallery-item:hover {
-            transform: scale(1.05);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.12);
-            cursor: pointer;
-        }
-        .gallery-item.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        .gallery-item img {
-            width: 100%;
-            max-height: 200px;
-            object-fit: contain;
-            border-radius: 6px;
-            flex-shrink: 0;
-            margin-bottom: 15px;
-            border: 1px solid #ddd;
-            padding: 5px;
-            background-color: #fff;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-        }
-        .product-info {
-            display: flex;
-            flex-direction: column;
-            text-align: center;
-            flex-grow: 1;
-            padding-top: 10px;
-        }
-        .product-name-box,
-        .product-weight-box,
-        .product-description-box {
-            background-color: var(--secondary-color);
-            border-radius: 8px;
-            padding: 10px;
-            margin: 5px 0;
-            width: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .product-name-box {
-            border-left: 4px solid var(--highlight-color);
-            font-weight: 700;
-            color: var(--accent-color);
-        }
-        .product-weight-box {
-            border-left: 4px solid #f9a825;
-            font-weight: 500;
-            color: #666;
-        }
-        .product-description-box {
-            border-left: 4px solid var(--primary-color);
-            font-style: italic;
-            color: #666;
-            flex-grow: 1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .product-description-box p {
-            font-size: 0.9em;
-            line-height: 1.6;
-            margin: 0;
-            font-style: italic;
-        }
-        .gallery-item .product-weight-box,
-        .gallery-item .product-description-box,
-        .gallery-item .whatsapp-btn {
-            display: none;
-        }
-        #product-instruction {
-            position: sticky;
-            top: 70px;
-            background-color: var(--primary-color);
-            color: white;
-            padding: 10px;
-            border-radius: 20px;
-            z-index: 1001;
-            margin-bottom: 20px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-            animation: pulse-instruction 2s infinite;
-            text-align: center;
-            font-style: italic;
-        }
-        @keyframes pulse-instruction {
-            0% {
-                transform: scale(1);
-                box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-            }
-            50% {
-                transform: scale(1.02);
-                box-shadow: 0 6px 12px rgba(0,0,0,0.3);
-            }
-            100% {
-                transform: scale(1);
-                box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-            }
-        }
-        .badge {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            background-color: var(--highlight-color);
-            color: white;
-            font-weight: 600;
-            padding: 4px 10px;
-            border-radius: 15px;
-            font-size: 0.8em;
-        }
-        .fixed-enquiry-btn {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background-color: var(--primary-color);
-            color: white;
-            padding: 12px 25px;
-            border-radius: 25px;
-            text-decoration: none;
-            font-weight: 600;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-            transition: transform 0.3s ease, background-color 0.3s;
-            z-index: 1000;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            animation: pulse 2s infinite;
-        }
-        .fixed-enquiry-btn:hover {
-            background-color: #0056b3;
-            transform: translateY(-3px);
-        }
-        @keyframes pulse {
-            0% { box-shadow: 0 0 0 0 rgba(0, 123, 255, 0.4); }
-            70% { box-shadow: 0 0 0 15px rgba(0, 123, 255, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(0, 123, 255, 0); }
-        }
-        #home {
-            transition: opacity 0.5s ease;
-            padding: 40px 0;
-        }
-        #testimonials .gallery-item {
-            padding: 30px;
-            text-align: center;
-        }
-        #testimonials .gallery-item p {
-            font-style: italic;
-            font-size: 1.1em;
-        }
-        #testimonials .gallery-item .product-title {
-            font-style: normal;
-        }
-        #contact {
-            background-color: var(--secondary-color);
-            border-top: 1px solid #e9ecef;
-            padding: 30px 0;
-            text-align: center;
-        }
-        .contact-container {
-            display: flex;
-            flex-direction: column;
-            gap: 30px;
-            max-width: 1000px;
-            margin: auto;
-            padding: 0 15px;
-        }
-        .contact-content {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-        .contact-info, .contact-form-container, .contact-map {
-            background-color: var(--bg-soft);
-            padding: 20px;
-            border-radius: 15px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-        }
-        .contact-info {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        .contact-info-item {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            margin-bottom: 10px;
-            text-align: left;
-            width: 100%;
-            justify-content: center;
-        }
-        .contact-info-item i {
-            font-size: 1.5em;
-            color: var(--primary-color);
-            min-width: 30px;
-            text-align: center;
-        }
-        .contact-info-item p {
-            margin: 0;
-            font-size: 1em;
-            line-height: 1.6;
-        }
-        .contact-info-item .contact-link {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            text-decoration: none;
-            color: var(--text-color);
-            transition: color 0.3s ease;
-        }
-        .contact-info-item .contact-link:hover {
-            color: var(--primary-color);
-        }
-        .contact-buttons {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            width: 100%;
-            align-items: center;
-            margin-top: 20px;
-        }
-        .contact-link {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 12px 20px;
-            border-radius: 25px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: transform 0.3s ease, background-color 0.3s;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-        }
-        .call-now-btn {
-            background-color: var(--highlight-color);
-            color: white;
-        }
-        .call-now-btn:hover {
-            background-color: #c92f39;
-            transform: translateY(-2px);
-        }
-        .email-btn {
-            background-color: var(--primary-color);
-            color: white;
-        }
-        .email-btn:hover {
-            background-color: #0056b3;
-            transform: translateY(-2px);
-        }
-        .contact-form-container {
-            flex: 1.5;
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-        .contact-form-container form {
-            display: grid;
-            gap: 20px;
-        }
-        .contact-form-container input, .contact-form-container textarea {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            font-family: 'Poppins', sans-serif;
-            font-size: 1em;
-            transition: border-color 0.3s;
-            background-color: var(--secondary-color);
-            color: var(--text-color);
-        }
-        .contact-form-container input:focus, .contact-form-container textarea:focus {
-            outline: none;
-            border-color: var(--primary-color);
-        }
-        .contact-form-container button {
-            background-color: var(--primary-color);
-            color: white;
-            border: none;
-            padding: 15px 25px;
-            border-radius: 8px;
-            font-size: 1.1em;
-            font-weight: 600;
-            cursor: pointer;
-            transition: background-color 0.3s, transform 0.3s;
-        }
-        .contact-form-container button:hover {
-            background-color: #0056b3;
-            transform: translateY(-2px);
-        }
-        .contact-map {
-            height: 400px;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-        }
-        .contact-map iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
-        .testimonial-carousel {
-            position: relative;
-            overflow: hidden;
-            max-width: 900px;
-            margin: 0 auto;
-            border-radius: 15px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-            background-color: var(--bg-soft);
-            padding: 20px;
-        }
-        .testimonial-wrapper {
-            display: flex;
-            transition: transform 0.8s ease-in-out;
-        }
-        .testimonial-card {
-            flex-shrink: 0;
-            width: 100%;
-            padding: 40px;
-            text-align: center;
-            opacity: 0;
-            transform: scale(0.9);
-            transition: opacity 0.6s ease-in-out, transform 0.6s ease-in-out;
-        }
-        .testimonial-card.active {
-            opacity: 1;
-            transform: scale(1);
-        }
-        .testimonial-card p {
-            font-style: italic;
-            font-size: 1.2em;
-            line-height: 1.6;
-            color: var(--text-color);
-            margin: 0 0 20px 0;
-        }
-        .testimonial-card .client-name {
-            font-weight: 600;
-            font-size: 1.1em;
-            color: var(--primary-color);
-            margin-bottom: 5px;
-        }
-        .testimonial-card .client-role {
-            font-size: 0.9em;
-            color: #6c757d;
-        }
-        .carousel-dots {
-            text-align: center;
-            margin-top: 20px;
-        }
-        .dot {
-            height: 12px;
-            width: 12px;
-            margin: 0 6px;
-            background-color: #bbb;
-            border-radius: 50%;
-            display: inline-block;
-            transition: background-color 0.6s ease;
-            cursor: pointer;
-        }
-        .dot.active {
-            background-color: var(--primary-color);
-        }
-        .carousel-btn {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background-color: rgba(0,0,0,0.5);
-            color: white;
-            border: none;
-            padding: 12px;
-            cursor: pointer;
-            font-size: 1.5em;
-            z-index: 10;
-            border-radius: 50%;
-            transition: background-color 0.3s;
-        }
-        .carousel-btn:hover {
-            background-color: rgba(0,0,0,0.8);
-        }
-        .prev-btn {
-            left: 10px;
-        }
-        .next-btn {
-            right: 10px;
-        }
-        #home .welcome-content {
-            padding: 40px;
-            border-radius: 15px;
-            background-color: var(--bg-soft);
-            box-shadow: 0 6px 15px rgba(0,0,0,0.08);
-            animation: fadeIn 1s ease-out;
-        }
-        #home h2 {
-            font-size: 2.8em;
-            color: var(--primary-color);
-            margin-bottom: 5px;
-            position: relative;
-        }
-        #home h2::after {
-            content: '';
-            width: 100px;
-            height: 4px;
-            background: var(--highlight-color);
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-            bottom: -15px;
-            border-radius: 5px;
-        }
-        #home p {
-            font-size: 1.2em;
-            font-weight: 500;
-            line-height: 1.8;
-            color: var(--text-color);
-            max-width: 800px;
-            margin: 30px auto 0;
-        }
-        #about .about-content {
-            display: flex;
-            flex-direction: column;
-            gap: 30px;
-            max-width: 900px;
-            margin: auto;
-        }
-        .about-box {
-            background-color: var(--bg-soft);
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-            border-left: 6px solid var(--primary-color);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        .about-box:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-        }
-        .about-box h3 {
-            color: var(--highlight-color);
-            font-size: 1.8em;
-            margin-top: 0;
-            font-weight: 600;
-        }
-        .about-box p {
-            font-size: 1.1em;
-            line-height: 1.7;
-            text-align: left;
-        }
-        .about-box:nth-of-type(even) {
-            border-left-color: var(--highlight-color);
-        }
-        .form-status-message {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background-color: var(--primary-color);
-            color: white;
-            padding: 20px 40px;
-            border-radius: 10px;
-            font-size: 1.2em;
-            z-index: 9000;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.5s ease, visibility 0.5s ease;
-        }
-        .form-status-message.show {
-            opacity: 1;
-            visibility: visible;
-        }
-        #partners {
-            padding: 40px 0;
-            margin-bottom: 20px;
-            background-color: var(--secondary-color);
-        }
-        #partners h2 {
-            color: var(--primary-color);
-        }
-        .partners-list {
-            max-width: 800px;
-            margin: auto;
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 15px;
-        }
-        .partner-box {
-            display: block;
-            text-align: center;
-            padding: 15px;
-            background-color: var(--bg-soft);
-            border: 2px solid var(--primary-color);
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-            font-size: 1.1em;
-            font-weight: 600;
-            color: var(--primary-color);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            opacity: 0;
-            transform: translateY(20px);
-            animation: fadeIn 0.8s ease-out forwards;
-        }
-        .partner-box:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 15px rgba(0,0,0,0.1);
-        }
-        .partner-box:nth-child(1) { animation-delay: 0.1s; }
-        .partner-box:nth-child(2) { animation-delay: 0.2s; }
-        .partner-box:nth-child(3) { animation-delay: 0.3s; }
-        .partner-box:nth-child(4) { animation-delay: 0.4s; }
-        .partner-box:nth-child(5) { animation-delay: 0.5s; }
-        .partner-box:nth-child(6) { animation-delay: 0.6s; }
-        .partner-box:nth-child(7) { animation-delay: 0.7s; }
-        .partner-box:nth-child(8) { animation-delay: 0.8s; }
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 4000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgba(0,0,0,0.4);
-            justify-content: center;
-            align-items: center;
-        }
-        .modal.visible {
-            display: flex;
-        }
-        .modal-content {
-            position: relative;
-            background-color: var(--bg-soft);
-            margin: auto;
-            padding: 30px;
-            border: 1px solid #888;
-            width: 80%;
-            max-width: 600px;
-            border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-            animation: animateModal 0.5s;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 20px;
-        }
-        @keyframes animateModal {
-            from { transform: scale(0.7); opacity: 0; }
-            to { transform: scale(1); opacity: 1; }
-        }
-        .modal-content .close-btn {
-            color: var(--text-color);
-            position: absolute;
-            top: 10px;
-            right: 20px;
-            font-size: 28px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-        .modal-content img {
-            width: 100%;
-            max-height: 250px;
-            object-fit: contain;
-        }
-        .modal-product-info {
-            width: 100%;
-            text-align: center;
-        }
-        .modal-product-info h3 {
-            font-size: 1.8em;
-            color: var(--primary-color);
-            margin-bottom: 5px;
-        }
-        .modal-product-info p {
-            color: #6c757d;
-            margin-bottom: 20px;
-        }
-        .modal-product-info .product-description-box {
-            min-height: 100px;
-        }
-        .whatsapp-btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            background-color: #25D366;
-            color: white;
-            padding: 10px 20px;
-            border-radius: 25px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: transform 0.3s ease, background-color 0.3s;
-            margin-top: 15px;
-        }
-        .whatsapp-btn:hover {
-            background-color: #128C7E;
-            transform: translateY(-2px);
-        }
-        .cta-box {
-            text-align: center;
-            background-color: var(--primary-color);
-            color: white;
-            padding: 50px;
-            border-radius: 15px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            margin-top: 50px;
-        }
-        .cta-box h3 {
-            color: white;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.05);
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+        
+        .product-category > h3 {
             font-size: 2em;
-            margin-bottom: 10px;
-        }
-        .cta-box p {
-            font-size: 1.1em;
-            margin-bottom: 30px;
-        }
-        .cta-btn {
-            display: inline-block;
-            padding: 12px 25px;
-            border-radius: 25px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: transform 0.3s ease, background-color 0.3s;
-            margin: 0 10px;
-            border: 2px solid white;
-        }
-        .primary-btn {
-            background-color: white;
+            text-align: center;
             color: var(--primary-color);
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 0;
+            margin-bottom: 40px;
+            padding: 10px 0;
+            font-weight: 600;
         }
-        .primary-btn:hover {
-            background-color: #f0f0f0;
-            transform: translateY(-3px);
+        .product-category > h3::before,
+        .product-category > h3::after {
+            content: '';
+            flex-grow: 1;
+            height: 2px;
+            background: var(--accent-color);
+            margin: 0 20px;
+            opacity: 0.6;
         }
-        .secondary-btn {
-            background-color: transparent;
+        .product-category > h3.highlight { color: var(--highlight-color); }
+        .product-category > h3.highlight::before,
+        .product-category > h3.highlight::after {
+            background: var(--highlight-color);
+        }
+
+        .gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; }
+        .gallery-item { background-color: var(--bg-light); border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); transition: transform 0.3s ease, box-shadow 0.3s ease; text-align: center; padding: 20px; display: flex; flex-direction: column; border: 1px solid rgba(0,0,0,0.05); cursor: pointer; }
+        .gallery-item:hover { transform: translateY(-5px); box-shadow: 0 12px 25px rgba(0,0,0,0.1); }
+        .gallery-item img { width: 100%; height: 200px; object-fit: contain; border-radius: 6px; margin-bottom: 15px; }
+        .product-info { display: flex; flex-direction: column; text-align: center; flex-grow: 1; }
+        .product-weight-box, .product-description-box { display: none; }
+        .product-name-box { background-color: transparent; border: none; padding: 10px; margin: 5px 0; width: 100%; }
+        
+        .gallery.single-item {
+            display: flex;
+            justify-content: center;
+        }
+        .gallery.single-item > .gallery-item {
+            max-width: 300px;
+            width: 100%;
+        }
+
+        /* About & Partners */
+        #about { background-color: var(--secondary-color); }
+        .about-content { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; max-width: 900px; margin: auto; align-items: center; }
+        .about-box { background-color: var(--bg-soft); padding: 30px; border-radius: 10px; box-shadow: 0 8px 25px rgba(0,0,0,0.05); transition: transform 0.3s ease, box-shadow 0.3s ease; }
+        .about-box:hover { transform: scale(1.05); box-shadow: 0 15px 30px rgba(0,0,0,0.12); }
+        .about-box h3 { color: var(--primary-color); font-size: 1.8em; margin-top: 0; }
+        .about-box p { font-size: 1.05em; line-height: 1.8; text-align: left; }
+        #partners { background-color: var(--bg-light); }
+        .partners-list { max-width: 900px; margin: auto; display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; }
+        .partner-box { text-align: center; padding: 20px 25px; background-color: var(--bg-soft); border: 1px solid rgba(0,0,0,0.08); border-radius: 50px; font-size: 1em; font-weight: 600; color: var(--primary-color); transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s, color 0.3s; }
+        .partner-box:hover { background-color: var(--primary-color); color: white; transform: scale(1.05); box-shadow: 0 15px 30px rgba(0,0,0,0.12); }
+        
+        /* Testimonials */
+        .testimonial-carousel { position: relative; overflow: hidden; max-width: 800px; margin: 0 auto; border-radius: 15px; background-color: var(--bg-soft); padding: 40px; border: 1px solid rgba(0,0,0,0.05); min-height: 250px; }
+        .testimonial-wrapper { display: flex; transition: transform 0.6s ease-in-out; }
+        .testimonial-card { flex-shrink: 0; width: 100%; padding: 20px 40px; text-align: center; }
+        .testimonial-card p { font-style: italic; font-size: 1.3em; line-height: 1.7; position: relative; padding: 0 20px; margin-bottom: 20px; }
+        .testimonial-card p::before { content: '“'; font-family: var(--font-heading); font-size: 4em; color: var(--primary-color); opacity: 0.2; position: absolute; top: -20px; left: -10px; }
+        .testimonial-card .client-name { font-weight: 700; font-size: 1.1em; color: var(--primary-color); }
+        .carousel-dots { text-align: center; margin-top: 20px; }
+        .dot { height: 12px; width: 12px; margin: 0 6px; background-color: #bbb; border-radius: 50%; display: inline-block; transition: background-color 0.6s ease, transform 0.3s; cursor: pointer; }
+        .dot.active { background-color: var(--primary-color); transform: scale(1.2); }
+        
+        /* Contact & CTA */
+        #contact { background-color: var(--secondary-color); padding-bottom: 0; }
+        .contact-content { display: grid; grid-template-columns: 1fr 1.5fr; gap: 40px; background-color: var(--bg-soft); padding: 40px; border-radius: 15px; box-shadow: 0 10px 40px rgba(0,0,0,0.08); }
+        .contact-info-item { display: flex; gap: 15px; align-items: flex-start; margin-bottom: 15px; }
+        .contact-info-item i { font-size: 1.2em; color: var(--primary-color); width: 25px; text-align: center; margin-top: 4px; }
+        .contact-form-container form { display: grid; gap: 20px; }
+        .contact-form-container input, .contact-form-container textarea { border: 1px solid #ddd; border-radius: 8px; transition: border-color 0.3s, box-shadow 0.3s; background-color: var(--bg-light); padding: 12px; font-family: var(--font-body); font-size: 1em; color: var(--text-color); }
+        .contact-form-container input:focus, .contact-form-container textarea:focus { outline: none; border-color: var(--primary-color); box-shadow: 0 0 0 3px rgba(46, 125, 50, 0.2); }
+        .contact-form-container button, .cta-btn { background-color: var(--primary-color); color: white; border: none; padding: 15px 25px; border-radius: 50px; font-size: 1.1em; font-weight: 700; cursor: pointer; transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s; }
+        .contact-form-container button:hover, .cta-btn:hover { background-color: #1B5E20; transform: translateY(-3px); box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
+        .cta-box { text-align: center; background: var(--primary-color); color: white; padding: 50px 40px; border-radius: 20px; margin-top: 50px; transition: transform 0.3s ease, box-shadow 0.3s ease; }
+        .cta-box:hover { transform: scale(1.05); box-shadow: 0 15px 30px rgba(0,0,0,0.12); }
+        .cta-box h3 { font-family: var(--font-heading); color: white; font-size: 2.5em; margin-top: 0; margin-bottom: 15px; }
+        .cta-box p { margin-top: 0; margin-bottom: 30px; font-size: 1.1em; opacity: 0.9; }
+        .primary-btn { background-color: var(--accent-color); color: var(--text-color); border: none; }
+        .primary-btn:hover { background-color: #FFB300; }
+        .secondary-btn { background-color: transparent; color: white; border: 2px solid var(--accent-color); }
+        .secondary-btn:hover { background-color: var(--accent-color); color: var(--text-color); }
+        
+        .contact-action-link {
+            font-size: 0.9em;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-decoration: none;
+            background-color: rgba(46, 125, 50, 0.1);
+            padding: 2px 8px;
+            border-radius: 10px;
+            transition: background-color 0.3s, color 0.3s;
+            display: inline-block;
+            margin-top: 5px;
+        }
+        .contact-action-link:hover {
+            background-color: var(--primary-color);
             color: white;
         }
-        .secondary-btn:hover {
-            background-color: rgba(255, 255, 255, 0.2);
-            transform: translateY(-3px);
+
+        /* Sidebar & Controls */
+        #navSearchInput, #navCategorySelect, #nav-lang-select { 
+            border: 1px solid var(--primary-color); 
+            border-radius: 20px; 
+            background-color: var(--bg-soft); 
+            color: var(--text-color); 
+            transition: all 0.3s; 
+            padding: 8px 12px; 
         }
-        @keyframes scaleUpAndFadeIn {
-            0% { transform: scale(0.8); opacity: 0; }
-            100% { transform: scale(1); opacity: 1; }
+        #navSearchInput:focus, #navCategorySelect:focus, #nav-lang-select:focus { 
+            outline: none; 
+            border-color: var(--accent-color); 
+            box-shadow: 0 0 0 3px rgba(255, 193, 7, 0.3); 
         }
-        @keyframes slideInLeft {
-            0% { transform: translateX(-50px); opacity: 0; }
-            100% { transform: translateX(0); opacity: 1; }
-        }
-        @keyframes slideInRight {
-            0% { transform: translateX(50px); opacity: 0; }
-            100% { transform: translateX(0); opacity: 1; }
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .goog-te-gadget {
-            display: none;
-        }
-        #google_translate_element {
-            display: none;
-        }
-        .language-dropdown-container {
-            position: relative;
-            z-index: 100;
-        }
-        #nav-lang-select {
-            appearance: none;
-            background-image: url('data:image/svg+xml;utf8,<svg fill="black" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>');
-            background-repeat: no-repeat;
-            background-position: right 12px center;
-            padding-right: 30px;
-            cursor: pointer;
-        }
-        /* Mobile-specific menu styles */
-        .mobile-menu-container {
-            position: fixed;
-            top: 60px; /* Adjust based on nav height */
-            left: 0;
-            right: 0;
-            background-color: var(--bg-soft);
-            padding: 15px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            z-index: 1000;
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            transition: transform 0.3s ease-in-out;
-            transform: translateY(-150%);
-        }
-        .mobile-menu-container.open {
-            transform: translateY(0);
-        }
-        .mobile-menu-container #mobileSearchInput,
-        .mobile-menu-container #mobileCategorySelect,
-        .mobile-menu-container #mobile-lang-select {
-            width: 100%;
-            padding: 10px;
-            font-size: 16px;
-            border-radius: 8px;
-            border: 1px solid #ccc;
-        }
+        .hamburger-menu { cursor: pointer; width: 30px; height: 25px; display: flex; flex-direction: column; justify-content: space-between; opacity: 0.8; transition: opacity 0.3s; }
+        .hamburger-menu:hover { opacity: 1; }
+        .hamburger-menu span { display: block; height: 3px; background-color: var(--text-color); border-radius: 3px; transition: transform 0.3s, opacity 0.3s; }
+        .hamburger-menu.open span { background-color: white; }
+        .hamburger-menu.open span:nth-child(1) { transform: translateY(11px) rotate(45deg); }
+        .hamburger-menu.open span:nth-child(2) { opacity: 0; }
+        .hamburger-menu.open span:nth-child(3) { transform: translateY(-11px) rotate(-45deg); }
+        .sidebar { height: 100%; width: 0; position: fixed; z-index: 3000; top: 0; left: 0; backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px); overflow-x: hidden; transition: 0.5s; padding-top: 60px; display: flex; flex-direction: column; justify-content: flex-start; align-items: center; background-color: rgba(46, 125, 50, 0.95); color: white; box-shadow: 2px 0 8px rgba(0,0,0,0.4); }
+        .sidebar a { color: white; font-size: 1.2em; padding: 10px 25px; margin: 5px 0; width: 90%; border-radius: 8px; transition: background-color 0.3s, transform 0.3s; text-decoration: none; display: flex; align-items: center; gap: 15px; }
+        .sidebar a:hover { background-color: rgba(255, 255, 255, 0.1); transform: translateX(5px); }
+        .sidebar a i { width: 20px; text-align: center; }
+        .sidebar-header { color: white; font-size: 1.5em; margin-bottom: 20px; font-family: var(--font-heading); }
+        .sidebar .close-btn { position: absolute; top: 20px; right: 25px; font-size: 36px; color: white; cursor: pointer; }
+        .sidebar-controls { width: 90%; display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px; padding-bottom: 20px; border-bottom: 1px solid rgba(255,255,255,0.2); }
+        .sidebar-controls select, .sidebar-controls input { width: 100%; padding: 10px; border-radius: 8px; border: 1px solid var(--primary-color); background-color: var(--bg-soft); color: var(--text-color); font-size: 1em; }
+        .main-content-blurred { filter: blur(5px); pointer-events: none; user-select: none; }
+        .nav-controls { display: flex; justify-content: flex-end; align-items: center; gap: 15px; }
+        .fixed-enquiry-btn { position: fixed; bottom: 20px; right: 20px; background-color: var(--primary-color); color: white; padding: 12px 25px; border-radius: 50px; text-decoration: none; font-weight: 600; box-shadow: 0 4px 20px rgba(0,0,0,0.2); transition: transform 0.3s ease, background-color 0.3s; z-index: 1000; display: flex; align-items: center; gap: 10px; animation: pulse 2s infinite; }
+        .fixed-enquiry-btn:hover { background-color: #1B5E20; transform: translateY(-3px); }
+        @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(46, 125, 50, 0.4); } 70% { box-shadow: 0 0 0 15px rgba(46, 125, 50, 0); } 100% { box-shadow: 0 0 0 0 rgba(46, 125, 50, 0); } }
+        
+        /* Modal */
+        .modal { display: none; position: fixed; z-index: 4000; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.6); justify-content: center; align-items: center; }
+        .modal.visible { display: flex; }
+        .modal-content { position: relative; background-color: var(--bg-soft); margin: auto; padding: 30px; border: none; width: 80%; max-width: 600px; border-radius: 15px; box-shadow: 0 5px 25px rgba(0,0,0,0.3); animation: animateModal 0.5s; display: flex; flex-direction: column; align-items: center; gap: 20px; }
+        @keyframes animateModal { from { transform: scale(0.7); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+        .modal-content .close-btn { color: var(--text-color); position: absolute; top: 10px; right: 20px; font-size: 28px; font-weight: bold; cursor: pointer; }
+        .modal-content img { width: 100%; max-height: 250px; object-fit: contain; }
+        .modal-product-info h3 { font-size: 2em; color: var(--primary-color); margin-bottom: 5px; font-family: var(--font-heading); }
+        .whatsapp-btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; background-color: #25D366; color: white; padding: 12px 25px; border-radius: 50px; text-decoration: none; font-weight: 600; transition: transform 0.3s ease, background-color 0.3s; margin-top: 15px; }
+        .whatsapp-btn:hover { background-color: #128C7E; transform: translateY(-2px); }
+        
         /* Media Queries */
-        @media (min-width: 768px) {
-            .contact-content {
-                flex-direction: row;
-            }
-            .nav-controls {
-                display: flex;
-            }
-            #category-controls {
-                display: none;
-            }
-            .mobile-menu-container {
-                display: none;
-            }
-            #main-nav {
-                justify-content: space-between;
-                gap: 20px;
-            }
-            .nav-brand {
-                position: static;
-                transform: none;
-            }
-            #partners .partners-list {
-                grid-template-columns: repeat(4, 1fr);
-            }
+        @media (max-width: 992px) { .contact-content, .about-content { grid-template-columns: 1fr; } }
+        @media (max-width: 767px) { .header-content { flex-direction: column; padding: 20px; } .company-details-box { text-align: center; } .company-details-box h1 { font-size: 2.5em; } h2 { font-size: 2.2em; } .nav-controls, .nav-brand .company-name-container { display: none; } header .header-content img { width: 120px; height: 120px; } }
+        @media (max-width: 480px) { .company-details-box h1 { font-size: 1.8em; } .company-details-box .tagline { font-size: 1em; } .gallery { grid-template-columns: 1fr; } .partners-list { gap: 10px; } .partner-box { font-size: 0.9em; padding: 15px 20px; } }
+
+        /* Utilities */
+        .goog-te-gadget, #google_translate_element { display: none; }
+        footer { text-align: center; padding: 20px; margin-top: 40px; background-color: var(--secondary-color); font-size: 0.9em; }
+        .form-status-message { position: fixed; bottom: 20px; right: 20px; background-color: var(--primary-color); color: white; padding: 20px 40px; border-radius: 10px; font-size: 1.2em; z-index: 9000; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); opacity: 0; visibility: hidden; transition: opacity 0.5s ease, visibility 0.5s ease; }
+        .form-status-message.show { opacity: 1; visibility: visible; }
+        #home { transition: opacity 0.5s ease, height 0.5s ease, padding 0.5s ease, margin 0.5s ease; }
+        @keyframes scaleUpAndFadeIn { 0% { transform: scale(0.8); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
+        @keyframes slideInLeft { 0% { transform: translateX(-50px); opacity: 0; } 100% { transform: translateX(0); opacity: 1; } }
+        @keyframes slideInRight { 0% { transform: translateX(50px); opacity: 0; } 100% { transform: translateX(0); opacity: 1; } }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* ==================================
+         NEW & IMPROVED STYLES
+         ================================== */
+        .product-detail {
+            font-size: 0.9em;
+            color: #666;
+            margin: 5px 0 15px 0;
         }
-        @media (max-width: 767px) {
-            .nav-controls {
-                display: none;
-            }
-            nav {
-                padding: 10px;
-            }
-            .nav-brand .company-name {
-                display: none;
-            }
-            .hamburger-box {
-                padding: 8px 12px;
-            }
-            #category-controls {
-                display: none; /* Hide the desktop-style controls on mobile */
-            }
-            .gallery {
-                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            }
-            .product-category h3.highlight {
-                padding: 8px 12px;
-            }
-            h2 {
-                font-size: 2em;
-            }
-            .contact-info, .contact-form-container {
-                align-items: center;
-            }
-            header h1 {
-                font-size: 1.8em;
-            }
-            .header-content {
-                padding: 20px;
-                flex-direction: column;
-            }
-            header .header-content img {
-                width: 120px;
-                height: 120px;
-            }
-            #partners .partners-list {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            .nav-controls #google_translate_element {
-                display: none;
-            }
+
+        .product-cta {
+            margin-top: auto;
+            background-color: var(--accent-color);
+            color: var(--text-color);
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 0.9em;
+            transition: background-color 0.3s ease;
         }
-        @media (max-width: 480px) {
-            header h1 {
-                font-size: 1.5em;
-            }
-            #category-controls {
-                padding-left: 10px;
-                padding-right: 10px;
-            }
-            .gallery {
-                grid-template-columns: 1fr;
-            }
-            .fixed-enquiry-btn {
-                bottom: 10px;
-                right: 10px;
-                padding: 10px 20px;
-            }
-            .contact-info-item {
-                flex-direction: column;
-                text-align: center;
-                gap: 5px;
-            }
-            header .header-content {
-                flex-direction: column;
-                padding: 20px;
-                max-width: 90%;
-                gap: 20px;
-            }
-            .company-details-box {
-                align-items: center;
-                text-align: center;
-            }
-            .company-details-box h1 {
-                font-size: 1.5em;
-            }
-            .company-details-box .tagline {
-                font-size: 1em;
-            }
-            #partners .partners-list {
-                grid-template-columns: 1fr;
-            }
+
+        .gallery-item:hover .product-cta {
+            background-color: #FFB300;
+        }
+
+        #modal-product-description {
+            border-top: 1px solid #eee;
+            padding-top: 15px;
+            margin-top: 10px;
+            line-height: 1.7;
+            color: #555;
+            text-align: left;
+            width: 100%;
+        }
+
+        .product-title {
+            font-family: var(--font-heading); font-weight: 600; font-size: 1.4em; color: var(--primary-color);
+            position: relative;
+            display: inline-block;
+            padding-bottom: 8px;
+        }
+        .product-title::after { content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 60%; height: 3px; background-color: var(--accent-color); border-radius: 3px; transition: width 0.3s ease-in-out; }
+        .gallery-item:hover .product-title::after { width: 90%; }
+        
+        .product-subheading {
+            text-align: center;
+            margin: 40px 0 20px;
+            font-family: var(--font-heading);
+            font-size: 1.5em;
+            font-weight: 600;
+            color: var(--primary-color);
+            position: relative;
+            padding-bottom: 10px;
+        }
+        .product-subheading::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 2px;
+            background: var(--accent-color);
         }
     </style>
 </head>
 <body>
+    <!-- MODAL -->
     <div id="product-modal" class="modal">
         <div class="modal-content">
-            <span class="close-btn" onclick="closeProductModal()">×</span>
+            <span id="modal-close-btn" class="close-btn">×</span>
             <img id="modal-product-image" src="" alt="Product Image">
             <div class="modal-product-info">
                 <h3 class="product-title notranslate" id="modal-product-title"></h3>
-                <p class="product-detail notranslate" id="modal-product-detail"></p>
-                <div id="modal-product-description" class="product-description-box"></div>
-                <a href="#" class="whatsapp-btn" id="modal-whatsapp-btn" onclick="sendWhatsAppMessageFromModal(event)">
+                <div class="product-weight-box" id="modal-product-weight-box" style="display: block;">
+                    <p class="product-detail notranslate" id="modal-product-detail"></p>
+                </div>
+                <div class="product-description-box" id="modal-product-description-box" style="display: block;">
+                    <p id="modal-product-description"></p>
+                </div>
+                <a href="#" class="whatsapp-btn" id="modal-whatsapp-btn">
                     <i class="fab fa-whatsapp"></i> Order on WhatsApp
                 </a>
             </div>
         </div>
     </div>
+
+    <!-- SIDEBAR -->
     <div id="side-menu" class="sidebar">
-        <span class="close-btn" onclick="closeNav()">×</span>
-        <div class="sidebar-header">OPTIONS</div>
+        <span id="sidebar-close-btn" class="close-btn">×</span>
+        <div class="sidebar-header">MENU</div>
         <div class="sidebar-controls">
-            <select id="mobile-lang-select" onchange="doGTranslate(this.value)">
-                <option value="en" selected>English</option>
-                <option value="hi">हिंदी</option>
-                <option value="mr">मराठी</option>
+            <select id="mobile-lang-select">
+                <option value="en" selected>English</option> <option value="hi">हिंदी</option> <option value="mr">मराठी</option>
             </select>
-            <input
-                type="text"
-                id="mobileSearchInput"
-                placeholder="Search for a product..."
-                aria-label="Search for products"
-            />
+            <input type="text" id="mobileSearchInput" placeholder="Search for a product..." aria-label="Search for products" />
             <select id="mobileCategorySelect" aria-label="Select product category">
-                <option value="all">All Categories</option>
-                <option value="soya-chunks">Soya Chunks</option>
-                <option value="pastes">Pastes</option>
-                <option value="seviyan">Seviyan</option>
-                <option value="bakery">Bakery & Dry Items</option>
-                <option value="ready-cook">Ready to Cook</option>
-                <option value="tofu">Tofu (Soya Paneer)</option>
-                <option value="pickles">Pickles</option>
-                <option value="pudding">Pudding</option>
-                <option value="frozen">Frozen Treats</option>
-                <option value="chocolates">Chocolates</option>
-                <option value="beverages">Beverages</option>
+                <option value="all">All Categories</option> <option value="soya-chunks">Soya Chunks</option> <option value="pastes">Pastes</option> <option value="seviyan">Seviyan</option> <option value="bakery">Bakery & Dry Items</option> <option value="ready-cook">Ready to Cook</option> <option value="tofu">Tofu (Soya Paneer)</option> <option value="pickles">Pickles</option> <option value="pudding">Pudding</option> <option value="frozen">Frozen Treats</option> <option value="chocolates">Chocolates</option> <option value="beverages">Beverages</option>
             </select>
         </div>
-        <a href="#home" onclick="closeNav()"><i class="fas fa-home"></i> Home</a>
-        <a href="#cta-section" onclick="closeNav()"><i class="fas fa-hand-point-right"></i> Explore Now</a>
-        <a href="#about" onclick="closeNav()"><i class="fas fa-info-circle"></i> About Us</a>
-        <a href="#gallery" onclick="closeNav()"><i class="fas fa-utensils"></i> Products</a>
-        <a href="#partners" onclick="closeNav()"><i class="fas fa-handshake"></i> Our Partners</a>
-        <a href="#testimonials" onclick="closeNav()"><i class="fas fa-star"></i> Testimonials</a>
-        <a href="#contact" onclick="closeNav()"><i class="fas fa-phone"></i> Contact Us</a>
+        <a href="#home"><i class="fas fa-home"></i> Home</a>
+        <a href="#cta-section"><i class="fas fa-hand-point-right"></i> Explore Now</a>
+        <a href="#about"><i class="fas fa-info-circle"></i> About Us</a>
+        <a href="#gallery"><i class="fas fa-utensils"></i> Products</a>
+        <a href="#partners"><i class="fas fa-handshake"></i> Our Partners</a>
+        <a href="#testimonials"><i class="fas fa-star"></i> Testimonials</a>
+        <a href="#contact"><i class="fas fa-phone"></i> Contact Us</a>
         <a href="SERIAL ENTERPRISE BROCHURE NEW.pdf" download><i class="fas fa-file-download"></i> Download Catalog</a>
     </div>
+
+    <!-- MAIN CONTENT AND NAVIGATION -->
     <nav id="main-nav">
-        <div class="hamburger-box">
-            <div class="hamburger-menu" id="hamburger-menu" onclick="toggleHamburgerMenu()">
-                <span></span>
-                <span></span>
-                <span></span>
+        <div class="nav-left">
+            <div class="hamburger-box">
+                <div class="hamburger-menu" id="hamburger-menu"><span></span><span></span><span></span></div>
+            </div>
+            <div class="nav-brand" id="nav-brand-link">
+                <img src="logo.PNG" alt="Serial Logo" />
+                <div class="company-name-container" style="display: flex; align-items: center;">
+                    <span class="company-name notranslate">Serial Enterprise Foods</span>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="border: 1px solid #2E7D32; padding: 2px; border-radius: 4px; display: inline-block; vertical-align: middle; margin-left: 8px;">
+                        <circle cx="12" cy="12" r="8" fill="#2E7D32"/>
+                    </svg>
+                </div>
             </div>
         </div>
-        <div class="nav-brand" onclick="navigateToHome()">
-            <img src="logo.PNG" alt="Serial Logo" />
-            <span class="company-name notranslate">Serial Enterprise Foods</span>
-        </div>
         <div class="nav-controls">
-            <select id="nav-lang-select" onchange="doGTranslate(this.value)">
-                <option value="en" selected>English</option>
-                <option value="hi">हिंदी</option>
-                <option value="mr">मराठी</option>
+            <select id="nav-lang-select">
+                <option value="en" selected>English</option> <option value="hi">हिंदी</option> <option value="mr">मराठी</option>
             </select>
-            <input
-                type="text"
-                id="navSearchInput"
-                placeholder="Search for a product..."
-                aria-label="Search for products"
-            />
+            <input type="text" id="navSearchInput" placeholder="Search for a product..." aria-label="Search for products" />
             <select id="navCategorySelect" aria-label="Select product category">
-                <option value="all">All Categories</option>
-                <option value="soya-chunks">Soya Chunks</option>
-                <option value="pastes">Pastes</option>
-                <option value="seviyan">Seviyan</option>
-                <option value="bakery">Bakery & Dry Items</option>
-                <option value="ready-cook">Ready to Cook</option>
-                <option value="tofu">Tofu (Soya Paneer)</option>
-                <option value="pickles">Pickles</option>
-                <option value="pudding">Pudding</option>
-                <option value="frozen">Frozen Treats</option>
-                <option value="chocolates">Chocolates</option>
-                <option value="beverages">Beverages</option>
+                <option value="all">All Categories</option> <option value="soya-chunks">Soya Chunks</option> <option value="pastes">Pastes</option> <option value="seviyan">Seviyan</option> <option value="bakery">Bakery & Dry Items</option> <option value="ready-cook">Ready to Cook</option> <option value="tofu">Tofu (Soya Paneer)</option> <option value="pickles">Pickles</option> <option value="pudding">Pudding</option> <option value="frozen">Frozen Treats</option> <option value="chocolates">Chocolates</option> <option value="beverages">Beverages</option>
             </select>
-            <label class="switch">
-                <input type="checkbox" id="theme-toggle" />
-                <span class="slider"></span>
-            </label>
         </div>
         <div id="google_translate_element"></div>
     </nav>
@@ -1434,43 +381,19 @@
             </div>
         </div>
     </header>
+
     <main class="container" id="main-content">
         <a href="#contact" id="fixed-enquiry-btn" class="fixed-enquiry-btn">
-            <i class="fas fa-paper-plane"></i>
-            <span>Make an Enquiry</span>
+            <i class="fas fa-paper-plane"></i> <span>Make an Enquiry</span>
         </a>
-        <div id="category-controls" aria-label="Product search and category filter">
-            <input
-                type="text"
-                id="searchInput"
-                placeholder="Search for a product..."
-                aria-label="Search for products"
-            />
-            <select id="categorySelect" aria-label="Select product category">
-                <option value="all">All Categories</option>
-                <option value="soya-chunks">Soya Chunks</option>
-                <option value="pastes">Pastes</option>
-                <option value="seviyan">Seviyan</option>
-                <option value="bakery">Bakery & Dry Items</option>
-                <option value="ready-cook">Ready to Cook</option>
-                <option value="tofu">Tofu (Soya Paneer)</option>
-                <option value="pickles">Pickles</option>
-                <option value="pudding">Pudding</option>
-                <option value="frozen">Frozen Treats</option>
-                <option value="chocolates">Chocolates</option>
-                <option value="beverages">Beverages</option>
-            </select>
-            <button id="back-to-all-btn" onclick="showAllProducts()">Back to All Products</button>
-        </div>
+        
         <section id="home">
             <div class="welcome-content animate-on-scroll">
-                <h2>Welcome to <span class="notranslate">Serial Enterprise Foods Private Limited</span></h2>
-                <p>
-                    A trusted wholesale distributor of high-quality packed food products, serving customers across India.
-                    With a diverse product line, reliable delivery, and a commitment to excellence, we ensure that taste and quality reach every home.
-                </p>
+                <h2>Welcome to <span class="notranslate">Serial Enterprise Foods</span></h2>
+                <p>A trusted wholesale distributor of high-quality packed food products, serving customers across India. With a diverse product line, reliable delivery, and a commitment to excellence, we ensure that taste and quality reach every home.</p>
             </div>
         </section>
+        
         <section id="cta-section" class="container">
             <div class="cta-box animate-on-scroll">
                 <h3>Ready to Explore Our Products?</h3>
@@ -1479,628 +402,137 @@
                 <a href="#contact" class="cta-btn secondary-btn">Make a Bulk Enquiry</a>
             </div>
         </section>
+        
         <section id="about">
-            <div class="animate-on-scroll">
+            <div class="container animate-on-scroll">
                 <h2>About Us</h2>
                 <div class="about-content">
                     <div class="about-box">
                         <h3>Our Mission</h3>
-                        <p>
-                            <span class="notranslate">Serial Enterprise Foods</span> was founded with a simple mission: to deliver exceptional quality and taste to every household in India. We are a **100% pure vegetarian company**. As a new company, we're driven by passion and a commitment to excellence.
-                        </p>
+                        <p><span class="notranslate">Serial Enterprise Foods</span> was founded with a simple mission: to deliver exceptional quality and taste to every household in India. We are a **100% pure vegetarian company**. As a new company, we're driven by passion and a commitment to excellence.</p>
                     </div>
                     <div class="about-box">
                         <h3>Our Commitment</h3>
-                        <p>
-                            We specialize in sourcing and distributing a diverse range of premium packed food products, from traditional Indian staples to modern culinary essentials. We believe that good food starts with trust, and we work tirelessly to ensure every product in our catalog meets the highest standards. Thank you for joining us on this exciting new venture!
-                        </p>
+                        <p>We specialize in sourcing and distributing a diverse range of premium packed food products. We believe that good food starts with trust, and we work tirelessly to ensure every product in our catalog meets the highest standards. Thank you for joining us on this exciting new venture!</p>
                     </div>
                 </div>
             </div>
         </section>
+
         <section id="partners">
             <div class="container animate-on-scroll">
                 <h2>Brands We Market</h2>
                 <div class="partners-list">
-                    <div class="partner-box notranslate">Serial Enterprise Foods Pvt. Ltd.</div>
-                    <div class="partner-box notranslate">Harnik General Foods Pvt. Ltd.</div>
-                    <div class="partner-box notranslate">Maharashtra Samosa Patti</div>
-                    <div class="partner-box notranslate">Avanti Enterprise</div>
-                    <div class="partner-box notranslate">Vega Industries</div>
-                    <div class="partner-box notranslate">Eatsip Foods & Beverages</div>
-                    <div class="partner-box notranslate">Special Home Made Pickle</div>
-                    <div class="partner-box notranslate">B 2 Bakery</div>
+                    <div class="partner-box notranslate">Serial Enterprise Foods Pvt. Ltd.</div> <div class="partner-box notranslate">Harnik General Foods Pvt. Ltd.</div> <div class="partner-box notranslate">Maharashtra Samosa Patti</div> <div class="partner-box notranslate">Avanti Enterprise</div> <div class="partner-box notranslate">Vega Industries</div> <div class="partner-box notranslate">Eatsip Foods & Beverages</div> <div class="partner-box notranslate">Special Home Made Pickle</div> <div class="partner-box notranslate">B 2 Bakery</div>
                 </div>
             </div>
         </section>
+
         <section id="gallery">
             <h2>Our Products</h2>
-            <p id="product-instruction">Click on the product to know more</p>
             <div id="product-list-container">
+                 <!-- Soya Chunks -->
                 <div class="product-category animate-on-scroll" id="soya-chunks">
                     <h3 class="notranslate">Soya Chunks</h3>
-                    <h4 class="notranslate">Soya Chunks Box</h4>
+                    <div class="product-subheading notranslate">Boxed Soya Chunks</div>
                     <div class="gallery">
-                        <div class="gallery-item animate-on-scroll">
-                            <img src="regular-soyabox.PNG" alt="Soya Chunks – Regular" loading="lazy" />
-                            <div class="product-info">
-                                <div class="product-name-box">
-                                    <h4 class="product-title notranslate">Soya Chunks – Regular</h4>
-                                </div>
-                                <div class="product-weight-box">
-                                    <p class="product-detail notranslate">Gross Weight: 200 gm</p>
-                                </div>
-                                <div class="product-description-box">
-                                    <p>A wholesome and nutritious protein alternative, our Soya Chunks are perfect for curries, stir-fries, and snacks. Made from high-quality soybeans, they are packed with protein and fiber to keep you energized.</p>
-                                </div>
-                                <a href="#" class="whatsapp-btn" onclick="sendWhatsAppMessage(this)">
-                                    <i class="fab fa-whatsapp"></i> Order on WhatsApp
-                                </a>
-                            </div>
-                        </div>
-                        <div class="gallery-item animate-on-scroll">
-                            <img src="granules-soyabox.PNG" alt="Soya Chunks – Granules" loading="lazy" />
-                            <div class="product-info">
-                                <div class="product-name-box">
-                                    <h4 class="product-title notranslate">Soya Chunks – Granules</h4>
-                                </div>
-                                <div class="product-weight-box">
-                                    <p class="product-detail notranslate">Gross Weight: 200 gm</p>
-                                </div>
-                                <div class="product-description-box">
-                                    <p>Soya granules, a finely ground version of our classic chunks, are ideal for adding a rich, meaty texture to a variety of dishes like pasta sauces and cutlets.</p>
-                                </div>
-                                <a href="#" class="whatsapp-btn" onclick="sendWhatsAppMessage(this)">
-                                    <i class="fab fa-whatsapp"></i> Order on WhatsApp
-                                </a>
-                            </div>
-                        </div>
-                        <div class="gallery-item animate-on-scroll">
-                            <img src="mini-soyabox.PNG" alt="Soya Chunks – Mini" loading="lazy" />
-                            <div class="product-info">
-                                <div class="product-name-box">
-                                    <h4 class="product-title notranslate">Soya Chunks – Mini</h4>
-                                </div>
-                                <div class="product-weight-box">
-                                    <p class="product-detail notranslate">Gross Weight: 200 gm</p>
-                                </div>
-                                <div class="product-description-box">
-                                    <p>Our mini soya chunks are bite-sized and perfect for quick cooking, salads, and kid-friendly recipes.</p>
-                                </div>
-                                <a href="#" class="whatsapp-btn" onclick="sendWhatsAppMessage(this)">
-                                    <i class="fab fa-whatsapp"></i> Order on WhatsApp
-                                </a>
-                            </div>
-                        </div>
+                        <div class="gallery-item animate-on-scroll"><img src="regular-soyabox.PNG" alt="Soya Chunks – Regular" loading="lazy" /><div class="product-info"><div class="product-name-box"><h4 class="product-title notranslate">Soya Chunks – Regular</h4></div><div class="product-weight-box"><p class="product-detail notranslate">Gross Weight: 200 gm</p></div><div class="product-description-box"><p>A wholesome and nutritious protein alternative, our Soya Chunks are perfect for curries, stir-fries, and snacks. Made from high-quality soybeans, they are packed with protein and fiber to keep you energized.</p></div><div class="product-cta">Click to View</div></div></div>
+                        <div class="gallery-item animate-on-scroll"><img src="granules-soyabox.PNG" alt="Soya Chunks – Granules" loading="lazy" /><div class="product-info"><div class="product-name-box"><h4 class="product-title notranslate">Soya Chunks – Granules</h4></div><div class="product-weight-box"><p class="product-detail notranslate">Gross Weight: 200 gm</p></div><div class="product-description-box"><p>Soya granules, a finely ground version of our classic chunks, are ideal for adding a rich, meaty texture to a variety of dishes like pasta sauces and cutlets.</p></div><div class="product-cta">Click to View</div></div></div>
+                        <div class="gallery-item animate-on-scroll"><img src="mini-soyabox.PNG" alt="Soya Chunks – Mini" loading="lazy" /><div class="product-info"><div class="product-name-box"><h4 class="product-title notranslate">Soya Chunks – Mini</h4></div><div class="product-weight-box"><p class="product-detail notranslate">Gross Weight: 200 gm</p></div><div class="product-description-box"><p>Our mini soya chunks are bite-sized and perfect for quick cooking, salads, and kid-friendly recipes.</p></div><div class="product-cta">Click to View</div></div></div>
                     </div>
-                    <h4 class="notranslate">Soya Chunks Pouch</h4>
+                    <div class="product-subheading notranslate">Convenient Soya Pouches</div>
                     <div class="gallery">
-                        <div class="gallery-item animate-on-scroll">
-                            <img src="regular-soyapouch.PNG" alt="Soya Chunks" loading="lazy" />
-                            <div class="product-info">
-                                <div class="product-name-box">
-                                    <h4 class="product-title notranslate">Soya Chunks</h4>
-                                </div>
-                                <div class="product-weight-box">
-                                    <p class="product-detail notranslate">Price: ₹10 Pouch</p>
-                                </div>
-                                <div class="product-description-box">
-                                    <p>The same great quality soya chunks, now in a convenient and affordable pouch for daily use.</p>
-                                </div>
-                                <a href="#" class="whatsapp-btn" onclick="sendWhatsAppMessage(this)">
-                                    <i class="fab fa-whatsapp"></i> Order on WhatsApp
-                                </a>
-                            </div>
-                        </div>
-                        <div class="gallery-item animate-on-scroll">
-                            <img src="mini-soyapouch.PNG" alt="Soya Mini Chunks" loading="lazy" />
-                            <div class="product-info">
-                                <div class="product-name-box">
-                                    <h4 class="product-title notranslate">Soya Mini Chunks</h4>
-                                </div>
-                                <div class="product-weight-box">
-                                    <p class="product-detail notranslate">Price: ₹10 Pouch</p>
-                                </div>
-                                <div class="product-description-box">
-                                    <p>Small-sized soya chunks, packed in a pouch, are great for a quick and easy protein boost in any meal.</p>
-                                </div>
-                                <a href="#" class="whatsapp-btn" onclick="sendWhatsAppMessage(this)">
-                                    <i class="fab fa-whatsapp"></i> Order on WhatsApp
-                                </a>
-                            </div>
-                        </div>
+                        <div class="gallery-item animate-on-scroll"><img src="regular-soyapouch.PNG" alt="Soya Chunks" loading="lazy" /><div class="product-info"><div class="product-name-box"><h4 class="product-title notranslate">Soya Chunks</h4></div><div class="product-weight-box"><p class="product-detail notranslate">Price: ₹10 Pouch</p></div><div class="product-description-box"><p>The same great quality soya chunks, now in a convenient and affordable pouch for daily use.</p></div><div class="product-cta">Click to View</div></div></div>
+                        <div class="gallery-item animate-on-scroll"><img src="mini-soyapouch.PNG" alt="Soya Mini Chunks" loading="lazy" /><div class="product-info"><div class="product-name-box"><h4 class="product-title notranslate">Soya Mini Chunks</h4></div><div class="product-weight-box"><p class="product-detail notranslate">Price: ₹10 Pouch</p></div><div class="product-description-box"><p>Small-sized soya chunks, packed in a pouch, are great for a quick and easy protein boost in any meal.</p></div><div class="product-cta">Click to View</div></div></div>
                     </div>
                 </div>
-                <div class="product-category animate-on-scroll" id="pastes">
-                    <h3 class="notranslate">Pastes</h3>
-                    <div class="gallery">
-                        <div class="gallery-item animate-on-scroll">
-                            <img src="ggpaste-1kg_jar.PNG" alt="Ginger Garlic Paste Jar 1kg" loading="lazy" />
-                            <div class="product-info">
-                                <div class="product-name-box">
-                                    <h4 class="product-title notranslate">Ginger Garlic Paste Jar</h4>
-                                </div>
-                                <div class="product-weight-box">
-                                    <p class="product-detail notranslate">Gross Weight: 1 kg</p>
-                                </div>
-                                <div class="product-description-box">
-                                    <p>Our signature Ginger Garlic Paste in a large, bulk-sized jar. A kitchen essential for authentic Indian flavors.</p>
-                                </div>
-                                <a href="#" class="whatsapp-btn" onclick="sendWhatsAppMessage(this)">
-                                    <i class="fab fa-whatsapp"></i> Order on WhatsApp
-                                </a>
-                            </div>
-                        </div>
-                        <div class="gallery-item animate-on-scroll">
-                            <img src="ggpaste-200gm_jar.PNG" alt="Ginger Garlic Paste Jar 200gm" loading="lazy" />
-                            <div class="product-info">
-                                <div class="product-name-box">
-                                    <h4 class="product-title notranslate">Ginger Garlic Paste Jar</h4>
-                                </div>
-                                <div class="product-weight-box">
-                                    <p class="product-detail notranslate">Gross Weight: 200 gm</p>
-                                </div>
-                                <div class="product-description-box">
-                                    <p>A convenient jar of our fresh ginger garlic paste, perfect for everyday cooking.</p>
-                                </div>
-                                <a href="#" class="whatsapp-btn" onclick="sendWhatsAppMessage(this)">
-                                    <i class="fab fa-whatsapp"></i> Order on WhatsApp
-                                </a>
-                            </div>
-                        </div>
-                        <div class="gallery-item animate-on-scroll">
-                            <img src="ggpaste-pouch.PNG" alt="Ginger Garlic Paste Pouch 25gm" loading="lazy" />
-                            <div class="product-info">
-                                <div class="product-name-box">
-                                    <h4 class="product-title notranslate">Ginger Garlic Paste – Pouch</h4>
-                                </div>
-                                <div class="product-weight-box">
-                                    <p class="product-detail notranslate">Gross Weight: 25 gm</p>
-                                </div>
-                                <div class="product-description-box">
-                                    <p>A single-serving pouch of our flavorful ginger garlic paste, great for travel or quick meals.</p>
-                                </div>
-                                <a href="#" class="whatsapp-btn" onclick="sendWhatsAppMessage(this)">
-                                    <i class="fab fa-whatsapp"></i> Order on WhatsApp
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="product-category animate-on-scroll" id="seviyan">
-                    <h3 class="notranslate">Seviyan</h3>
-                    <div class="gallery">
-                        <div class="gallery-item animate-on-scroll">
-                            <img src="roasted-sevaiyan.PNG" alt="Roasted Seviyan" loading="lazy" />
-                            <div class="product-info">
-                                <div class="product-name-box">
-                                    <h4 class="product-title notranslate">Roasted Seviyan</h4>
-                                </div>
-                                <div class="product-weight-box">
-                                    <p class="product-detail notranslate">Gross Weight: 150g / 100g</p>
-                                </div>
-                                <div class="product-description-box">
-                                    <p>Perfectly roasted to a golden-brown finish, our seviyan are ready to use in your favorite sweet or savory dishes.</p>
-                                </div>
-                                <a href="#" class="whatsapp-btn" onclick="sendWhatsAppMessage(this)">
-                                    <i class="fab fa-whatsapp"></i> Order on WhatsApp
-                                </a>
-                            </div>
-                        </div>
-                        <div class="gallery-item animate-on-scroll">
-                            <img src="uncooked-sevaiyan.PNG" alt="Kachhi Seviyan" loading="lazy" />
-                            <div class="product-info">
-                                <div class="product-name-box">
-                                    <h4 class="product-title notranslate">Kachhi Seviyan</h4>
-                                </div>
-                                <div class="product-weight-box">
-                                    <p class="product-detail notranslate">Gross Weight: 150g / 100g</p>
-                                </div>
-                                <div class="product-description-box">
-                                    <p>Uncooked seviyan for a traditional preparation. Cook them to your desired texture for a variety of recipes.</p>
-                                </div>
-                                <a href="#" class="whatsapp-btn" onclick="sendWhatsAppMessage(this)">
-                                    <i class="fab fa-whatsapp"></i> Order on WhatsApp
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="product-category animate-on-scroll" id="bakery">
-                    <h3 class="notranslate">Bakery & Dry Items</h3>
-                    <div class="gallery">
-                        <div class="gallery-item animate-on-scroll">
-                            <img src="sugar_cubes.PNG" alt="Sugar Cubes" loading="lazy" />
-                            <div class="product-info">
-                                <div class="product-name-box">
-                                    <h4 class="product-title notranslate">Sugar Cubes</h4>
-                                </div>
-                                <div class="product-weight-box">
-                                    <p class="product-detail notranslate">Gross Weight: 500g</p>
-                                </div>
-                                <div class="product-description-box">
-                                    <p>Premium sugar cubes, perfect for tea and coffee. A touch of elegance for your table.</p>
-                                </div>
-                                <a href="#" class="whatsapp-btn" onclick="sendWhatsAppMessage(this)">
-                                    <i class="fab fa-whatsapp"></i> Order on WhatsApp
-                                </a>
-                            </div>
-                        </div>
-                        <div class="gallery-item animate-on-scroll">
-                            <img src="suji-toast.PNG" alt="Suji Toast" loading="lazy" />
-                            <div class="product-info">
-                                <div class="product-name-box">
-                                    <h4 class="product-title notranslate">Suji Toast</h4>
-                                </div>
-                                <div class="product-weight-box">
-                                    <p class="product-detail notranslate">Gross Weight: 300g</p>
-                                </div>
-                                <div class="product-description-box">
-                                    <p>A crispy, delicious suji toast that's perfect for a morning snack or with your evening chai.</p>
-                                </div>
-                                <a href="#" class="whatsapp-btn" onclick="sendWhatsAppMessage(this)">
-                                    <i class="fab fa-whatsapp"></i> Order on WhatsApp
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="product-category animate-on-scroll" id="ready-cook">
-                    <h3 class="notranslate">Ready to Cook</h3>
-                    <div class="gallery">
-                        <div class="gallery-item animate-on-scroll">
-                            <img src="samosa-patti.PNG" alt="Samosa Patti" loading="lazy" style="object-fit: cover;" />
-                            <div class="product-info">
-                                <div class="product-name-box">
-                                    <h4 class="product-title notranslate">Samosa Patti</h4>
-                                </div>
-                                <div class="product-weight-box">
-                                    <p class="product-detail notranslate">Gross Weight: 500gm / 250 gm</p>
-                                </div>
-                                <div class="product-description-box">
-                                    <p>Thin, crispy sheets ready to be filled with your favorite ingredients to create perfect samosas at home.</p>
-                                </div>
-                                <a href="#" class="whatsapp-btn" onclick="sendWhatsAppMessage(this)">
-                                    <i class="fab fa-whatsapp"></i> Order on WhatsApp
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="gallery">
-                        <div class="gallery-item animate-on-scroll">
-                            <img src="crispy-thread.PNG" alt="Crispy Thread" loading="lazy" />
-                            <div class="product-info">
-                                <div class="product-name-box">
-                                    <h4 class="product-title notranslate">Crispy Thread</h4>
-                                </div>
-                                <div class="product-weight-box">
-                                    <p class="product-detail notranslate">Gross Weight: 500gm</p>
-                                </div>
-                                <div class="product-description-box">
-                                    <p>Delightfully crunchy threads for a unique texture in your snacks and appetizers.</p>
-                                </div>
-                                <a href="#" class="whatsapp-btn" onclick="sendWhatsAppMessage(this)">
-                                    <i class="fab fa-whatsapp"></i> Order on WhatsApp
-                                </a>
-                            </div>
-                        </div>
-                        <div class="gallery-item animate-on-scroll">
-                            <img src="spring-roll-sheets.PNG" alt="Spring Roll Sheets" loading="lazy" />
-                            <div class="product-info">
-                                <div class="product-name-box">
-                                    <h4 class="product-title notranslate">Spring Roll Sheets</h4>
-                                </div>
-                                <div class="product-weight-box">
-                                    <p class="product-detail notranslate">Gross Weight: 400gm</p>
-                                </div>
-                                <div class="product-description-box">
-                                    <p>Versatile sheets that are perfect for making fresh, homemade spring rolls.</p>
-                                </div>
-                                <a href="#" class="whatsapp-btn" onclick="sendWhatsAppMessage(this)">
-                                    <i class="fab fa-whatsapp"></i> Order on WhatsApp
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="product-category animate-on-scroll" id="tofu">
-                    <h3 class="notranslate">Tofu (Soya Paneer)</h3>
-                    <div class="gallery">
-                        <div class="gallery-item animate-on-scroll">
-                            <img src="regular-tofu.PNG" alt="Tofu – Regular" loading="lazy" />
-                            <div class="product-info">
-                                <div class="product-name-box">
-                                    <h4 class="product-title notranslate">Tofu – Regular</h4>
-                                </div>
-                                <div class="product-weight-box">
-                                    <p class="product-detail notranslate">Gross Weight: 200gm</p>
-                                </div>
-                                <div class="product-description-box">
-                                    <p>Our classic, firm tofu (soya paneer) is a versatile and healthy protein source for all your recipes.</p>
-                                </div>
-                                <a href="#" class="whatsapp-btn" onclick="sendWhatsAppMessage(this)">
-                                    <i class="fab fa-whatsapp"></i> Order on WhatsApp
-                                </a>
-                            </div>
-                        </div>
-                        <div class="gallery-item animate-on-scroll">
-                            <img src="red_chilli-tofu.PNG" alt="Tofu – Red Chilli" loading="lazy" />
-                            <div class="product-info">
-                                <div class="product-name-box">
-                                    <h4 class="product-title notranslate">Tofu – Red Chilli</h4>
-                                </div>
-                                <div class="product-weight-box">
-                                    <p class="product-detail notranslate">Gross Weight: 200gm</p>
-                                </div>
-                                <div class="product-description-box">
-                                    <p>A spicy twist on our classic tofu, infused with red chilli for an extra kick of flavor.</p>
-                                </div>
-                                <a href="#" class="whatsapp-btn" onclick="sendWhatsAppMessage(this)">
-                                    <i class="fab fa-whatsapp"></i> Order on WhatsApp
-                                </a>
-                            </div>
-                        </div>
-                        <div class="gallery-item animate-on-scroll">
-                            <img src="garlic_pepper-tofu.PNG" alt="Tofu – Garlic Pepper" loading="lazy" />
-                            <div class="product-info">
-                                <div class="product-name-box">
-                                    <h4 class="product-title notranslate">Tofu – Garlic Pepper</h4>
-                                </div>
-                                <div class="product-weight-box">
-                                    <p class="product-detail notranslate">Gross Weight: 200gm</p>
-                                </div>
-                                <div class="product-description-box">
-                                    <p>Infused with a rich blend of garlic and black pepper, this tofu adds a savory depth to any dish.</p>
-                                </div>
-                                <a href="#" class="whatsapp-btn" onclick="sendWhatsAppMessage(this)">
-                                    <i class="fab fa-whatsapp"></i> Order on WhatsApp
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="product-category animate-on-scroll" id="pickles">
-                    <h3 class="notranslate">Pickles</h3>
-                    <div class="gallery">
-                        <div class="gallery-item animate-on-scroll">
-                            <img src="home_made-pickle.PNG" alt="Special Homemade Pickle" loading="lazy" />
-                            <div class="product-info">
-                                <div class="product-name-box">
-                                    <h4 class="product-title notranslate">Special Homemade Pickle</h4>
-                                </div>
-                                <div class="product-weight-box">
-                                    <p class="product-detail notranslate">Gross Weight: 250gm</p>
-                                </div>
-                                <div class="product-description-box">
-                                    <p>A traditional homemade recipe with a mix of select spices, bringing authentic flavor to your meals.</p>
-                                </div>
-                                <a href="#" class="whatsapp-btn" onclick="sendWhatsAppMessage(this)">
-                                    <i class="fab fa-whatsapp"></i> Order on WhatsApp
-                                </a>
-                            </div>
-                        </div>
-                        <div class="gallery-item animate-on-scroll">
-                            <img src="silver-pickle.PNG" alt="Silver Pickle" loading="lazy" />
-                            <div class="product-info">
-                                <div class="product-name-box">
-                                    <h4 class="product-title notranslate">Silver Pickle</h4>
-                                </div>
-                                <div class="product-weight-box">
-                                    <p class="product-detail notranslate">Gross Weight: 40gm</p>
-                                </div>
-                                <div class="product-description-box">
-                                    <p>A small, convenient pack of our classic pickle, perfect for a tangy treat on the go.</p>
-                                </div>
-                                <a href="#" class="whatsapp-btn" onclick="sendWhatsAppMessage(this)">
-                                    <i class="fab fa-whatsapp"></i> Order on WhatsApp
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="product-category animate-on-scroll" id="pudding">
-                    <h3 class="notranslate">Pudding</h3>
-                    <div class="gallery">
-                        <div class="gallery-item animate-on-scroll">
-                            <img src="caramel-pudding.PNG" alt="Caramel Pudding" loading="lazy" />
-                            <div class="product-info">
-                                <div class="product-name-box">
-                                    <h4 class="product-title notranslate">Caramel Pudding</h4>
-                                </div>
-                                <div class="product-weight-box">
-                                    <p class="product-detail notranslate">Gross Weight: 90gm</p>
-                                </div>
-                                <div class="product-description-box">
-                                    <p>A rich, delightful caramel pudding mix. Follow our simple instructions to create a silky, smooth dessert at home. A perfect sweet treat for any occasion.</p>
-                                </div>
-                                <a href="#" class="whatsapp-btn" onclick="sendWhatsAppMessage(this)">
-                                    <i class="fab fa-whatsapp"></i> Order on WhatsApp
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="product-category animate-on-scroll" id="frozen">
-                    <h3 class="notranslate">Frozen Treats</h3>
-                    <div class="gallery">
-                        <div class="gallery-item animate-on-scroll">
-                            <img src="sippin-pops.PNG" alt="Sippin Pops" loading="lazy" />
-                            <div class="product-info">
-                                <div class="product-name-box">
-                                    <h4 class="product-title notranslate">Sippin Pops</h4>
-                                </div>
-                                <div class="product-weight-box">
-                                    <p class="product-detail notranslate">12 FLAVORS/12 PC PER BOX</p>
-                                </div>
-                                <div class="product-description-box">
-                                    <p>A refreshing range of colorful, fruit-flavored drinks. Perfect for parties and summer days.</p>
-                                </div>
-                                <a href="#" class="whatsapp-btn" onclick="sendWhatsAppMessage(this)">
-                                    <i class="fab fa-whatsapp"></i> Order on WhatsApp
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="product-category animate-on-scroll" id="chocolates">
-                    <h3 class="notranslate">Chocolates</h3>
-                    <div class="gallery">
-                        <div class="gallery-item animate-on-scroll">
-                            <img src="gold-coin.PNG" alt="Gold Coin - Imli Kick - Harty Beauty" loading="lazy" />
-                            <div class="product-info">
-                                <div class="product-name-box">
-                                    <h4 class="product-title notranslate">Gold Coin - Imli Kick - Harty Beauty</h4>
-                                </div>
-                                <div class="product-weight-box">
-                                    <p class="product-detail notranslate">Gross Weight: 12 pc</p>
-                                </div>
-                                <div class="product-description-box">
-                                    <p>A mix of our delightful chocolate assortments, including Gold Coin, Imli Kick, and Harty Beauty.</p>
-                                </div>
-                                <a href="#" class="whatsapp-btn" onclick="sendWhatsAppMessage(this)">
-                                    <i class="fab fa-whatsapp"></i> Order on WhatsApp
-                                </a>
-                            </div>
-                        </div>
-                        <div class="gallery-item animate-on-scroll">
-                            <img src="choco-lush.PNG" alt="Choco Lush" loading="lazy" />
-                            <div class="product-info">
-                                <div class="product-name-box">
-                                    <h4 class="product-title notranslate">Choco Lush</h4>
-                                </div>
-                                <div class="product-weight-box">
-                                    <p class="product-detail notranslate">Gross Weight: 12 pc</p>
-                                </div>
-                                <div class="product-description-box">
-                                    <p>A rich and creamy assortment of our finest chocolates, perfect for a sweet indulgence.</p>
-                                </div>
-                                <a href="#" class="whatsapp-btn" onclick="sendWhatsAppMessage(this)">
-                                    <i class="fab fa-whatsapp"></i> Order on WhatsApp
-                                </a>
-                            </div>
-                        </div>
-                        <div class="gallery-item animate-on-scroll">
-                            <img src="assorted-chocolate.PNG" alt="Assorted Chocolates" loading="lazy" />
-                            <div class="product-info">
-                                <div class="product-name-box">
-                                    <h4 class="product-title notranslate">Assorted Chocolates</h4>
-                                </div>
-                                <div class="product-weight-box">
-                                    <p class="product-detail notranslate">Gross Weight: 12 pc</p>
-                                </div>
-                                <div class="product-description-box">
-                                    <p>A delightful mix of various chocolates in one pack, offering a treat for every taste bud.</p>
-                                </div>
-                                <a href="#" class="whatsapp-btn" onclick="sendWhatsAppMessage(this)">
-                                    <i class="fab fa-whatsapp"></i> Order on WhatsApp
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="product-category animate-on-scroll" id="beverages">
-                    <h3 class="notranslate">Beverages</h3>
-                    <div class="gallery">
-                        <div class="gallery-item animate-on-scroll">
-                            <img src="umbrella-drinks.PNG" alt="Umbrella drinks" loading="lazy" />
-                            <div class="product-info">
-                                <div class="product-name-box">
-                                    <h4 class="product-title notranslate">Umbrella Drinks</h4>
-                                </div>
-                                <div class="product-weight-box">
-                                    <p class="product-detail notranslate">Gross Weight: 750 ml / bottle</p>
-                                </div>
-                                <div class="product-description-box">
-                                    <p>A refreshing range of colorful, fruit-flavored beverages. Perfect for parties and summer days.</p>
-                                </div>
-                                <a href="#" class="whatsapp-btn" onclick="sendWhatsAppMessage(this)">
-                                    <i class="fab fa-whatsapp"></i> Order on WhatsApp
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <!-- Pastes -->
+                <div class="product-category animate-on-scroll" id="pastes"><h3 class="notranslate">Pastes</h3><div class="gallery"><div class="gallery-item animate-on-scroll"><img src="ggpaste-1kg_jar.PNG" alt="Ginger Garlic Paste Jar 1kg" loading="lazy" /><div class="product-info"><div class="product-name-box"><h4 class="product-title notranslate">Ginger Garlic Paste Jar</h4></div><div class="product-weight-box"><p class="product-detail notranslate">Gross Weight: 1 kg</p></div><div class="product-description-box"><p>Our signature Ginger Garlic Paste in a large, bulk-sized jar. A kitchen essential for authentic Indian flavors.</p></div><div class="product-cta">Click to View</div></div></div><div class="gallery-item animate-on-scroll"><img src="ggpaste-200gm_jar.PNG" alt="Ginger Garlic Paste Jar 200gm" loading="lazy" /><div class="product-info"><div class="product-name-box"><h4 class="product-title notranslate">Ginger Garlic Paste Jar</h4></div><div class="product-weight-box"><p class="product-detail notranslate">Gross Weight: 200 gm</p></div><div class="product-description-box"><p>A convenient jar of our fresh ginger garlic paste, perfect for everyday cooking.</p></div><div class="product-cta">Click to View</div></div></div><div class="gallery-item animate-on-scroll"><img src="ggpaste-pouch.PNG" alt="Ginger Garlic Paste Pouch 25gm" loading="lazy" /><div class="product-info"><div class="product-name-box"><h4 class="product-title notranslate">Ginger Garlic Paste – Pouch</h4></div><div class="product-weight-box"><p class="product-detail notranslate">Gross Weight: 25 gm</p></div><div class="product-description-box"><p>A single-serving pouch of our flavorful ginger garlic paste, great for travel or quick meals.</p></div><div class="product-cta">Click to View</div></div></div></div></div>
+                <!-- Seviyan -->
+                <div class="product-category animate-on-scroll" id="seviyan"><h3 class="notranslate">Seviyan</h3><div class="gallery"><div class="gallery-item animate-on-scroll"><img src="roasted-sevaiyan.PNG" alt="Roasted Seviyan" loading="lazy" /><div class="product-info"><div class="product-name-box"><h4 class="product-title notranslate">Roasted Seviyan</h4></div><div class="product-weight-box"><p class="product-detail notranslate">Gross Weight: 150g / 100g</p></div><div class="product-description-box"><p>Perfectly roasted to a golden-brown finish, our seviyan are ready to use in your favorite sweet or savory dishes.</p></div><div class="product-cta">Click to View</div></div></div><div class="gallery-item animate-on-scroll"><img src="uncooked-sevaiyan.PNG" alt="Kachhi Seviyan" loading="lazy" /><div class="product-info"><div class="product-name-box"><h4 class="product-title notranslate">Kachhi Seviyan</h4></div><div class="product-weight-box"><p class="product-detail notranslate">Gross Weight: 150g / 100g</p></div><div class="product-description-box"><p>Uncooked seviyan for a traditional preparation. Cook them to your desired texture for a variety of recipes.</p></div><div class="product-cta">Click to View</div></div></div></div></div>
+                <!-- Bakery -->
+                <div class="product-category animate-on-scroll" id="bakery"><h3 class="notranslate">Bakery & Dry Items</h3><div class="gallery"><div class="gallery-item animate-on-scroll"><img src="sugar_cubes.PNG" alt="Sugar Cubes" loading="lazy" /><div class="product-info"><div class="product-name-box"><h4 class="product-title notranslate">Sugar Cubes</h4></div><div class="product-weight-box"><p class="product-detail notranslate">Gross Weight: 500g</p></div><div class="product-description-box"><p>Premium sugar cubes, perfect for tea and coffee. A touch of elegance for your table.</p></div><div class="product-cta">Click to View</div></div></div><div class="gallery-item animate-on-scroll"><img src="suji-toast.PNG" alt="Suji Toast" loading="lazy" /><div class="product-info"><div class="product-name-box"><h4 class="product-title notranslate">Suji Toast</h4></div><div class="product-weight-box"><p class="product-detail notranslate">Gross Weight: 300g</p></div><div class="product-description-box"><p>A crispy, delicious suji toast that's perfect for a morning snack or with your evening chai.</p></div><div class="product-cta">Click to View</div></div></div></div></div>
+                <!-- Ready to Cook -->
+                <div class="product-category animate-on-scroll" id="ready-cook"><h3 class="notranslate">Ready to Cook</h3><div class="gallery"><div class="gallery-item animate-on-scroll"><img src="samosa-patti.PNG" alt="Samosa Patti" loading="lazy" style="object-fit: contain;" /><div class="product-info"><div class="product-name-box"><h4 class="product-title notranslate">Samosa Patti</h4></div><div class="product-weight-box"><p class="product-detail notranslate">Gross Weight: 500gm / 250 gm</p></div><div class="product-description-box"><p>Thin, crispy sheets ready to be filled with your favorite ingredients to create perfect samosas at home.</p></div><div class="product-cta">Click to View</div></div></div><div class="gallery-item animate-on-scroll"><img src="crispy-thread.PNG" alt="Crispy Thread" loading="lazy" /><div class="product-info"><div class="product-name-box"><h4 class="product-title notranslate">Crispy Thread</h4></div><div class="product-weight-box"><p class="product-detail notranslate">Gross Weight: 500gm</p></div><div class="product-description-box"><p>Delightfully crunchy threads for a unique texture in your snacks and appetizers.</p></div><div class="product-cta">Click to View</div></div></div><div class="gallery-item animate-on-scroll"><img src="spring-roll-sheets.PNG" alt="Spring Roll Sheets" loading="lazy" /><div class="product-info"><div class="product-name-box"><h4 class="product-title notranslate">Spring Roll Sheets</h4></div><div class="product-weight-box"><p class="product-detail notranslate">Gross Weight: 400gm</p></div><div class="product-description-box"><p>Versatile sheets that are perfect for making fresh, homemade spring rolls.</p></div><div class="product-cta">Click to View</div></div></div></div></div>
+                <!-- Tofu -->
+                <div class="product-category animate-on-scroll" id="tofu"><h3 class="notranslate">Tofu (Soya Paneer)</h3><div class="gallery"><div class="gallery-item animate-on-scroll"><img src="regular-tofu.PNG" alt="Tofu – Regular" loading="lazy" /><div class="product-info"><div class="product-name-box"><h4 class="product-title notranslate">Tofu – Regular</h4></div><div class="product-weight-box"><p class="product-detail notranslate">Gross Weight: 200gm</p></div><div class="product-description-box"><p>Our classic, firm tofu (soya paneer) is a versatile and healthy protein source for all your recipes.</p></div><div class="product-cta">Click to View</div></div></div><div class="gallery-item animate-on-scroll"><img src="red_chilli-tofu.PNG" alt="Tofu – Red Chilli" loading="lazy" /><div class="product-info"><div class="product-name-box"><h4 class="product-title notranslate">Tofu – Red Chilli</h4></div><div class="product-weight-box"><p class="product-detail notranslate">Gross Weight: 200gm</p></div><div class="product-description-box"><p>A spicy twist on our classic tofu, infused with red chilli for an extra kick of flavor.</p></div><div class="product-cta">Click to View</div></div></div><div class="gallery-item animate-on-scroll"><img src="garlic_pepper-tofu.PNG" alt="Tofu – Garlic Pepper" loading="lazy" /><div class="product-info"><div class="product-name-box"><h4 class="product-title notranslate">Tofu – Garlic Pepper</h4></div><div class="product-weight-box"><p class="product-detail notranslate">Gross Weight: 200gm</p></div><div class="product-description-box"><p>Infused with a rich blend of garlic and black pepper, this tofu adds a savory depth to any dish.</p></div><div class="product-cta">Click to View</div></div></div></div></div>
+                <!-- Pickles -->
+                <div class="product-category animate-on-scroll" id="pickles"><h3 class="notranslate">Pickles</h3><div class="gallery"><div class="gallery-item animate-on-scroll"><img src="home_made-pickle.PNG" alt="Special Homemade Pickle" loading="lazy" /><div class="product-info"><div class="product-name-box"><h4 class="product-title notranslate">Special Homemade Pickle</h4></div><div class="product-weight-box"><p class="product-detail notranslate">Gross Weight: 250gm</p></div><div class="product-description-box"><p>A traditional homemade recipe with a mix of select spices, bringing authentic flavor to your meals.</p></div><div class="product-cta">Click to View</div></div></div><div class="gallery-item animate-on-scroll"><img src="silver-pickle.PNG" alt="Silver Pickle" loading="lazy" /><div class="product-info"><div class="product-name-box"><h4 class="product-title notranslate">Silver Pickle</h4></div><div class="product-weight-box"><p class="product-detail notranslate">Gross Weight: 40gm</p></div><div class="product-description-box"><p>A small, convenient pack of our classic pickle, perfect for a tangy treat on the go.</p></div><div class="product-cta">Click to View</div></div></div></div></div>
+                <!-- Pudding -->
+                <div class="product-category animate-on-scroll" id="pudding"><h3 class="notranslate">Pudding</h3><div class="gallery"><div class="gallery-item animate-on-scroll"><img src="caramel-pudding.PNG" alt="Caramel Pudding" loading="lazy" /><div class="product-info"><div class="product-name-box"><h4 class="product-title notranslate">Caramel Pudding</h4></div><div class="product-weight-box"><p class="product-detail notranslate">Gross Weight: 90gm</p></div><div class="product-description-box"><p>A rich, delightful caramel pudding mix. Follow our simple instructions to create a silky, smooth dessert at home. A perfect sweet treat for any occasion.</p></div><div class="product-cta">Click to View</div></div></div></div></div>
+                <!-- Frozen Treats -->
+                <div class="product-category animate-on-scroll" id="frozen"><h3 class="notranslate">Frozen Treats</h3><div class="gallery"><div class="gallery-item animate-on-scroll"><img src="sippin-pops.PNG" alt="Sippin Pops" loading="lazy" /><div class="product-info"><div class="product-name-box"><h4 class="product-title notranslate">Sippin Pops</h4></div><div class="product-weight-box"><p class="product-detail notranslate">12 FLAVORS/12 PC PER BOX</p></div><div class="product-description-box"><p>A refreshing range of colorful, fruit-flavored drinks. Perfect for parties and summer days.</p></div><div class="product-cta">Click to View</div></div></div></div></div>
+                <!-- Chocolates -->
+                <div class="product-category animate-on-scroll" id="chocolates"><h3 class="notranslate">Chocolates</h3><div class="gallery"><div class="gallery-item animate-on-scroll"><img src="gold-coin.PNG" alt="Gold Coin - Imli Kick - Harty Beauty" loading="lazy" /><div class="product-info"><div class="product-name-box"><h4 class="product-title notranslate">Gold Coin - Imli Kick - Harty Beauty</h4></div><div class="product-weight-box"><p class="product-detail notranslate">Gross Weight: 12 pc</p></div><div class="product-description-box"><p>A mix of our delightful chocolate assortments, including Gold Coin, Imli Kick, and Harty Beauty.</p></div><div class="product-cta">Click to View</div></div></div><div class="gallery-item animate-on-scroll"><img src="choco-lush.PNG" alt="Choco Lush" loading="lazy" /><div class="product-info"><div class="product-name-box"><h4 class="product-title notranslate">Choco Lush</h4></div><div class="product-weight-box"><p class="product-detail notranslate">Gross Weight: 12 pc</p></div><div class="product-description-box"><p>A rich and creamy assortment of our finest chocolates, perfect for a sweet indulgence.</p></div><div class="product-cta">Click to View</div></div></div><div class="gallery-item animate-on-scroll"><img src="assorted-chocolate.PNG" alt="Assorted Chocolates" loading="lazy" /><div class="product-info"><div class="product-name-box"><h4 class="product-title notranslate">Assorted Chocolates</h4></div><div class="product-weight-box"><p class="product-detail notranslate">Gross Weight: 12 pc</p></div><div class="product-description-box"><p>A delightful mix of various chocolates in one pack, offering a treat for every taste bud.</p></div><div class="product-cta">Click to View</div></div></div></div></div>
+                <!-- Beverages -->
+                <div class="product-category animate-on-scroll" id="beverages"><h3 class="notranslate">Beverages</h3><div class="gallery"><div class="gallery-item animate-on-scroll"><img src="umbrella-drinks.PNG" alt="Umbrella drinks" loading="lazy" /><div class="product-info"><div class="product-name-box"><h4 class="product-title notranslate">Umbrella Drinks</h4></div><div class="product-weight-box"><p class="product-detail notranslate">Gross Weight: 750 ml / bottle</p></div><div class="product-description-box"><p>A refreshing range of colorful, fruit-flavored beverages. Perfect for parties and summer days.</p></div><div class="product-cta">Click to View</div></div></div></div></div>
             </div>
         </section>
+
         <section id="testimonials">
-            <div class="animate-on-scroll">
+            <div class="container animate-on-scroll">
                 <h2>What Our Clients Say</h2>
                 <div class="testimonial-carousel">
                     <div class="testimonial-wrapper" id="testimonial-wrapper">
-                        <div class="testimonial-card">
-                            <p>Serial Enterprise Foods has exceeded our expectations. Their products are consistently fresh and our customers love the variety!</p>
-                            <div class="client-name notranslate">- Local Grocer</div>
-                            <div class="client-role">Mumbai, Maharashtra</div>
-                        </div>
-                        <div class="testimonial-card">
-                            <p>The best quality Soya Chunks we've ever stocked. The delivery is always on time, and the team is a pleasure to work with.</p>
-                            <div class="client-name notranslate">- Restaurant Owner</div>
-                            <div class="client-role">Pune, Maharashtra</div>
-                        </div>
-                        <div class="testimonial-card">
-                            <p>From pickles to pastes, their range is fantastic. Our inventory has never been more popular since we started carrying their brand.</p>
-                            <div class="client-name notranslate">- Supermarket Manager</div>
-                            <div class="client-role">Ahmedabad, Gujarat</div>
-                        </div>
+                        <div class="testimonial-card"><p>Serial Enterprise Foods has exceeded our expectations. Their products are consistently fresh and our customers love the variety!</p><div class="client-name notranslate">- Local Grocer</div><div class="client-role">Mumbai, Maharashtra</div></div>
+                        <div class="testimonial-card"><p>The best quality Soya Chunks we've ever stocked. The delivery is always on time, and the team is a pleasure to work with.</p><div class="client-name notranslate">- Restaurant Owner</div><div class="client-role">Pune, Maharashtra</div></div>
+                        <div class="testimonial-card"><p>From pickles to pastes, their range is fantastic. Our inventory has never been more popular since we started carrying their brand.</p><div class="client-name notranslate">- Supermarket Manager</div><div class="client-role">Ahmedabad, Gujarat</div></div>
                     </div>
-                    <button class="carousel-btn prev-btn" onclick="moveCarousel(-1)">❮</button>
-                    <button class="carousel-btn next-btn" onclick="moveCarousel(1)">❯</button>
                     <div class="carousel-dots" id="carousel-dots"></div>
                 </div>
             </div>
         </section>
+
         <section id="contact">
-            <div class="animate-on-scroll contact-container">
+            <div class="container animate-on-scroll">
                 <h2>Contact Us</h2>
                 <div class="contact-content">
                     <div class="contact-info">
-                        <h3>Get in Touch</h3>
+                        <h3 style="font-size: 2em; color: var(--primary-color);">Get in Touch</h3>
+                        <div class="contact-info-item"><i class="fas fa-map-marker-alt"></i><p>14/110, Anand Nagar, near Vakola Police Station,<br /> Santacruz (E), <span class="notranslate">Mumbai 400057</span><br /> <span class="notranslate">Maharashtra</span>, India</p></div>
                         <div class="contact-info-item">
-                            <i class="fas fa-map-marker-alt"></i>
-                            <p>
-                                14/110, Anand Nagar, near Vakola Police Station,<br />
-                                Santacruz (E), <span class="notranslate">Mumbai 400057</span><br />
-                                <span class="notranslate">Maharashtra</span>, India
-                            </p>
+                            <i class="fas fa-phone-alt"></i>
+                            <div>
+                                <p style="margin:0; padding:0;"><strong>Sanjay Savla:</strong> <span class="notranslate">+91 77158 44176</span></p>
+                                <a href="tel:+917715844176" class="contact-action-link">Call Sanjay</a>
+                            </div>
                         </div>
                         <div class="contact-info-item">
                             <i class="fas fa-phone-alt"></i>
-                            <p>
-                                <strong>Sanjay Savla:</strong> <span class="notranslate">+91 77158 44176</span><br />
-                                <strong>Manish Savla:</strong> <span class="notranslate">+91 88504 01035</span>
-                            </p>
+                            <div>
+                                <p style="margin:0; padding:0;"><strong>Manish Savla:</strong> <span class="notranslate">+91 88504 01035</span></p>
+                                <a href="tel:+918850401035" class="contact-action-link">Call Manish</a>
+                            </div>
                         </div>
-                        <div class="contact-buttons">
-                            <a href="tel:+918850401035" class="contact-link call-now-btn">
-                                <i class="fas fa-phone"></i> Call Now
-                            </a>
-                            <a href="mailto:serial.enterfoods@gmail.com" class="contact-link email-btn">
-                                <i class="fas fa-envelope"></i> Email Us
-                            </a>
+                        <div class="contact-info-item">
+                            <i class="fas fa-envelope"></i>
+                            <div>
+                                <p style="margin:0; padding:0;">serial.enterfoods@gmail.com</p>
+                                <a href="mailto:serial.enterfoods@gmail.com" class="contact-action-link">Email Us</a>
+                            </div>
                         </div>
                     </div>
                     <div class="contact-form-container">
-                        <h3>Send a Message</h3>
-                        <form id="contactForm">
-                            <input type="text" id="name" name="name" placeholder="Your Name" required />
-                            <input type="email" id="email" name="email" placeholder="Your Email" required />
-                            <input type="tel" id="phone" name="phone" placeholder="Your Phone Number" required />
-                            <textarea id="message" name="message" rows="5" placeholder="Your Message / Enquiry" required></textarea>
-                            <button type="submit">Send Message</button>
-                        </form>
+                        <h3 style="font-size: 2em; color: var(--primary-color);">Send a Message</h3>
+                        <form id="contactForm"><input type="text" id="name" name="name" placeholder="Your Name" required /><input type="email" id="email" name="email" placeholder="Your Email" required /><input type="tel" id="phone" name="phone" placeholder="Your Phone Number" required /><textarea id="message" name="message" rows="5" placeholder="Your Message / Enquiry" required></textarea><button type="submit">Send Message</button></form>
                     </div>
                 </div>
-                <div class="contact-map">
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3770.672430044566!2d72.84888207502396!3d19.07849188212623!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7c919d50a7c41%3A0x6b45a49c6d4e28a5!2s14%2F110%2C%20Anand%20Nagar%2C%20Vakola%2C%20Santacruz%20East%2C%20Mumbai%2C%20Maharashtra%20400057!5e0!3m2!1sen!2sin!4v1719543110292!5m2!1sen!2sin" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                <div class="map-container" style="margin-top: 40px;">
+                    <h3 style="text-align: center; font-size: 2em; color: var(--primary-color);">Find Us Here</h3>
+                    <div class="contact-map" style="border-radius: 15px; overflow: hidden; box-shadow: 0 8px 25px rgba(0,0,0,0.1);">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3770.6052055049026!2d72.84545747395126!3d19.081087951815157!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7c90090cc2d9b%3A0x50a46a5302901f9d!2s14%2C%20Anand%20Nagar%20Ln%2C%20Anand%20Nagar%2C%20Vakola%2C%20Santacruz%20East%2C%20Mumbai%2C%20Maharashtra%20400055!5e0!3m2!1sen!2sin!4v1755953057495!5m2!1sen!2sin" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </div>
                 </div>
             </div>
         </section>
     </main>
-    <footer>
-        © 2025 <span class="notranslate">Serial Enterprise Foods Private Limited</span> | All Rights Reserved
-    </footer>
-    <div id="formStatusMessage" class="form-status-message"></div>
-    <script type="text/javascript">
+    <footer>© 2025 <span class="notranslate">Serial Enterprise Foods Private Limited</span> | All Rights Reserved</footer>
+    <div id="formStatusMessage" class="form-status-message" aria-live="polite"></div>
+
+    <!-- SCRIPTS -->
+    <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+    <script>
+        // Initialize Google Translate
         function googleTranslateElementInit() {
             new google.translate.TranslateElement({
                 pageLanguage: 'en',
@@ -2108,414 +540,329 @@
                 layout: google.translate.TranslateElement.InlineLayout.VERTICAL
             }, 'google_translate_element');
         }
-    </script>
-    <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-    <script>
-        // Force page to load at the top
-        if (history.scrollRestoration) {
-            history.scrollRestoration = 'manual';
-        } else {
-            window.onbeforeunload = function () {
-                window.scrollTo(0, 0);
-            }
-        }
-
-        const searchInput = document.getElementById("searchInput");
-        const categorySelect = document.getElementById("categorySelect");
-        const navSearchInput = document.getElementById("navSearchInput");
-        const navCategorySelect = document.getElementById("navCategorySelect");
-        const productCategories = document.querySelectorAll(".product-category");
-        const homeSection = document.getElementById("home");
-        const categoryHeaders = document.querySelectorAll(".product-category h3");
-        const logoLink = document.querySelector('.nav-brand img');
-        const companyNameLink = document.querySelector('.nav-brand .company-name');
-        const sideMenu = document.getElementById("side-menu");
-        const hamburgerMenu = document.getElementById("hamburger-menu");
-        const fixedEnquiryBtn = document.getElementById("fixed-enquiry-btn");
-        const productModal = document.getElementById("product-modal");
-        const modalImage = document.getElementById("modal-product-image");
-        const modalTitle = document.getElementById("modal-product-title");
-        const modalDetail = document.getElementById("modal-product-detail");
-        const modalDescription = document.getElementById("modal-product-description");
-        const galleryItems = document.querySelectorAll('.gallery-item');
-        const htmlEl = document.documentElement;
-        const mainNav = document.getElementById('main-nav');
-        const backToAllBtn = document.getElementById('back-to-all-btn');
-        const themeToggle = document.getElementById("theme-toggle");
-        const contactForm = document.getElementById("contactForm");
-        const formStatusMessage = document.getElementById("formStatusMessage");
-        const navLangSelect = document.getElementById("nav-lang-select");
-        const mobileLangSelect = document.getElementById("mobile-lang-select");
-        const mobileMenuContainer = document.getElementById("mobile-menu-container");
-        const mobileSearchInput = document.getElementById("mobileSearchInput");
-        const mobileCategorySelect = document.getElementById("mobileCategorySelect");
-        const mainContent = document.getElementById("main-content");
-
-        window.onload = function() {
-            window.scrollTo(0, 0);
-            updateLangSelects(navLangSelect.value);
-        };
         
-        function doGTranslate(lang) {
-            const googTr = document.querySelector('#google_translate_element select');
-            if (googTr) {
-                googTr.value = lang;
-                googTr.dispatchEvent(new Event('change'));
-            }
-            updateLangSelects(lang);
-        }
-
-        function updateLangSelects(lang) {
-            navLangSelect.value = lang;
-            mobileLangSelect.value = lang;
-        }
-
-        function openNav() {
-            sideMenu.style.width = "250px";
-            hamburgerMenu.classList.add('open');
-            mainContent.classList.add('main-content-blurred');
-        }
-
-        function closeNav() {
-            sideMenu.style.width = "0";
-            hamburgerMenu.classList.remove('open');
-            mainContent.classList.remove('main-content-blurred');
-        }
-        
-        function toggleHamburgerMenu() {
-            const isOpen = sideMenu.style.width === "250px";
-            if (isOpen) {
-                closeNav();
-            } else {
-                openNav();
-            }
-        }
-        
-        window.openNav = openNav;
-        window.closeNav = closeNav;
-        window.toggleHamburgerMenu = toggleHamburgerMenu;
-
-        mainContent.addEventListener('click', () => {
-             if (sideMenu.style.width === "250px") {
-                closeNav();
-            }
-        });
-        
-        function syncSearchInputs(sourceInput, targetInput) {
-            targetInput.value = sourceInput.value;
-        }
-
-        function syncCategorySelects(sourceSelect, targetSelect) {
-            targetSelect.value = sourceSelect.value;
-        }
-
-        function updateBackButtonVisibility() {
-            const hasSearchTerm = searchInput.value.trim().length > 0 || navSearchInput.value.trim().length > 0 || mobileSearchInput.value.trim().length > 0;
-            const hasCategorySelected = categorySelect.value !== 'all' || navCategorySelect.value !== 'all' || mobileCategorySelect.value !== 'all';
-            if (hasSearchTerm || hasCategorySelected) {
-                backToAllBtn.classList.add('visible');
-            } else {
-                backToAllBtn.classList.remove('visible');
-            }
-        }
-        
-        function filterProducts() {
-            const isMobile = window.innerWidth <= 767;
-            const currentSearchInput = isMobile ? mobileSearchInput : navSearchInput;
-            const currentCategorySelect = isMobile ? mobileCategorySelect : navCategorySelect;
-            const searchTerm = currentSearchInput.value.trim().toLowerCase();
-            const categoryId = currentCategorySelect.value;
-            
-            let firstMatchFound = false;
-
-            productCategories.forEach(category => {
-                let categoryHasMatch = false;
-                const isCategoryMatch = categoryId === "all" || category.id === categoryId;
-                
-                if (!isCategoryMatch && searchTerm.length === 0) {
-                    category.style.display = "none";
-                    return;
-                }
-                category.querySelectorAll(".gallery-item").forEach(item => {
-                    const title = item.querySelector(".product-title").textContent.toLowerCase();
-                    const description = item.querySelector(".product-description-box p").textContent.toLowerCase();
-                    const matchesSearch = title.includes(searchTerm) || description.includes(searchTerm);
-                    
-                    if (matchesSearch && isCategoryMatch) {
-                        item.style.display = "flex";
-                        categoryHasMatch = true;
-                    } else {
-                        item.style.display = "none";
-                    }
-                });
-                category.style.display = categoryHasMatch ? "" : "none";
-                if (isCategoryMatch && categoryHasMatch && !firstMatchFound && (searchTerm.length > 0 || categoryId !== 'all')) {
-                    firstMatchFound = true;
-                    setTimeout(() => {
-                        const offset = mainNav.offsetHeight + 20;
-                        const targetPosition = category.offsetTop - offset;
-                        window.scrollTo({
-                            top: targetPosition,
-                            behavior: "smooth"
-                        });
-                    }, 50);
-                }
-            });
-            highlightCategory(categoryId);
-            updateHomeVisibility();
-            updateBackButtonVisibility();
-        }
-
-        function showAllProducts() {
-            document.getElementById("categorySelect").value = "all";
-            document.getElementById("navCategorySelect").value = "all";
-            document.getElementById("mobileCategorySelect").value = "all";
-            document.getElementById("searchInput").value = "";
-            document.getElementById("navSearchInput").value = "";
-            document.getElementById("mobileSearchInput").value = "";
-            filterProducts();
-        }
-
-        navSearchInput.addEventListener("input", () => {
-            // When typing in search, reset the category dropdown
-            navCategorySelect.value = 'all';
-            mobileCategorySelect.value = 'all';
-            syncSearchInputs(navSearchInput, mobileSearchInput);
-            filterProducts();
-        });
-
-        navCategorySelect.addEventListener("change", () => {
-            // When selecting a category, reset the search input
-            navSearchInput.value = '';
-            mobileSearchInput.value = '';
-            syncCategorySelects(navCategorySelect, mobileCategorySelect);
-            filterProducts();
-        });
-
-        mobileSearchInput.addEventListener("input", () => {
-            // When typing in mobile search, reset the category dropdown
-            navCategorySelect.value = 'all';
-            mobileCategorySelect.value = 'all';
-            syncSearchInputs(mobileSearchInput, navSearchInput);
-            filterProducts();
-        });
-
-        mobileCategorySelect.addEventListener("change", () => {
-            // When selecting a category on mobile, reset the search input
-            navSearchInput.value = '';
-            mobileSearchInput.value = '';
-            syncCategorySelects(mobileCategorySelect, navCategorySelect);
-            filterProducts();
-        });
-        
-        // These listeners are for the controls inside the main content, which are hidden on larger screens.
-        // We'll apply the same logic for consistency.
-        searchInput.addEventListener("input", () => {
-            categorySelect.value = 'all';
-            filterProducts();
-        });
-        categorySelect.addEventListener("change", () => {
-            searchInput.value = '';
-            filterProducts();
-        });
-
-        backToAllBtn.addEventListener("click", showAllProducts);
-        filterProducts();
-
-        if (themeToggle) {
-            themeToggle.addEventListener("change", () => {
-                if (themeToggle.checked) {
-                    htmlEl.setAttribute("data-theme", "dark");
-                } else {
-                    htmlEl.setAttribute("data-theme", "light");
-                }
-            });
-        }
-        if (fixedEnquiryBtn) {
-            fixedEnquiryBtn.addEventListener('click', function(e) {
-                e.preventDefault();
-                const targetId = this.getAttribute('href').substring(1);
-                const targetElement = document.getElementById(targetId);
-                const offset = mainNav.offsetHeight + 20;
-                const targetPosition = targetElement.offsetTop - offset;
-                window.scrollTo({
-                    top: targetPosition,
-                    behavior: 'smooth'
-                });
-            });
-        }
-        function navigateToHome() {
-            showAllProducts();
-            updateHomeVisibility();
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        }
-        if (logoLink) {
-            logoLink.addEventListener("click", navigateToHome);
-        }
-        if (companyNameLink) {
-            companyNameLink.addEventListener("click", navigateToHome);
-        }
-        function highlightCategory(categoryId) {
-            categoryHeaders.forEach(h3 => {
-                if (categoryId === "all") {
-                    h3.classList.remove("highlight");
-                } else {
-                    h3.classList.toggle("highlight", h3.parentElement.id === categoryId);
-                }
-            });
-        }
-        function updateHomeVisibility() {
-            const searchVal = searchInput.value.trim() || navSearchInput.value.trim() || mobileSearchInput.value.trim();
-            const catVal = categorySelect.value || navCategorySelect.value || mobileCategorySelect.value;
-            if (searchVal.length > 0 || (catVal !== "all" && catVal !== "")) {
-                homeSection.style.opacity = 0;
-                homeSection.style.height = "0";
-                homeSection.style.padding = "0";
-                homeSection.style.overflow = "hidden";
-            } else {
-                homeSection.style.opacity = 1;
-                homeSection.style.height = "auto";
-                homeSection.style.padding = "40px 0";
-                homeSection.style.overflow = "visible";
-            }
-        }
-        
-        const animateElements = document.querySelectorAll('.animate-on-scroll');
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                } else {
-                    entry.target.classList.remove('visible');
-                }
-            });
-        }, {
-            threshold: 0.1
-        });
-        animateElements.forEach(element => {
-            observer.observe(element);
-        });
-        function openProductModal(item) {
-            const imgSrc = item.querySelector('img').src;
-            const title = item.querySelector('.product-title').textContent;
-            const detail = item.querySelector('.product-detail').textContent;
-            const description = item.querySelector('.product-description-box p').textContent;
-            modalImage.src = imgSrc;
-            modalTitle.textContent = title;
-            modalDetail.textContent = detail;
-            modalDescription.textContent = description;
-            productModal.classList.add('visible');
-        }
-        function closeProductModal() {
-            productModal.classList.remove('visible');
-        }
-        galleryItems.forEach(item => {
-            item.addEventListener('click', (e) => {
-                if (!e.target.closest('.whatsapp-btn')) {
-                    openProductModal(item);
-                }
-            });
-        });
-        productModal.addEventListener('click', (e) => {
-            if (e.target.id === 'product-modal' || e.target.classList.contains('close-btn')) {
-                closeProductModal();
-            }
-        });
-        const testimonials = document.querySelectorAll('.testimonial-card');
-        const testimonialWrapper = document.getElementById('testimonial-wrapper');
-        const dotsContainer = document.getElementById('carousel-dots');
-        let currentIndex = 0;
-        function showTestimonial(index) {
-            if (index >= testimonials.length) {
-                currentIndex = 0;
-            } else if (index < 0) {
-                currentIndex = testimonials.length - 1;
-            } else {
-                currentIndex = index;
-            }
-            testimonialWrapper.style.transform = `translateX(${-currentIndex * 100}%)`;
-            testimonials.forEach((card, i) => {
-                card.classList.toggle('active', i === currentIndex);
-            });
-            updateDots();
-        }
-        function createDots() {
-            testimonials.forEach((_, i) => {
-                const dot = document.createElement('span');
-                dot.classList.add('dot');
-                dot.addEventListener('click', () => showTestimonial(i));
-                dotsContainer.appendChild(dot);
-            });
-        }
-        function updateDots() {
-            const dots = dotsContainer.querySelectorAll('.dot');
-            dots.forEach((dot, i) => {
-                dot.classList.toggle('active', i === currentIndex);
-            });
-        }
-        function moveCarousel(direction) {
-            showTestimonial(currentIndex + direction);
-        }
-        function startAutoSlide() {
-            setInterval(() => {
-                showTestimonial(currentIndex + 1);
-            }, 5000);
-        }
+        // Wait for the DOM to be fully loaded before running scripts
         document.addEventListener('DOMContentLoaded', () => {
-            createDots();
-            showTestimonial(0);
-            startAutoSlide();
-        });
-        contactForm.addEventListener('submit', async function(e) {
-            e.preventDefault();
-            const form = e.target;
-            const formURL = "https://formspree.io/f/mnnzeaaj";
-            const data = new FormData(form);
-            formStatusMessage.textContent = "Sending...";
-            formStatusMessage.classList.add('show');
-            try {
-                const response = await fetch(formURL, {
-                    method: 'POST',
-                    body: data,
-                    headers: {
-                        'Accept': 'application/json'
+            
+            // --- 1. GATHER UI ELEMENTS ---
+            // Core Layout
+            const mainContent = document.getElementById("main-content");
+            const homeSection = document.getElementById("home");
+            
+            // Sidebar Navigation
+            const sideMenu = document.getElementById("side-menu");
+            const hamburgerMenu = document.getElementById("hamburger-menu");
+            const sidebarCloseBtn = document.getElementById("sidebar-close-btn");
+            const sidebarLinks = document.querySelectorAll('.sidebar a');
+            
+            // Main Navigation & Filtering
+            const navBrandLink = document.getElementById("nav-brand-link");
+            const navSearchInput = document.getElementById("navSearchInput");
+            const navCategorySelect = document.getElementById("navCategorySelect");
+            const navLangSelect = document.getElementById("nav-lang-select");
+            
+            // Mobile Filtering (in sidebar)
+            const mobileSearchInput = document.getElementById("mobileSearchInput");
+            const mobileCategorySelect = document.getElementById("mobileCategorySelect");
+            const mobileLangSelect = document.getElementById("mobile-lang-select");
+
+            // Product Display
+            const productCategories = document.querySelectorAll(".product-category");
+            const allGalleryItems = document.querySelectorAll(".gallery-item");
+            const categoryHeaders = document.querySelectorAll(".product-category > h3");
+
+            // Product Modal
+            const productModal = document.getElementById("product-modal");
+            const modalImage = document.getElementById("modal-product-image");
+            const modalTitle = document.getElementById("modal-product-title");
+            const modalDetail = document.getElementById("modal-product-detail");
+            const modalDescription = document.getElementById("modal-product-description");
+            const modalCloseBtn = document.getElementById("modal-close-btn");
+            const modalWhatsappBtn = document.getElementById("modal-whatsapp-btn");
+            
+            // Testimonials
+            const testimonialWrapper = document.getElementById('testimonial-wrapper');
+            const dotsContainer = document.getElementById('carousel-dots');
+
+            // Contact & Utility
+            const contactForm = document.getElementById("contactForm");
+            const formStatusMessage = document.getElementById("formStatusMessage");
+            const fixedEnquiryBtn = document.getElementById("fixed-enquiry-btn");
+
+            // --- 2. INITIAL PAGE SETUP ---
+            if (history.scrollRestoration) {
+                history.scrollRestoration = 'manual';
+            }
+            window.scrollTo(0, 0);
+            updateLangSelects(navLangSelect.value || 'en');
+
+
+            // --- 3. CORE FUNCTIONS ---
+
+            /**
+             * Normalizes a string for searching.
+             */
+            function normalizeString(str) {
+                return str ? str.toLowerCase().replace(/[\–\-\—]/g, ' ').replace(/\s+/g, ' ').trim() : '';
+            }
+
+            /**
+             * Main function to filter products based on search and category selection.
+             */
+            function filterAndDisplay(isMobileAction) {
+                const isMobile = window.innerWidth <= 767;
+                const searchTerm = normalizeString(isMobile ? mobileSearchInput.value : navSearchInput.value);
+                const selectedCategoryId = isMobile ? mobileCategorySelect.value : navCategorySelect.value;
+                let firstVisibleCategory = null;
+
+                // Filter individual product items
+                allGalleryItems.forEach(item => {
+                    const productTitle = normalizeString(item.querySelector(".product-title").textContent);
+                    const parentCategory = item.closest('.product-category');
+                    const categoryTitle = normalizeString(parentCategory.querySelector('h3').textContent);
+                    const itemCategoryId = parentCategory.id;
+                    const searchableText = productTitle + ' ' + categoryTitle;
+
+                    const matchesSearch = searchTerm === '' || searchableText.includes(searchTerm);
+                    const matchesCategory = selectedCategoryId === 'all' || itemCategoryId === selectedCategoryId;
+                    
+                    item.style.display = (matchesSearch && matchesCategory) ? "flex" : "none";
+                });
+
+                // Show/hide entire category sections and handle single-item layout
+                productCategories.forEach(category => {
+                    const galleries = category.querySelectorAll('.gallery');
+                    galleries.forEach(gallery => {
+                        const visibleItems = gallery.querySelectorAll('.gallery-item[style*="display: flex"]');
+                        if (visibleItems.length === 1) {
+                            gallery.classList.add('single-item');
+                        } else {
+                            gallery.classList.remove('single-item');
+                        }
+                    });
+                    
+                    const visibleItemsInCategory = category.querySelectorAll('.gallery-item[style*="display: flex"]');
+                    const isVisible = visibleItemsInCategory.length > 0;
+                    category.style.display = isVisible ? "block" : "none";
+
+                    if (isVisible && !firstVisibleCategory) {
+                        firstVisibleCategory = category;
                     }
                 });
-                if (response.ok) {
-                    formStatusMessage.textContent = "Message Sent!";
-                    form.reset();
-                } else {
-                    formStatusMessage.textContent = "Error! Please try again.";
+                
+                // Scroll to the first visible category if a search term is entered
+                if (searchTerm && firstVisibleCategory) {
+                    firstVisibleCategory.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }
-            } catch (error) {
-                formStatusMessage.textContent = "Network error. Please try again.";
-            } finally {
-                setTimeout(() => {
-                    formStatusMessage.classList.remove('show');
-                }, 3000);
+                
+                highlightCategory(selectedCategoryId);
+                updateHomeVisibility();
+
+                if (isMobileAction) {
+                    closeNav();
+                }
             }
+            
+            /**
+             * Applies a highlight style to the selected category's title.
+             */
+            function highlightCategory(categoryId) {
+                categoryHeaders.forEach(h3 => {
+                    const isMatch = h3.parentElement.id === categoryId && categoryId !== 'all';
+                    h3.classList.toggle("highlight", isMatch);
+                });
+            }
+
+            /**
+             * Hides the main "Welcome" section when a filter is active.
+             */
+            function updateHomeVisibility() {
+                const isFiltered = navSearchInput.value.trim().length > 0 || navCategorySelect.value !== "all";
+                homeSection.style.opacity = isFiltered ? '0' : '1';
+                homeSection.style.height = isFiltered ? '0' : 'auto';
+                homeSection.style.padding = isFiltered ? '0' : '60px 0';
+                homeSection.style.margin = isFiltered ? '0' : '0 0 20px 0';
+                homeSection.style.overflow = isFiltered ? 'hidden' : 'visible';
+            }
+
+            /**
+             * Opens and populates the product details modal.
+             */
+            function openProductModal(item) {
+                modalImage.src = item.querySelector('img')?.src || '';
+                modalTitle.textContent = item.querySelector('.product-title')?.textContent || 'Product';
+                modalDetail.textContent = item.querySelector('.product-detail')?.textContent || '';
+                modalDescription.textContent = item.querySelector('.product-description-box p')?.textContent || '';
+                productModal.classList.add('visible');
+            }
+
+            /** Closes the product details modal. */
+            function closeProductModal() {
+                productModal.classList.remove('visible');
+            }
+
+            /** Opens the sidebar navigation. */
+            function openNav() {
+                sideMenu.style.width = "250px";
+                hamburgerMenu.classList.add('open');
+                mainContent.classList.add('main-content-blurred');
+            }
+
+            /** Closes the sidebar navigation. */
+            function closeNav() {
+                sideMenu.style.width = "0";
+                hamburgerMenu.classList.remove('open');
+                mainContent.classList.remove('main-content-blurred');
+            }
+
+            /**
+             * Triggers the Google Translate widget.
+             */
+            function doGTranslate(lang) {
+                const googTr = document.querySelector('#google_translate_element select');
+                if (googTr && googTr.value !== lang) {
+                    googTr.value = lang;
+                    googTr.dispatchEvent(new Event('change'));
+                }
+                updateLangSelects(lang);
+            }
+
+            /**
+             * Syncs the language selection between desktop and mobile dropdowns.
+             */
+            function updateLangSelects(lang) {
+                if (navLangSelect) navLangSelect.value = lang;
+                if (mobileLangSelect) mobileLangSelect.value = lang;
+            }
+
+            // --- 4. EVENT LISTENERS ---
+
+            // Search input listeners (sync controls and then filter)
+            [navSearchInput, mobileSearchInput].forEach(input => {
+                input.addEventListener("input", (e) => {
+                    const value = e.target.value;
+                    navSearchInput.value = value;
+                    mobileSearchInput.value = value;
+                    if (value.trim() !== '') {
+                        navCategorySelect.value = "all"; 
+                        mobileCategorySelect.value = "all";
+                    }
+                    filterAndDisplay(e.target === mobileSearchInput);
+                });
+            });
+
+            // Category select listeners (sync controls and then filter)
+            [navCategorySelect, mobileCategorySelect].forEach(select => {
+                select.addEventListener("change", (e) => {
+                    const value = e.target.value;
+                    navCategorySelect.value = value;
+                    mobileCategorySelect.value = value;
+                    navSearchInput.value = ""; 
+                    mobileSearchInput.value = "";
+                    filterAndDisplay(e.target === mobileCategorySelect);
+                    
+                    if (value !== 'all') {
+                        document.getElementById(value).scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                });
+            });
+            
+            // Language select listeners
+            navLangSelect.addEventListener('change', (e) => doGTranslate(e.target.value));
+            mobileLangSelect.addEventListener('change', (e) => {
+                doGTranslate(e.target.value);
+                closeNav();
+            });
+
+            // Sidebar open/close listeners
+            hamburgerMenu.addEventListener('click', (e) => {
+                e.stopPropagation(); 
+                sideMenu.style.width === "250px" ? closeNav() : openNav();
+            });
+            sidebarCloseBtn.addEventListener('click', closeNav);
+            sidebarLinks.forEach(link => link.addEventListener('click', closeNav));
+            
+            // NEW: Close sidebar on click outside of it
+            document.addEventListener('click', (event) => {
+                const isClickInsideSidebar = sideMenu.contains(event.target);
+                const isClickOnHamburger = hamburgerMenu.contains(event.target);
+                if (sideMenu.style.width === "250px" && !isClickInsideSidebar && !isClickOnHamburger) {
+                    closeNav();
+                }
+            });
+
+            // Reset filters when clicking the main brand logo
+            navBrandLink.addEventListener("click", () => {
+                navCategorySelect.value = "all";
+                mobileCategorySelect.value = "all";
+                navSearchInput.value = "";
+                mobileSearchInput.value = "";
+                filterAndDisplay(false);
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+
+            // Product modal open/close listeners
+            allGalleryItems.forEach(item => item.addEventListener('click', () => openProductModal(item)));
+            modalCloseBtn.addEventListener('click', closeProductModal);
+            productModal.addEventListener('click', (e) => { if (e.target === productModal) closeProductModal(); });
+
+            // Contact form submission
+            contactForm.addEventListener('submit', async function(e) {
+                e.preventDefault();
+                const data = new FormData(contactForm);
+                formStatusMessage.textContent = "Sending...";
+                formStatusMessage.classList.add('show');
+                try {
+                    const response = await fetch("https://formspree.io/f/mnnzeaaj", { method: 'POST', body: data, headers: { 'Accept': 'application/json' } });
+                    formStatusMessage.textContent = response.ok ? "Message Sent!" : "Error! Please try again.";
+                    if (response.ok) contactForm.reset();
+                } catch (error) {
+                    formStatusMessage.textContent = "Network error. Please try again.";
+                } finally {
+                    setTimeout(() => formStatusMessage.classList.remove('show'), 3000);
+                }
+            });
+
+            // WhatsApp button in modal
+            modalWhatsappBtn.addEventListener('click', function(event) {
+                event.preventDefault();
+                const message = `Hello, I would like to order the product: ${modalTitle.textContent} (${modalDetail.textContent}). Please provide more details.`;
+                const whatsappUrl = `https://wa.me/918850401035?text=${encodeURIComponent(message)}`;
+                window.open(whatsappUrl, '_blank');
+            });
+            
+            // Testimonial carousel initialization
+            let currentIndex = 0;
+            function showTestimonial(index) {
+                const testimonials = testimonialWrapper.querySelectorAll('.testimonial-card');
+                if (testimonials.length === 0) return;
+                currentIndex = (index + testimonials.length) % testimonials.length;
+                testimonialWrapper.style.transform = `translateX(-${currentIndex * 100}%)`;
+                dotsContainer.querySelectorAll('.dot').forEach((dot, i) => dot.classList.toggle('active', i === currentIndex));
+            }
+            if (testimonialWrapper) {
+                const testimonials = testimonialWrapper.querySelectorAll('.testimonial-card');
+                if (testimonials.length > 0) {
+                    dotsContainer.innerHTML = Array.from(testimonials).map((_, i) => `<span class="dot" data-index="${i}"></span>`).join('');
+                    dotsContainer.querySelectorAll('.dot').forEach(dot => dot.addEventListener('click', (e) => showTestimonial(parseInt(e.target.dataset.index))));
+                    showTestimonial(0);
+                    setInterval(() => showTestimonial(currentIndex + 1), 5000);
+                }
+            }
+
+            // Animate elements on scroll
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+            document.querySelectorAll('.animate-on-scroll').forEach(element => observer.observe(element));
+
+            // --- 5. INITIAL FUNCTION CALL ---
+            filterAndDisplay(false); // Run filter on page load to set initial state
         });
-        function sendWhatsAppMessage(button) {
-            const item = button.closest('.gallery-item');
-            const productName = item.querySelector('.product-title').textContent;
-            const productWeight = item.querySelector('.product-detail').textContent;
-            const message = `Hello, I would like to order the product: ${productName} (${productWeight}). Please provide more details.`;
-            const encodedMessage = encodeURIComponent(message);
-            const whatsappUrl = `https://wa.me/918850401035?text=${encodedMessage}`;
-            window.open(whatsappUrl, '_blank');
-        }
-        function sendWhatsAppMessageFromModal(event) {
-            event.preventDefault();
-            const productName = document.getElementById('modal-product-title').textContent;
-            const productWeight = document.getElementById('modal-product-detail').textContent;
-            const message = `Hello, I would like to order the product: ${productName} (${productWeight}). Please provide more details.`;
-            const encodedMessage = encodeURIComponent(message);
-            const whatsappUrl = `https://wa.me/918850401035?text=${encodedMessage}`;
-            window.open(whatsappUrl, '_blank');
-        }
     </script>
 </body>
 </html>

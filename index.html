@@ -95,7 +95,7 @@
             scroll-margin-top: 80px;
             border-radius: 15px;
             box-shadow: 0 8px 25px rgba(0,0,0,0.05);
-            border: 1px solid rgba(0,0,0,0.05);
+            border: 1px solid var(--primary-color);
         }
         
         .product-category > h3 {
@@ -223,7 +223,7 @@
         .hamburger-menu.open span:nth-child(1) { transform: translateY(11px) rotate(45deg); }
         .hamburger-menu.open span:nth-child(2) { opacity: 0; }
         .hamburger-menu.open span:nth-child(3) { transform: translateY(-11px) rotate(-45deg); }
-        .sidebar { height: 100%; width: 0; position: fixed; z-index: 3000; top: 0; left: 0; backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px); overflow-x: hidden; transition: 0.5s; padding-top: 60px; display: flex; flex-direction: column; justify-content: flex-start; align-items: center; background-color: rgba(46, 125, 50, 0.95); color: white; box-shadow: 2px 0 8px rgba(0,0,0,0.4); }
+        .sidebar { height: 100%; width: 0; position: fixed; z-index: 3000; top: 0; left: 0; backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px); overflow-x: hidden; transition: 0.5s; padding-top: 60px; display: flex; flex-direction: column; justify-content: flex-start; align-items: center; background-color: rgba(46, 125, 50, 0.85); color: white; box-shadow: 2px 0 8px rgba(0,0,0,0.4); }
         .sidebar a { color: white; font-size: 1.2em; padding: 10px 25px; margin: 5px 0; width: 90%; border-radius: 8px; transition: background-color 0.3s, transform 0.3s; text-decoration: none; display: flex; align-items: center; gap: 15px; }
         .sidebar a:hover { background-color: rgba(255, 255, 255, 0.1); transform: translateX(5px); }
         .sidebar a i { width: 20px; text-align: center; }
@@ -832,7 +832,9 @@
             sidebarCloseBtn.addEventListener('click', closeNav);
             sidebarLinks.forEach(link => link.addEventListener('click', closeNav));
             
-            // NEW: Close sidebar on click outside of it
+            sideMenu.addEventListener('mouseleave', closeNav);
+
+            // Close sidebar on click outside of it
             document.addEventListener('click', (event) => {
                 const isClickInsideSidebar = sideMenu.contains(event.target);
                 const isClickOnHamburger = hamburgerMenu.contains(event.target);

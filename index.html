@@ -29,6 +29,35 @@
         body { margin: 0; font-family: var(--font-body); background-color: var(--bg-light); color: var(--text-color); }
         .container { max-width: 1200px; margin: auto; padding: 0 15px; }
         
+        /* Preloader Animation */
+        .preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--bg-light);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+            transition: opacity 0.75s ease, visibility 0.75s ease;
+        }
+        .preloader-hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+        .preloader img {
+            width: 150px;
+            height: 150px;
+            animation: pulse 2s infinite ease-in-out;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
         /* Header */
         header { background-color: var(--bg-light); padding: 120px 20px 60px; display: flex; align-items: center; justify-content: center; animation: fadeIn 1s ease-out; }
         .header-content { display: flex; flex-direction: row; align-items: center; justify-content: center; padding: 30px 60px; border: 2px solid var(--primary-color); border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); background-color: var(--secondary-color); gap: 40px; max-width: 800px; animation: scaleUpAndFadeIn 1s ease-out; transition: transform 0.3s ease, box-shadow 0.3s ease; }
@@ -222,7 +251,18 @@
         /* Media Queries */
         @media (max-width: 992px) { .contact-content, .about-content { grid-template-columns: 1fr; } }
         @media (max-width: 767px) { .header-content { flex-direction: column; padding: 20px; } .company-details-box { text-align: center; } .company-details-box h1 { font-size: 2.5em; } h2 { font-size: 2.2em; } .nav-controls, .nav-brand .company-name-container { display: none; } header .header-content img { width: 120px; height: 120px; } }
-        @media (max-width: 480px) { .company-details-box h1 { font-size: 1.8em; } .company-details-box .tagline { font-size: 1em; } .gallery { grid-template-columns: 1fr; } .partners-list { gap: 10px; } .partner-box { font-size: 0.9em; padding: 15px 20px; } }
+        @media (max-width: 480px) { 
+            .company-details-box h1 { font-size: 1.8em; } 
+            .company-details-box .tagline { font-size: 1em; } 
+            .gallery { grid-template-columns: 1fr; } 
+            .partners-list { gap: 10px; } 
+            .partner-box { font-size: 0.9em; padding: 15px 20px; }
+            .cta-box .cta-btn {
+                display: block;
+                width: 80%;
+                margin: 10px auto;
+            }
+        }
 
         /* Utilities */
         .goog-te-gadget, #google_translate_element { display: none; }
@@ -301,6 +341,9 @@
     </style>
 </head>
 <body>
+    <div class="preloader">
+        <img src="logo.PNG" alt="Loading..." />
+    </div>
     <!-- MODAL -->
     <div id="product-modal" class="modal">
         <div class="modal-content">
@@ -545,7 +588,7 @@
         document.addEventListener('DOMContentLoaded', () => {
             
             // --- 1. GATHER UI ELEMENTS ---
-            // Core Layout
+            const preloader = document.querySelector('.preloader');
             const mainContent = document.getElementById("main-content");
             const homeSection = document.getElementById("home");
             
@@ -590,6 +633,13 @@
             const fixedEnquiryBtn = document.getElementById("fixed-enquiry-btn");
 
             // --- 2. INITIAL PAGE SETUP ---
+            window.addEventListener('load', () => {
+                preloader.classList.add('preloader-hidden');
+                setTimeout(() => {
+                    preloader.style.display = 'none';
+                }, 750);
+            });
+
             if (history.scrollRestoration) {
                 history.scrollRestoration = 'manual';
             }

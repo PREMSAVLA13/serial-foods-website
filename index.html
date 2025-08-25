@@ -127,7 +127,7 @@
         }
 
         .gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; }
-        .gallery-item { background-color: var(--bg-light); border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); transition: transform 0.3s ease, box-shadow 0.3s ease; text-align: center; padding: 20px; display: flex; flex-direction: column; border: 1px solid rgba(0,0,0,0.05); cursor: pointer; }
+        .gallery-item { position: relative; background-color: var(--bg-light); border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); transition: transform 0.3s ease, box-shadow 0.3s ease; text-align: center; padding: 20px; display: flex; flex-direction: column; border: 1px solid rgba(0,0,0,0.05); cursor: pointer; }
         .gallery-item:hover { transform: translateY(-5px); box-shadow: 0 12px 25px rgba(0,0,0,0.1); }
         .gallery-item img { width: 100%; height: 200px; object-fit: contain; border-radius: 6px; margin-bottom: 15px; }
         .product-info { display: flex; flex-direction: column; text-align: center; flex-grow: 1; }
@@ -249,9 +249,44 @@
         .whatsapp-btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; background-color: #25D366; color: white; padding: 12px 25px; border-radius: 50px; text-decoration: none; font-weight: 600; transition: transform 0.3s ease, background-color 0.3s; margin-top: 15px; }
         .whatsapp-btn:hover { background-color: #128C7E; transform: translateY(-2px); }
         
+        /* Mobile Search Bar */
+        .mobile-search-container {
+            display: none;
+            padding: 10px 15px;
+            background-color: var(--bg-light);
+            position: fixed;
+            top: 68px; /* Position below nav */
+            left: 0;
+            right: 0;
+            z-index: 1999;
+            border-bottom: 1px solid #eee;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        .mobile-search-container input {
+            width: 100%;
+            padding: 10px 15px;
+            border-radius: 20px;
+            border: 1px solid var(--primary-color);
+            font-size: 1em;
+        }
+        .mobile-search-container input:focus {
+            outline: none; 
+            border-color: var(--accent-color); 
+            box-shadow: 0 0 0 3px rgba(255, 193, 7, 0.3); 
+        }
+
         /* Media Queries */
         @media (max-width: 992px) { .contact-content, .about-content { grid-template-columns: 1fr; } }
-        @media (max-width: 767px) { .header-content { flex-direction: column; padding: 20px; } .company-details-box { text-align: center; } .company-details-box h1 { font-size: 2.5em; } h2 { font-size: 2.2em; } .nav-controls, .nav-brand .company-name-container { display: none; } header .header-content img { width: 120px; height: 120px; } }
+        @media (max-width: 767px) { 
+            .header-content { flex-direction: column; padding: 20px; } 
+            .company-details-box { text-align: center; } 
+            .company-details-box h1 { font-size: 2.5em; } 
+            h2 { font-size: 2.2em; } 
+            .nav-controls, .nav-brand .company-name-container { display: none; } 
+            header .header-content img { width: 120px; height: 120px; }
+            .mobile-search-container { display: block; }
+            header { padding-top: 140px; } /* Adjust padding to avoid overlap with fixed nav and search */
+        }
         @media (max-width: 480px) { 
             .company-details-box h1 { font-size: 1.8em; } 
             .company-details-box .tagline { font-size: 1em; } 
@@ -373,6 +408,21 @@
             margin: 0;
             font-size: 0.9em;
         }
+
+        .new-product-badge {
+            position: absolute;
+            top: 10px;
+            right: -5px;
+            background-color: var(--highlight-color);
+            color: white;
+            padding: 5px 12px;
+            font-size: 0.8em;
+            font-weight: 700;
+            border-radius: 3px;
+            transform: rotate(20deg);
+            z-index: 1;
+            box-shadow: 1px 1px 5px rgba(0,0,0,0.2);
+        }
     </style>
 </head>
 <body>
@@ -408,9 +458,8 @@
             <select id="mobile-lang-select">
                 <option value="en" selected>English</option> <option value="hi">हिंदी</option> <option value="mr">मराठी</option>
             </select>
-            <input type="text" id="mobileSearchInput" placeholder="Search for a product..." aria-label="Search for products" />
             <select id="mobileCategorySelect" aria-label="Select product category">
-                <option value="all">All Categories</option> <option value="soya-chunks">Soya Chunks</option> <option value="pastes">Pastes</option> <option value="seviyan">Seviyan</option> <option value="bakery">Bakery & Dry Items</option> <option value="ready-cook">Ready to Cook</option> <option value="tofu">Tofu (Soya Paneer)</option> <option value="pickles">Pickles</option> <option value="pudding">Pudding</option> <option value="frozen">Frozen Treats</option> <option value="chocolates">Chocolates</option> <option value="beverages">Beverages</option>
+                <option value="all">All Categories</option> <option value="dal-pakwan">Dal Pakwan</option> <option value="puri">Puri</option> <option value="soya-chunks">Soya Chunks</option> <option value="pastes">Pastes</option> <option value="seviyan">Seviyan</option> <option value="bakery">Bakery & Dry Items</option> <option value="ready-cook">Ready to Cook</option> <option value="tofu">Tofu (Soya Paneer)</option> <option value="pickles">Pickles</option> <option value="pudding">Pudding</option> <option value="frozen">Frozen Treats</option> <option value="chocolates">Chocolates</option> <option value="beverages">Beverages</option>
             </select>
         </div>
         <a href="#home"><i class="fas fa-home"></i> Home</a>
@@ -420,7 +469,7 @@
         <a href="#partners"><i class="fas fa-handshake"></i> Our Partners</a>
         <a href="#testimonials"><i class="fas fa-star"></i> Testimonials</a>
         <a href="#contact"><i class="fas fa-phone"></i> Contact Us</a>
-        <a href="Catalog.html" target="_blank"><i class="fas fa-file-download"></i> View Catalog</a>
+        <a href="catalog.html" target="_blank"><i class="fas fa-file-download"></i> View Catalog</a>
     </div>
 
     <!-- MAIN CONTENT AND NAVIGATION -->
@@ -445,11 +494,16 @@
             </select>
             <input type="text" id="navSearchInput" placeholder="Search for a product..." aria-label="Search for products" />
             <select id="navCategorySelect" aria-label="Select product category">
-                <option value="all">All Categories</option> <option value="soya-chunks">Soya Chunks</option> <option value="pastes">Pastes</option> <option value="seviyan">Seviyan</option> <option value="bakery">Bakery & Dry Items</option> <option value="ready-cook">Ready to Cook</option> <option value="tofu">Tofu (Soya Paneer)</option> <option value="pickles">Pickles</option> <option value="pudding">Pudding</option> <option value="frozen">Frozen Treats</option> <option value="chocolates">Chocolates</option> <option value="beverages">Beverages</option>
+                <option value="all">All Categories</option> <option value="dal-pakwan">Dal Pakwan</option> <option value="puri">Puri</option> <option value="soya-chunks">Soya Chunks</option> <option value="pastes">Pastes</option> <option value="seviyan">Seviyan</option> <option value="bakery">Bakery & Dry Items</option> <option value="ready-cook">Ready to Cook</option> <option value="tofu">Tofu (Soya Paneer)</option> <option value="pickles">Pickles</option> <option value="pudding">Pudding</option> <option value="frozen">Frozen Treats</option> <option value="chocolates">Chocolates</option> <option value="beverages">Beverages</option>
             </select>
         </div>
         <div id="google_translate_element"></div>
     </nav>
+
+    <!-- MOBILE SEARCH BAR -->
+    <div class="mobile-search-container">
+        <input type="text" id="mobileSearchInput" placeholder="Search for a product..." aria-label="Search for products" />
+    </div>
     
     <header>
         <div class="header-content">
@@ -510,6 +564,111 @@
         <section id="gallery">
             <h2>Our Products</h2>
             <div id="product-list-container">
+
+                <!-- NEW: Dal Pakwan -->
+                <div class="product-category animate-on-scroll" id="dal-pakwan">
+                    <h3 class="notranslate">Dal Pakwan</h3>
+                    <div class="gallery">
+                        <div class="gallery-item animate-on-scroll" data-product-id="dal-pakwan-jeera">
+                            <div class="new-product-badge">NEW</div>
+                            <img src="jeera-pakwaan.jpg" alt="Jeera Dal Pakwan" loading="lazy" style="border: 1px solid #eee;"/>
+                            <div class="product-info">
+                                <div class="product-name-box"><h4 class="product-title notranslate">Jeera Dal Pakwan</h4></div>
+                                <div class="product-weight-box"><p class="product-detail notranslate">Gross Weight: 250 gms</p></div>
+                                <div class="product-description-box"><p>A crispy, traditional snack infused with the aromatic flavor of cumin (jeera).</p></div>
+                                <div class="product-cta">Click to View</div>
+                            </div>
+                        </div>
+                        <div class="gallery-item animate-on-scroll" data-product-id="dal-pakwan-onion">
+                            <div class="new-product-badge">NEW</div>
+                            <img src="onion-pakwaan.jpg" alt="Onion Dal Pakwan" loading="lazy" style="border: 1px solid #eee;"/>
+                            <div class="product-info">
+                                <div class="product-name-box"><h4 class="product-title notranslate">Onion Dal Pakwan</h4></div>
+                                <div class="product-weight-box"><p class="product-detail notranslate">Gross Weight: 250 gms</p></div>
+                                <div class="product-description-box"><p>A savory and crunchy delight featuring the classic taste of onion.</p></div>
+                                <div class="product-cta">Click to View</div>
+                            </div>
+                        </div>
+                        <div class="gallery-item animate-on-scroll" data-product-id="dal-pakwan-garlic">
+                            <div class="new-product-badge">NEW</div>
+                            <img src="garlic-pakwaan.jpg" alt="Garlic Dal Pakwan" loading="lazy" style="border: 1px solid #eee;"/>
+                            <div class="product-info">
+                                <div class="product-name-box"><h4 class="product-title notranslate">Garlic Dal Pakwan</h4></div>
+                                <div class="product-weight-box"><p class="product-detail notranslate">Gross Weight: 250 gms</p></div>
+                                <div class="product-description-box"><p>A flavorful pakwan with the pungent and zesty kick of garlic.</p></div>
+                                <div class="product-cta">Click to View</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- NEW: Puri -->
+                <div class="product-category animate-on-scroll" id="puri">
+                    <h3 class="notranslate">Puri</h3>
+                    <div class="gallery">
+                        <div class="gallery-item animate-on-scroll" data-product-id="puri-nachni">
+                            <div class="new-product-badge">NEW</div>
+                            <img src="nachni-puri.jpg" alt="Nachni Puri" loading="lazy" style="border: 1px solid #eee;"/>
+                            <div class="product-info">
+                                <div class="product-name-box"><h4 class="product-title notranslate">Nachni Puri</h4></div>
+                                <div class="product-weight-box"><p class="product-detail notranslate">Gross Weight: 250 gms</p></div>
+                                <div class="product-description-box"><p>Wholesome and crispy puris made from nutritious nachni (ragi flour).</p></div>
+                                <div class="product-cta">Click to View</div>
+                            </div>
+                        </div>
+                        <div class="gallery-item animate-on-scroll" data-product-id="puri-bajri">
+                            <div class="new-product-badge">NEW</div>
+                            <img src="bajra-puri.jpg" alt="Bajri Puri" loading="lazy" style="border: 1px solid #eee;"/>
+                            <div class="product-info">
+                                <div class="product-name-box"><h4 class="product-title notranslate">Bajri Puri</h4></div>
+                                <div class="product-weight-box"><p class="product-detail notranslate">Gross Weight: 250 gms</p></div>
+                                <div class="product-description-box"><p>Traditional and healthy puris crafted from bajri (pearl millet flour).</p></div>
+                                <div class="product-cta">Click to View</div>
+                            </div>
+                        </div>
+                        <div class="gallery-item animate-on-scroll" data-product-id="puri-maida">
+                            <div class="new-product-badge">NEW</div>
+                            <img src="maida-puri.jpg" alt="Maida Puri" loading="lazy" style="border: 1px solid #eee;"/>
+                            <div class="product-info">
+                                <div class="product-name-box"><h4 class="product-title notranslate">Maida Puri</h4></div>
+                                <div class="product-weight-box"><p class="product-detail notranslate">Gross Weight: 250 gms</p></div>
+                                <div class="product-description-box"><p>Classic, light, and flaky puris made from refined maida, perfect for any occasion.</p></div>
+                                <div class="product-cta">Click to View</div>
+                            </div>
+                        </div>
+                        <div class="gallery-item animate-on-scroll" data-product-id="puri-methi">
+                            <div class="new-product-badge">NEW</div>
+                            <img src="methi-puri.jpg" alt="Methi Puri" loading="lazy" style="border: 1px solid #eee;"/>
+                            <div class="product-info">
+                                <div class="product-name-box"><h4 class="product-title notranslate">Methi Puri</h4></div>
+                                <div class="product-weight-box"><p class="product-detail notranslate">Gross Weight: 250 gms</p></div>
+                                <div class="product-description-box"><p>Deliciously savory puris infused with the unique, aromatic flavor of fenugreek (methi).</p></div>
+                                <div class="product-cta">Click to View</div>
+                            </div>
+                        </div>
+                        <div class="gallery-item animate-on-scroll" data-product-id="puri-jeera">
+                            <div class="new-product-badge">NEW</div>
+                            <img src="jeera-puri.jpg" alt="Jeera Puri" loading="lazy" style="border: 1px solid #eee;"/>
+                            <div class="product-info">
+                                <div class="product-name-box"><h4 class="product-title notranslate">Jeera Puri</h4></div>
+                                <div class="product-weight-box"><p class="product-detail notranslate">Gross Weight: 250 gms</p></div>
+                                <div class="product-description-box"><p>A crunchy and flavorful puri seasoned with toasted cumin seeds (jeera).</p></div>
+                                <div class="product-cta">Click to View</div>
+                            </div>
+                        </div>
+                        <div class="gallery-item animate-on-scroll" data-product-id="puri-masala">
+                            <div class="new-product-badge">NEW</div>
+                            <img src="masala-puri.jpg" alt="Masala Puri" loading="lazy" style="border: 1px solid #eee;"/>
+                            <div class="product-info">
+                                <div class="product-name-box"><h4 class="product-title notranslate">Masala Puri</h4></div>
+                                <div class="product-weight-box"><p class="product-detail notranslate">Gross Weight: 250 gms</p></div>
+                                <div class="product-description-box"><p>Spicy and irresistible puris packed with a special blend of authentic Indian spices.</p></div>
+                                <div class="product-cta">Click to View</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                  <!-- Soya Chunks -->
                 <div class="product-category animate-on-scroll" id="soya-chunks">
                     <h3 class="notranslate">Soya Chunks</h3>
@@ -731,7 +890,7 @@
             /**
              * Main function to filter products based on search and category selection.
              */
-            function filterAndDisplay(isMobileAction) {
+            function filterAndDisplay() {
                 const isMobile = window.innerWidth <= 767;
                 const searchTerm = normalizeString(isMobile ? mobileSearchInput.value : navSearchInput.value);
                 const selectedCategoryId = isMobile ? mobileCategorySelect.value : navCategorySelect.value;
@@ -779,10 +938,6 @@
                 
                 highlightCategory(selectedCategoryId);
                 updateHomeVisibility();
-
-                if (isMobileAction) {
-                    closeNav();
-                }
             }
             
             /**
@@ -899,7 +1054,7 @@
                         navCategorySelect.value = "all"; 
                         mobileCategorySelect.value = "all";
                     }
-                    filterAndDisplay(e.target === mobileSearchInput);
+                    filterAndDisplay();
                 });
             });
 
@@ -911,10 +1066,14 @@
                     mobileCategorySelect.value = value;
                     navSearchInput.value = ""; 
                     mobileSearchInput.value = "";
-                    filterAndDisplay(e.target === mobileCategorySelect);
+                    filterAndDisplay();
                     
                     if (value !== 'all') {
                         document.getElementById(value).scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+
+                    if (e.target === mobileCategorySelect) {
+                        closeNav();
                     }
                 });
             });

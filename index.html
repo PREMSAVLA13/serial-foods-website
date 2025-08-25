@@ -11,8 +11,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <style>
         /* ========================================
-         FINAL STYLESHEET
-         ======================================== */
+         * FINAL STYLESHEET
+         * ======================================== */
         :root {
             --primary-color: #2E7D32; /* Deep Forest Green */
             --secondary-color: #fdfaf5; /* Earthy Beige/Off-white */
@@ -129,7 +129,21 @@
         .gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; }
         .gallery-item { position: relative; background-color: var(--bg-light); border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); transition: transform 0.3s ease, box-shadow 0.3s ease; text-align: center; padding: 20px; display: flex; flex-direction: column; border: 1px solid rgba(0,0,0,0.05); cursor: pointer; }
         .gallery-item:hover { transform: translateY(-5px); box-shadow: 0 12px 25px rgba(0,0,0,0.1); }
-        .gallery-item img { width: 100%; height: 200px; object-fit: contain; border-radius: 6px; margin-bottom: 15px; }
+        
+        /* UPDATED IMAGE STYLES */
+        .gallery-item img {
+            width: 100%;
+            height: 200px;
+            object-fit: contain; /* Scales image down to fit, preserving aspect ratio */
+            border-radius: 6px;
+            margin-bottom: 15px;
+            /* --- NEW STYLES FOR THE FRAME --- */
+            border: 1px solid #e0e0e0;     /* Adds a clean, light-grey border */
+            background-color: #ffffff;     /* Ensures a solid white background behind the image */
+            padding: 8px;                  /* Creates space between the image and the border */
+            box-sizing: border-box;        /* Makes sure padding and border are inside the 200px height */
+        }
+
         .product-info { display: flex; flex-direction: column; text-align: center; flex-grow: 1; }
         .product-weight-box, .product-description-box { display: none; }
         .product-name-box { background-color: transparent; border: none; padding: 10px; margin: 5px 0; width: 100%; }
@@ -298,6 +312,11 @@
                 width: 80%;
                 margin: 10px auto;
             }
+            .modal-extra-info ul {
+                columns: 1;
+                -webkit-columns: 1;
+                -moz-columns: 1;
+            }
         }
 
         /* Utilities */
@@ -312,8 +331,8 @@
         @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
         /* ==================================
-         NEW & IMPROVED STYLES
-         ================================== */
+         * NEW & IMPROVED STYLES
+         * ================================== */
         .product-detail {
             font-size: 0.9em;
             color: #666;
@@ -389,12 +408,25 @@
             margin-top: 0;
             margin-bottom: 10px;
         }
-        .modal-extra-info ul, .modal-extra-info ol {
-            padding-left: 20px;
-            margin: 0;
+        .modal-extra-info ul {
+            list-style-type: none;
+            padding-left: 0;
+            margin-top: 10px;
+            columns: 2;
+            -webkit-columns: 2;
+            -moz-columns: 2;
         }
         .modal-extra-info li {
             margin-bottom: 8px;
+            padding-left: 15px;
+            position: relative;
+        }
+        .modal-extra-info li::before {
+            content: '✓';
+            color: var(--primary-color);
+            position: absolute;
+            left: 0;
+            font-weight: bold;
         }
         .recipe-item {
             margin-bottom: 20px;
@@ -459,7 +491,7 @@
                 <option value="en" selected>English</option> <option value="hi">हिंदी</option> <option value="mr">मराठी</option>
             </select>
             <select id="mobileCategorySelect" aria-label="Select product category">
-                <option value="all">All Categories</option> <option value="dal-pakwan">Dal Pakwan</option> <option value="puri">Puri</option> <option value="soya-chunks">Soya Chunks</option> <option value="pastes">Pastes</option> <option value="seviyan">Seviyan</option> <option value="bakery">Bakery & Dry Items</option> <option value="ready-cook">Ready to Cook</option> <option value="tofu">Tofu (Soya Paneer)</option> <option value="pickles">Pickles</option> <option value="pudding">Pudding</option> <option value="frozen">Frozen Treats</option> <option value="chocolates">Chocolates</option> <option value="beverages">Beverages</option>
+                <option value="all">All Categories</option> <option value="dal-pakwan">Dal Pakwan</option> <option value="puri">Puri</option> <option value="soya-chunks">Soya Chunks</option> <option value="pastes">Pastes</option> <option value="seviyan">Seviyan (Roasted/Kacchi)</option> <option value="bakery">Bakery & Dry Items</option> <option value="ready-cook">Ready to Cook</option> <option value="tofu">Tofu (Soya Paneer)</option> <option value="pickles">Pickles</option> <option value="pudding">Pudding</option> <option value="frozen">Frozen Treats</option> <option value="chocolates">Chocolates</option> <option value="beverages">Beverages</option>
             </select>
         </div>
         <a href="#home"><i class="fas fa-home"></i> Home</a>
@@ -494,7 +526,7 @@
             </select>
             <input type="text" id="navSearchInput" placeholder="Search for a product..." aria-label="Search for products" />
             <select id="navCategorySelect" aria-label="Select product category">
-                <option value="all">All Categories</option> <option value="dal-pakwan">Dal Pakwan</option> <option value="puri">Puri</option> <option value="soya-chunks">Soya Chunks</option> <option value="pastes">Pastes</option> <option value="seviyan">Seviyan</option> <option value="bakery">Bakery & Dry Items</option> <option value="ready-cook">Ready to Cook</option> <option value="tofu">Tofu (Soya Paneer)</option> <option value="pickles">Pickles</option> <option value="pudding">Pudding</option> <option value="frozen">Frozen Treats</option> <option value="chocolates">Chocolates</option> <option value="beverages">Beverages</option>
+                <option value="all">All Categories</option> <option value="dal-pakwan">Dal Pakwan</option> <option value="puri">Puri</option> <option value="soya-chunks">Soya Chunks</option> <option value="pastes">Pastes</option> <option value="seviyan">Seviyan (Roasted/Kacchi)</option> <option value="bakery">Bakery & Dry Items</option> <option value="ready-cook">Ready to Cook</option> <option value="tofu">Tofu (Soya Paneer)</option> <option value="pickles">Pickles</option> <option value="pudding">Pudding</option> <option value="frozen">Frozen Treats</option> <option value="chocolates">Chocolates</option> <option value="beverages">Beverages</option>
             </select>
         </div>
         <div id="google_translate_element"></div>
@@ -571,7 +603,7 @@
                     <div class="gallery">
                         <div class="gallery-item animate-on-scroll" data-product-id="dal-pakwan-jeera">
                             <div class="new-product-badge">NEW</div>
-                            <img src="jeera-pakwaan.jpg" alt="Jeera Dal Pakwan" loading="lazy" style="border: 1px solid #eee;"/>
+                            <img src="jeera-pakwaan.jpg" alt="Jeera Dal Pakwan" loading="lazy"/>
                             <div class="product-info">
                                 <div class="product-name-box"><h4 class="product-title notranslate">Jeera Dal Pakwan</h4></div>
                                 <div class="product-weight-box"><p class="product-detail notranslate">Gross Weight: 250 gms</p></div>
@@ -581,7 +613,7 @@
                         </div>
                         <div class="gallery-item animate-on-scroll" data-product-id="dal-pakwan-onion">
                             <div class="new-product-badge">NEW</div>
-                            <img src="onion-pakwaan.jpg" alt="Onion Dal Pakwan" loading="lazy" style="border: 1px solid #eee;"/>
+                            <img src="onion-pakwaan.jpg" alt="Onion Dal Pakwan" loading="lazy"/>
                             <div class="product-info">
                                 <div class="product-name-box"><h4 class="product-title notranslate">Onion Dal Pakwan</h4></div>
                                 <div class="product-weight-box"><p class="product-detail notranslate">Gross Weight: 250 gms</p></div>
@@ -591,7 +623,7 @@
                         </div>
                         <div class="gallery-item animate-on-scroll" data-product-id="dal-pakwan-garlic">
                             <div class="new-product-badge">NEW</div>
-                            <img src="garlic-pakwaan.jpg" alt="Garlic Dal Pakwan" loading="lazy" style="border: 1px solid #eee;"/>
+                            <img src="garlic-pakwaan.jpg" alt="Garlic Dal Pakwan" loading="lazy"/>
                             <div class="product-info">
                                 <div class="product-name-box"><h4 class="product-title notranslate">Garlic Dal Pakwan</h4></div>
                                 <div class="product-weight-box"><p class="product-detail notranslate">Gross Weight: 250 gms</p></div>
@@ -608,7 +640,7 @@
                     <div class="gallery">
                         <div class="gallery-item animate-on-scroll" data-product-id="puri-nachni">
                             <div class="new-product-badge">NEW</div>
-                            <img src="nachni-puri.jpg" alt="Nachni Puri" loading="lazy" style="border: 1px solid #eee;"/>
+                            <img src="nachni-puri.jpg" alt="Nachni Puri" loading="lazy"/>
                             <div class="product-info">
                                 <div class="product-name-box"><h4 class="product-title notranslate">Nachni Puri</h4></div>
                                 <div class="product-weight-box"><p class="product-detail notranslate">Gross Weight: 250 gms</p></div>
@@ -618,7 +650,7 @@
                         </div>
                         <div class="gallery-item animate-on-scroll" data-product-id="puri-bajri">
                             <div class="new-product-badge">NEW</div>
-                            <img src="bajra-puri.jpg" alt="Bajri Puri" loading="lazy" style="border: 1px solid #eee;"/>
+                            <img src="bajra-puri.jpg" alt="Bajri Puri" loading="lazy"/>
                             <div class="product-info">
                                 <div class="product-name-box"><h4 class="product-title notranslate">Bajri Puri</h4></div>
                                 <div class="product-weight-box"><p class="product-detail notranslate">Gross Weight: 250 gms</p></div>
@@ -628,7 +660,7 @@
                         </div>
                         <div class="gallery-item animate-on-scroll" data-product-id="puri-maida">
                             <div class="new-product-badge">NEW</div>
-                            <img src="maida-puri.jpg" alt="Maida Puri" loading="lazy" style="border: 1px solid #eee;"/>
+                            <img src="maida-puri.jpg" alt="Maida Puri" loading="lazy"/>
                             <div class="product-info">
                                 <div class="product-name-box"><h4 class="product-title notranslate">Maida Puri</h4></div>
                                 <div class="product-weight-box"><p class="product-detail notranslate">Gross Weight: 250 gms</p></div>
@@ -638,7 +670,7 @@
                         </div>
                         <div class="gallery-item animate-on-scroll" data-product-id="puri-methi">
                             <div class="new-product-badge">NEW</div>
-                            <img src="methi-puri.jpg" alt="Methi Puri" loading="lazy" style="border: 1px solid #eee;"/>
+                            <img src="methi-puri.jpg" alt="Methi Puri" loading="lazy"/>
                             <div class="product-info">
                                 <div class="product-name-box"><h4 class="product-title notranslate">Methi Puri</h4></div>
                                 <div class="product-weight-box"><p class="product-detail notranslate">Gross Weight: 250 gms</p></div>
@@ -648,7 +680,7 @@
                         </div>
                         <div class="gallery-item animate-on-scroll" data-product-id="puri-jeera">
                             <div class="new-product-badge">NEW</div>
-                            <img src="jeera-puri.jpg" alt="Jeera Puri" loading="lazy" style="border: 1px solid #eee;"/>
+                            <img src="jeera-puri.jpg" alt="Jeera Puri" loading="lazy"/>
                             <div class="product-info">
                                 <div class="product-name-box"><h4 class="product-title notranslate">Jeera Puri</h4></div>
                                 <div class="product-weight-box"><p class="product-detail notranslate">Gross Weight: 250 gms</p></div>
@@ -658,7 +690,7 @@
                         </div>
                         <div class="gallery-item animate-on-scroll" data-product-id="puri-masala">
                             <div class="new-product-badge">NEW</div>
-                            <img src="masala-puri.jpg" alt="Masala Puri" loading="lazy" style="border: 1px solid #eee;"/>
+                            <img src="masala-puri.jpg" alt="Masala Puri" loading="lazy"/>
                             <div class="product-info">
                                 <div class="product-name-box"><h4 class="product-title notranslate">Masala Puri</h4></div>
                                 <div class="product-weight-box"><p class="product-detail notranslate">Gross Weight: 250 gms</p></div>
@@ -680,30 +712,65 @@
                     </div>
                     <div class="product-subheading notranslate">Convenient Soya Pouches</div>
                     <div class="gallery">
-                        <div class="gallery-item animate-on-scroll" data-product-id="soya-chunks-pouch"><img src="regular-soyapouch.PNG" alt="Soya Chunks" loading="lazy" /><div class="product-info"><div class="product-name-box"><h4 class="product-title notranslate">Soya Chunks</h4></div><div class="product-weight-box"><p class="product-detail notranslate">Price: ₹10 Pouch</p></div><div class="product-description-box"><p>The same great quality soya chunks, now in a convenient and affordable pouch for daily use.</p></div><div class="product-cta">Click to View</div></div></div>
-                        <div class="gallery-item animate-on-scroll" data-product-id="soya-mini-chunks-pouch"><img src="mini-soyapouch.PNG" alt="Soya Mini Chunks" loading="lazy" /><div class="product-info"><div class="product-name-box"><h4 class="product-title notranslate">Soya Mini Chunks</h4></div><div class="product-weight-box"><p class="product-detail notranslate">Price: ₹10 Pouch</p></div><div class="product-description-box"><p>Small-sized soya chunks, packed in a pouch, are great for a quick and easy protein boost in any meal.</p></div><div class="product-cta">Click to View</div></div></div>
+                        <div class="gallery-item animate-on-scroll" data-product-id="soya-chunks-pouch"><img src="regular-soyapouch.PNG" alt="Soya Chunks" loading="lazy" /><div class="product-info"><div class="product-name-box"><h4 class="product-title notranslate">Soya Chunks</h4></div><div class="product-weight-box"><p class="product-detail notranslate">Gross Weight: 40 gm</p></div><div class="product-description-box"><p>The same great quality soya chunks, now in a convenient and affordable pouch for daily use.</p></div><div class="product-cta">Click to View</div></div></div>
+                        <div class="gallery-item animate-on-scroll" data-product-id="soya-mini-chunks-pouch"><img src="mini-soyapouch.PNG" alt="Soya Mini Chunks" loading="lazy" /><div class="product-info"><div class="product-name-box"><h4 class="product-title notranslate">Soya Mini Chunks</h4></div><div class="product-weight-box"><p class="product-detail notranslate">Gross Weight: 40 gm</p></div><div class="product-description-box"><p>Small-sized soya chunks, packed in a pouch, are great for a quick and easy protein boost in any meal.</p></div><div class="product-cta">Click to View</div></div></div>
                     </div>
                 </div>
                 <!-- Pastes -->
                 <div class="product-category animate-on-scroll" id="pastes"><h3 class="notranslate">Pastes</h3><div class="gallery"><div class="gallery-item animate-on-scroll" data-product-id="gg-paste-1kg"><img src="ggpaste-1kg_jar.PNG" alt="Ginger Garlic Paste Jar 1kg" loading="lazy" /><div class="product-info"><div class="product-name-box"><h4 class="product-title notranslate">Ginger Garlic Paste Jar</h4></div><div class="product-weight-box"><p class="product-detail notranslate">Gross Weight: 1 kg</p></div><div class="product-description-box"><p>Our signature Ginger Garlic Paste in a large, bulk-sized jar. A kitchen essential for authentic Indian flavors.</p></div><div class="product-cta">Click to View</div></div></div><div class="gallery-item animate-on-scroll" data-product-id="gg-paste-200g"><img src="ggpaste-200gm_jar.PNG" alt="Ginger Garlic Paste Jar 200gm" loading="lazy" /><div class="product-info"><div class="product-name-box"><h4 class="product-title notranslate">Ginger Garlic Paste Jar</h4></div><div class="product-weight-box"><p class="product-detail notranslate">Gross Weight: 200 gm</p></div><div class="product-description-box"><p>A convenient jar of our fresh ginger garlic paste, perfect for everyday cooking.</p></div><div class="product-cta">Click to View</div></div></div><div class="gallery-item animate-on-scroll" data-product-id="gg-paste-pouch"><img src="ggpaste-pouch.PNG" alt="Ginger Garlic Paste Pouch 25gm" loading="lazy" /><div class="product-info"><div class="product-name-box"><h4 class="product-title notranslate">Ginger Garlic Paste – Pouch</h4></div><div class="product-weight-box"><p class="product-detail notranslate">Gross Weight: 25 gm</p></div><div class="product-description-box"><p>A single-serving pouch of our flavorful ginger garlic paste, great for travel or quick meals.</p></div><div class="product-cta">Click to View</div></div></div></div></div>
                 <!-- Seviyan -->
-                <div class="product-category animate-on-scroll" id="seviyan"><h3 class="notranslate">Seviyan</h3><div class="gallery"><div class="gallery-item animate-on-scroll" data-product-id="roasted-seviyan"><img src="roasted-sevaiyan.PNG" alt="Roasted Seviyan" loading="lazy" /><div class="product-info"><div class="product-name-box"><h4 class="product-title notranslate">Roasted Seviyan</h4></div><div class="product-weight-box"><p class="product-detail notranslate">Gross Weight: 150g / 100g</p></div><div class="product-description-box"><p>Perfectly roasted to a golden-brown finish, our seviyan are ready to use in your favorite sweet or savory dishes.</p></div><div class="product-cta">Click to View</div></div></div><div class="gallery-item animate-on-scroll" data-product-id="kachhi-seviyan"><img src="uncooked-sevaiyan.PNG" alt="Kachhi Seviyan" loading="lazy" /><div class="product-info"><div class="product-name-box"><h4 class="product-title notranslate">Kachhi Seviyan</h4></div><div class="product-weight-box"><p class="product-detail notranslate">Gross Weight: 150g / 100g</p></div><div class="product-description-box"><p>Uncooked seviyan for a traditional preparation. Cook them to your desired texture for a variety of recipes.</p></div><div class="product-cta">Click to View</div></div></div></div></div>
+                <div class="product-category animate-on-scroll" id="seviyan"><h3 class="notranslate">Seviyan (Roasted/Kacchi)</h3><div class="gallery"><div class="gallery-item animate-on-scroll" data-product-id="roasted-seviyan"><img src="roasted-sevaiyan.PNG" alt="Roasted Seviyan" loading="lazy" /><div class="product-info"><div class="product-name-box"><h4 class="product-title notranslate">Roasted Seviyan</h4></div><div class="product-weight-box"><p class="product-detail notranslate">Gross Weight: 150g / 100g</p></div><div class="product-description-box"><p>Perfectly roasted to a golden-brown finish, our seviyan are ready to use in your favorite sweet or savory dishes.</p></div><div class="product-cta">Click to View</div></div></div><div class="gallery-item animate-on-scroll" data-product-id="kachhi-seviyan"><img src="uncooked-sevaiyan.PNG" alt="Kachhi Seviyan" loading="lazy" /><div class="product-info"><div class="product-name-box"><h4 class="product-title notranslate">Vermicelli Seviyan</h4></div><div class="product-weight-box"><p class="product-detail notranslate">Gross Weight: 150g / 100g</p></div><div class="product-description-box"><p>Uncooked seviyan for a traditional preparation. Cook them to your desired texture for a variety of recipes.</p></div><div class="product-cta">Click to View</div></div></div></div></div>
                 <!-- Bakery -->
                 <div class="product-category animate-on-scroll" id="bakery"><h3 class="notranslate">Bakery & Dry Items</h3><div class="gallery"><div class="gallery-item animate-on-scroll" data-product-id="sugar-cubes"><img src="sugar_cubes.PNG" alt="Sugar Cubes" loading="lazy" /><div class="product-info"><div class="product-name-box"><h4 class="product-title notranslate">Sugar Cubes</h4></div><div class="product-weight-box"><p class="product-detail notranslate">Gross Weight: 500g</p></div><div class="product-description-box"><p>Premium sugar cubes, perfect for tea and coffee. A touch of elegance for your table.</p></div><div class="product-cta">Click to View</div></div></div><div class="gallery-item animate-on-scroll" data-product-id="suji-toast"><img src="suji-toast.PNG" alt="Suji Toast" loading="lazy" /><div class="product-info"><div class="product-name-box"><h4 class="product-title notranslate">Suji Toast</h4></div><div class="product-weight-box"><p class="product-detail notranslate">Gross Weight: 300g</p></div><div class="product-description-box"><p>A crispy, delicious suji toast that's perfect for a morning snack or with your evening chai.</p></div><div class="product-cta">Click to View</div></div></div></div></div>
                 <!-- Ready to Cook -->
-                <div class="product-category animate-on-scroll" id="ready-cook"><h3 class="notranslate">Ready to Cook</h3><div class="gallery"><div class="gallery-item animate-on-scroll" data-product-id="samosa-patti"><img src="samosa-patti.PNG" alt="Samosa Patti" loading="lazy" style="object-fit: contain;" /><div class="product-info"><div class="product-name-box"><h4 class="product-title notranslate">Samosa Patti</h4></div><div class="product-weight-box"><p class="product-detail notranslate">Gross Weight: 500gm / 250 gm</p></div><div class="product-description-box"><p>Thin, crispy sheets ready to be filled with your favorite ingredients to create perfect samosas at home.</p></div><div class="product-cta">Click to View</div></div></div><div class="gallery-item animate-on-scroll" data-product-id="crispy-thread"><img src="crispy-thread.PNG" alt="Crispy Thread" loading="lazy" /><div class="product-info"><div class="product-name-box"><h4 class="product-title notranslate">Crispy Thread</h4></div><div class="product-weight-box"><p class="product-detail notranslate">Gross Weight: 500gm</p></div><div class="product-description-box"><p>Delightfully crunchy threads for a unique texture in your snacks and appetizers.</p></div><div class="product-cta">Click to View</div></div></div><div class="gallery-item animate-on-scroll" data-product-id="spring-roll-sheets"><img src="spring-roll-sheets.PNG" alt="Spring Roll Sheets" loading="lazy" /><div class="product-info"><div class="product-name-box"><h4 class="product-title notranslate">Spring Roll Sheets</h4></div><div class="product-weight-box"><p class="product-detail notranslate">Gross Weight: 400gm</p></div><div class="product-description-box"><p>Versatile sheets that are perfect for making fresh, homemade spring rolls.</p></div><div class="product-cta">Click to View</div></div></div></div></div>
+                <div class="product-category animate-on-scroll" id="ready-cook"><h3 class="notranslate">Ready to Cook</h3><div class="gallery"><div class="gallery-item animate-on-scroll" data-product-id="samosa-patti"><img src="samosa-patti.PNG" alt="Samosa Patti" loading="lazy" /><div class="product-info"><div class="product-name-box"><h4 class="product-title notranslate">Samosa Patti</h4></div><div class="product-weight-box"><p class="product-detail notranslate">Gross Weight: 500gm / 250 gm</p></div><div class="product-description-box"><p>Thin, crispy sheets ready to be filled with your favorite ingredients to create perfect samosas at home.</p></div><div class="product-cta">Click to View</div></div></div><div class="gallery-item animate-on-scroll" data-product-id="crispy-thread"><img src="crispy-thread.PNG" alt="Crispy Thread" loading="lazy" /><div class="product-info"><div class="product-name-box"><h4 class="product-title notranslate">Crispy Thread</h4></div><div class="product-weight-box"><p class="product-detail notranslate">Gross Weight: 500gm</p></div><div class="product-description-box"><p>Delightfully crunchy threads for a unique texture in your snacks and appetizers.</p></div><div class="product-cta">Click to View</div></div></div><div class="gallery-item animate-on-scroll" data-product-id="spring-roll-sheets"><img src="spring-roll-sheets.PNG" alt="Spring Roll Sheets" loading="lazy" /><div class="product-info"><div class="product-name-box"><h4 class="product-title notranslate">Spring Roll Sheets</h4></div><div class="product-weight-box"><p class="product-detail notranslate">Gross Weight: 400gm</p></div><div class="product-description-box"><p>Versatile sheets that are perfect for making fresh, homemade spring rolls.</p></div><div class="product-cta">Click to View</div></div></div></div></div>
                 <!-- Tofu -->
-                <div class="product-category animate-on-scroll" id="tofu"><h3 class="notranslate">Tofu (Soya Paneer)</h3><div class="gallery"><div class="gallery-item animate-on-scroll" data-product-id="tofu-regular"><img src="regular-tofu.PNG" alt="Tofu – Regular" loading="lazy" /><div class="product-info"><div class="product-name-box"><h4 class="product-title notranslate">Tofu – Regular</h4></div><div class="product-weight-box"><p class="product-detail notranslate">Gross Weight: 200gm</p></div><div class="product-description-box"><p>Our classic, firm tofu (soya paneer) is a versatile and healthy protein source for all your recipes.</p></div><div class="product-cta">Click to View</div></div></div><div class="gallery-item animate-on-scroll" data-product-id="tofu-red-chilli"><img src="red_chilli-tofu.PNG" alt="Tofu – Red Chilli" loading="lazy" /><div class="product-info"><div class="product-name-box"><h4 class="product-title notranslate">Tofu – Red Chilli</h4></div><div class="product-weight-box"><p class="product-detail notranslate">Gross Weight: 200gm</p></div><div class="product-description-box"><p>A spicy twist on our classic tofu, infused with red chilli for an extra kick of flavor.</p></div><div class="product-cta">Click to View</div></div></div><div class="gallery-item animate-on-scroll" data-product-id="tofu-garlic-pepper"><img src="garlic_pepper-tofu.PNG" alt="Tofu – Garlic Pepper" loading="lazy" /><div class="product-info"><div class="product-name-box"><h4 class="product-title notranslate">Tofu – Garlic Pepper</h4></div><div class="product-weight-box"><p class="product-detail notranslate">Gross Weight: 200gm</p></div><div class="product-description-box"><p>Infused with a rich blend of garlic and black pepper, this tofu adds a savory depth to any dish.</p></div><div class="product-cta">Click to View</div></div></div></div></div>
+                <div class="product-category animate-on-scroll" id="tofu"><h3 class="notranslate">Tofu (Soya Paneer)</h3><div class="gallery"><div class="gallery-item animate-on-scroll" data-product-id="tofu-regular"><img src="tofu-regular.jpg" alt="Tofu – Regular" loading="lazy" /><div class="product-info"><div class="product-name-box"><h4 class="product-title notranslate">Tofu – Regular</h4></div><div class="product-weight-box"><p class="product-detail notranslate">Gross Weight: 200gm</p></div><div class="product-description-box"><p>Our classic, firm tofu (soya paneer) is a versatile and healthy protein source for all your recipes.</p></div><div class="product-cta">Click to View</div></div></div><div class="gallery-item animate-on-scroll" data-product-id="tofu-red-chilli"><img src="tofu-chilli.jpg" alt="Tofu – Red Chilli" loading="lazy" /><div class="product-info"><div class="product-name-box"><h4 class="product-title notranslate">Tofu – Red Chilli</h4></div><div class="product-weight-box"><p class="product-detail notranslate">Gross Weight: 200gm</p></div><div class="product-description-box"><p>A spicy twist on our classic tofu, infused with red chilli for an extra kick of flavor.</p></div><div class="product-cta">Click to View</div></div></div><div class="gallery-item animate-on-scroll" data-product-id="tofu-garlic-pepper"><img src="tofu-garlic.jpg" alt="Tofu – Garlic Pepper" loading="lazy" /><div class="product-info"><div class="product-name-box"><h4 class="product-title notranslate">Tofu – Garlic Pepper</h4></div><div class="product-weight-box"><p class="product-detail notranslate">Gross Weight: 200gm</p></div><div class="product-description-box"><p>Infused with a rich blend of garlic and black pepper, this tofu adds a savory depth to any dish.</p></div><div class="product-cta">Click to View</div></div></div></div></div>
                 <!-- Pickles -->
-                <div class="product-category animate-on-scroll" id="pickles"><h3 class="notranslate">Pickles</h3><div class="gallery"><div class="gallery-item animate-on-scroll" data-product-id="homemade-pickle"><img src="home_made-pickle.PNG" alt="Special Homemade Pickle" loading="lazy" /><div class="product-info"><div class="product-name-box"><h4 class="product-title notranslate">Special Homemade Pickle</h4></div><div class="product-weight-box"><p class="product-detail notranslate">Gross Weight: 250gm</p></div><div class="product-description-box"><p>A traditional homemade recipe with a mix of select spices, bringing authentic flavor to your meals.</p></div><div class="product-cta">Click to View</div></div></div><div class="gallery-item animate-on-scroll" data-product-id="silver-pickle"><img src="silver-pickle.PNG" alt="Silver Pickle" loading="lazy" /><div class="product-info"><div class="product-name-box"><h4 class="product-title notranslate">Silver Pickle</h4></div><div class="product-weight-box"><p class="product-detail notranslate">Gross Weight: 40gm</p></div><div class="product-description-box"><p>A small, convenient pack of our classic pickle, perfect for a tangy treat on the go.</p></div><div class="product-cta">Click to View</div></div></div></div></div>
+                <div class="product-category animate-on-scroll" id="pickles">
+                    <h3 class="notranslate">Pickles</h3>
+                    <div class="gallery">
+                        <div class="gallery-item animate-on-scroll" data-product-id="homemade-pickle-main">
+                            <img src="home_made-pickle.PNG" alt="Special Homemade Pickle" loading="lazy" />
+                            <div class="product-info">
+                                <div class="product-name-box"><h4 class="product-title notranslate">Special Homemade Pickle</h4></div>
+                                <div class="product-weight-box"><p class="product-detail notranslate">Gross Weight: 250gm</p></div>
+                                <div class="product-description-box"><p>A traditional homemade recipe with a mix of select spices, bringing authentic flavor to your meals. Click to see all our varieties!</p></div>
+                                <div class="product-cta">View Varieties</div>
+                            </div>
+                        </div>
+                        <div class="gallery-item animate-on-scroll" data-product-id="silver-pickle-main">
+                            <img src="silver-pickle.PNG" alt="Silver Pickle" loading="lazy" />
+                            <div class="product-info">
+                                <div class="product-name-box"><h4 class="product-title notranslate">Silver Pickle</h4></div>
+                                <div class="product-weight-box"><p class="product-detail notranslate">Gross Weight: 40gm</p></div>
+                                <div class="product-description-box"><p>A small, convenient pack of our classic pickle, perfect for a tangy treat on the go. Click to see all our varieties!</p></div>
+                                <div class="product-cta">View Varieties</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <!-- Pudding -->
                 <div class="product-category animate-on-scroll" id="pudding"><h3 class="notranslate">Pudding</h3><div class="gallery"><div class="gallery-item animate-on-scroll" data-product-id="caramel-pudding"><img src="caramel-pudding.PNG" alt="Caramel Pudding" loading="lazy" /><div class="product-info"><div class="product-name-box"><h4 class="product-title notranslate">Caramel Pudding</h4></div><div class="product-weight-box"><p class="product-detail notranslate">Gross Weight: 90gm</p></div><div class="product-description-box"><p>A rich, delightful caramel pudding mix. Follow our simple instructions to create a silky, smooth dessert at home. A perfect sweet treat for any occasion.</p></div><div class="product-cta">Click to View</div></div></div></div></div>
                 <!-- Frozen Treats -->
                 <div class="product-category animate-on-scroll" id="frozen"><h3 class="notranslate">Frozen Treats</h3><div class="gallery"><div class="gallery-item animate-on-scroll" data-product-id="sippin-pops"><img src="sippin-pops.PNG" alt="Sippin Pops" loading="lazy" /><div class="product-info"><div class="product-name-box"><h4 class="product-title notranslate">Sippin Pops</h4></div><div class="product-weight-box"><p class="product-detail notranslate">12 FLAVORS/12 PC PER BOX</p></div><div class="product-description-box"><p>A refreshing range of colorful, fruit-flavored drinks. Perfect for parties and summer days.</p></div><div class="product-cta">Click to View</div></div></div></div></div>
                 <!-- Chocolates -->
-                <div class="product-category animate-on-scroll" id="chocolates"><h3 class="notranslate">Chocolates</h3><div class="gallery"><div class="gallery-item animate-on-scroll" data-product-id="gold-coin-chocolates"><img src="gold-coin.PNG" alt="Gold Coin - Imli Kick - Harty Beauty" loading="lazy" /><div class="product-info"><div class="product-name-box"><h4 class="product-title notranslate">Gold Coin - Imli Kick - Harty Beauty</h4></div><div class="product-weight-box"><p class="product-detail notranslate">Gross Weight: 12 pc</p></div><div class="product-description-box"><p>A mix of our delightful chocolate assortments, including Gold Coin, Imli Kick, and Harty Beauty.</p></div><div class="product-cta">Click to View</div></div></div><div class="gallery-item animate-on-scroll" data-product-id="choco-lush"><img src="choco-lush.PNG" alt="Choco Lush" loading="lazy" /><div class="product-info"><div class="product-name-box"><h4 class="product-title notranslate">Choco Lush</h4></div><div class="product-weight-box"><p class="product-detail notranslate">Gross Weight: 12 pc</p></div><div class="product-description-box"><p>A rich and creamy assortment of our finest chocolates, perfect for a sweet indulgence.</p></div><div class="product-cta">Click to View</div></div></div><div class="gallery-item animate-on-scroll" data-product-id="assorted-chocolates"><img src="assorted-chocolate.PNG" alt="Assorted Chocolates" loading="lazy" /><div class="product-info"><div class="product-name-box"><h4 class="product-title notranslate">Assorted Chocolates</h4></div><div class="product-weight-box"><p class="product-detail notranslate">Gross Weight: 12 pc</p></div><div class="product-description-box"><p>A delightful mix of various chocolates in one pack, offering a treat for every taste bud.</p></div><div class="product-cta">Click to View</div></div></div></div></div>
+                <div class="product-category animate-on-scroll" id="chocolates"><h3 class="notranslate">Chocolates</h3><div class="gallery"><div class="gallery-item animate-on-scroll" data-product-id="choco-lush"><img src="choco-lush.PNG" alt="Choco Lush" loading="lazy" /><div class="product-info"><div class="product-name-box"><h4 class="product-title notranslate">Choco Lush & Gracia</h4></div><div class="product-weight-box"><p class="product-detail notranslate">Gross Weight: 200 gm</p></div><div class="product-description-box"><p>A rich and creamy assortment of our finest chocolates, perfect for a sweet indulgence.</p></div><div class="product-cta">Click to View</div></div></div><div class="gallery-item animate-on-scroll" data-product-id="assorted-chocolates"><img src="assorted-chocolate.PNG" alt="Assorted Chocolates" loading="lazy" /><div class="product-info"><div class="product-name-box"><h4 class="product-title notranslate">Choco Lush & Gracia</h4></div><div class="product-weight-box"><p class="product-detail notranslate">Gross Weight: 770 gm</p></div><div class="product-description-box"><p>A delightful mix of various chocolates in one pack, offering a treat for every taste bud.</p></div><div class="product-cta">Click to View</div></div></div></div></div>
                 <!-- Beverages -->
-                <div class="product-category animate-on-scroll" id="beverages"><h3 class="notranslate">Beverages</h3><div class="gallery"><div class="gallery-item animate-on-scroll" data-product-id="umbrella-drinks"><img src="umbrella-drinks.PNG" alt="Umbrella drinks" loading="lazy" /><div class="product-info"><div class="product-name-box"><h4 class="product-title notranslate">Umbrella Drinks</h4></div><div class="product-weight-box"><p class="product-detail notranslate">Gross Weight: 750 ml / bottle</p></div><div class="product-description-box"><p>A refreshing range of colorful, fruit-flavored beverages. Perfect for parties and summer days.</p></div><div class="product-cta">Click to View</div></div></div></div></div>
+                <div class="product-category animate-on-scroll" id="beverages">
+                    <h3 class="notranslate">Beverages</h3>
+                    <div class="gallery">
+                        <div class="gallery-item animate-on-scroll" data-product-id="umbrella-drinks-main">
+                            <img src="umbrella-drinks.PNG" alt="Umbrella Drinks" loading="lazy" />
+                            <div class="product-info">
+                                <div class="product-name-box"><h4 class="product-title notranslate">Umbrella Drinks</h4></div>
+                                <div class="product-weight-box"><p class="product-detail notranslate">Over 45 Flavors Available</p></div>
+                                <div class="product-description-box"><p>A refreshing range of colorful, fruit-flavored beverages. Perfect for parties and summer days. Click to see all our flavors!</p></div>
+                                <div class="product-cta">View Flavors</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
 
@@ -820,8 +887,8 @@
             const formStatusMessage = document.getElementById("formStatusMessage");
             const fixedEnquiryBtn = document.getElementById("fixed-enquiry-btn");
 
-            // --- 2. RECIPE & NUTRITION DATA ---
-            const recipes = {
+            // --- 2. PRODUCT DATA (NUTRITION, RECIPES, VARIANTS) ---
+            const productDetails = {
                 'soya-chunks-regular': {
                     nutrition: "High in protein (52g per 100g), rich in fiber, and a great source of iron and calcium.",
                     recipes: [
@@ -859,6 +926,21 @@
                     recipes: [
                         { title: 'Meethi Seviyan', description: 'A traditional sweet dish made during festivals, with roasted vermicelli, ghee, sugar, and nuts.' },
                         { title: 'Seviyan Upma', description: 'A quick and savory breakfast dish made with roasted vermicelli and vegetables.' }
+                    ]
+                },
+                'umbrella-drinks-main': {
+                    variants: [
+                        'Classic Jeera Masala Soda', 'Masala Kala Khatta', 'Tangy Orange', 'Lemon & Lime', 'Sp. Blue Curacao', 'Blue Lagoon', 'Shahi Rose', 'Rose Petals', 'Gulab Gulkand', 'Instant Rose Falooda', 'Instant Butter Scotch Falooda', 'Instant Kulfi Falooda', 'Instant Kesar D/F Falooda', 'Instant Ice Cream Falooda', 'Sp. American Icecream', 'Sp. Butterscotch', 'Sp. Kesar Elaichi', 'Instant Royal Coffee', 'Sp. Pan Pasand', 'Sp. Lemon Pudina', 'Alphonso Mango', 'Sp. Pink Guava', 'Crush Litchi', 'Crush Pineapple', 'Crush Strawberry', 'Mocktail N More', 'Aam Panna', 'Varialy Elachi', 'Real Variyali', 'Mojito', 'Sp. Ginger Lemon', 'Saffron', 'Anjeer Kesar', 'Masala Sikanji', 'Kokam Sharbat', 'Masala Kachha Keri', 'Real Choco', 'Blueberry Fruit Squash', 'Bubblegum Syrup', 'Chilli Guava Fruit Squash', 'Fruit Nuts Syrup', 'Pulpy Orange Fruit Squash', 'Rabadi Syrup', 'Real Date Syrup', 'Kesar D/F Thandai Squash', 'Kesar D/F Thandai (200ml)', 'Khus Syrup'
+                    ]
+                },
+                'homemade-pickle-main': {
+                    variants: [
+                        'Amla Murabba Pickle', 'Amla Pickle', 'Bijora Pickle', 'Dryfruit Mix Pickle', 'Garlic Bijora Pickle', 'Garlic Pickle', 'Green Chilli Pickle', 'Hot Lemon Pickle', 'Keri Chana Methi Pickle', 'Keri Gunda Pickle', 'Keri Chunda Pickle', 'Kharek Pickle', 'Lemon Chutney', 'Mango Pickle', 'Masala Ker Pickle', 'Methiya Mango Pickle', 'Mix Pickle', 'Rayta Ker Pickle', 'Red Stuff Chilly Pickle', 'Sweet Lemon Pickle', 'Sweet Mango Pickle', 'Sweet Red Chilly Pickle', 'Tikha Gunda Pickle'
+                    ]
+                },
+                'silver-pickle-main': {
+                    variants: [
+                        'Green Chilli Pickle', 'Hot Lemon Pickle', 'Mango Pickle', 'Mixed Pickle'
                     ]
                 }
             };
@@ -971,17 +1053,25 @@
                 modalDetail.textContent = item.querySelector('.product-detail')?.textContent || '';
                 modalDescription.textContent = item.querySelector('.product-description-box p')?.textContent || '';
                 
-                // NEW: Recipe & Nutrition Logic
                 const productId = item.dataset.productId;
-                const productData = recipes[productId];
+                const productData = productDetails[productId];
                 modalExtraContent.innerHTML = ''; // Clear previous content
 
                 if (productData) {
                     let html = '<div class="modal-extra-info">';
 
+                    // Add variants if they exist
+                    if (productData.variants && productData.variants.length > 0) {
+                        html += `<h4>Available Varieties</h4><ul>`;
+                        productData.variants.forEach(variant => {
+                            html += `<li>${variant}</li>`;
+                        });
+                        html += `</ul>`;
+                    }
+
                     // Add nutritional info if it exists
                     if (productData.nutrition) {
-                        html += `<h4>Nutritional Highlights</h4><p>${productData.nutrition}</p>`;
+                        html += `<h4 style="margin-top: 20px;">Nutritional Highlights</h4><p>${productData.nutrition}</p>`;
                     }
 
                     // Add recipes if they exist

@@ -6,116 +6,120 @@
     <title>Serial Enterprise Foods - Product Catalog</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
     <style>
+        /* ========================================
+         * VIBRANT & POLISHED CATALOG STYLES
+         * ======================================== */
+
+        :root {
+            --primary-color: #2E7D32;
+            --secondary-color: #fdfaf5;
+            --accent-color: #FFC107;
+            --text-color: #333;
+            --bg-light: #f7f5f2;
+            --bg-white: #ffffff;
+            --border-color: #e0e0e0;
+            --font-heading: 'Playfair Display', serif;
+            --font-body: 'Lato', sans-serif;
+        }
+
         /* General Body and Container */
         body {
-            font-family: 'Lato', sans-serif;
+            font-family: var(--font-body);
             margin: 0;
             padding: 20px;
-            background-color: #f7f5f2; /* Lighter, warmer background */
-            color: #444;
+            background-color: var(--bg-light);
+            color: var(--text-color);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
         .catalog-container {
-            max-width: 900px;
+            max-width: 1000px;
             margin: 20px auto;
             padding: 40px;
-            background-color: #ffffff;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            background-color: var(--bg-white);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
             border-radius: 15px;
+            border: 1px solid var(--border-color);
         }
 
         /* Header */
         .header {
             text-align: center;
-            padding-bottom: 30px;
+            padding-bottom: 25px;
             margin-bottom: 40px;
-            border-bottom: 3px solid #2E7D32;
+            border-bottom: 4px solid var(--primary-color);
         }
         .header img {
-            max-width: 130px;
-            margin-bottom: 15px;
+            max-width: 120px;
+            margin-bottom: 10px;
             border-radius: 50%;
-            border: 4px solid #f0f0f0;
+            border: 3px solid var(--border-color);
         }
         .header h1 {
-            font-family: 'Playfair Display', serif;
-            color: #2E7D32;
+            font-family: var(--font-heading);
+            color: var(--primary-color);
             margin: 0;
-            font-size: 3.2em;
+            font-size: 3em;
+            font-weight: 700;
         }
         .header p {
             font-style: italic;
             color: #777;
-            margin: 8px 0 0 0;
+            margin: 5px 0 0 0;
             font-size: 1.2em;
         }
 
         /* Category Styling */
         .category {
-            margin-bottom: 60px;
+            margin-bottom: 50px;
             page-break-inside: avoid;
         }
         .category-title {
-            font-family: 'Playfair Display', serif;
+            font-family: var(--font-heading);
             font-size: 2.4em;
-            color: #2E7D32;
-            border-bottom: 2px solid #f0f0f0;
-            padding-bottom: 15px;
+            font-weight: 700;
+            color: var(--primary-color);
+            background-color: var(--secondary-color);
+            padding: 15px 20px;
             margin-bottom: 30px;
             text-align: center;
-            position: relative;
+            border-radius: 8px;
+            border-left: 5px solid var(--accent-color);
+            border-right: 5px solid var(--accent-color);
         }
-        .category-title::after {
-            content: '';
-            position: absolute;
-            bottom: -2px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 3px;
-            background-color: #FFC107; /* Accent color */
-        }
-        .subcategory-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.6em;
-            color: #333;
-            margin-top: 40px;
-            margin-bottom: 25px;
-            border-bottom: 1px solid #ddd;
-            padding-bottom: 10px;
-        }
-
+        
         /* Product Grid Layout */
         .product-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
             gap: 30px;
         }
 
         /* Product Item Card Styling */
         .product-item {
             display: flex;
-            flex-direction: column; /* Stack image and details vertically */
-            background-color: #fdfdfd;
-            border: 1px solid #f0f0f0;
+            flex-direction: column;
+            background-color: var(--bg-white);
+            border: 1px solid var(--border-color);
             border-radius: 12px;
-            padding: 0; /* Remove padding from the item itself */
-            overflow: hidden; /* To contain the image */
+            overflow: hidden;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             page-break-inside: avoid;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            border-top: 4px solid var(--accent-color);
         }
         .product-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 12px 25px rgba(0,0,0,0.1);
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.12);
         }
         .product-item img {
             width: 100%;
-            height: 220px; /* Taller image area */
+            height: 190px;
             object-fit: contain;
             padding: 15px;
-            background-color: #fff;
-            border-bottom: 1px solid #f0f0f0;
+            background-color: var(--bg-white);
         }
         .product-details {
             padding: 20px;
@@ -123,433 +127,206 @@
             display: flex;
             flex-direction: column;
             flex-grow: 1;
+            border-top: 1px solid var(--border-color);
         }
         .product-details h4 {
             margin: 0 0 10px 0;
-            font-family: 'Playfair Display', serif;
-            font-size: 1.4em;
-            color: #2E7D32;
+            font-family: var(--font-heading);
+            font-size: 1.3em;
+            font-weight: 700;
+            color: var(--primary-color);
         }
         .product-details .details {
             font-size: 0.9em;
             font-weight: 700;
-            color: #666;
-            margin-bottom: 12px;
-            background-color: #f4f4f4;
-            padding: 5px 10px;
+            color: var(--text-color);
+            margin: 0 auto 12px auto;
+            background-color: #f0f0f0;
+            padding: 4px 12px;
             border-radius: 15px;
             display: inline-block;
-            align-self: center;
         }
         .product-details .description {
-            font-size: 1em;
+            font-size: 0.95em;
             line-height: 1.6;
             color: #666;
-            flex-grow: 1;
+            flex-grow: 1; /* This makes the description expand */
         }
 
-        /* Variant List Styling (for pickles, beverages) */
+        /* Variant List Styling */
         .variant-list-container {
-            background-color: #f9f9f9;
-            padding: 20px;
-            border-radius: 8px;
-            margin-top: 20px;
+            margin-top: 15px;
             text-align: left;
+            background-color: #f8f8f8;
+            padding: 10px;
+            border-radius: 6px;
+            border-top: 2px solid var(--accent-color);
         }
         .variant-list-container h4 {
-            margin-top: 0;
-            font-family: 'Playfair Display', serif;
-            color: #2E7D32;
+            margin: 0 0 8px 0;
+            font-family: var(--font-heading);
+            font-size: 1em;
+            color: var(--primary-color);
+            text-align: center;
         }
         .variant-list {
             list-style-type: none;
-            padding-left: 0;
+            padding: 0;
             margin: 0;
+            font-size: 0.85em;
+            line-height: 1.6;
+            color: #555;
             columns: 2;
             -webkit-columns: 2;
             -moz-columns: 2;
-            column-gap: 20px;
+            column-gap: 15px;
+        }
+        .variant-list.single-column {
+            columns: 1; -webkit-columns: 1; -moz-columns: 1;
         }
         .variant-list li {
-            margin-bottom: 8px;
-            padding-left: 20px;
+            padding-left: 15px;
             position: relative;
-            font-size: 0.95em;
-            color: #555;
         }
         .variant-list li::before {
-            content: '✓';
-            color: #2E7D32;
+            content: '•';
+            color: var(--primary-color);
             position: absolute;
             left: 0;
             font-weight: bold;
         }
 
         /* Footer Sections */
-        .brands-section, .contact-info {
+        .footer-section {
             padding: 30px;
             border-radius: 10px;
             margin-top: 50px;
+            text-align: center;
         }
         .brands-section {
-            background-color: #f7f5f2;
+            background-color: var(--secondary-color);
         }
         .contact-info {
-            border-top: 3px solid #2E7D32;
+            border-top: 4px solid var(--primary-color);
         }
         .brands-list {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 15px;
+            gap: 12px;
             padding: 0;
             margin: 0;
             list-style: none;
         }
         .brands-list li {
-            background-color: #fff;
+            background-color: var(--bg-white);
             padding: 10px 20px;
             border-radius: 20px;
-            font-size: 1em;
+            font-size: 0.95em;
             border: 1px solid #ddd;
             box-shadow: 0 2px 5px rgba(0,0,0,0.05);
         }
-        .contact-info h3 {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.8em;
-            color: #2E7D32;
-            margin-bottom: 20px;
-        }
         .contact-info p {
-            margin: 10px 0;
+            margin: 8px 0;
             font-size: 1.1em;
             line-height: 1.7;
         }
 
         /* Media Queries for Responsiveness & Print */
-        @media print, (max-width: 768px) {
-            .product-grid {
-                grid-template-columns: 1fr;
-            }
-        }
         @media print, (max-width: 600px) {
-            body {
-                box-shadow: none;
-                background-color: #fff;
-                padding: 0;
-            }
+            body { padding: 0; }
             .catalog-container {
                 box-shadow: none;
                 margin: 0;
-                padding: 20px;
-                max-width: 100%;
-                border-top: none;
+                padding: 15px;
+                border-radius: 0;
             }
-            .variant-list {
-                columns: 1;
-                -webkit-columns: 1;
-                -moz-columns: 1;
-            }
+            .product-grid { grid-template-columns: 1fr; }
+            .variant-list { columns: 1; -webkit-columns: 1; -moz-columns: 1; }
         }
     </style>
 </head>
 <body>
 
     <div class="catalog-container">
-        <div class="header">
+        <header class="header">
             <img src="logo.PNG" alt="Serial Enterprise Foods Logo">
             <h1>Serial Enterprise Foods</h1>
             <p>QUALITY & TASTE IS OUR RECIPE</p>
-        </div>
+        </header>
 
-        <div class="category">
-            <h2 class="category-title">Dal Pakwan & Puri</h2>
+        <!-- Category: Savory Snacks -->
+        <section class="category">
+            <h2 class="category-title">Savory Snacks</h2>
             <div class="product-grid">
-                <div class="product-item">
-                    <img src="jeera-pakwaan.jpg" alt="Jeera Dal Pakwan">
-                    <div class="product-details">
-                        <h4>Jeera Dal Pakwan</h4>
-                        <p class="details">Gross Weight: 250 gms</p>
-                        <p class="description">A crispy, traditional snack infused with the aromatic flavor of cumin (jeera).</p>
-                    </div>
-                </div>
-                <div class="product-item">
-                    <img src="onion-pakwaan.jpg" alt="Onion Dal Pakwan">
-                    <div class="product-details">
-                        <h4>Onion Dal Pakwan</h4>
-                        <p class="details">Gross Weight: 250 gms</p>
-                        <p class="description">A savory and crunchy delight featuring the classic taste of onion.</p>
-                    </div>
-                </div>
-                <div class="product-item">
-                    <img src="garlic-pakwaan.jpg" alt="Garlic Dal Pakwan">
-                    <div class="product-details">
-                        <h4>Garlic Dal Pakwan</h4>
-                        <p class="details">Gross Weight: 250 gms</p>
-                        <p class="description">A flavorful pakwan with the pungent and zesty kick of garlic.</p>
-                    </div>
-                </div>
-                <div class="product-item">
-                    <img src="nachni-puri.jpg" alt="Nachni Puri">
-                    <div class="product-details">
-                        <h4>Nachni Puri</h4>
-                        <p class="details">Gross Weight: 250 gms</p>
-                        <p class="description">Wholesome and crispy puris made from nutritious nachni (ragi flour).</p>
-                    </div>
-                </div>
-                <div class="product-item">
-                    <img src="bajra-puri.jpg" alt="Bajri Puri">
-                    <div class="product-details">
-                        <h4>Bajri Puri</h4>
-                        <p class="details">Gross Weight: 250 gms</p>
-                        <p class="description">Traditional and healthy puris crafted from bajri (pearl millet flour).</p>
-                    </div>
-                </div>
-                <div class="product-item">
-                    <img src="maida-puri.jpg" alt="Maida Puri">
-                    <div class="product-details">
-                        <h4>Maida Puri</h4>
-                        <p class="details">Gross Weight: 250 gms</p>
-                        <p class="description">Classic, light, and flaky puris made from refined maida, perfect for any occasion.</p>
-                    </div>
-                </div>
+                <!-- Dal Pakwan -->
+                <div class="product-item"><img src="jeera-pakwaan.jpg" alt="Jeera Dal Pakwan"><div class="product-details"><h4>Jeera Dal Pakwan</h4><p class="details">250 gms</p><p class="description">Crispy, traditional snack with an aromatic cumin flavor.</p></div></div>
+                <div class="product-item"><img src="onion-pakwaan.jpg" alt="Onion Dal Pakwan"><div class="product-details"><h4>Onion Dal Pakwan</h4><p class="details">250 gms</p><p class="description">A savory and crunchy delight with a classic onion taste.</p></div></div>
+                <div class="product-item"><img src="garlic-pakwaan.jpg" alt="Garlic Dal Pakwan"><div class="product-details"><h4>Garlic Dal Pakwan</h4><p class="details">250 gms</p><p class="description">Flavorful pakwan with a pungent and zesty garlic kick.</p></div></div>
+                <!-- Puri -->
+                <div class="product-item"><img src="nachni-puri.jpg" alt="Nachni Puri"><div class="product-details"><h4>Nachni Puri</h4><p class="details">250 gms</p><p class="description">Wholesome and crispy puris made from nutritious ragi flour.</p></div></div>
+                <div class="product-item"><img src="bajra-puri.jpg" alt="Bajri Puri"><div class="product-details"><h4>Bajri Puri</h4><p class="details">250 gms</p><p class="description">Traditional, healthy puris from pearl millet flour.</p></div></div>
+                <div class="product-item"><img src="maida-puri.jpg" alt="Maida Puri"><div class="product-details"><h4>Maida Puri</h4><p class="details">250 gms</p><p class="description">Classic, light, and flaky puris perfect for any occasion.</p></div></div>
+                <div class="product-item"><img src="methi-puri.jpg" alt="Methi Puri"><div class="product-details"><h4>Methi Puri</h4><p class="details">250 gms</p><p class="description">Savory puris infused with the aromatic flavor of fenugreek.</p></div></div>
+                <div class="product-item"><img src="jeera-puri.jpg" alt="Jeera Puri"><div class="product-details"><h4>Jeera Puri</h4><p class="details">250 gms</p><p class="description">A crunchy and flavorful puri seasoned with toasted cumin.</p></div></div>
+                <div class="product-item"><img src="masala-puri.jpg" alt="Masala Puri"><div class="product-details"><h4>Masala Puri</h4><p class="details">250 gms</p><p class="description">Spicy and irresistible puris with a blend of Indian spices.</p></div></div>
             </div>
-        </div>
+        </section>
 
-        <div class="category">
-            <h2 class="category-title">Soya Chunks</h2>
+        <!-- Category: Pantry Essentials -->
+        <section class="category">
+            <h2 class="category-title">Pantry Essentials</h2>
             <div class="product-grid">
-                <div class="product-item">
-                    <img src="regular-soyabox.PNG" alt="Soya Chunks – Regular">
-                    <div class="product-details">
-                        <h4>Soya Chunks – Regular</h4>
-                        <p class="details">Gross Weight: 200 gm</p>
-                        <p class="description">A wholesome and nutritious protein alternative, perfect for curries, stir-fries, and snacks.</p>
-                    </div>
-                </div>
-                <div class="product-item">
-                    <img src="granules-soyabox.PNG" alt="Soya Chunks – Granules">
-                    <div class="product-details">
-                        <h4>Soya Chunks – Granules</h4>
-                        <p class="details">Gross Weight: 200 gm</p>
-                        <p class="description">Finely ground version of our classic chunks, ideal for adding a rich, meaty texture to dishes.</p>
-                    </div>
-                </div>
-                <div class="product-item">
-                    <img src="mini-soyabox.PNG" alt="Soya Chunks – Mini">
-                    <div class="product-details">
-                        <h4>Soya Chunks – Mini</h4>
-                        <p class="details">Gross Weight: 200 gm</p>
-                        <p class="description">Bite-sized and perfect for quick cooking, salads, and kid-friendly recipes.</p>
-                    </div>
-                </div>
-                <div class="product-item">
-                    <img src="regular-soyapouch.PNG" alt="Soya Chunks Pouch">
-                    <div class="product-details">
-                        <h4>Soya Chunks Pouch</h4>
-                        <p class="details">Gross Weight: 40 gm</p>
-                        <p class="description">The same great quality in a convenient and affordable pouch for daily use.</p>
-                    </div>
-                </div>
+                <!-- Soya -->
+                <div class="product-item"><img src="regular-soyabox.PNG" alt="Soya Chunks"><div class="product-details"><h4>Soya Chunks</h4><p class="details">200 gm Box / 40 gm Pouch</p><p class="description">A nutritious protein alternative for curries and stir-fries.</p></div></div>
+                <div class="product-item"><img src="granules-soyabox.PNG" alt="Soya Granules"><div class="product-details"><h4>Soya Granules</h4><p class="details">200 gm Box</p><p class="description">Finely ground chunks, ideal for a rich, meaty texture.</p></div></div>
+                <div class="product-item"><img src="mini-soyabox.PNG" alt="Soya Mini Chunks"><div class="product-details"><h4>Soya Mini Chunks</h4><p class="details">200 gm Box / 40 gm Pouch</p><p class="description">Bite-sized and perfect for quick cooking and salads.</p></div></div>
+                <!-- Pastes -->
+                <div class="product-item"><img src="ggpaste-1kg_jar.PNG" alt="Ginger Garlic Paste"><div class="product-details"><h4>Ginger Garlic Paste</h4><p class="details">1kg / 200gm Jar / 25gm Pouch</p><p class="description">A kitchen essential for authentic Indian flavors.</p></div></div>
+                <!-- Seviyan -->
+                <div class="product-item"><img src="roasted-sevaiyan.PNG" alt="Roasted Seviyan"><div class="product-details"><h4>Roasted Seviyan</h4><p class="details">150g / 100g</p><p class="description">Golden-brown vermicelli, ready for sweet or savory dishes.</p></div></div>
+                <div class="product-item"><img src="uncooked-sevaiyan.PNG" alt="Vermicelli Seviyan"><div class="product-details"><h4>Vermicelli Seviyan</h4><p class="details">150g / 100g</p><p class="description">Uncooked (Kachhi) seviyan for traditional preparations.</p></div></div>
+                <!-- Bakery -->
+                <div class="product-item"><img src="sugar_cubes.PNG" alt="Sugar Cubes"><div class="product-details"><h4>Sugar Cubes</h4><p class="details">500g</p><p class="description">Premium sugar cubes, perfect for tea and coffee.</p></div></div>
+                <div class="product-item"><img src="suji-toast.PNG" alt="Suji Toast"><div class="product-details"><h4>Suji Toast</h4><p class="details">300g</p><p class="description">A crispy, delicious toast for a morning or evening snack.</p></div></div>
             </div>
-        </div>
+        </section>
 
-        <div class="category">
-            <h2 class="category-title">Pastes & Seviyan</h2>
-            <div class="product-grid">
-                <div class="product-item">
-                    <img src="ggpaste-1kg_jar.PNG" alt="Ginger Garlic Paste Jar 1kg">
-                    <div class="product-details">
-                        <h4>Ginger Garlic Paste Jar</h4>
-                        <p class="details">Gross Weight: 1 kg</p>
-                        <p class="description">A kitchen essential for authentic Indian flavors.</p>
-                    </div>
-                </div>
-                <div class="product-item">
-                    <img src="ggpaste-200gm_jar.PNG" alt="Ginger Garlic Paste Jar 200gm">
-                    <div class="product-details">
-                        <h4>Ginger Garlic Paste Jar</h4>
-                        <p class="details">Gross Weight: 200 gm</p>
-                        <p class="description">A convenient jar of our fresh ginger garlic paste.</p>
-                    </div>
-                </div>
-                <div class="product-item">
-                    <img src="roasted-sevaiyan.PNG" alt="Roasted Seviyan">
-                    <div class="product-details">
-                        <h4>Roasted Seviyan</h4>
-                        <p class="details">Gross Weight: 150g / 100g</p>
-                        <p class="description">Perfectly roasted to a golden-brown finish, ready for sweet or savory dishes.</p>
-                    </div>
-                </div>
-                <div class="product-item">
-                    <img src="uncooked-sevaiyan.PNG" alt="Kachhi Seviyan">
-                    <div class="product-details">
-                        <h4>Kachhi Seviyan</h4>
-                        <p class="details">Gross Weight: 150g / 100g</p>
-                        <p class="description">Uncooked seviyan for a traditional preparation.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="category">
+        <!-- Category: Ready to Cook & Tofu -->
+        <section class="category">
             <h2 class="category-title">Ready to Cook & Tofu</h2>
             <div class="product-grid">
-                <div class="product-item">
-                    <img src="samosa-patti.PNG" alt="Samosa Patti">
-                    <div class="product-details">
-                        <h4>Samosa Patti</h4>
-                        <p class="details">Gross Weight: 500gm / 250 gm</p>
-                        <p class="description">Thin, crispy sheets ready to be filled to create perfect samosas at home.</p>
-                    </div>
-                </div>
-                <div class="product-item">
-                    <img src="spring-roll-sheets.PNG" alt="Spring Roll Sheets">
-                    <div class="product-details">
-                        <h4>Spring Roll Sheets</h4>
-                        <p class="details">Gross Weight: 400gm</p>
-                        <p class="description">Versatile sheets that are perfect for making fresh, homemade spring rolls.</p>
-                    </div>
-                </div>
-                <div class="product-item">
-                    <img src="tofu-regular.jpg" alt="Tofu – Regular">
-                    <div class="product-details">
-                        <h4>Tofu – Regular</h4>
-                        <p class="details">Gross Weight: 200gm</p>
-                        <p class="description">Our classic, firm tofu (soya paneer) is a versatile and healthy protein source.</p>
-                    </div>
-                </div>
-                 <div class="product-item">
-                    <img src="tofu-chilli.jpg" alt="Tofu – Red Chilli">
-                    <div class="product-details">
-                        <h4>Tofu – Red Chilli</h4>
-                        <p class="details">Gross Weight: 200gm</p>
-                        <p class="description">A spicy twist on our classic tofu, infused with red chilli for an extra kick of flavor.</p>
-                    </div>
-                </div>
+                <div class="product-item"><img src="samosa-patti.PNG" alt="Samosa Patti"><div class="product-details"><h4>Samosa Patti</h4><p class="details">500gm / 250 gm</p><p class="description">Thin, crispy sheets ready to be filled for perfect samosas.</p></div></div>
+                <div class="product-item"><img src="crispy-thread.PNG" alt="Crispy Thread"><div class="product-details"><h4>Crispy Thread</h4><p class="details">500gm</p><p class="description">Crunchy threads for a unique texture in snacks.</p></div></div>
+                <div class="product-item"><img src="spring-roll-sheets.PNG" alt="Spring Roll Sheets"><div class="product-details"><h4>Spring Roll Sheets</h4><p class="details">400gm</p><p class="description">Versatile sheets for making fresh, homemade spring rolls.</p></div></div>
+                <div class="product-item"><img src="tofu-regular.jpg" alt="Tofu – Regular"><div class="product-details"><h4>Tofu – Regular</h4><p class="details">200gm</p><p class="description">Classic, firm tofu (soya paneer), a versatile protein source.</p></div></div>
+                <div class="product-item"><img src="tofu-chilli.jpg" alt="Tofu – Red Chilli"><div class="product-details"><h4>Tofu – Red Chilli</h4><p class="details">200gm</p><p class="description">A spicy twist on our classic tofu, infused with red chilli.</p></div></div>
+                <div class="product-item"><img src="tofu-garlic.jpg" alt="Tofu – Garlic Pepper"><div class="product-details"><h4>Tofu – Garlic Pepper</h4><p class="details">200gm</p><p class="description">Infused with garlic and black pepper for a savory depth.</p></div></div>
             </div>
-        </div>
+        </section>
 
-        <div class="category">
-            <h2 class="category-title">Pickles</h2>
+        <!-- Category: Pickles & Desserts -->
+        <section class="category">
+            <h2 class="category-title">Pickles, Desserts & Treats</h2>
             <div class="product-grid">
-                <div class="product-item">
-                    <img src="home_made-pickle.PNG" alt="Special Homemade Pickle">
-                    <div class="product-details">
-                        <h4>Special Homemade Pickle</h4>
-                        <p class="details">Gross Weight: 250gm</p>
-                        <p class="description">A traditional homemade recipe with a mix of select spices, bringing authentic flavor to your meals.</p>
-                        <div class="variant-list-container">
-                            <h4>Available Varieties:</h4>
-                            <ul class="variant-list">
-                                <li>Amla Murabba</li> <li>Amla</li> <li>Bijora</li> <li>Dryfruit Mix</li> <li>Garlic Bijora</li> <li>Garlic</li> <li>Green Chilli</li> <li>Hot Lemon</li> <li>Keri Chana Methi</li> <li>Keri Gunda</li> <li>Keri Chunda</li> <li>Kharek</li> <li>Lemon Chutney</li> <li>Mango</li> <li>Masala Ker</li> <li>Methiya Mango</li> <li>Mix</li> <li>Rayta Ker</li> <li>Red Stuff Chilly</li> <li>Sweet Lemon</li> <li>Sweet Mango</li> <li>Sweet Red Chilly</li> <li>Tikha Gunda</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="product-item">
-                    <img src="silver-pickle.PNG" alt="Silver Pickle">
-                    <div class="product-details">
-                        <h4>Silver Pickle</h4>
-                        <p class="details">Gross Weight: 40gm</p>
-                        <p class="description">A convenient pack of our classic pickle, perfect for a tangy treat on the go.</p>
-                         <div class="variant-list-container">
-                            <h4>Available Varieties:</h4>
-                            <ul class="variant-list">
-                                <li>Green Chilli</li> <li>Hot Lemon</li> <li>Mango</li> <li>Mixed</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
+                <div class="product-item"><img src="home_made-pickle.PNG" alt="Special Homemade Pickle"><div class="product-details"><h4>Homemade Pickle</h4><p class="details">250gm</p><p class="description">Traditional recipe with a mix of select spices.</p><div class="variant-list-container"><h4>Available Varieties:</h4><ul class="variant-list"><li>Amla Murabba</li><li>Amla</li><li>Bijora</li><li>Dryfruit Mix</li><li>Garlic Bijora</li><li>Garlic</li><li>Green Chilli</li><li>Hot Lemon</li><li>Keri Chana Methi</li><li>Keri Gunda</li><li>Keri Chunda</li><li>Kharek</li><li>Lemon Chutney</li><li>Mango</li><li>Masala Ker</li><li>Methiya Mango</li><li>Mix</li><li>Rayta Ker</li><li>Red Stuff Chilly</li><li>Sweet Lemon</li><li>Sweet Mango</li><li>Sweet Red Chilly</li><li>Tikha Gunda</li></ul></div></div></div>
+                <div class="product-item"><img src="silver-pickle.PNG" alt="Silver Pickle"><div class="product-details"><h4>Silver Pickle</h4><p class="details">40gm</p><p class="description">A convenient pack for a tangy treat on the go.</p><div class="variant-list-container"><h4>Available Varieties:</h4><ul class="variant-list single-column"><li>Green Chilli</li><li>Hot Lemon</li><li>Mango</li><li>Mixed</li></ul></div></div></div>
+                <div class="product-item"><img src="caramel-pudding.PNG" alt="Caramel Pudding"><div class="product-details"><h4>Caramel Pudding</h4><p class="details">90gm</p><p class="description">A rich, delightful pudding mix for a perfect sweet treat.</p></div></div>
+                <div class="product-item"><img src="sippin-pops.PNG" alt="Sippin Pops"><div class="product-details"><h4>Sippin Pops</h4><p class="details">12 Flavors / Box</p><p class="description">A refreshing range of colorful, fruit-flavored ice pops.</p></div></div>
             </div>
-        </div>
-        
-        <div class="category">
-            <h2 class="category-title">Desserts & Frozen Treats</h2>
+        </section>
+
+        <!-- Category: Chocolates & Beverages -->
+        <section class="category">
+            <h2 class="category-title">Chocolates & Beverages</h2>
             <div class="product-grid">
-                <div class="product-item">
-                    <img src="caramel-pudding.PNG" alt="Caramel Pudding">
-                    <div class="product-details">
-                        <h4>Caramel Pudding</h4>
-                        <p class="details">Gross Weight: 90gm</p>
-                        <p class="description">A rich, delightful caramel pudding mix. A perfect sweet treat for any occasion.</p>
-                    </div>
-                </div>
-                <div class="product-item">
-                    <img src="sippin-pops.PNG" alt="Sippin Pops">
-                    <div class="product-details">
-                        <h4>Sippin Pops</h4>
-                        <p class="details">12 Flavors / 12 pcs per box</p>
-                        <p class="description">A refreshing range of colorful, fruit-flavored drinks. Perfect for parties and summer days.</p>
-                    </div>
-                </div>
+                <div class="product-item"><img src="choco-lush.PNG" alt="Choco Lush & Gracia"><div class="product-details"><h4>Choco Lush & Gracia</h4><p class="details">770gm / 200gm</p><p class="description">A delightful mix of assorted chocolates for every taste bud.</p><div class="variant-list-container"><h4>Available Varieties:</h4><ul class="variant-list single-column"><li>Assorted</li><li>Hazelnut</li><li>Milk</li><li>Orange</li><li>Pista</li><li>Strawberry</li><li>Gracia</li></ul></div></div></div>
+                <div class="product-item"><img src="umbrella-drinks.PNG" alt="Umbrella Drinks"><div class="product-details"><h4>Umbrella Drinks</h4><p class="details">750 ml & 200 ml</p><p class="description">Refreshing, fruit-flavored beverages for parties.</p><div class="variant-list-container"><h4>45+ Flavors Available</h4><ul class="variant-list"><li>Jeera Masala</li><li>Kala Khatta</li><li>Orange</li><li>Lemon</li><li>Blue Curacao</li><li>Rose</li><li>Gulkand</li><li>Falooda</li><li>Icecream</li><li>Kesar Elaichi</li><li>Coffee</li><li>Pan Pasand</li><li>Lemon Pudina</li><li>Mango</li><li>Guava</li><li>Litchi</li><li>Pineapple</li><li>Strawberry</li><li>Mojito</li><li>Ginger Lemon</li><li>Saffron</li><li>Anjeer Kesar</li><li>Sikanji</li><li>Kokam</li><li>Kachha Keri</li><li>Choco</li><li>Blueberry</li><li>Bubblegum</li><li>Chilli Guava</li><li>Thandai</li><li>Khus & more</li></ul></div></div></div>
             </div>
-        </div>
+        </section>
 
-        <div class="category">
-            <h2 class="category-title">Beverages</h2>
-            <div class="product-item">
-                <img src="umbrella-drinks.PNG" alt="Umbrella Drinks">
-                <div class="product-details">
-                    <h4>Umbrella Drinks</h4>
-                    <p class="details">Gross Weight: 750 ml & 200 ml</p>
-                    <p class="description">A refreshing range of colorful, fruit-flavored beverages. Perfect for parties and summer days. Available in over 45 flavors:</p>
-                    <div class="variant-list-container">
-                        <ul class="variant-list">
-                            <li>Classic Jeera Masala Soda</li> <li>Masala Kala Khatta</li> <li>Tangy Orange</li> <li>Lemon & Lime</li> <li>Sp. Blue Curacao</li> <li>Blue Lagoon</li> <li>Shahi Rose</li> <li>Rose Petals</li> <li>Gulab Gulkand</li> <li>Instant Rose Falooda</li> <li>Instant Butter Scotch Falooda</li> <li>Instant Kulfi Falooda</li> <li>Instant Kesar D/F Falooda</li> <li>Instant Ice Cream Falooda</li> <li>Sp. American Icecream</li> <li>Sp. Butterscotch</li> <li>Sp. Kesar Elaichi</li> <li>Instant Royal Coffee</li> <li>Sp. Pan Pasand</li> <li>Sp. Lemon Pudina</li> <li>Alphonso Mango</li> <li>Sp. Pink Guava</li> <li>Crush Litchi</li> <li>Crush Pineapple</li> <li>Crush Strawberry</li> <li>Mocktail N More</li> <li>Aam Panna</li> <li>Varialy Elachi</li> <li>Real Variyali</li> <li>Mojito</li> <li>Sp. Ginger Lemon</li> <li>Saffron</li> <li>Anjeer Kesar</li> <li>Masala Sikanji</li> <li>Kokam Sharbat</li> <li>Masala Kachha Keri</li> <li>Real Choco</li> <li>Blueberry Fruit Squash</li> <li>Bubblegum Syrup</li> <li>Chilli Guava Fruit Squash</li> <li>Fruit Nuts Syrup</li> <li>Pulpy Orange Fruit Squash</li> <li>Rabadi Syrup</li> <li>Real Date Syrup</li> <li>Kesar D/F Thandai Squash</li> <li>Kesar D/F Thandai (200ml)</li> <li>Khus Syrup</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="category">
-            <h2 class="category-title">Chocolates</h2>
-            <div class="product-grid">
-                <div class="product-item">
-                    <img src="assorted-chocolate.PNG" alt="Choco Lush & Gracia Large">
-                    <div class="product-details">
-                        <h4>Choco Lush & Gracia (Large)</h4>
-                        <p class="details">Gross Weight: 770gm</p>
-                        <p class="description">A delightful mix of various chocolates in one pack, offering a treat for every taste bud.</p>
-                        <div class="variant-list-container">
-                            <h4>Available Varieties:</h4>
-                            <ul class="variant-list">
-                                <li>Assorted</li>
-                                <li>Hazelnut</li>
-                                <li>Milk</li>
-                                <li>Orange</li>
-                                <li>Pista</li>
-                                <li>Strawberry</li>
-                                <li>Gracia</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="product-item">
-                    <img src="choco-lush.PNG" alt="Choco Lush & Gracia Small">
-                    <div class="product-details">
-                        <h4>Choco Lush & Gracia (Small)</h4>
-                        <p class="details">Gross Weight: 200gm / 250gm</p>
-                        <p class="description">A rich and creamy assortment of our finest chocolates, perfect for a sweet indulgence.</p>
-                        <div class="variant-list-container">
-                            <h4>Available Varieties:</h4>
-                            <ul class="variant-list">
-                               <li>Assorted</li>
-                                <li>Hazelnut</li>
-                                <li>Milk</li>
-                                <li>Orange</li>
-                                <li>Pista</li>
-                                <li>Strawberry</li>
-                                <li>Gracia</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="category brands-section">
+        <!-- Footer Section: Brands -->
+        <footer class="footer-section brands-section">
             <h2 class="category-title">Brands We Market</h2>
             <ul class="brands-list">
                 <li>Serial Enterprise Foods Pvt. Ltd.</li>
@@ -561,14 +338,15 @@
                 <li>Special Home Made Pickle</li>
                 <li>B 2 Bakery</li>
             </ul>
-        </div>
+        </footer>
         
-        <div class="contact-info">
-            <h3>Contact Us</h3>
+        <!-- Footer Section: Contact -->
+        <footer class="footer-section contact-info">
+            <h2 class="category-title">Contact Us</h2>
             <p><strong>Sanjay Savla:</strong> +91 77158 44176</p>
             <p><strong>Manish Savla:</strong> +91 88504 01035</p>
             <p><strong>Email:</strong> serial.enterfoods@gmail.com</p>
-        </div>
+        </footer>
     </div>
 
 </body>

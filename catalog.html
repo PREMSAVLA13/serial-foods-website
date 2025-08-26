@@ -9,16 +9,16 @@
     <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
     <style>
         /* ========================================
-         * ROYAL & ELEGANT CATALOG STYLES
+         * ROYAL & ELEGANT CATALOG STYLES V2
          * ======================================== */
 
         :root {
             --primary-color: #2E7D32; /* Deep Forest Green */
             --accent-color: #B8860B; /* Dark Goldenrod for a classic, royal feel */
             --text-color: #3a3a3a; /* Softer Charcoal */
-            --bg-main: #FDFDFD; /* Clean White */
-            --bg-alt: #F5F5F5; /* Very light grey for subtle contrast */
-            --border-color: #e0e0e0;
+            --bg-main: #FFFFFF; /* Clean White */
+            --bg-alt: #F8F6F2; /* Lighter, warmer off-white */
+            --border-color: #e8e3d9;
             --font-heading: 'Playfair Display', serif;
             --font-body: 'Lora', serif;
         }
@@ -29,6 +29,7 @@
             margin: 0;
             padding: 20px;
             background-color: var(--bg-alt);
+            background-image: linear-gradient(rgba(255,255,255,0.5), rgba(255,255,255,0.5)), url('data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%23dcd6ca" fill-opacity="0.2"%3E%3Cpath d="M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');
             color: var(--text-color);
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
@@ -99,14 +100,29 @@
             text-align: center;
             position: relative;
         }
+        .category-title::before, .category-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            height: 2px;
+            width: 60px;
+            background: var(--accent-color);
+        }
+        .category-title::before {
+            left: 50%;
+            transform: translateX(calc(-50% - 40px));
+        }
         .category-title::after {
-            content: '⚜'; /* Fleur-de-lis for a royal touch */
+            right: 50%;
+            transform: translateX(calc(50% + 40px));
+        }
+        .category-title span {
+            display: inline-block;
+            margin: 0 20px;
             font-size: 0.6em;
             color: var(--accent-color);
-            position: absolute;
-            bottom: -15px;
-            left: 50%;
-            transform: translateX(-50%);
+            position: relative;
+            bottom: 5px;
         }
         
         /* Product Grid Layout */
@@ -130,7 +146,7 @@
         }
         .product-item:hover {
             transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+            box-shadow: 0 20px 40px rgba(46, 125, 50, 0.15);
         }
         .product-image-container {
             background-color: white;
@@ -148,7 +164,7 @@
             display: flex;
             flex-direction: column;
             flex-grow: 1;
-            background-color: #fafafa;
+            background-color: var(--bg-alt);
         }
         .product-details h4 {
             margin: 0 0 10px 0;
@@ -159,13 +175,9 @@
         }
         .product-details .details {
             font-size: 0.9em;
-            font-weight: 700;
-            color: var(--text-color);
+            font-style: italic;
+            color: #555;
             margin: 0 auto 15px auto;
-            background-color: transparent;
-            border: 1px solid var(--accent-color);
-            padding: 4px 12px;
-            border-radius: 20px;
             display: inline-block;
         }
         .product-details .description {
@@ -214,6 +226,7 @@
         .variant-list li {
             padding-left: 18px;
             position: relative;
+            page-break-inside: avoid;
         }
         .variant-list li::before {
             content: '✧';
@@ -236,7 +249,7 @@
         }
         .contact-info {
             border-top: 4px solid var(--primary-color);
-            background-color: var(--secondary-color);
+            background-color: #fdfaf5; /* Warmer than bg-alt */
         }
         .brands-list {
             display: flex;
@@ -286,7 +299,7 @@
 
         <!-- Category: Savory Snacks -->
         <section class="category">
-            <h2 class="category-title">Savory Snacks</h2>
+            <h2 class="category-title"><span>⚜</span>Savory Snacks<span>⚜</span></h2>
             <div class="product-grid">
                 <div class="product-item"><div class="product-image-container"><img src="jeera-pakwaan.jpg" alt="Jeera Dal Pakwan"></div><div class="product-details"><h4>Jeera Dal Pakwan</h4><p class="details">250 gms</p><p class="description">Crispy, traditional snack with an aromatic cumin flavor.</p></div></div>
                 <div class="product-item"><div class="product-image-container"><img src="onion-pakwaan.jpg" alt="Onion Dal Pakwan"></div><div class="product-details"><h4>Onion Dal Pakwan</h4><p class="details">250 gms</p><p class="description">A savory and crunchy delight with a classic onion taste.</p></div></div>
@@ -302,7 +315,7 @@
 
         <!-- Category: Pantry Essentials -->
         <section class="category">
-            <h2 class="category-title">Pantry Essentials</h2>
+            <h2 class="category-title"><span>⚜</span>Pantry Essentials<span>⚜</span></h2>
             <div class="product-grid">
                 <div class="product-item"><div class="product-image-container"><img src="regular-soyabox.PNG" alt="Soya Chunks"></div><div class="product-details"><h4>Soya Chunks</h4><p class="details">200 gm Box / 40 gm Pouch</p><p class="description">A nutritious protein alternative for curries and stir-fries.</p></div></div>
                 <div class="product-item"><div class="product-image-container"><img src="granules-soyabox.PNG" alt="Soya Granules"></div><div class="product-details"><h4>Soya Granules</h4><p class="details">200 gm Box</p><p class="description">Finely ground chunks, ideal for a rich, meaty texture.</p></div></div>
@@ -317,7 +330,7 @@
 
         <!-- Category: Ready to Cook & Tofu -->
         <section class="category">
-            <h2 class="category-title">Ready to Cook & Tofu</h2>
+            <h2 class="category-title"><span>⚜</span>Ready to Cook & Tofu<span>⚜</span></h2>
             <div class="product-grid">
                 <div class="product-item"><div class="product-image-container"><img src="samosa-patti.PNG" alt="Samosa Patti"></div><div class="product-details"><h4>Samosa Patti</h4><p class="details">500gm / 250 gm</p><p class="description">Thin, crispy sheets ready to be filled for perfect samosas.</p></div></div>
                 <div class="product-item"><div class="product-image-container"><img src="crispy-thread.PNG" alt="Crispy Thread"></div><div class="product-details"><h4>Crispy Thread</h4><p class="details">500gm</p><p class="description">Crunchy threads for a unique texture in snacks.</p></div></div>
@@ -330,7 +343,7 @@
 
         <!-- Category: Pickles & Desserts -->
         <section class="category">
-            <h2 class="category-title">Pickles, Desserts & Treats</h2>
+            <h2 class="category-title"><span>⚜</span>Pickles, Desserts & Treats<span>⚜</span></h2>
             <div class="product-grid">
                 <div class="product-item"><div class="product-image-container"><img src="home_made-pickle.PNG" alt="Special Homemade Pickle"></div><div class="product-details"><h4>Homemade Pickle</h4><p class="details">250gm</p><p class="description">Traditional recipe with a mix of select spices.</p><div class="variant-list-container"><h4>Available Varieties:</h4><ul class="variant-list"><li>Amla Murabba</li><li>Amla</li><li>Bijora</li><li>Dryfruit Mix</li><li>Garlic Bijora</li><li>Garlic</li><li>Green Chilli</li><li>Hot Lemon</li><li>Keri Chana Methi</li><li>Keri Gunda</li><li>Keri Chunda</li><li>Kharek</li><li>Lemon Chutney</li><li>Mango</li><li>Masala Ker</li><li>Methiya Mango</li><li>Mix</li><li>Rayta Ker</li><li>Red Stuff Chilly</li><li>Sweet Lemon</li><li>Sweet Mango</li><li>Sweet Red Chilly</li><li>Tikha Gunda</li></ul></div></div></div>
                 <div class="product-item"><div class="product-image-container"><img src="silver-pickle.PNG" alt="Silver Pickle"></div><div class="product-details"><h4>Silver Pickle</h4><p class="details">40gm</p><p class="description">A convenient pack for a tangy treat on the go.</p><div class="variant-list-container"><h4>Available Varieties:</h4><ul class="variant-list single-column"><li>Green Chilli</li><li>Hot Lemon</li><li>Mango</li><li>Mixed</li></ul></div></div></div>
@@ -341,7 +354,7 @@
 
         <!-- Category: Chocolates & Beverages -->
         <section class="category">
-            <h2 class="category-title">Chocolates & Beverages</h2>
+            <h2 class="category-title"><span>⚜</span>Chocolates & Beverages<span>⚜</span></h2>
             <div class="product-grid">
                 <div class="product-item"><div class="product-image-container"><img src="choco-lush.PNG" alt="Choco Lush & Gracia"></div><div class="product-details"><h4>Choco Lush & Gracia</h4><p class="details">770gm / 250gm / 200gm</p><p class="description">A delightful mix of assorted chocolates for every taste bud.</p><div class="variant-list-container"><h4>Available Varieties:</h4><ul class="variant-list single-column"><li>Assorted</li><li>Hazelnut</li><li>Milk</li><li>Orange</li><li>Pista</li><li>Strawberry</li><li>Gracia</li></ul></div></div></div>
                 <div class="product-item"><div class="product-image-container"><img src="umbrella-drinks.PNG" alt="Umbrella Drinks"></div><div class="product-details"><h4>Umbrella Drinks</h4><p class="details">750 ml</p><p class="description">Refreshing, fruit-flavored beverages for parties.</p><div class="variant-list-container"><h4>Available Flavors:</h4><ul class="variant-list three-columns"><li>Classic Jeera Masala Soda</li><li>Masala Kala Khatta</li><li>Tangy Orange</li><li>Lemon & Lime</li><li>Sp. Blue Curacao</li><li>Blue Lagoon</li><li>Shahi Rose</li><li>Rose Petals</li><li>Gulab Gulkand</li><li>Instant Rose Falooda</li><li>Instant Butter Scotch Falooda</li><li>Instant Kulfi Falooda</li><li>Instant Kesar D/F Falooda</li><li>Instant Ice Cream Falooda</li><li>Sp. American Icecream</li><li>Sp. Butterscotch</li><li>Sp. Kesar Elaichi</li><li>Instant Royal Coffee</li><li>Sp. Pan Pasand</li><li>Sp. Lemon Pudina</li><li>Alphonso Mango</li><li>Sp. Pink Guava</li><li>Crush Litchi</li><li>Crush Pineapple</li><li>Crush Strawberry</li><li>Mocktail N More</li><li>Aam Panna</li><li>Varialy Elachi</li><li>Real Variyali</li><li>Mojito</li><li>Sp. Ginger Lemon</li><li>Saffron</li><li>Anjeer Kesar</li><li>Masala Sikanji</li><li>Kokam Sharbat</li><li>Masala Kachha Keri</li><li>Real Choco</li><li>Blueberry Fruit Squash</li><li>Bubblegum Syrup</li><li>Chilli Guava Fruit Squash</li><li>Fruit Nuts Syrup</li><li>Pulpy Orange Fruit Squash</li><li>Rabadi Syrup</li><li>Real Date Syrup</li><li>Kesar D/F Thandai Squash</li><li>Kesar D/F Thandai (200ml)</li><li>Khus Syrup</li></ul></div></div></div>
@@ -350,7 +363,7 @@
 
         <!-- Footer Section: Brands -->
         <footer class="footer-section brands-section">
-            <h2 class="category-title">Brands We Market</h2>
+            <h2 class="category-title"><span>⚜</span>Brands We Market<span>⚜</span></h2>
             <ul class="brands-list">
                 <li>Serial Enterprise Foods Pvt. Ltd.</li>
                 <li>Harnik General Foods Pvt. Ltd.</li>
@@ -365,7 +378,7 @@
         
         <!-- Footer Section: Contact -->
         <footer class="footer-section contact-info">
-            <h2 class="category-title">Contact Us</h2>
+            <h2 class="category-title"><span>⚜</span>Contact Us<span>⚜</span></h2>
             <p><strong>Sanjay Savla:</strong> +91 77158 44176</p>
             <p><strong>Manish Savla:</strong> +91 88504 01035</p>
             <p><strong>Email:</strong> serial.enterfoods@gmail.com</p>

@@ -1,1290 +1,2572 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Serial Enterprise Foods is a leading wholesale distributor of high-quality, 100% vegetarian packed food products in India, including soya chunks, pickles, pastes, and snacks." />
-    <title>Serial Enterprise Foods Private Limited</title>
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-    <style>
-        /* ========================================
-         * FINAL STYLESHEET
-         * ======================================== */
-        :root {
-            --primary-color: #2E7D32; /* Deep Forest Green */
-            --secondary-color: #fdfaf5; /* Earthy Beige/Off-white */
-            --accent-color: #FFC107; /* Warm Gold */
-            --text-color: #333333; /* Dark Charcoal */
-            --bg-light: #FBF9F6; /* Light Background */
-            --bg-soft: #FFFFFF;
-            --highlight-color: #D32F2F;
-            --font-heading: 'Playfair Display', serif;
-            --font-body: 'Lato', sans-serif;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Serial Enterprise Foods Pvt. Ltd.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Syne:wght@400;500;600;700&family=Crimson+Pro:ital,wght@0,300;0,400;1,300&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <style>
+    :root {
+      --bg: #f4f1ea;
+      --text: #1a1a1a;
+      --orange: #e8660a;
+      --black: #000;
+      --white: #fff;
+      --muted: #666;
+      --border: rgba(0, 0, 0, 0.1);
 
-        * { box-sizing: border-box; scroll-behavior: smooth; }
-        body { margin: 0; font-family: var(--font-body); background-color: var(--bg-light); color: var(--text-color); }
-        .container { max-width: 1200px; margin: auto; padding: 0 15px; }
-        
-        /* Preloader Animation */
-        .preloader {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: var(--bg-light);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 10000;
-            transition: opacity 0.75s ease, visibility 0.75s ease;
-        }
-        .preloader-hidden {
-            opacity: 0;
-            visibility: hidden;
-        }
-        .preloader img {
-            width: 150px;
-            height: 150px;
-            animation: pulse 2s infinite ease-in-out;
-        }
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
-        }
+      --ff-d: 'Bebas Neue', sans-serif;
+      --ff-b: 'Syne', sans-serif;
+      --ff-s: 'Instrument Serif', serif;
+    }
 
-        /* Header */
-        header { background-color: var(--bg-light); padding: 120px 20px 60px; display: flex; align-items: center; justify-content: center; animation: fadeIn 1s ease-out; }
-        .header-content { display: flex; flex-direction: row; align-items: center; justify-content: center; padding: 30px 60px; border: 2px solid var(--primary-color); border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); background-color: var(--secondary-color); gap: 40px; max-width: 800px; animation: scaleUpAndFadeIn 1s ease-out; transition: transform 0.3s ease, box-shadow 0.3s ease; }
-        .header-content:hover { transform: scale(1.05); box-shadow: 0 15px 40px rgba(0,0,0,0.15); }
-        header .header-content img { width: 150px; height: 150px; border-radius: 15px; border: 4px solid var(--text-color); box-shadow: 0 4px 10px rgba(0,0,0,0.15); animation: slideInLeft 1s ease-out 0.5s backwards; }
-        .company-details-box { text-align: left; animation: slideInRight 1s ease-out 0.5s backwards; }
-        .company-details-box h1 { font-family: var(--font-heading); font-size: 2.8em; margin: 0; font-weight: 700; color: var(--primary-color); }
-        .company-details-box .tagline { font-size: 1.3em; margin-top: 10px; font-style: italic; color: var(--text-color); font-weight: 400; opacity: 0.8; }
-        
-        /* Navigation */
-        nav { position: fixed; top: 0; left: 0; right: 0; display: flex; justify-content: space-between; align-items: center; padding: 10px 20px; background-color: rgba(255, 255, 255, 0.8); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid rgba(0,0,0,0.05); z-index: 2000; }
-        .nav-left { display: flex; align-items: center; gap: 15px; }
-        .nav-brand { display: flex; align-items: center; gap: 15px; cursor: pointer; }
-        .nav-brand img { width: 48px; height: 48px; border-radius: 8px; border: 2px solid var(--primary-color); transition: transform 0.3s ease; }
-        .nav-brand img:hover { transform: scale(1.1) rotate(5deg); }
-        .nav-brand .company-name { font-size: 1.2em; font-weight: 600; color: var(--text-color); }
-        
-        /* General Section & Headings */
-        section { padding: 60px 0; margin-bottom: 20px; }
-        h2 { text-align: center; font-family: var(--font-heading); font-size: 2.8em; color: var(--primary-color); margin-bottom: 40px; position: relative; font-weight: 700; }
-        h2::after { content: ''; width: 80px; height: 3px; background: var(--accent-color); position: absolute; left: 50%; transform: translateX(-50%); bottom: -15px; border-radius: 5px; }
-        h3 { font-family: var(--font-heading); }
+    body.dark-mode {
+      --bg: #121212;
+      --text: #e0e0e0;
+      --black: #fff;
+      /* Invert black/white for mainly text/borders */
+      --white: #1e1e1e;
+      /* Cards become dark grey */
+      --muted: #aaa;
+      --border: rgba(255, 255, 255, 0.1);
+    }
 
-        /* Welcome Section */
-        .welcome-content { background-color: var(--bg-soft); padding: 40px; border-radius: 15px; box-shadow: 0 8px 25px rgba(0,0,0,0.05); text-align: center; transition: transform 0.3s ease, box-shadow 0.3s ease; }
-        .welcome-content:hover { transform: scale(1.05); box-shadow: 0 15px 30px rgba(0,0,0,0.12); }
-        .welcome-content p { max-width: 800px; margin: 30px auto 0; font-size: 1.2em; line-height: 1.8; }
+    /* Specific overrides for Dark Mode */
+    body.dark-mode .pcard-img {
+      background: #252525;
+    }
 
-        /* Product Section */
-        #gallery h2 { margin-bottom: 60px; }
-        .product-category { 
-            background-color: var(--bg-soft);
-            padding: 30px; 
-            margin-bottom: 40px; 
-            scroll-margin-top: 80px;
-            border-radius: 15px;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.05);
-            border: 2px solid var(--primary-color);
-        }
-        
-        .product-category > h3 {
-            font-size: 2em;
-            text-align: center;
-            color: var(--primary-color);
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-top: 0;
-            margin-bottom: 40px;
-            padding: 10px 0;
-            font-weight: 600;
-        }
-        .product-category > h3::before,
-        .product-category > h3::after {
-            content: '';
-            flex-grow: 1;
-            height: 2px;
-            background: var(--accent-color);
-            margin: 0 20px;
-            opacity: 0.6;
-        }
-        .product-category > h3.highlight { color: var(--highlight-color); }
-        .product-category > h3.highlight::before,
-        .product-category > h3.highlight::after {
-            background: var(--highlight-color);
-        }
+    body.dark-mode .pcard:hover .pcard-img {
+      background: #2a2a2a;
+    }
 
-        .gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; }
-        .gallery-item { position: relative; background-color: var(--bg-light); border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); transition: transform 0.3s ease, box-shadow 0.3s ease; text-align: center; padding: 20px; display: flex; flex-direction: column; border: 1px solid rgba(0,0,0,0.05); cursor: pointer; }
-        .gallery-item:hover { transform: translateY(-5px); box-shadow: 0 12px 25px rgba(0,0,0,0.1); }
-        
-        .gallery-item img {
-            width: 100%;
-            height: 200px;
-            object-fit: contain;
-            border-radius: 6px;
-            margin-bottom: 15px;
-            border: 1px solid #e0e0e0;
-            background-color: #ffffff;
-            padding: 8px;
-            box-sizing: border-box;
-        }
+    body.dark-mode .reel-item {
+      border-color: var(--black);
+    }
 
-        .product-info { display: flex; flex-direction: column; text-align: center; flex-grow: 1; }
-        .product-weight-box, .product-description-box { display: none; }
-        .product-name-box { background-color: transparent; border: none; padding: 10px; margin: 5px 0; width: 100%; }
-        
-        .gallery.single-item {
-            display: flex;
-            justify-content: center;
-        }
-        .gallery.single-item > .gallery-item {
-            max-width: 300px;
-            width: 100%;
-        }
+    body.dark-mode nav {
+      background: rgba(18, 18, 18, 0.95);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
 
-        /* About & Partners */
-        #about { background-color: var(--secondary-color); }
-        .about-content { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; max-width: 900px; margin: auto; align-items: center; }
-        .about-box { background-color: var(--bg-soft); padding: 30px; border-radius: 10px; box-shadow: 0 8px 25px rgba(0,0,0,0.05); transition: transform 0.3s ease, box-shadow 0.3s ease; }
-        .about-box:hover { transform: scale(1.05); box-shadow: 0 15px 30px rgba(0,0,0,0.12); }
-        .about-box h3 { color: var(--primary-color); font-size: 1.8em; margin-top: 0; }
-        .about-box p { font-size: 1.05em; line-height: 1.8; text-align: left; }
-        #partners { background-color: var(--bg-light); }
-        .partners-list { max-width: 900px; margin: auto; display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; }
-        .partner-box { text-align: center; padding: 20px 25px; background-color: var(--bg-soft); border: 1px solid rgba(0,0,0,0.08); border-radius: 50px; font-size: 1em; font-weight: 600; color: var(--primary-color); transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s, color 0.3s; }
-        .partner-box:hover { background-color: var(--primary-color); color: white; transform: scale(1.05); box-shadow: 0 15px 30px rgba(0,0,0,0.12); }
-        
-        /* Testimonials */
-        .testimonial-carousel { position: relative; overflow: hidden; max-width: 800px; margin: 0 auto; border-radius: 15px; background-color: var(--bg-soft); padding: 40px; border: 1px solid rgba(0,0,0,0.05); min-height: 250px; }
-        .testimonial-wrapper { display: flex; transition: transform 0.6s ease-in-out; }
-        .testimonial-card { flex-shrink: 0; width: 100%; padding: 20px 40px; text-align: center; }
-        .testimonial-card p { font-style: italic; font-size: 1.3em; line-height: 1.7; position: relative; padding: 0 20px; margin-bottom: 20px; }
-        .testimonial-card p::before { content: '“'; font-family: var(--font-heading); font-size: 4em; color: var(--primary-color); opacity: 0.2; position: absolute; top: -20px; left: -10px; }
-        .testimonial-card .client-name { font-weight: 700; font-size: 1.1em; color: var(--primary-color); }
-        .carousel-dots { text-align: center; margin-top: 20px; }
-        .dot { height: 12px; width: 12px; margin: 0 6px; background-color: #bbb; border-radius: 50%; display: inline-block; transition: background-color 0.6s ease, transform 0.3s; cursor: pointer; }
-        .dot.active { background-color: var(--primary-color); transform: scale(1.2); }
-        
-        /* Contact & CTA */
-        #contact { background-color: var(--secondary-color); padding-bottom: 0; }
-        .contact-content { display: grid; grid-template-columns: 1fr 1.5fr; gap: 40px; background-color: var(--bg-soft); padding: 40px; border-radius: 15px; box-shadow: 0 10px 40px rgba(0,0,0,0.08); }
-        .contact-info-item { display: flex; gap: 15px; align-items: flex-start; margin-bottom: 15px; }
-        .contact-info-item i { font-size: 1.2em; color: var(--primary-color); width: 25px; text-align: center; margin-top: 4px; }
-        .contact-form-container form { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-        .contact-form-container .full-width { grid-column: 1 / -1; }
-        .contact-form-container input, .contact-form-container textarea, .contact-form-container select { width: 100%; border: 1px solid #ddd; border-radius: 8px; transition: border-color 0.3s, box-shadow 0.3s; background-color: var(--bg-light); padding: 12px; font-family: var(--font-body); font-size: 1em; color: var(--text-color); }
-        .contact-form-container input:focus, .contact-form-container textarea:focus, .contact-form-container select:focus { outline: none; border-color: var(--primary-color); box-shadow: 0 0 0 3px rgba(46, 125, 50, 0.2); }
-        .contact-form-container button, .cta-btn { background-color: var(--primary-color); color: white; border: none; padding: 15px 25px; border-radius: 50px; font-size: 1.1em; font-weight: 700; cursor: pointer; transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s; }
-        .contact-form-container button:hover, .cta-btn:hover { background-color: #1B5E20; transform: translateY(-3px); box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
-        .cta-box { text-align: center; background: var(--primary-color); color: white; padding: 50px 40px; border-radius: 20px; margin-top: 50px; transition: transform 0.3s ease, box-shadow 0.3s ease; }
-        .cta-box:hover { transform: scale(1.05); box-shadow: 0 15px 30px rgba(0,0,0,0.12); }
-        .cta-box h3 { font-family: var(--font-heading); color: white; font-size: 2.5em; margin-top: 0; margin-bottom: 15px; }
-        .cta-box p { margin-top: 0; margin-bottom: 30px; font-size: 1.1em; opacity: 0.9; }
-        .primary-btn { background-color: var(--accent-color); color: var(--text-color); border: none; }
-        .primary-btn:hover { background-color: #FFB300; }
-        .secondary-btn { background-color: transparent; color: white; border: 2px solid var(--accent-color); }
-        .secondary-btn:hover { background-color: var(--accent-color); color: var(--text-color); }
-        
-        .contact-action-link {
-            font-size: 0.9em;
-            font-weight: 700;
-            color: var(--primary-color);
-            text-decoration: none;
-            background-color: rgba(46, 125, 50, 0.1);
-            padding: 2px 8px;
-            border-radius: 10px;
-            transition: background-color 0.3s, color 0.3s;
-            display: inline-block;
-            margin-top: 5px;
-        }
-        .contact-action-link:hover {
-            background-color: var(--primary-color);
-            color: white;
-        }
+    body.dark-mode #partners,
+    body.dark-mode .con-l,
+    body.dark-mode .con-r {
+      background: #1a1a1a;
+      /* Dark background for contact/partners sections */
+      border-color: rgba(255, 255, 255, 0.05);
+    }
 
-        /* Sidebar & Controls */
-        #navSearchInput, #navCategorySelect, #nav-lang-select { 
-            border: 1px solid var(--primary-color); 
-            border-radius: 20px; 
-            background-color: var(--bg-soft); 
-            color: var(--text-color); 
-            transition: all 0.3s; 
-            padding: 8px 12px; 
-        }
-        #navSearchInput:focus, #navCategorySelect:focus, #nav-lang-select:focus { 
-            outline: none; 
-            border-color: var(--accent-color); 
-            box-shadow: 0 0 0 3px rgba(255, 193, 7, 0.3); 
-        }
-        .hamburger-menu { cursor: pointer; width: 30px; height: 25px; display: flex; flex-direction: column; justify-content: space-between; opacity: 0.8; transition: opacity 0.3s; }
-        .hamburger-menu:hover { opacity: 1; }
-        .hamburger-menu span { display: block; height: 3px; background-color: var(--text-color); border-radius: 3px; transition: transform 0.3s, opacity 0.3s; }
-        .hamburger-menu.open span { background-color: white; }
-        .hamburger-menu.open span:nth-child(1) { transform: translateY(11px) rotate(45deg); }
-        .hamburger-menu.open span:nth-child(2) { opacity: 0; }
-        .hamburger-menu.open span:nth-child(3) { transform: translateY(-11px) rotate(-45deg); }
-        .sidebar { height: 100%; width: 0; position: fixed; z-index: 3000; top: 0; left: 0; backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px); overflow-x: hidden; transition: 0.5s; padding-top: 60px; display: flex; flex-direction: column; justify-content: flex-start; align-items: center; background-color: rgba(46, 125, 50, 0.85); color: white; box-shadow: 2px 0 8px rgba(0,0,0,0.4); }
-        .sidebar a { color: white; font-size: 1.2em; padding: 10px 25px; margin: 5px 0; width: 90%; border-radius: 8px; transition: background-color 0.3s, transform 0.3s; text-decoration: none; display: flex; align-items: center; gap: 15px; }
-        .sidebar a:hover { background-color: rgba(255, 255, 255, 0.1); transform: translateX(5px); }
-        .sidebar a i { width: 20px; text-align: center; }
-        .sidebar-header { color: white; font-size: 1.5em; margin-bottom: 20px; font-family: var(--font-heading); }
-        .sidebar .close-btn { position: absolute; top: 20px; right: 25px; font-size: 36px; color: white; cursor: pointer; }
-        .sidebar-controls { width: 90%; display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px; padding-bottom: 20px; border-bottom: 1px solid rgba(255,255,255,0.2); }
-        .sidebar-controls select, .sidebar-controls input { width: 100%; padding: 10px; border-radius: 8px; border: 1px solid var(--primary-color); background-color: var(--bg-soft); color: var(--text-color); font-size: 1em; }
-        .main-content-blurred { filter: blur(5px); pointer-events: none; user-select: none; }
-        .nav-controls { display: flex; justify-content: flex-end; align-items: center; gap: 15px; }
-        .fixed-enquiry-btn { position: fixed; bottom: 20px; right: 20px; background-color: var(--primary-color); color: white; padding: 12px 25px; border-radius: 50px; text-decoration: none; font-weight: 600; box-shadow: 0 4px 20px rgba(0,0,0,0.2); transition: transform 0.3s ease, background-color 0.3s; z-index: 1000; display: flex; align-items: center; gap: 10px; animation: pulse 2s infinite; }
-        .fixed-enquiry-btn:hover { background-color: #1B5E20; transform: translateY(-3px); }
-        @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(46, 125, 50, 0.4); } 70% { box-shadow: 0 0 0 15px rgba(46, 125, 50, 0); } 100% { box-shadow: 0 0 0 0 rgba(46, 125, 50, 0); } }
-        
-        /* Modal */
-        .modal { display: none; position: fixed; z-index: 4000; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.6); justify-content: center; align-items: center; }
-        .modal.visible { display: flex; }
-        .modal-content { position: relative; background-color: var(--bg-soft); margin: auto; padding: 30px; border: none; width: 80%; max-width: 600px; border-radius: 15px; box-shadow: 0 5px 25px rgba(0,0,0,0.3); animation: animateModal 0.5s; display: flex; flex-direction: column; align-items: center; gap: 15px; }
-        @keyframes animateModal { from { transform: scale(0.7); opacity: 0; } to { transform: scale(1); opacity: 1; } }
-        .modal-content .close-btn { color: var(--text-color); position: absolute; top: 10px; right: 20px; font-size: 28px; font-weight: bold; cursor: pointer; }
-        .modal-content img { width: 100%; max-height: 250px; object-fit: contain; }
-        .modal-product-info { width: 100%; text-align: center; }
-        .modal-product-info h3 { font-size: 2em; color: var(--primary-color); margin-bottom: 5px; font-family: var(--font-heading); }
-        .whatsapp-btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; background-color: #25D366; color: white; padding: 12px 25px; border-radius: 50px; text-decoration: none; font-weight: 600; transition: transform 0.3s ease, background-color 0.3s; margin-top: 15px; }
-        .whatsapp-btn:hover { background-color: #128C7E; transform: translateY(-2px); }
-        
-        /* Mobile Search Bar */
-        .mobile-search-container {
-            display: none;
-            padding: 10px 15px;
-            background-color: var(--bg-light);
-            position: fixed;
-            top: 68px;
-            left: 0;
-            right: 0;
-            z-index: 1999;
-            border-bottom: 1px solid #eee;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-        }
-        .search-wrapper { position: relative; }
-        .mobile-search-container input {
-            width: 100%;
-            padding: 10px 15px;
-            border-radius: 20px;
-            border: 1px solid var(--primary-color);
-            font-size: 1em;
-        }
-        .mobile-search-container input:focus {
-            outline: none; 
-            border-color: var(--accent-color); 
-            box-shadow: 0 0 0 3px rgba(255, 193, 7, 0.3); 
-        }
+    body.dark-mode .hero-r {
+      background: #1a1a1a;
+    }
 
-        /* Clear Search & Show All Button */
-        .clear-search-btn {
-            position: absolute;
-            right: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-            cursor: pointer;
-            color: #999;
-            font-weight: bold;
-            font-size: 1.2em;
-            display: none;
-        }
-        .show-all-btn {
-            background-color: var(--accent-color);
-            color: var(--text-color);
-            border: none;
-            padding: 8px 15px;
-            border-radius: 20px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: background-color 0.3s;
-            margin-left: 10px;
-        }
-        .show-all-btn:hover {
-            background-color: #FFB300;
-        }
+    body.dark-mode .part-item {
+      color: #444;
+    }
 
-        /* Media Queries */
-        @media (max-width: 992px) { .contact-content, .about-content { grid-template-columns: 1fr; } }
-        @media (max-width: 767px) { 
-            .header-content { flex-direction: column; padding: 20px; } 
-            .company-details-box { text-align: center; } 
-            .company-details-box h1 { font-size: 2.5em; } 
-            h2 { font-size: 2.2em; } 
-            .nav-controls, .nav-brand .company-name-container { display: none; } 
-            header .header-content img { width: 120px; height: 120px; }
-            .mobile-search-container { display: block; }
-            header { padding-top: 140px; } 
-            .contact-form-container form { grid-template-columns: 1fr; }
-        }
-        @media (max-width: 480px) { 
-            .company-details-box h1 { font-size: 1.8em; } 
-            .company-details-box .tagline { font-size: 1em; } 
-            .gallery { grid-template-columns: 1fr; } 
-            .partners-list { gap: 10px; } 
-            .partner-box { font-size: 0.9em; padding: 15px 20px; }
-            .cta-box .cta-btn {
-                display: block;
-                width: 80%;
-                margin: 10px auto;
-            }
-            .modal-extra-info ul {
-                columns: 1;
-                -webkit-columns: 1;
-                -moz-columns: 1;
-            }
-        }
+    body.dark-mode .part-item:hover {
+      color: var(--orange);
+    }
 
-        /* Utilities */
-        .goog-te-gadget, #google_translate_element { display: none; }
-        footer { text-align: center; padding: 20px; margin-top: 40px; background-color: var(--secondary-color); font-size: 0.9em; }
-        .form-status-message { position: fixed; bottom: 20px; right: 20px; background-color: var(--primary-color); color: white; padding: 20px 40px; border-radius: 10px; font-size: 1.2em; z-index: 9000; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); opacity: 0; visibility: hidden; transition: opacity 0.5s ease, visibility 0.5s ease; }
-        .form-status-message.show { opacity: 1; visibility: visible; }
-        #home { transition: opacity 0.5s ease, height 0.5s ease, padding 0.5s ease, margin 0.5s ease; }
-        @keyframes scaleUpAndFadeIn { 0% { transform: scale(0.8); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
-        @keyframes slideInLeft { 0% { transform: translateX(-50px); opacity: 0; } 100% { transform: translateX(0); opacity: 1; } }
-        @keyframes slideInRight { 0% { transform: translateX(50px); opacity: 0; } 100% { transform: translateX(0); opacity: 1; } }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-        /* Scroll Animation */
-        .animate-on-scroll {
-            opacity: 0;
-            transform: translateY(50px);
-            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-        }
+    html {
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+    }
 
-        .animate-on-scroll.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--ff-b);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      cursor: none;
+      /* Hide default cursor */
+      line-height: 1.6;
+    }
 
-        .product-detail {
-            font-size: 0.9em;
-            color: #666;
-            margin: 5px 0 15px 0;
-        }
+    /* UTILS */
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 40px;
+    }
 
-        .product-cta {
-            margin-top: auto;
-            background-color: var(--accent-color);
-            color: var(--text-color);
-            padding: 8px 15px;
-            border-radius: 20px;
-            font-weight: 700;
-            font-size: 0.9em;
-            transition: background-color 0.3s ease;
-        }
+    .section-pad {
+      padding: 100px 0;
+    }
 
-        .gallery-item:hover .product-cta {
-            background-color: #FFB300;
-        }
+    .char {
+      display: inline-block;
+      transition: color .1s ease, text-shadow .1s ease;
+    }
 
-        #modal-product-description {
-            border-top: 1px solid #eee;
-            padding-top: 15px;
-            margin-top: 10px;
-            line-height: 1.7;
-            color: #555;
-            text-align: left;
-            width: 100%;
-        }
+    .char.space {
+      display: inline;
+    }
 
-        .product-title {
-            font-family: var(--font-heading); font-weight: 600; font-size: 1.4em; color: var(--primary-color);
-            position: relative;
-            display: inline-block;
-            padding-bottom: 8px;
-        }
-        .product-title::after { content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 60%; height: 3px; background-color: var(--accent-color); border-radius: 3px; transition: width 0.3s ease-in-out; }
-        .gallery-item:hover .product-title::after { width: 90%; }
-        
-        .product-subheading {
-            text-align: center;
-            margin: 40px 0 20px;
-            font-family: var(--font-heading);
-            font-size: 1.5em;
-            font-weight: 600;
-            color: var(--primary-color);
-            position: relative;
-            padding-bottom: 10px;
-        }
-        .product-subheading::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 50px;
-            height: 2px;
-            background: var(--accent-color);
-        }
+    /* CUSTOM CURSOR */
+    .cursor-dot,
+    .cursor-circle {
+      position: fixed;
+      top: 0;
+      left: 0;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      z-index: 9999;
+    }
 
-        /* Recipe & Nutrition Styles in Modal */
-        .modal-extra-info {
-            width: 100%;
-            text-align: left;
-            margin-top: 20px;
-            border-top: 1px solid #eee;
-            padding-top: 20px;
-        }
-        .modal-extra-info h4 {
-            font-family: var(--font-heading);
-            color: var(--primary-color);
-            margin-top: 0;
-            margin-bottom: 10px;
-        }
-        .modal-extra-info ul {
-            list-style-type: none;
-            padding-left: 0;
-            margin-top: 10px;
-            columns: 2;
-            -webkit-columns: 2;
-            -moz-columns: 2;
-        }
-        .modal-extra-info li {
-            margin-bottom: 8px;
-            padding-left: 15px;
-            position: relative;
-        }
-        .modal-extra-info li::before {
-            content: '✓';
-            color: var(--primary-color);
-            position: absolute;
-            left: 0;
-            font-weight: bold;
-        }
-        .recipe-item {
-            margin-bottom: 20px;
-        }
-        .recipe-item h5 {
-            font-family: var(--font-heading);
-            margin: 0 0 5px 0;
-            color: var(--text-color);
-        }
-        .recipe-item p {
-            margin: 0;
-            font-size: 0.9em;
-        }
+    .cursor-dot {
+      width: 8px;
+      height: 8px;
+      background: var(--black);
+      border-radius: 50%;
+    }
 
-        .new-product-badge {
-            position: absolute;
-            top: 10px;
-            right: -5px;
-            background-color: var(--highlight-color);
-            color: white;
-            padding: 5px 12px;
-            font-size: 0.8em;
-            font-weight: 700;
-            border-radius: 3px;
-            transform: rotate(20deg);
-            z-index: 1;
-            box-shadow: 1px 1px 5px rgba(0,0,0,0.2);
-        }
-    </style>
+    .cursor-circle {
+      width: 40px;
+      height: 40px;
+      /* Explicit border as requested */
+      border: 1px solid var(--black);
+      border-radius: 50%;
+      transition: width 0.2s, height 0.2s, background-color 0.2s, transform 0.1s ease-out;
+      box-shadow: none;
+    }
+
+    /* Hover state for interactive elements */
+    body.hovering .cursor-circle {
+      width: 60px;
+      height: 60px;
+      background-color: rgba(232, 102, 10, 0.05);
+      border-color: var(--orange);
+    }
+
+    /* SCROLL REVEAL CLASS */
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* PRELOADER */
+    #preloader {
+      position: fixed;
+      inset: 0;
+      background: var(--bg);
+      z-index: 99999;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      transition: opacity .6s ease, visibility .6s ease;
+    }
+
+    #preloader.gone {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    /* NOISE OVERLAY */
+    .noise-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 9000;
+      opacity: 0.05;
+      background: url('data:image/svg+xml;utf8,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)" opacity="1"/%3E%3C/svg%3E');
+    }
+
+    .pre-big {
+      font-family: var(--ff-d);
+      font-size: clamp(3.5rem, 9vw, 8rem);
+      line-height: 0.9;
+      text-align: center;
+      color: var(--black);
+      margin-bottom: 20px;
+    }
+
+    .pre-row {
+      overflow: hidden;
+      display: block;
+    }
+
+    .pre-row span {
+      display: block;
+      transform: translateY(110%);
+      animation: textRise 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    .pre-row:nth-child(1) span {
+      animation-delay: 0.1s;
+    }
+
+    .pre-row:nth-child(2) span {
+      animation-delay: 0.2s;
+      color: var(--orange);
+    }
+
+    .pre-bar-w {
+      width: 200px;
+      height: 2px;
+      background: #ddd;
+      overflow: hidden;
+      margin-top: 20px;
+    }
+
+    .pre-bar {
+      height: 100%;
+      background: var(--orange);
+      animation: pbar 1.8s ease forwards;
+    }
+
+    @keyframes textRise {
+      to {
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes pbar {
+      from {
+        width: 0
+      }
+
+      to {
+        width: 100%
+      }
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 7000;
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+      height: 90px;
+      display: flex;
+      align-items: center;
+      transition: all .3s ease;
+    }
+
+    nav.scrolled {
+      background: rgba(255, 255, 255, 0.98);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    }
+
+    .nav-in {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      padding: 0 40px;
+    }
+
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: var(--black);
+      cursor: none;
+    }
+
+    .nav-brand img {
+      width: 50px;
+      height: 50px;
+      object-fit: contain;
+      /* Removed border for cleaner look */
+    }
+
+    .nav-brand-txt {
+      font-family: var(--ff-d);
+      line-height: 0.9;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .brand-main {
+      font-size: 1.6rem;
+      letter-spacing: .03em;
+      color: var(--black);
+    }
+
+    .brand-sub {
+      font-size: 0.65rem;
+      color: var(--orange);
+      letter-spacing: 0.05em;
+      font-weight: 700;
+      text-transform: uppercase;
+      margin-top: 4px;
+    }
+
+    .nav-mid {
+      display: flex;
+      gap: 32px;
+    }
+
+    .nav-mid a {
+      font-family: var(--ff-b);
+      font-size: .85rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--black);
+      letter-spacing: .05em;
+      transition: color .2s;
+      position: relative;
+      cursor: none;
+    }
+
+    .nav-mid a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--orange);
+      transition: width .3s;
+    }
+
+    .nav-mid a:hover::after {
+      width: 100%;
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .nav-cta {
+      background: var(--black);
+      color: var(--white);
+      padding: 12px 28px;
+      font-size: .8rem;
+      font-weight: 700;
+      letter-spacing: .05em;
+      text-decoration: none;
+      border-radius: 50px;
+      transition: all .3s ease;
+      border: 2px solid var(--black);
+      cursor: none;
+    }
+
+    .nav-cta:hover {
+      background: transparent;
+      color: var(--black);
+      transform: translateY(-2px);
+    }
+
+    .ham {
+      display: none;
+      flex-direction: column;
+      gap: 6px;
+      cursor: pointer;
+      padding: 10px;
+    }
+
+    .ham span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--black);
+      transition: all .3s;
+    }
+
+    .ham.open span:nth-child(1) {
+      transform: translateY(8px) rotate(45deg);
+    }
+
+    .ham.open span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .ham.open span:nth-child(3) {
+      transform: translateY(-8px) rotate(-45deg);
+    }
+
+    /* HERO */
+    #hero {
+      padding-top: 90px;
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+      overflow: hidden;
+    }
+
+    .hero-l {
+      padding: 60px 80px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      z-index: 10;
+    }
+
+    .hero-tag {
+      display: inline-block;
+      padding: 6px 12px;
+      background: rgba(232, 102, 10, 0.1);
+      color: var(--orange);
+      font-size: .7rem;
+      font-weight: 700;
+      letter-spacing: .1em;
+      border-radius: 4px;
+      margin-bottom: 24px;
+      align-self: flex-start;
+    }
+
+    .hero-h1 {
+      font-family: var(--ff-d);
+      font-size: clamp(4rem, 7vw, 7.5rem);
+      line-height: 0.9;
+      margin-bottom: 24px;
+      color: var(--black);
+      cursor: none;
+    }
+
+    .hero-h1 span {
+      color: var(--orange);
+    }
+
+    .hero-sub {
+      font-family: var(--ff-s);
+      font-size: 1.35rem;
+      line-height: 1.6;
+      color: var(--muted);
+      margin-bottom: 40px;
+      max-width: 480px;
+    }
+
+    .hero-btns {
+      display: flex;
+      gap: 16px;
+    }
+
+    .btn-p {
+      background: var(--orange);
+      color: var(--white);
+      padding: 16px 38px;
+      font-family: var(--ff-b);
+      font-size: .9rem;
+      font-weight: 700;
+      text-decoration: none;
+      border-radius: 4px;
+      transition: all .2s;
+      box-shadow: 0 10px 20px -5px rgba(232, 102, 10, 0.4);
+      border: 2px solid var(--orange);
+      cursor: none;
+    }
+
+    .btn-p:hover {
+      background: transparent;
+      color: var(--orange);
+      transform: translateY(-3px);
+      box-shadow: 0 15px 30px -5px rgba(232, 102, 10, 0.2);
+    }
+
+    .hero-r {
+      flex: 1;
+      height: 100%;
+      background: #eaddcf;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      /* Ensure reel doesn't spill over */
+    }
+
+    .hero-r::before {
+      content: '';
+      position: absolute;
+      width: 600px;
+      height: 600px;
+      background: rgba(232, 102, 10, 0.05);
+      border-radius: 50%;
+      filter: blur(80px);
+      animation: pulse 8s infinite alternate;
+    }
+
+    @keyframes pulse {
+      0% {
+        transform: scale(1);
+      }
+
+      100% {
+        transform: scale(1.1);
+      }
+    }
+
+    /* MOVIE REEL SLIDESHOW */
+    .reel-wrapper {
+      position: absolute;
+      width: 100%;
+      /* Fix alignment to container width */
+      height: 100%;
+      display: flex;
+      align-items: center;
+      transform: rotate(-3deg) scale(1.1);
+      /* Scale up slightly to cover corners if needed */
+      pointer-events: none;
+      /* Make non-interactable as requested */
+      user-select: none;
+    }
+
+    .reel-track {
+      display: flex;
+      gap: 0;
+      /* Joint flow */
+      /* Continuous scroll logic */
+      animation: reelScroll 15s linear infinite;
+      /* Faster speed */
+      will-change: transform;
+    }
+
+    .reel-track:hover {
+      /* No pause on hover for continuous flow feel? Or keep it? keeping it for usability */
+      animation-play-state: paused;
+    }
+
+    @keyframes reelScroll {
+      0% {
+        transform: translateX(0);
+      }
+
+      100% {
+        transform: translateX(-25%);
+      }
+    }
+
+    .reel-item {
+      position: relative;
+      width: 300px;
+      height: 420px;
+      flex-shrink: 0;
+      overflow: hidden;
+      /* The Slant + Black Border */
+      transform: skewX(-12deg);
+      border: 3px solid var(--black);
+      background: var(--black);
+      /* Gap fill */
+      /* Remove border connection duplication via negative margin if needed, or just let thick borders coexist */
+      margin-right: -3px;
+    }
+
+    /* Ensure last visual item connects */
+    .reel-item:last-child {
+      margin-right: 0;
+    }
+
+    .reel-item:hover {
+      transform: skewX(-12deg) scale(1.02);
+    }
+
+    .reel-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      /* Un-skew image so it looks normal inside slanted frame */
+      transform: skewX(12deg) scale(1.4);
+      filter: none;
+      /* Original color as requested */
+      transition: filter 0.3s;
+    }
+
+    .reel-item:hover .reel-img {
+      filter: grayscale(0%);
+    }
+
+    /* REMOVED TEXT OVERLAY AS REQUESTED */
+    .reel-info {
+      display: none;
+    }
+
+    /* ABOUT (Interactive Stats) */
+    #about {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+    }
+
+    .about-l {
+      padding: 100px 80px;
+      background: var(--white);
+    }
+
+    .sec-sub {
+      font-size: .75rem;
+      font-weight: 700;
+      color: var(--orange);
+      letter-spacing: .2em;
+      display: block;
+      margin-bottom: 16px;
+      text-transform: uppercase;
+    }
+
+    .sec-h2 {
+      font-family: var(--ff-d);
+      font-size: clamp(3rem, 5vw, 4.5rem);
+      line-height: 1;
+      margin-bottom: 24px;
+    }
+
+    .about-txt {
+      font-family: var(--ff-s);
+      font-size: 1.2rem;
+      line-height: 1.7;
+      color: var(--muted);
+      max-width: 550px;
+    }
+
+    .about-r {
+      padding: 100px 60px;
+      background: #f4f4f4;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 40px;
+    }
+
+    .stat-item {
+      position: relative;
+      padding-left: 20px;
+      border-left: 2px solid transparent;
+      transition: border-color 0.3s;
+    }
+
+    .stat-item:hover {
+      border-left-color: var(--orange);
+    }
+
+    .stat-item h3 {
+      font-family: var(--ff-d);
+      font-size: 3.5rem;
+      color: var(--black);
+      line-height: 1;
+      display: flex;
+      align-items: baseline;
+    }
+
+    .stat-item h3 span {
+      color: var(--orange);
+      font-size: 2rem;
+      margin-left: 5px;
+    }
+
+    .stat-item p {
+      font-size: 1rem;
+      color: var(--muted);
+      font-weight: 600;
+      letter-spacing: .05em;
+    }
+
+    /* PRODUCTS (Premium Minimalist) */
+    #products {
+      background: var(--bg);
+    }
+
+    .cat-filter {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      flex-wrap: wrap;
+      margin-bottom: 80px;
+      padding: 0 20px;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+      padding-bottom: 20px;
+    }
+
+    .chip {
+      padding: 10px 24px;
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      border-radius: 50px;
+      font-family: var(--ff-b);
+      font-size: 0.8rem;
+      font-weight: 600;
+      transition: all .3s ease;
+      background: transparent;
+      color: var(--muted);
+      letter-spacing: .05em;
+      text-transform: uppercase;
+    }
+
+    .chip:hover {
+      border-color: var(--black);
+      color: var(--black);
+      transform: translateY(-2px);
+    }
+
+    .chip.active {
+      background: var(--black);
+      color: var(--white);
+      border-color: var(--black);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      transform: translateY(-1px);
+    }
+
+    /* ACCORDION REFRESH (Minimal) */
+    .cblk {
+      border: none;
+      margin-bottom: 40px;
+    }
+
+    /* REMOVING OLD HEADER STYLES TO PREVENT CONFLICT */
+
+    .chdr-icon {
+      width: 40px;
+      height: 40px;
+      background: transparent;
+      color: var(--black);
+      border: 1px solid #ddd;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all .3s;
+      font-size: 0.9rem;
+    }
+
+    .chdr-icon:hover {
+      border-color: var(--orange);
+      color: var(--orange);
+    }
+
+    .chdr.open .chdr-icon {
+      transform: rotate(90deg);
+      background: var(--black);
+      color: var(--white);
+      border-color: var(--black);
+    }
+
+    .cbdy {
+      display: none;
+      padding: 20px 0;
+      animation: fadeIn .6s ease;
+    }
+
+    .cbdy.open {
+      display: block;
+    }
+
+    .pgrid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 60px 40px;
+      perspective: 1000px;
+    }
+
+    .pcard {
+      background: var(--white);
+      border-radius: 12px;
+      overflow: hidden;
+      transition: all .4s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+      border: 1px solid rgba(0, 0, 0, 0.04);
+      box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.05);
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      transform-style: preserve-3d;
+      will-change: transform;
+      /* Separate transitions to prevent tilt lag */
+      transition: box-shadow 0.4s ease, border-color 0.4s ease, transform 0.1s ease-out;
+      /* Entry Animation */
+      opacity: 0;
+      animation: cardEnter 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+    }
+
+    @keyframes cardEnter {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* 3D Glare Effect */
+    .pcard-glare {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.8), transparent 60%);
+      opacity: 0;
+      pointer-events: none;
+      z-index: 5;
+      mix-blend-mode: overlay;
+      transition: opacity 0.3s;
+    }
+
+    .pcard:hover .pcard-glare {
+      opacity: 1;
+    }
+
+    .pcard:hover {
+      box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.15);
+      border-color: rgba(232, 102, 10, 0.2);
+    }
+
+    .pcard-img {
+      height: 320px;
+      background: #fafafa;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      position: relative;
+      overflow: hidden;
+      margin-bottom: 0;
+      transition: background-color 0.3s;
+    }
+
+    /* Clean Background */
+    .pcard-img::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at center, rgba(0, 0, 0, 0.03) 0%, transparent 70%);
+      opacity: 0;
+      transition: opacity 0.5s;
+    }
+
+    .pcard:hover .pcard-img {
+      background: #f0f0f0;
+    }
+
+    .pcard:hover .pcard-img::before {
+      opacity: 1;
+    }
+
+    .pcard-img::after {
+      display: none;
+    }
+
+    .pcard-img img {
+      max-width: 90%;
+      max-height: 90%;
+      object-fit: contain;
+      transition: transform .6s cubic-bezier(0.16, 1, 0.3, 1);
+      z-index: 1;
+      filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.05));
+    }
+
+    .pcard:hover .pcard-img img {
+      transform: scale(1.1) translateY(-4px);
+    }
+
+    .pcard-info {
+      padding: 24px;
+      text-align: left;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      /* Changed from space-between */
+    }
+
+    .pcard-tag-pill {
+      display: inline-block;
+      font-size: 0.65rem;
+      font-weight: 700;
+      color: var(--black);
+      /* Light Mode: Orange -> Black */
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 8px;
+    }
+
+    .pcard-name {
+      font-family: var(--ff-b);
+      font-size: 1.4rem;
+      line-height: 1.2;
+      margin-bottom: 8px;
+      color: var(--orange);
+      /* Light Mode: Black -> Orange */
+      font-weight: 700;
+      letter-spacing: -0.01em;
+    }
+
+    .pcard {
+      background: var(--white);
+      border-radius: 12px;
+      overflow: hidden;
+      transition: all .4s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+      border: 1px solid rgba(0, 0, 0, 0.04);
+      box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.05);
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      transform-style: preserve-3d;
+      will-change: transform;
+      /* Separate transitions to prevent tilt lag */
+      transition: box-shadow 0.4s ease, border-color 0.4s ease, transform 0.1s ease-out;
+      /* Entry Animation */
+      opacity: 0;
+      animation: cardEnter 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+    }
+
+    /* Orange Shadow Request */
+    .pcard:hover {
+      box-shadow: 0 15px 40px rgba(232, 102, 10, 0.25);
+      /* Orange Shadow */
+      border-color: rgba(232, 102, 10, 0.4);
+    }
+
+    /* Dark Mode Overrides for Product Cards */
+    body.dark-mode .pcard-tag-pill {
+      color: var(--black);
+      /* Dark Mode: Tag becomes White (var--black is white in DM) */
+    }
+
+    body.dark-mode .pcard-name {
+      color: var(--orange);
+      /* Dark Mode: Name becomes Orange */
+    }
+
+    /* Dark Mode Shadow */
+    body.dark-mode .pcard:hover {
+      box-shadow: 0 15px 40px rgba(232, 102, 10, 0.15);
+    }
+
+    .pcard-wt {
+      font-size: .8rem;
+      color: var(--muted);
+      font-weight: 500;
+      margin-bottom: 0;
+      letter-spacing: 0.02em;
+      opacity: 0.7;
+    }
+
+    .pcard-link {
+      display: none;
+      /* Removing basic link */
+    }
+
+    .chdr {
+      padding: 20px 30px;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: all 0.3s;
+      background: var(--white);
+      border: 1px solid var(--border);
+      /* Boxed boundary */
+      margin-bottom: 20px;
+      /* Spacing */
+      position: relative;
+      overflow: hidden;
+    }
+
+    .chdr::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 4px;
+      height: 100%;
+      background: var(--orange);
+      transform: scaleY(0);
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      transform-origin: bottom;
+    }
+
+    .chdr:hover::before,
+    .chdr.open::before {
+      transform: scaleY(1);
+    }
+
+    .chdr:hover,
+    .chdr.open {
+      background: #f9f9f9;
+      /* Slight bg change */
+      border-color: var(--orange);
+      padding-left: 40px;
+      /* Slight shift */
+    }
+
+    body.dark-mode .chdr:hover,
+    body.dark-mode .chdr.open {
+      background: #1f1f1f;
+    }
+
+    .chdr-ttl {
+      font-family: var(--ff-b);
+      font-size: 1.8rem;
+      /* Slightly smaller to fit box */
+      color: var(--black);
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: -0.02em;
+      transition: color 0.3s;
+    }
+
+    .chdr:hover .chdr-ttl,
+    .chdr.open .chdr-ttl {
+      color: var(--orange);
+    }
+
+    /* PARTNERS (Static Grid) */
+    #partners {
+      padding: 80px 0;
+      text-align: center;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      background: var(--white);
+    }
+
+    .part-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 40px;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 40px;
+      align-items: center;
+      justify-items: center;
+      opacity: 0;
+      animation: fadeIn 1s forwards;
+      /* Simple fade in */
+    }
+
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+      }
+    }
+
+    .part-item {
+      font-family: var(--ff-b);
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--muted);
+      text-transform: uppercase;
+      transition: all 0.3s;
+      letter-spacing: 0.05em;
+      opacity: 0.7;
+      cursor: default;
+    }
+
+    .part-item:hover {
+      color: var(--orange);
+      opacity: 1;
+      transform: scale(1.1);
+      letter-spacing: 0.1em;
+    }
+
+    /* Stats Redesign */
+    .stat-card {
+      background: var(--white);
+      padding: 30px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      transition: transform 0.3s;
+    }
+
+    .stat-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--orange);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    }
+
+    .stat-card h3 {
+      font-family: var(--ff-b);
+      font-size: 3.5rem;
+      color: var(--orange);
+      /* Pop color */
+      line-height: 1;
+      margin-bottom: 10px;
+      font-weight: 800;
+    }
+
+    .stat-card p {
+      font-family: var(--ff-b);
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--black);
+      letter-spacing: 0.1em;
+    }
+
+    /* CONTACT (Clean) */
+    #contact {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      background: var(--white);
+    }
+
+    .con-l {
+      padding: 100px 80px;
+      background: #f4f4f4;
+    }
+
+    .c-item {
+      margin-bottom: 32px;
+    }
+
+    .c-lbl {
+      font-size: .7rem;
+      font-weight: 700;
+      color: var(--muted);
+      text-transform: uppercase;
+      margin-bottom: 8px;
+      display: block;
+    }
+
+    .c-val {
+      font-size: 1.2rem;
+      font-family: var(--ff-d);
+      letter-spacing: .05em;
+      color: var(--black);
+      display: block;
+      text-decoration: none;
+      transition: color .2s;
+    }
+
+    .c-val:hover {
+      color: var(--orange);
+    }
+
+    .con-r {
+      padding: 100px 80px;
+    }
+
+    .cform {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .finp {
+      width: 100%;
+      border: none;
+      border-bottom: 2px solid #ddd;
+      padding: 16px 0;
+      font-family: var(--ff-b);
+      font-size: 1rem;
+      background: transparent;
+      outline: none;
+      transition: border-color .3s;
+    }
+
+    .finp:focus {
+      border-color: var(--orange);
+    }
+
+    .cat-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      /* Remove gap, use border/padding */
+    }
+
+    .cat-btn {
+      text-align: left;
+      background: none;
+      border: none;
+      border-bottom: 1px solid var(--border);
+      padding: 18px 0;
+      font-family: var(--ff-b);
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--muted);
+      cursor: pointer;
+      transition: all 0.3s;
+      position: relative;
+    }
+
+    .cat-btn:hover,
+    .cat-btn.active {
+      color: var(--text);
+      padding-left: 10px;
+    }
+
+    .cat-btn::before {
+      content: '→';
+      position: absolute;
+      left: -20px;
+      opacity: 0;
+      transition: all 0.3s;
+      color: var(--orange);
+    }
+
+    .cat-btn:hover::before,
+    .cat-btn.active::before {
+      left: 0;
+      opacity: 1;
+    }
+
+    .cat-btn:first-child {
+      border-top: 1px solid var(--border);
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .catalogue-btn {
+      font-family: var(--ff-b);
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: var(--black);
+      text-decoration: none;
+      border-bottom: 2px solid var(--orange);
+      padding-bottom: 2px;
+      transition: all 0.3s;
+    }
+
+    .catalogue-btn:hover {
+      color: var(--orange);
+    }
+
+    .theme-toggle {
+      background: none;
+      border: 1px solid var(--border);
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: var(--text);
+      transition: all 0.3s;
+    }
+
+    .theme-toggle:hover {
+      background: var(--text);
+      color: var(--bg);
+    }
+
+    .fbtn {
+      background: var(--black);
+      color: var(--white);
+      border: none;
+      padding: 16px 40px;
+      font-family: var(--ff-b);
+      font-weight: 700;
+      font-size: .9rem;
+      align-self: flex-start;
+      border-radius: 4px;
+      margin-top: 20px;
+      transition: all .2s;
+    }
+
+    .fbtn:hover {
+      background: var(--orange);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 16px rgba(232, 102, 10, 0.3);
+    }
+
+    /* FOOTER */
+    footer {
+      background: var(--black);
+      color: var(--white);
+      padding: 80px 40px;
+      text-align: center;
+      font-size: .9rem;
+    }
+
+    .f-links {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      margin-bottom: 30px;
+    }
+
+    .f-links a {
+      color: #999;
+      text-decoration: none;
+      transition: color .2s;
+    }
+
+    .f-links a:hover {
+      color: var(--orange);
+    }
+
+    /* DRAWER */
+    .drawer {
+      position: fixed;
+      top: 0;
+      right: -100%;
+      width: 100%;
+      height: 100%;
+      background: var(--white);
+      z-index: 8000;
+      transition: right .4s cubic-bezier(0.16, 1, 0.3, 1);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 40px;
+    }
+
+    .drawer.open {
+      right: 0;
+    }
+
+    .d-close {
+      position: absolute;
+      top: 30px;
+      right: 30px;
+      font-size: 2rem;
+      cursor: pointer;
+      transition: transform .3s;
+    }
+
+    .d-close:hover {
+      transform: rotate(90deg) scale(1.1);
+      color: var(--orange);
+    }
+
+    .d-links a {
+      display: block;
+      font-family: var(--ff-d);
+      font-size: 3rem;
+      color: var(--black);
+      text-decoration: none;
+      margin-bottom: 20px;
+      transition: all .2s;
+      transform: translateX(20px);
+      opacity: 0;
+    }
+
+    .drawer.open .d-links a {
+      transform: translateX(0);
+      opacity: 1;
+      transition-delay: 0.2s;
+    }
+
+    .drawer.open .d-links a:nth-child(2) {
+      transition-delay: 0.3s;
+    }
+
+    .drawer.open .d-links a:nth-child(3) {
+      transition-delay: 0.4s;
+    }
+
+    .drawer.open .d-links a:nth-child(4) {
+      transition-delay: 0.5s;
+    }
+
+    .d-links a:hover {
+      color: var(--orange);
+      padding-left: 10px;
+    }
+
+    /* MODAL */
+    .modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.7);
+      z-index: 9000;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      backdrop-filter: blur(8px);
+    }
+
+    .modal.open {
+      display: flex;
+    }
+
+    .mbox {
+      background: var(--white);
+      width: 100%;
+      max-width: 500px;
+      border-radius: 12px;
+      overflow: hidden;
+      position: relative;
+      /* "Crazy" Transition */
+      animation: crazyPop .6s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+      box-shadow: 20px 20px 0 var(--black);
+      border: 3px solid var(--black);
+    }
+
+    @keyframes crazyPop {
+      0% {
+        transform: scale(0) rotate(-15deg);
+        opacity: 0;
+      }
+
+      60% {
+        transform: scale(1.1) rotate(5deg);
+        opacity: 1;
+      }
+
+      100% {
+        transform: scale(1) rotate(0deg);
+        opacity: 1;
+      }
+    }
+
+    .m-img-w {
+      background: #f4f4f4;
+      padding: 30px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .m-img-w img {
+      height: 180px;
+      object-fit: contain;
+    }
+
+    .m-body {
+      padding: 30px;
+    }
+
+    .m-name {
+      font-family: var(--ff-d);
+      font-size: 2rem;
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+
+    .m-wt {
+      font-size: .8rem;
+      color: var(--muted);
+      font-weight: 700;
+      margin-bottom: 16px;
+      display: block;
+    }
+
+    .m-desc {
+      font-size: .95rem;
+      line-height: 1.6;
+      margin-bottom: 24px;
+    }
+
+    /* Modal Extra Info */
+    .m-extra {
+      text-align: left;
+      margin-top: 20px;
+      border-top: 1px solid #eee;
+      padding-top: 20px;
+      width: 100%;
+    }
+
+    .m-extra h4 {
+      font-family: var(--ff-b);
+      color: var(--orange);
+      margin-top: 20px;
+      margin-bottom: 10px;
+      font-size: 1.1rem;
+    }
+
+    .m-extra ul {
+      list-style-type: none;
+      padding-left: 0;
+      margin-top: 10px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5px 15px;
+    }
+
+    .m-extra li {
+      margin-bottom: 5px;
+      padding-left: 15px;
+      position: relative;
+      font-size: 0.9rem;
+      color: #555;
+    }
+
+    .m-extra li::before {
+      content: '✓';
+      color: var(--orange);
+      position: absolute;
+      left: 0;
+      font-weight: bold;
+    }
+
+    .recipe-item {
+      margin-bottom: 15px;
+      background: #f9f9f9;
+      padding: 10px;
+      border-radius: 6px;
+    }
+
+    .recipe-item h5 {
+      font-family: var(--ff-b);
+      margin: 0 0 5px 0;
+      color: var(--black);
+      font-size: 1rem;
+    }
+
+    .recipe-item p {
+      margin: 0;
+      font-size: 0.9rem;
+      color: #666;
+    }
+
+    .m-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 24px;
+    }
+
+    .m-chip {
+      font-size: .7rem;
+      padding: 4px 10px;
+      background: #eee;
+      border-radius: 4px;
+      color: #555;
+    }
+
+    .m-wa {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      background: #25D366;
+      color: var(--white);
+      text-decoration: none;
+      padding: 14px;
+      border-radius: 8px;
+      font-weight: 700;
+      transition: transform .2s;
+      cursor: none;
+    }
+
+    .m-wa:hover {
+      transform: scale(1.02);
+      box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3);
+    }
+
+    .m-close {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      width: 32px;
+      height: 32px;
+      background: var(--white);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: none;
+      font-weight: bold;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      transition: transform .2s;
+    }
+
+    .m-close:hover {
+      transform: scale(1.1);
+      color: var(--red);
+    }
+
+    /* FLOATING BTN */
+    .float-btn {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      width: 60px;
+      height: 60px;
+      background: var(--orange);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--white);
+      font-size: 1.5rem;
+      box-shadow: 0 10px 25px rgba(232, 102, 10, 0.5);
+      z-index: 6000;
+      transition: transform .2s;
+      cursor: none;
+      text-decoration: none;
+      animation: float 3s ease-in-out infinite;
+    }
+
+    .float-btn:hover {
+      transform: scale(1.1);
+    }
+
+    @keyframes float {
+
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-6px);
+      }
+    }
+
+    /* Missing Keyframes for Card Entry */
+    @keyframes cardEnter {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* RESPONSIVE */
+    @media(max-width:1024px) {
+      #hero {
+        grid-template-columns: 1fr;
+        text-align: center;
+        padding-top: 100px;
+      }
+
+      .hero-l {
+        align-items: center;
+        padding: 60px 20px;
+      }
+
+      .hero-r {
+        display: none;
+      }
+
+      #about,
+      #contact {
+        grid-template-columns: 1fr;
+      }
+
+      .about-l,
+      .about-r,
+      .con-l,
+      .con-r {
+        padding: 60px 20px;
+      }
+
+      /* Restore default cursor on touch/mobile */
+      body,
+      a,
+      button,
+      .pcard,
+      .chip,
+      select,
+      input,
+      textarea {
+        cursor: auto;
+      }
+
+      .cursor-dot,
+      .cursor-circle {
+        display: none;
+      }
+    }
+
+    @media(max-width:768px) {
+
+      .nav-mid,
+      .nav-cta {
+        display: none;
+      }
+
+      .ham {
+        display: flex;
+      }
+
+      .nav-in {
+        padding: 0 20px;
+      }
+
+      .hero-h1 {
+        font-size: 4rem;
+      }
+
+      .pgrid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media(max-width:480px) {
+      .pgrid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* DROPDOWN MENU */
+    .nav-dropdown {
+      position: relative;
+      height: 100%;
+      display: flex;
+      align-items: center;
+    }
+
+    .nav-drop-btn {
+      font-family: var(--ff-b);
+      font-size: .85rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--black);
+      letter-spacing: .05em;
+      transition: color .2s;
+      cursor: none;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      height: 100%;
+    }
+
+    .nav-drop-btn:hover {
+      color: var(--orange);
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: var(--white);
+      min-width: 220px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      border-top: 3px solid var(--orange);
+      border-radius: 0 0 8px 8px;
+      z-index: 7001;
+      padding: 10px 0;
+      flex-direction: column;
+    }
+
+    .nav-dropdown:hover .dropdown-content {
+      display: flex;
+    }
+
+    .dropdown-content a {
+      padding: 16px 24px;
+      text-decoration: none;
+      color: var(--black);
+      font-family: var(--ff-s);
+      /* Premium Serif */
+      font-size: 1.1rem;
+      font-weight: 500;
+      transition: all 0.2s;
+      white-space: nowrap;
+      cursor: pointer;
+      display: block;
+      text-align: left;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+    .dropdown-content a:last-child {
+      border-bottom: none;
+    }
+
+    .dropdown-content a:hover {
+      background-color: rgba(232, 102, 10, 0.05);
+      color: var(--orange);
+      padding-left: 32px;
+    }
+
+    /* Mobile Dropdown Fix */
+    @media(max-width: 768px) {
+      .nav-dropdown:hover .dropdown-content {
+        display: none;
+        /* Hide on mobile, relying on drawer */
+      }
+    }
+  </style>
 </head>
+
 <body>
-    <div class="preloader">
-        <img src="logo.PNG" alt="Loading..." />
+
+  <!-- CUSTOM CURSOR REMOVED -->
+  <style>
+    /* Ensure default cursor everywhere */
+    * {
+      cursor: auto !important;
+    }
+
+    /* Restore pointer for interaction */
+    a,
+    button,
+    .chdr,
+    .pcard,
+    select,
+    input,
+    textarea,
+    .cat-btn {
+      cursor: pointer !important;
+    }
+  </style>
+
+  <div class="noise-overlay"></div>
+
+  <!-- PRELOADER -->
+  <div id="preloader">
+    <div class="pre-big">
+      <div class="pre-row"><span>SERIAL</span></div>
+      <div class="pre-row"><span>FOODS</span></div>
     </div>
-    <!-- MODAL -->
-    <div id="product-modal" class="modal">
-        <div class="modal-content">
-            <span id="modal-close-btn" class="close-btn">×</span>
-            <img id="modal-product-image" src="" alt="Product Image">
-            <div class="modal-product-info">
-                <h3 class="product-title notranslate" id="modal-product-title"></h3>
-                <div class="product-weight-box" id="modal-product-weight-box" style="display: block;">
-                    <p class="product-detail notranslate" id="modal-product-detail"></p>
-                </div>
-                <div class="product-description-box" id="modal-product-description-box" style="display: block;">
-                    <p id="modal-product-description"></p>
-                </div>
-                <div id="modal-extra-content"></div>
-                <a href="#" class="whatsapp-btn" id="modal-whatsapp-btn">
-                    <i class="fab fa-whatsapp"></i> Order on WhatsApp
-                </a>
-            </div>
-        </div>
+    <div class="pre-bar-w">
+      <div class="pre-bar"></div>
     </div>
+  </div>
 
-    <!-- SIDEBAR -->
-    <div id="side-menu" class="sidebar">
-        <span id="sidebar-close-btn" class="close-btn">×</span>
-        <div class="sidebar-header">MENU</div>
-        <div class="sidebar-controls">
-            <select id="mobile-lang-select">
-                <option value="en" selected>English</option> <option value="hi">हिंदी</option> <option value="mr">मराठी</option>
-            </select>
-            <select id="mobileCategorySelect" aria-label="Select product category">
-                <option value="all">All Categories</option> 
-                <option value="soya-chunks">Soya Chunks</option> 
-                <option value="pastes">Pastes</option> 
-                <option value="seviyan">Seviyan (Roasted/Kacchi)</option> 
-                <option value="bakery">Bakery & Dry Items</option> 
-                <option value="ready-cook">Ready to Cook</option> 
-                <option value="tofu">Tofu (Soya Paneer)</option> 
-                <option value="pickles">Pickles</option> 
-                <option value="pudding">Pudding</option> 
-                <option value="chocolates">Chocolates</option>
-            </select>
+  <!-- NAV -->
+  <nav id="navbar">
+    <div class="nav-in">
+      <a href="#" class="nav-brand">
+        <img src="logo.PNG" alt="SEF Logo" onerror="this.style.display='none'">
+        <div class="nav-brand-txt">
+          <div class="brand-main">SERIAL</div>
+          <div class="brand-sub">ENTERPRISE FOODS</div>
         </div>
-        <a href="#home"><i class="fas fa-home"></i> Home</a>
-        <a href="#cta-section"><i class="fas fa-hand-point-right"></i> Explore Now</a>
-        <a href="#about"><i class="fas fa-info-circle"></i> About Us</a>
-        <a href="#gallery"><i class="fas fa-utensils"></i> Products</a>
-        <a href="#partners"><i class="fas fa-handshake"></i> Our Partners</a>
-        <a href="#testimonials"><i class="fas fa-star"></i> Testimonials</a>
-        <a href="#contact"><i class="fas fa-phone"></i> Contact Us</a>
-        <!-- Updated Catalog Link -->
-        <a href="catalog.pdf" download="Serial_Enterprise_Foods_Catalog.pdf"><i class="fas fa-file-download"></i> Download Catalog</a>
+      </a>
+      <div class="nav-mid">
+        <a href="#about">About</a>
+        <div class="nav-dropdown">
+          <a href="#products" class="nav-drop-btn">Products <i class="fas fa-chevron-down"
+              style="font-size:0.7em"></i></a>
+          <div class="dropdown-content">
+            <a href="javascript:void(0)" onclick="filterAndScroll('soya-chunks')">Soya Chunks</a>
+            <a href="javascript:void(0)" onclick="filterAndScroll('pastes')">Pastes</a>
+            <a href="javascript:void(0)" onclick="filterAndScroll('seviyan')">Seviyan</a>
+            <a href="javascript:void(0)" onclick="filterAndScroll('bakery')">Bakery</a>
+            <a href="javascript:void(0)" onclick="filterAndScroll('ready-cook')">Ready to Cook</a>
+            <a href="javascript:void(0)" onclick="filterAndScroll('tofu')">Tofu</a>
+            <a href="javascript:void(0)" onclick="filterAndScroll('pickles')">Pickles</a>
+            <a href="javascript:void(0)" onclick="filterAndScroll('sweets')">Pudding & Chocolates</a>
+          </div>
+        </div>
+        <a href="#contact">Contact</a>
+      </div>
+      <div class="nav-right">
+        <div class="header-actions">
+          <a href="catalog.html" class="catalogue-btn" download>Download Catalogue</a>
+          <button class="theme-toggle" id="theme-toggle" aria-label="Toggle Dark Mode">
+            <!-- Sun Icon -->
+            <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+              fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="5"></circle>
+              <line x1="12" y1="1" x2="12" y2="3"></line>
+              <line x1="12" y1="21" x2="12" y2="23"></line>
+              <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+              <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+              <line x1="1" y1="12" x2="3" y2="12"></line>
+              <line x1="21" y1="12" x2="23" y2="12"></line>
+              <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+              <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+            </svg>
+          </button>
+        </div>
+        <div class="ham" id="ham"><span></span><span></span><span></span></div>
+      </div>
     </div>
+  </nav>
 
-    <!-- MAIN NAVIGATION -->
-    <nav id="main-nav">
-        <div class="nav-left">
-            <div class="hamburger-box">
-                <div class="hamburger-menu" id="hamburger-menu"><span></span><span></span><span></span></div>
-            </div>
-            <div class="nav-brand" id="nav-brand-link">
-                <img src="logo.PNG" alt="Serial Logo" />
-                <div class="company-name-container" style="display: flex; align-items: center;">
-                    <span class="company-name notranslate">Serial Enterprise Foods</span>
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="border: 1px solid #2E7D32; padding: 2px; border-radius: 4px; display: inline-block; vertical-align: middle; margin-left: 8px;">
-                        <circle cx="12" cy="12" r="8" fill="#2E7D32"/>
-                    </svg>
-                </div>
-            </div>
-        </div>
-        <div class="nav-controls">
-            <select id="nav-lang-select">
-                <option value="en" selected>English</option> <option value="hi">हिंदी</option> <option value="mr">मराठी</option>
-            </select>
-            <div class="search-wrapper">
-                <input type="text" id="navSearchInput" placeholder="Search for a product..." aria-label="Search for products" />
-                <span class="clear-search-btn" id="clear-nav-search">×</span>
-            </div>
-            <select id="navCategorySelect" aria-label="Select product category">
-                <option value="all">All Categories</option> 
-                <option value="soya-chunks">Soya Chunks</option> 
-                <option value="pastes">Pastes</option> 
-                <option value="seviyan">Seviyan (Roasted/Kacchi)</option> 
-                <option value="bakery">Bakery & Dry Items</option> 
-                <option value="ready-cook">Ready to Cook</option> 
-                <option value="tofu">Tofu (Soya Paneer)</option> 
-                <option value="pickles">Pickles</option> 
-                <option value="pudding">Pudding</option> 
-                <option value="chocolates">Chocolates</option>
-            </select>
-            <button id="show-all-btn" class="show-all-btn" style="display: none;">Show All</button>
-        </div>
-        <div id="google_translate_element"></div>
-    </nav>
-
-    <!-- MOBILE SEARCH BAR -->
-    <div class="mobile-search-container">
-        <div class="search-wrapper">
-            <input type="text" id="mobileSearchInput" placeholder="Search for a product..." aria-label="Search for products" />
-            <span class="clear-search-btn" id="clear-mobile-search">×</span>
-        </div>
+  <!-- DRAWER (Mobile Menu) -->
+  <div class="drawer" id="drawer">
+    <span class="d-close" id="d-close">×</span>
+    <div class="d-links">
+      <a href="#hero" onclick="closeDrawer()">Home</a>
+      <a href="#about" onclick="closeDrawer()">About Us</a>
+      <a href="#products" onclick="closeDrawer()">Our Products</a>
+      <a href="#contact" onclick="closeDrawer()">Contact</a>
     </div>
-    
-    <header>
-        <div class="header-content">
-            <img src="logo.PNG" alt="Serial Logo" />
-            <div class="company-details-box">
-                <h1 class="notranslate">Serial Enterprise Foods Private Limited</h1>
-                <p class="tagline">QUALITY & TASTE IS OUR RECIPE</p>
-            </div>
+  </div>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-l reveal">
+      <span class="hero-tag">EST. 2024 · MUMBAI</span>
+      <h1 class="hero-h1">TASTE <br><span>IS OUR RECIPE.</span></h1>
+      <p class="hero-sub">Serial Enterprise Foods is a leading wholesale distributor of high-quality, 100% vegetarian
+        packed food products in India, including soya chunks, pickles, pastes, and snacks.</p>
+      <div class="hero-btns">
+        <a href="#products" class="btn-p">EXPLORE PRODUCTS</a>
+      </div>
+    </div>
+    <div class="hero-r">
+      <!-- SLIDESHOW CONTAINER -->
+      <!-- MOVIE REEL CONTAINER -->
+      <div class="reel-wrapper">
+        <div class="reel-track" id="reel-track">
+          <!-- Populated via JS -->
         </div>
-    </header>
+      </div>
+    </div>
+  </section>
 
-    <main class="container" id="main-content">
-        <a href="#contact" id="fixed-enquiry-btn" class="fixed-enquiry-btn">
-            <i class="fas fa-paper-plane"></i> <span>Make an Enquiry</span>
-        </a>
-        
-        <section id="home">
-            <div class="welcome-content animate-on-scroll">
-                <h2>Welcome to <span class="notranslate">Serial Enterprise Foods</span></h2>
-                <p>A trusted wholesale distributor of high-quality packed food products, serving customers across India. With a diverse product line, reliable delivery, and a commitment to excellence, we ensure that taste and quality reach every home.</p>
-            </div>
-        </section>
-        
-        <section id="cta-section" class="container">
-            <div class="cta-box animate-on-scroll">
-                <h3>Ready to Explore Our Products?</h3>
-                <p>Browse our full catalog of high-quality, delicious food items and find the perfect fit for your business.</p>
-                <a href="#gallery" class="cta-btn primary-btn">Explore Products</a>
-                <a href="#contact" class="cta-btn secondary-btn">Make a Bulk Enquiry</a>
-            </div>
-        </section>
-        
-        <section id="about">
-            <div class="container animate-on-scroll">
-                <h2>About Us</h2>
-                <div class="about-content">
-                    <div class="about-box">
-                        <h3>Our Mission</h3>
-                        <p><span class="notranslate">Serial Enterprise Foods</span> was founded with a simple mission: to deliver exceptional quality and taste to every household in India. We are a **100% pure vegetarian company**. As a new company, we're driven by passion and a commitment to excellence.</p>
-                    </div>
-                    <div class="about-box">
-                        <h3>Our Commitment</h3>
-                        <p>We specialize in sourcing and distributing a diverse range of premium packed food products. We believe that good food starts with trust, and we work tirelessly to ensure every product in our catalog meets the highest standards. Thank you for joining us on this exciting new venture!</p>
-                    </div>
-                </div>
-            </div>
-        </section>
+  <!-- PARTNERS GRID -->
+  <div id="partners">
+    <div class="part-grid">
+      <span class="part-item">Harnik General Foods</span>
+      <span class="part-item">Maharashtra Samosa</span>
+      <span class="part-item">Avanti Enterprise</span>
+      <span class="part-item">Vega Industries</span>
+      <span class="part-item">Eatsip Foods</span>
+      <span class="part-item">B 2 Bakery</span>
+      <span class="part-item">Special Homemade Pickle</span>
+      <span class="part-item">Serial Enterprise</span>
+    </div>
+  </div>
 
-        <section id="partners">
-            <div class="container animate-on-scroll">
-                <h2>Brands We Market</h2>
-                <div class="partners-list">
-                    <div class="partner-box notranslate">Serial Enterprise Foods Pvt. Ltd.</div> <div class="partner-box notranslate">Harnik General Foods Pvt. Ltd.</div> <div class="partner-box notranslate">Maharashtra Samosa Patti</div> <div class="partner-box notranslate">Avanti Enterprise</div> <div class="partner-box notranslate">Vega Industries</div> <div class="partner-box notranslate">Eatsip Foods & Beverages</div> <div class="partner-box notranslate">Special Home Made Pickle</div> <div class="partner-box notranslate">B 2 Bakery</div>
-                </div>
-            </div>
-        </section>
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="about-l reveal">
+      <span class="sec-sub">WHO WE ARE</span>
+      <h2 class="sec-h2">PURE VEG.<br>PURE <span>QUALITY.</span></h2>
+      <p class="about-txt">We are a Mumbai-based wholesale distributor committed to delivering the freshest, highest
+        quality food products to retailers and restaurants across India. Our catalog is curated with one promise: 100%
+        Vegetarian, 100% Delicious.</p>
+    </div>
+    <div class="about-r reveal">
+      <div class="stat-card">
+        <h3 class="counter" data-target="13">0</h3>
+        <p>PRODUCT CATEGORIES</p>
+      </div>
+      <div class="stat-card">
+        <h3 class="counter" data-target="50">0</h3>
+        <p>UNIQUE ITEMS</p>
+      </div>
+      <div class="stat-card">
+        <h3>PAN<span>+</span></h3>
+        <p>INDIA DELIVERY</p>
+      </div>
+    </div>
+  </section>
 
-        <section id="gallery">
-            <h2>Our Products</h2>
-            <div id="product-list-container">
+  <!-- PRODUCTS -->
+  <section id="products" class="section-pad">
+    <div class="container">
+      <div class="reveal" style="text-align:center;margin-bottom:40px;">
+        <span class="sec-sub">DISCOVER TASTE</span>
+        <h2 class="sec-h2">OUR <span>COLLECTION</span></h2>
+        <div style="width: 60px; height: 3px; background: var(--orange); margin: 20px auto 0;"></div>
+      </div>
 
-                <!-- Soya Chunks -->
-                <div class="product-category animate-on-scroll" id="soya-chunks">
-                    <h3 class="notranslate">Soya Chunks</h3>
-                    <div class="product-subheading notranslate">Boxed Soya Chunks</div>
-                    <div class="gallery">
-                        <div class="gallery-item animate-on-scroll" data-product-id="soya-chunks-regular"><img src="regular-soyabox.PNG" alt="Soya Chunks – Regular" loading="lazy" /><div class="product-info"><div class="product-name-box"><h4 class="product-title notranslate">Soya Chunks – Regular</h4></div><div class="product-weight-box"><p class="product-detail notranslate">Gross Weight: 200 gm</p></div><div class="product-description-box"><p>A wholesome and nutritious protein alternative, our Soya Chunks are perfect for curries, stir-fries, and snacks. Made from high-quality soybeans, they are packed with protein and fiber to keep you energized.</p></div><div class="product-cta">Click to View</div></div></div>
-                        <div class="gallery-item animate-on-scroll" data-product-id="soya-chunks-granules"><img src="granules-soyabox.PNG" alt="Soya Chunks – Granules" loading="lazy" /><div class="product-info"><div class="product-name-box"><h4 class="product-title notranslate">Soya Chunks – Granules</h4></div><div class="product-weight-box"><p class="product-detail notranslate">Gross Weight: 200 gm</p></div><div class="product-description-box"><p>Soya granules, a finely ground version of our classic chunks, are ideal for adding a rich, meaty texture to a variety of dishes like pasta sauces and cutlets.</p></div><div class="product-cta">Click to View</div></div></div>
-                        <div class="gallery-item animate-on-scroll" data-product-id="soya-chunks-mini"><img src="mini-soyabox.PNG" alt="Soya Chunks – Mini" loading="lazy" /><div class="product-info"><div class="product-name-box"><h4 class="product-title notranslate">Soya Chunks – Mini</h4></div><div class="product-weight-box"><p class="product-detail notranslate">Gross Weight: 200 gm</p></div><div class="product-description-box"><p>Our mini soya chunks are bite-sized and perfect for quick cooking, salads, and kid-friendly recipes.</p></div><div class="product-cta">Click to View</div></div></div>
-                    </div>
-                    <div class="product-subheading notranslate">Convenient Soya Pouches</div>
-                    <div class="gallery">
-                        <div class="gallery-item animate-on-scroll" data-product-id="soya-chunks-pouch"><img src="regular-soyapouch.PNG" alt="Soya Chunks" loading="lazy" /><div class="product-info"><div class="product-name-box"><h4 class="product-title notranslate">Soya Chunks</h4></div><div class="product-weight-box"><p class="product-detail notranslate">Gross Weight: 40 gm</p></div><div class="product-description-box"><p>The same great quality soya chunks, now in a convenient and affordable pouch for daily use.</p></div><div class="product-cta">Click to View</div></div></div>
-                        <div class="gallery-item animate-on-scroll" data-product-id="soya-mini-chunks-pouch"><img src="mini-soyapouch.PNG" alt="Soya Mini Chunks" loading="lazy" /><div class="product-info"><div class="product-name-box"><h4 class="product-title notranslate">Soya Mini Chunks</h4></div><div class="product-weight-box"><p class="product-detail notranslate">Gross Weight: 40 gm</p></div><div class="product-description-box"><p>Small-sized soya chunks, packed in a pouch, are great for a quick and easy protein boost in any meal.</p></div><div class="product-cta">Click to View</div></div></div>
-                    </div>
-                </div>
+      <div id="product-list" class="reveal">
+        <!-- Populated via JS -->
+      </div>
 
-                <!-- Pastes -->
-                <div class="product-category animate-on-scroll" id="pastes">
-                    <h3 class="notranslate">Pastes</h3>
-                    <div class="gallery">
-                        <div class="gallery-item animate-on-scroll" data-product-id="gg-paste-1kg"><img src="ggpaste-1kg_jar.PNG" alt="Ginger Garlic Paste Jar 1kg" loading="lazy" /><div class="product-info"><div class="product-name-box"><h4 class="product-title notranslate">Ginger Garlic Paste Jar</h4></div><div class="product-weight-box"><p class="product-detail notranslate">Gross Weight: 1 kg</p></div><div class="product-description-box"><p>Our signature Ginger Garlic Paste in a large, bulk-sized jar. A kitchen essential for authentic Indian flavors.</p></div><div class="product-cta">Click to View</div></div></div>
-                        <div class="gallery-item animate-on-scroll" data-product-id="gg-paste-200g"><img src="ggpaste-200gm_jar.PNG" alt="Ginger Garlic Paste Jar 200gm" loading="lazy" /><div class="product-info"><div class="product-name-box"><h4 class="product-title notranslate">Ginger Garlic Paste Jar</h4></div><div class="product-weight-box"><p class="product-detail notranslate">Gross Weight: 200 gm</p></div><div class="product-description-box"><p>A convenient jar of our fresh ginger garlic paste, perfect for everyday cooking.</p></div><div class="product-cta">Click to View</div></div></div>
-                        <div class="gallery-item animate-on-scroll" data-product-id="gg-paste-pouch"><img src="ggpaste-pouch.PNG" alt="Ginger Garlic Paste Pouch 25gm" loading="lazy" /><div class="product-info"><div class="product-name-box"><h4 class="product-title notranslate">Ginger Garlic Paste – Pouch</h4></div><div class="product-weight-box"><p class="product-detail notranslate">Gross Weight: 25 gm</p></div><div class="product-description-box"><p>A single-serving pouch of our flavorful ginger garlic paste, great for travel or quick meals.</p></div><div class="product-cta">Click to View</div></div></div>
-                    </div>
-                </div>
+    </div>
+  </section>
 
-                <!-- Seviyan -->
-                <div class="product-category animate-on-scroll" id="seviyan">
-                    <h3 class="notranslate">Seviyan (Roasted/Kacchi)</h3>
-                    <div class="gallery">
-                        <div class="gallery-item animate-on-scroll" data-product-id="roasted-seviyan"><img src="roasted-sevaiyan.PNG" alt="Roasted Seviyan" loading="lazy" /><div class="product-info"><div class="product-name-box"><h4 class="product-title notranslate">Roasted Seviyan</h4></div><div class="product-weight-box"><p class="product-detail notranslate">Gross Weight: 150g / 100g</p></div><div class="product-description-box"><p>Perfectly roasted to a golden-brown finish, our seviyan are ready to use in your favorite sweet or savory dishes.</p></div><div class="product-cta">Click to View</div></div></div>
-                        <div class="gallery-item animate-on-scroll" data-product-id="kachhi-seviyan"><img src="uncooked-sevaiyan.PNG" alt="Kachhi Seviyan" loading="lazy" /><div class="product-info"><div class="product-name-box"><h4 class="product-title notranslate">Vermicelli Seviyan</h4></div><div class="product-weight-box"><p class="product-detail notranslate">Gross Weight: 150g / 100g</p></div><div class="product-description-box"><p>Uncooked seviyan for a traditional preparation. Cook them to your desired texture for a variety of recipes.</p></div><div class="product-cta">Click to View</div></div></div>
-                    </div>
-                </div>
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="con-l reveal">
+      <span class="sec-sub">GET IN TOUCH</span>
+      <h2 class="sec-h2" style="margin-bottom:40px">LET'S <span>WORK</span></h2>
 
-                <!-- Bakery -->
-                <div class="product-category animate-on-scroll" id="bakery">
-                    <h3 class="notranslate">Bakery & Dry Items</h3>
-                    <div class="gallery">
-                        <div class="gallery-item animate-on-scroll" data-product-id="sugar-cubes"><img src="sugar_cubes.PNG" alt="Sugar Cubes" loading="lazy" /><div class="product-info"><div class="product-name-box"><h4 class="product-title notranslate">Sugar Cubes</h4></div><div class="product-weight-box"><p class="product-detail notranslate">Gross Weight: 500g</p></div><div class="product-description-box"><p>Premium sugar cubes, perfect for tea and coffee. A touch of elegance for your table.</p></div><div class="product-cta">Click to View</div></div></div>
-                        <div class="gallery-item animate-on-scroll" data-product-id="suji-toast"><img src="suji-toast.PNG" alt="Suji Toast" loading="lazy" /><div class="product-info"><div class="product-name-box"><h4 class="product-title notranslate">Suji Toast</h4></div><div class="product-weight-box"><p class="product-detail notranslate">Gross Weight: 300g</p></div><div class="product-description-box"><p>A crispy, delicious suji toast that's perfect for a morning snack or with your evening chai.</p></div><div class="product-cta">Click to View</div></div></div>
-                    </div>
-                </div>
+      <div class="c-item">
+        <span class="c-lbl">CALL US</span>
+        <a href="tel:+917715844176" class="c-val">+91 77158 44176</a><br>
+        <a href="tel:+918850401035" class="c-val">+91 88504 01035</a>
+      </div>
+      <div class="c-item">
+        <span class="c-lbl">EMAIL</span>
+        <a href="mailto:serial.enterfoods@gmail.com" class="c-val">serial.enterfoods@gmail.com</a>
+      </div>
+      <div class="c-item">
+        <span class="c-lbl">VISIT</span>
+        <span class="c-val" style="font-size:1rem;line-height:1.5">14/110, Anand Nagar, Santacruz (E),<br>Mumbai 400057,
+          MH, India</span>
+      </div>
+    </div>
+    <div class="con-r reveal">
+      <form class="cform" action="https://formspree.io/f/mnnzeaaj" method="POST">
+        <input type="text" name="name" class="finp" placeholder="Name" required>
+        <input type="email" name="email" class="finp" placeholder="Email Address" required>
+        <input type="tel" name="phone" class="finp" placeholder="Phone Number" required>
+        <input type="text" name="message" class="finp" placeholder="What are you looking for?">
+        <button type="submit" class="fbtn">SEND MESSAGE</button>
+      </form>
+    </div>
+  </section>
 
-                <!-- Ready to Cook -->
-                <div class="product-category animate-on-scroll" id="ready-cook">
-                    <h3 class="notranslate">Ready to Cook</h3>
-                    <div class="gallery">
-                        <div class="gallery-item animate-on-scroll" data-product-id="samosa-patti"><img src="samosa-patti.PNG" alt="Samosa Patti" loading="lazy" /><div class="product-info"><div class="product-name-box"><h4 class="product-title notranslate">Samosa Patti</h4></div><div class="product-weight-box"><p class="product-detail notranslate">Gross Weight: 500gm / 250 gm</p></div><div class="product-description-box"><p>Thin, crispy sheets ready to be filled with your favorite ingredients to create perfect samosas at home.</p></div><div class="product-cta">Click to View</div></div></div>
-                        <div class="gallery-item animate-on-scroll" data-product-id="crispy-thread"><img src="crispy-thread.PNG" alt="Crispy Thread" loading="lazy" /><div class="product-info"><div class="product-name-box"><h4 class="product-title notranslate">Crispy Thread</h4></div><div class="product-weight-box"><p class="product-detail notranslate">Gross Weight: 500gm</p></div><div class="product-description-box"><p>Delightfully crunchy threads for a unique texture in your snacks and appetizers.</p></div><div class="product-cta">Click to View</div></div></div>
-                        <div class="gallery-item animate-on-scroll" data-product-id="spring-roll-sheets"><img src="spring-roll-sheets.PNG" alt="Spring Roll Sheets" loading="lazy" /><div class="product-info"><div class="product-name-box"><h4 class="product-title notranslate">Spring Roll Sheets</h4></div><div class="product-weight-box"><p class="product-detail notranslate">Gross Weight: 400gm</p></div><div class="product-description-box"><p>Versatile sheets that are perfect for making fresh, homemade spring rolls.</p></div><div class="product-cta">Click to View</div></div></div>
-                    </div>
-                </div>
+  <!-- GOOGLE MAP -->
+  <!-- GOOGLE MAP (Visible) -->
+  <section id="map" style="height: 450px; width: 100%; border-top: 1px solid var(--border);">
+    <iframe
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3770.81438902888!2d72.8468779!3d19.0718719!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7c8eacefb5703%3A0x629538317c76742!2sAnand%20Nagar%2C%20Santacruz%20East%2C%20Mumbai%2C%20Maharashtra%20400055!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin"
+      width="100%" height="450" style="border:0; display:block;" allowfullscreen="" loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade"></iframe>
+  </section>
 
-                <!-- Tofu -->
-                <div class="product-category animate-on-scroll" id="tofu">
-                    <h3 class="notranslate">Tofu (Soya Paneer)</h3>
-                    <div class="gallery">
-                        <div class="gallery-item animate-on-scroll" data-product-id="tofu-regular"><img src="tofu-regular.jpg" alt="Tofu – Regular" loading="lazy" /><div class="product-info"><div class="product-name-box"><h4 class="product-title notranslate">Tofu – Regular</h4></div><div class="product-weight-box"><p class="product-detail notranslate">Gross Weight: 200gm</p></div><div class="product-description-box"><p>Our classic, firm tofu (soya paneer) is a versatile and healthy protein source for all your recipes.</p></div><div class="product-cta">Click to View</div></div></div>
-                        <div class="gallery-item animate-on-scroll" data-product-id="tofu-red-chilli"><img src="tofu-chilli.jpg" alt="Tofu – Red Chilli" loading="lazy" /><div class="product-info"><div class="product-name-box"><h4 class="product-title notranslate">Tofu – Red Chilli</h4></div><div class="product-weight-box"><p class="product-detail notranslate">Gross Weight: 200gm</p></div><div class="product-description-box"><p>A spicy twist on our classic tofu, infused with red chilli for an extra kick of flavor.</p></div><div class="product-cta">Click to View</div></div></div>
-                        <div class="gallery-item animate-on-scroll" data-product-id="tofu-garlic-pepper"><img src="tofu-garlic.jpg" alt="Tofu – Garlic Pepper" loading="lazy" /><div class="product-info"><div class="product-name-box"><h4 class="product-title notranslate">Tofu – Garlic Pepper</h4></div><div class="product-weight-box"><p class="product-detail notranslate">Gross Weight: 200gm</p></div><div class="product-description-box"><p>Infused with a rich blend of garlic and black pepper, this tofu adds a savory depth to any dish.</p></div><div class="product-cta">Click to View</div></div></div>
-                    </div>
-                </div>
+  <!-- FOOTER -->
+  <footer>
+    <div class="f-links">
+      <a href="#hero">Home</a>
+      <a href="#about">About</a>
+      <a href="#products">Products</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <p>&copy; 2025 Serial Enterprise Foods Pvt. Ltd. All Rights Reserved.</p>
+  </footer>
 
-                <!-- Pickles -->
-                <div class="product-category animate-on-scroll" id="pickles">
-                    <h3 class="notranslate">Pickles</h3>
-                    <div class="gallery">
-                        <div class="gallery-item animate-on-scroll" data-product-id="homemade-pickle-main">
-                            <img src="home_made-pickle.PNG" alt="Special Homemade Pickle" loading="lazy" />
-                            <div class="product-info">
-                                <div class="product-name-box"><h4 class="product-title notranslate">Special Homemade Pickle</h4></div>
-                                <div class="product-weight-box"><p class="product-detail notranslate">Gross Weight: 250gm</p></div>
-                                <div class="product-description-box"><p>A traditional homemade recipe with a mix of select spices, bringing authentic flavor to your meals. Click to see all our varieties!</p></div>
-                                <div class="product-cta">View Varieties</div>
-                            </div>
-                        </div>
-                        <div class="gallery-item animate-on-scroll" data-product-id="silver-pickle-main">
-                            <img src="silver-pickle.PNG" alt="Silver Pickle" loading="lazy" />
-                            <div class="product-info">
-                                <div class="product-name-box"><h4 class="product-title notranslate">Silver Pickle</h4></div>
-                                <div class="product-weight-box"><p class="product-detail notranslate">Gross Weight: 40gm</p></div>
-                                <div class="product-description-box"><p>A small, convenient pack of our classic pickle, perfect for a tangy treat on the go. Click to see all our varieties!</p></div>
-                                <div class="product-cta">View Varieties</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+  <!-- MODAL -->
+  <div class="modal" id="pmodal">
+    <div class="mbox">
+      <span class="m-close" id="m-close">×</span>
+      <div class="m-img-w"><img src="" alt="" id="m-img"></div>
+      <div class="m-body">
+        <h3 class="m-name" id="m-name"></h3>
+        <span class="m-wt" id="m-wt"></span>
+        <p class="m-desc" id="m-desc"></p>
+        <div class="m-chips" id="m-chips"></div> <!-- Keeping for backward compat if needed -->
+        <div id="m-extra" class="m-extra"></div>
+        <a href="#" class="m-wa" id="m-wa" target="_blank"><i class="fab fa-whatsapp"></i> Order on WhatsApp</a>
+      </div>
+    </div>
+  </div>
 
-                <!-- Pudding -->
-                <div class="product-category animate-on-scroll" id="pudding">
-                    <h3 class="notranslate">Pudding</h3>
-                    <div class="gallery">
-                        <div class="gallery-item animate-on-scroll" data-product-id="caramel-pudding"><img src="caramel-pudding.PNG" alt="Caramel Pudding" loading="lazy" /><div class="product-info"><div class="product-name-box"><h4 class="product-title notranslate">Caramel Pudding</h4></div><div class="product-weight-box"><p class="product-detail notranslate">Gross Weight: 90gm</p></div><div class="product-description-box"><p>A rich, delightful caramel pudding mix. Follow our simple instructions to create a silky, smooth dessert at home. A perfect sweet treat for any occasion.</p></div><div class="product-cta">Click to View</div></div></div>
-                    </div>
-                </div>
+  <!-- FLOAT BTN -->
+  <a href="#contact" class="float-btn"><i class="fas fa-comment-dots"></i></a>
 
-                <!-- Chocolates -->
-                <div class="product-category animate-on-scroll" id="chocolates">
-                    <h3 class="notranslate">Chocolates</h3>
-                    <div class="gallery">
-                        <div class="gallery-item animate-on-scroll" data-product-id="chocolush-gracia-large">
-                            <img src="choco-lush.PNG" alt="Choco Lush & Gracia Large" loading="lazy" />
-                            <div class="product-info">
-                                <div class="product-name-box"><h4 class="product-title notranslate">Choco Lush & Gracia (Large)</h4></div>
-                                <div class="product-weight-box"><p class="product-detail notranslate">Gross Weight: 770gm</p></div>
-                                <div class="product-description-box"><p>A delightful mix of various chocolates in one pack, offering a treat for every taste bud.</p></div>
-                                <div class="product-cta">View Varieties</div>
-                            </div>
-                        </div>
-                        <div class="gallery-item animate-on-scroll" data-product-id="chocolush-gracia-small">
-                            <img src="assorted-chocolate.PNG" alt="Choco Lush & Gracia Small" loading="lazy" />
-                            <div class="product-info">
-                                <div class="product-name-box"><h4 class="product-title notranslate">Choco Lush & Gracia (Small)</h4></div>
-                                <div class="product-weight-box"><p class="product-detail notranslate">Gross Weight: 200gm / 250gm</p></div>
-                                <div class="product-description-box"><p>A rich and creamy assortment of our finest chocolates, perfect for a sweet indulgence.</p></div>
-                                <div class="product-cta">View Varieties</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+  <script>
+    // THEME TOGGLE
+    const toggleBtn = document.getElementById('theme-toggle');
+    const body = document.body;
 
-        <section id="testimonials">
-            <div class="container animate-on-scroll">
-                <h2>What Our Clients Say</h2>
-                <div class="testimonial-carousel">
-                    <div class="testimonial-wrapper" id="testimonial-wrapper">
-                        <div class="testimonial-card"><p>Serial Enterprise Foods has exceeded our expectations. Their products are consistently fresh and our customers love the variety!</p><div class="client-name notranslate">- Local Grocer</div><div class="client-role">Mumbai, Maharashtra</div></div>
-                        <div class="testimonial-card"><p>The best quality Soya Chunks we've ever stocked. The delivery is always on time, and the team is a pleasure to work with.</p><div class="client-name notranslate">- Restaurant Owner</div><div class="client-role">Pune, Maharashtra</div></div>
-                        <div class="testimonial-card"><p>From pickles to pastes, their range is fantastic. Our inventory has never been more popular since we started carrying their brand.</p><div class="client-name notranslate">- Supermarket Manager</div><div class="client-role">Ahmedabad, Gujarat</div></div>
-                    </div>
-                    <div class="carousel-dots" id="carousel-dots"></div>
-                </div>
-            </div>
-        </section>
+    // Check saved
+    if (localStorage.getItem('theme') === 'dark') {
+      body.classList.add('dark-mode');
+    }
 
-        <section id="contact">
-            <div class="container animate-on-scroll">
-                <h2>Bulk & Wholesale Enquiries</h2>
-                <div class="contact-content">
-                    <div class="contact-info">
-                        <h3 style="font-size: 2em; color: var(--primary-color);">Get in Touch</h3>
-                        <div class="contact-info-item"><i class="fas fa-map-marker-alt"></i><p>14/110, Anand Nagar, near Vakola Police Station,<br /> Santacruz (E), <span class="notranslate">Mumbai 400057</span><br /> <span class="notranslate">Maharashtra</span>, India</p></div>
-                        <div class="contact-info-item">
-                            <i class="fas fa-phone-alt"></i>
-                            <div>
-                                <p style="margin:0; padding:0;"><strong>Sanjay Savla:</strong> <span class="notranslate">+91 77158 44176</span></p>
-                                <a href="tel:+917715844176" class="contact-action-link">Call Sanjay</a>
-                            </div>
-                        </div>
-                        <div class="contact-info-item">
-                            <i class="fas fa-phone-alt"></i>
-                            <div>
-                                <p style="margin:0; padding:0;"><strong>Manish Savla:</strong> <span class="notranslate">+91 88504 01035</span></p>
-                                <a href="tel:+918850401035" class="contact-action-link">Call Manish</a>
-                            </div>
-                        </div>
-                        <div class="contact-info-item">
-                            <i class="fas fa-envelope"></i>
-                            <div>
-                                <p style="margin:0; padding:0;">serial.enterfoods@gmail.com</p>
-                                <a href="mailto:serial.enterfoods@gmail.com" class="contact-action-link">Email Us</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="contact-form-container">
-                        <h3 style="font-size: 2em; color: var(--primary-color);">Enquiry Form</h3>
-                        <form id="contactForm">
-                            <div class="full-width">
-                                <input type="text" id="business-name" name="business-name" placeholder="Business Name" required />
-                            </div>
-                            <div>
-                                <input type="text" id="name" name="name" placeholder="Contact Person" required />
-                            </div>
-                            <div>
-                                <input type="email" id="email" name="email" placeholder="Email Address" required />
-                            </div>
-                             <div>
-                                <input type="tel" id="phone" name="phone" placeholder="Phone Number" required />
-                            </div>
-                            <div>
-                                <select id="business-type" name="business-type" required>
-                                    <option value="" disabled selected>Type of Business</option>
-                                    <option value="Retailer">Retailer</option>
-                                    <option value="Restaurant">Restaurant</option>
-                                    <option value="Caterer">Caterer</option>
-                                    <option value="Other">Other</option>
-                                </select>
-                            </div>
-                            <div class="full-width">
-                                <textarea id="message" name="message" rows="5" placeholder="Products of Interest & Estimated Quantity" required></textarea>
-                            </div>
-                            <div class="full-width">
-                                <button type="submit">Send Enquiry</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-                <div class="map-container" style="margin-top: 40px;">
-                    <h3 style="text-align: center; font-size: 2em; color: var(--primary-color);">Find Us Here</h3>
-                    <div class="contact-map" style="border-radius: 15px; overflow: hidden; box-shadow: 0 8px 25px rgba(0,0,0,0.1);">
-                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3770.6052055049026!2d72.84545747395126!3d19.081087951815157!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7c90090cc2d9b%3A0x50a46a5302901f9d!2s14%2C%20Anand%20Nagar%20Ln%2C%20Anand%20Nagar%2C%20Vakola%2C%20Santacruz%20East%2C%20Mumbai%2C%20Maharashtra%20400055!5e0!3m2!1sen!2sin!4v1755953057495!5m2!1sen!2sin" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
-    <footer>© 2025 <span class="notranslate">Serial Enterprise Foods Private Limited</span> | All Rights Reserved</footer>
-    <div id="formStatusMessage" class="form-status-message" aria-live="polite"></div>
+    toggleBtn.addEventListener('click', () => {
+      body.classList.toggle('dark-mode');
+      localStorage.setItem('theme', body.classList.contains('dark-mode') ? 'dark' : 'light');
+    });
 
-    <!-- SCRIPTS -->
-    <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-    <script>
-        // Initialize Google Translate
-        function googleTranslateElementInit() {
-            new google.translate.TranslateElement({
-                pageLanguage: 'en',
-                includedLanguages: 'en,hi,mr',
-                layout: google.translate.TranslateElement.InlineLayout.VERTICAL
-            }, 'google_translate_element');
-        }
-        
-        document.addEventListener('DOMContentLoaded', () => {
-            
-            // --- 1. GATHER UI ELEMENTS ---
-            const preloader = document.querySelector('.preloader');
-            const mainContent = document.getElementById("main-content");
-            const homeSection = document.getElementById("home");
-            
-            const sideMenu = document.getElementById("side-menu");
-            const hamburgerMenu = document.getElementById("hamburger-menu");
-            const sidebarCloseBtn = document.getElementById("sidebar-close-btn");
-            const sidebarLinks = document.querySelectorAll('.sidebar a');
-            
-            const navBrandLink = document.getElementById("nav-brand-link");
-            const navSearchInput = document.getElementById("navSearchInput");
-            const navCategorySelect = document.getElementById("navCategorySelect");
-            const navLangSelect = document.getElementById("nav-lang-select");
-            
-            const mobileSearchInput = document.getElementById("mobileSearchInput");
-            const mobileCategorySelect = document.getElementById("mobileCategorySelect");
-            const mobileLangSelect = document.getElementById("mobile-lang-select");
+    // If using feather icons, or just inline SVG above is fine.
+    // feather.replace(); 
 
-            const productCategories = document.querySelectorAll(".product-category");
-            const allGalleryItems = document.querySelectorAll(".gallery-item");
-            const categoryHeaders = document.querySelectorAll(".product-category > h3");
+    /* DATA SOURCE */
+    const products = [
+      {
+        id: 'soya-chunks', label: 'Soya Chunks', products: [
+          {
+            id: 'sc-reg-box', img: 'regular-soyabox.PNG', name: 'Soya Chunks – Regular (Box)', wt: '200 gm',
+            desc: 'A wholesome and nutritious protein alternative, our Soya Chunks are perfect for curries, stir-fries, and snacks. Made from high-quality soybeans, they are packed with protein and fiber to keep you energized.',
+            nutrition: 'High in protein (52g per 100g), rich in fiber, and a great source of iron and calcium.',
+            recipes: [
+              { title: 'Soya Matar Curry', desc: 'A classic North Indian curry with soya chunks and green peas in a rich tomato-onion gravy.' },
+              { title: 'Soya Manchurian', desc: 'An Indo-Chinese favorite, with crispy soya chunks tossed in a tangy and spicy Manchurian sauce.' }
+            ]
+          },
+          {
+            id: 'sc-gran-box', img: 'granules-soyabox.PNG', name: 'Soya Chunks – Granules (Box)', wt: '200 gm',
+            desc: 'Soya granules, a finely ground version of our classic chunks, are ideal for adding a rich, meaty texture to a variety of dishes like pasta sauces and cutlets.',
+            nutrition: 'Excellent source of plant-based protein, low in fat, and perfect for vegetarian keema.',
+            recipes: [
+              { title: 'Soya Keema Pav', desc: 'A delicious and healthy vegetarian take on the classic Mumbai street food.' },
+              { title: 'Soya Stuffed Paratha', desc: 'Wholesome flatbreads stuffed with a savory mixture of soya granules and spices.' }
+            ]
+          },
+          {
+            id: 'sc-mini-box', img: 'mini-soyabox.PNG', name: 'Soya Chunks – Mini (Box)', wt: '200 gm',
+            desc: 'Our mini soya chunks are bite-sized and perfect for quick cooking, salads, and kid-friendly recipes.'
+          },
+          {
+            id: 'sc-reg-pouch', img: 'regular-soyapouch.PNG', name: 'Soya Chunks (Pouch)', wt: '40 gm',
+            desc: 'The same great quality soya chunks, now in a convenient and affordable pouch for daily use.'
+          },
+          {
+            id: 'sc-mini-pouch', img: 'mini-soyapouch.PNG', name: 'Soya Mini Chunks (Pouch)', wt: '40 gm',
+            desc: 'Small-sized soya chunks, packed in a pouch, are great for a quick and easy protein boost in any meal.'
+          }
+        ]
+      },
+      {
+        id: 'pastes', label: 'Pastes', products: [
+          {
+            id: 'gg-large', img: 'ggpaste-1kg_jar.PNG', name: 'Ginger Garlic Paste Jar (Large)', wt: '1 kg',
+            desc: 'Our signature Ginger Garlic Paste in a large, bulk-sized jar. A kitchen essential for authentic Indian flavors.',
+            recipes: [
+              { title: 'Vegetable Biryani', desc: 'The essential base for a fragrant and flavorful vegetable biryani.' },
+              { title: 'Chole Masala', desc: 'A must-have for creating a rich and aromatic chickpea curry.' }
+            ]
+          },
+          {
+            id: 'gg-small', img: 'ggpaste-200gm_jar.PNG', name: 'Ginger Garlic Paste Jar (Small)', wt: '200 gm',
+            desc: 'A convenient jar of our fresh ginger garlic paste, perfect for everyday cooking.'
+          },
+          {
+            id: 'gg-pouch', img: 'ggpaste-pouch.PNG', name: 'Ginger Garlic Paste – Pouch', wt: '25 gm',
+            desc: 'A single-serving pouch of our flavorful ginger garlic paste, great for travel or quick meals.'
+          }
+        ]
+      },
+      {
+        id: 'seviyan', label: 'Seviyan', products: [
+          {
+            id: 'sev-rst', img: 'roasted-sevaiyan.PNG', name: 'Roasted Seviyan', wt: '150g / 100g',
+            desc: 'Perfectly roasted to a golden-brown finish, our seviyan are ready to use in your favorite sweet or savory dishes.',
+            recipes: [
+              { title: 'Meethi Seviyan', desc: 'A traditional sweet dish made during festivals, with roasted vermicelli, ghee, sugar, and nuts.' },
+              { title: 'Seviyan Upma', desc: 'A quick and savory breakfast dish made with roasted vermicelli and vegetables.' }
+            ]
+          },
+          {
+            id: 'sev-verm', img: 'uncooked-sevaiyan.PNG', name: 'Vermicelli Seviyan', wt: '150g / 100g',
+            desc: 'Uncooked seviyan for a traditional preparation. Cook them to your desired texture for a variety of recipes.'
+          }
+        ]
+      },
+      {
+        id: 'bakery', label: 'Bakery & Dry Items', products: [
+          {
+            id: 'sugar', img: 'sugar_cubes.PNG', name: 'Sugar Cubes', wt: '500g',
+            desc: 'Premium sugar cubes, perfect for tea and coffee. A touch of elegance for your table.'
+          },
+          {
+            id: 'toast', img: 'suji-toast.PNG', name: 'Suji Toast', wt: '300g',
+            desc: 'A crispy, delicious suji toast that\'s perfect for a morning snack or with your evening chai.'
+          }
+        ]
+      },
+      {
+        id: 'ready-cook', label: 'Ready to Cook', products: [
+          {
+            id: 'samosa', img: 'samosa-patti.PNG', name: 'Samosa Patti', wt: '500gm / 250 gm',
+            desc: 'Thin, crispy sheets ready to be filled with your favorite ingredients to create perfect samosas at home.',
+            recipes: [
+              { title: 'Classic Aloo Samosa', desc: 'Use our pattis to create the perfect crispy shell for the traditional spiced potato and pea filling.' },
+              { title: 'Paneer Tikka Samosa', desc: 'A modern twist with a spicy and tangy paneer filling wrapped in our crispy pattis.' }
+            ]
+          },
+          {
+            id: 'thread', img: 'crispy-thread.PNG', name: 'Crispy Thread', wt: '500gm',
+            desc: 'Delightfully crunchy threads for a unique texture in your snacks and appetizers.'
+          },
+          {
+            id: 'spring', img: 'spring-roll-sheets.PNG', name: 'Spring Roll Sheets', wt: '400gm',
+            desc: 'Versatile sheets that are perfect for making fresh, homemade spring rolls.'
+          }
+        ]
+      },
+      {
+        id: 'tofu', label: 'Tofu (Soya Paneer)', products: [
+          {
+            id: 'tf-reg', img: 'tofu-regular.jpg', name: 'Tofu – Regular', wt: '200gm',
+            desc: 'Our classic, firm tofu (soya paneer) is a versatile and healthy protein source for all your recipes.',
+            nutrition: 'A complete protein, containing all nine essential amino acids. Low in calories and rich in minerals.',
+            recipes: [
+              { title: 'Tofu Bhurji', desc: 'A simple and quick scrambled tofu dish, similar to paneer bhurji, spiced with Indian masalas.' },
+              { title: 'Palak Tofu', desc: 'A healthy and vegan alternative to Palak Paneer, with tofu cubes in a creamy spinach gravy.' }
+            ]
+          },
+          {
+            id: 'tf-chilli', img: 'tofu-chilli.jpg', name: 'Tofu – Red Chilli', wt: '200gm',
+            desc: 'A spicy twist on our classic tofu, infused with red chilli for an extra kick of flavor.'
+          },
+          {
+            id: 'tf-garlic', img: 'tofu-garlic.jpg', name: 'Tofu – Garlic Pepper', wt: '200gm',
+            desc: 'Infused with a rich blend of garlic and black pepper, this tofu adds a savory depth to any dish.'
+          }
+        ]
+      },
+      {
+        id: 'pickles', label: 'Pickles', products: [
+          {
+            id: 'pk-home', img: 'home_made-pickle.PNG', name: 'Special Homemade Pickle', wt: '250gm',
+            desc: 'A traditional homemade recipe with a mix of select spices, bringing authentic flavor to your meals.',
+            varieties: [
+              'Amla Murabba Pickle', 'Amla Pickle', 'Bijora Pickle', 'Dryfruit Mix Pickle', 'Garlic Bijora Pickle', 'Garlic Pickle', 'Green Chilli Pickle', 'Hot Lemon Pickle',
+              'Keri Chana Methi Pickle', 'Keri Gunda Pickle', 'Keri Chunda Pickle', 'Kharek Pickle', 'Lemon Chutney', 'Mango Pickle', 'Masala Ker Pickle', 'Methiya Mango Pickle',
+              'Mix Pickle', 'Rayta Ker Pickle', 'Red Stuff Chilly Pickle', 'Sweet Lemon Pickle', 'Sweet Mango Pickle', 'Sweet Red Chilly Pickle', 'Tikha Gunda Pickle'
+            ]
+          },
+          {
+            id: 'pk-silver', img: 'silver-pickle.PNG', name: 'Silver Pickle', wt: '40gm',
+            desc: 'A small, convenient pack of our classic pickle, perfect for a tangy treat on the go.',
+            varieties: ['Green Chilli Pickle', 'Hot Lemon Pickle', 'Mango Pickle', 'Mixed Pickle']
+          }
+        ]
+      },
+      {
+        id: 'pudding', label: 'Pudding', products: [
+          {
+            id: 'pudding', img: 'caramel-pudding.PNG', name: 'Caramel Pudding', wt: '90gm',
+            desc: 'A rich, delightful caramel pudding mix. Follow our simple instructions to create a silky, smooth dessert at home. A perfect sweet treat for any occasion.'
+          }
+        ]
+      },
+      {
+        id: 'chocolates', label: 'Chocolates', products: [
+          {
+            id: 'choco-l', img: 'choco-lush.PNG', name: 'Choco Lush & Gracia (Large)', wt: '770gm',
+            desc: 'A delightful mix of various chocolates in one pack, offering a treat for every taste bud.',
+            varieties: ['Assorted', 'Hazelnut', 'Milk', 'Orange', 'Pista', 'Strawberry', 'Gracia']
+          },
+          {
+            id: 'choco-s', img: 'assorted-chocolate.PNG', name: 'Choco Lush & Gracia (Small)', wt: '200gm / 250gm',
+            desc: 'A rich and creamy assortment of our finest chocolates, perfect for a sweet indulgence.',
+            varieties: ['Assorted', 'Hazelnut', 'Milk', 'Orange', 'Pista', 'Strawberry', 'Gracia']
+          }
+        ]
+      }
+    ];
 
-            const productModal = document.getElementById("product-modal");
-            const modalImage = document.getElementById("modal-product-image");
-            const modalTitle = document.getElementById("modal-product-title");
-            const modalDetail = document.getElementById("modal-product-detail");
-            const modalDescription = document.getElementById("modal-product-description");
-            const modalCloseBtn = document.getElementById("modal-close-btn");
-            const modalWhatsappBtn = document.getElementById("modal-whatsapp-btn");
-            const modalExtraContent = document.getElementById("modal-extra-content");
-            
-            const testimonialWrapper = document.getElementById('testimonial-wrapper');
-            const dotsContainer = document.getElementById('carousel-dots');
+    /* APP LOGIC */
+    document.addEventListener('DOMContentLoaded', () => {
+      // REMOVE PRELOADER
+      setTimeout(() => document.getElementById('preloader').classList.add('gone'), 1800);
 
-            const contactForm = document.getElementById("contactForm");
-            const formStatusMessage = document.getElementById("formStatusMessage");
-
-            const showAllBtn = document.getElementById('show-all-btn');
-            const clearNavSearch = document.getElementById('clear-nav-search');
-            const clearMobileSearch = document.getElementById('clear-mobile-search');
-
-            // --- 2. PRODUCT DATA ---
-            const productDetails = {
-                'soya-chunks-regular': {
-                    nutrition: "High in protein (52g per 100g), rich in fiber, and a great source of iron and calcium.",
-                    recipes: [
-                        { title: 'Soya Matar Curry', description: 'A classic North Indian curry with soya chunks and green peas in a rich tomato-onion gravy.' },
-                        { title: 'Soya Manchurian', description: 'An Indo-Chinese favorite, with crispy soya chunks tossed in a tangy and spicy Manchurian sauce.' }
-                    ]
-                },
-                'soya-chunks-granules': {
-                    nutrition: "Excellent source of plant-based protein, low in fat, and perfect for vegetarian keema.",
-                    recipes: [
-                        { title: 'Soya Keema Pav', description: 'A delicious and healthy vegetarian take on the classic Mumbai street food.' },
-                        { title: 'Soya Stuffed Paratha', description: 'Wholesome flatbreads stuffed with a savory mixture of soya granules and spices.' }
-                    ]
-                },
-                'tofu-regular': {
-                    nutrition: "A complete protein, containing all nine essential amino acids. Low in calories and rich in minerals.",
-                    recipes: [
-                        { title: 'Tofu Bhurji', description: 'A simple and quick scrambled tofu dish, similar to paneer bhurji, spiced with Indian masalas.' },
-                        { title: 'Palak Tofu', description: 'A healthy and vegan alternative to Palak Paneer, with tofu cubes in a creamy spinach gravy.' }
-                    ]
-                },
-                'gg-paste-1kg': {
-                    recipes: [
-                        { title: 'Vegetable Biryani', description: 'The essential base for a fragrant and flavorful vegetable biryani.' },
-                        { title: 'Chole Masala', description: 'A must-have for creating a rich and aromatic chickpea curry.' }
-                    ]
-                },
-                'samosa-patti': {
-                    recipes: [
-                        { title: 'Classic Aloo Samosa', description: 'Use our pattis to create the perfect crispy shell for the traditional spiced potato and pea filling.' },
-                        { title: 'Paneer Tikka Samosa', description: 'A modern twist with a spicy and tangy paneer filling wrapped in our crispy pattis.' }
-                    ]
-                },
-                'roasted-seviyan': {
-                    recipes: [
-                        { title: 'Meethi Seviyan', description: 'A traditional sweet dish made during festivals, with roasted vermicelli, ghee, sugar, and nuts.' },
-                        { title: 'Seviyan Upma', description: 'A quick and savory breakfast dish made with roasted vermicelli and vegetables.' }
-                    ]
-                },
-                'homemade-pickle-main': {
-                    variants: [
-                        'Amla Murabba Pickle', 'Amla Pickle', 'Bijora Pickle', 'Dryfruit Mix Pickle', 'Garlic Bijora Pickle', 'Garlic Pickle', 'Green Chilli Pickle', 'Hot Lemon Pickle', 'Keri Chana Methi Pickle', 'Keri Gunda Pickle', 'Keri Chunda Pickle', 'Kharek Pickle', 'Lemon Chutney', 'Mango Pickle', 'Masala Ker Pickle', 'Methiya Mango Pickle', 'Mix Pickle', 'Rayta Ker Pickle', 'Red Stuff Chilly Pickle', 'Sweet Lemon Pickle', 'Sweet Mango Pickle', 'Sweet Red Chilly Pickle', 'Tikha Gunda Pickle'
-                    ]
-                },
-                'silver-pickle-main': {
-                    variants: [
-                        'Green Chilli Pickle', 'Hot Lemon Pickle', 'Mango Pickle', 'Mixed Pickle'
-                    ]
-                },
-                'chocolush-gracia-large': {
-                    variants: [
-                        'Assorted', 'Hazelnut', 'Milk', 'Orange', 'Pista', 'Strawberry', 'Gracia'
-                    ]
-                },
-                'chocolush-gracia-small': {
-                    variants: [
-                        'Assorted', 'Hazelnut', 'Milk', 'Orange', 'Pista', 'Strawberry', 'Gracia'
-                    ]
-                }
-            };
-
-            // --- 3. INITIAL PAGE SETUP ---
-            window.addEventListener('load', () => {
-                preloader.classList.add('preloader-hidden');
-                setTimeout(() => {
-                    preloader.style.display = 'none';
-                }, 750);
-            });
-
-            if (history.scrollRestoration) {
-                history.scrollRestoration = 'manual';
-            }
-            window.scrollTo(0, 0);
-            updateLangSelects(navLangSelect.value || 'en');
-
-
-            // --- 4. CORE FUNCTIONS ---
-
-            function normalizeString(str) {
-                return str ? str.toLowerCase().replace(/[\–\-\—]/g, ' ').replace(/\s+/g, ' ').trim() : '';
-            }
-
-            function filterAndDisplay() {
-                const isMobile = window.innerWidth <= 767;
-                const searchTerm = normalizeString(isMobile ? mobileSearchInput.value : navSearchInput.value);
-                const selectedCategoryId = isMobile ? mobileCategorySelect.value : navCategorySelect.value;
-                let firstVisibleCategory = null;
-
-                allGalleryItems.forEach(item => {
-                    const productTitle = normalizeString(item.querySelector(".product-title").textContent);
-                    const parentCategory = item.closest('.product-category');
-                    const categoryTitle = normalizeString(parentCategory.querySelector('h3').textContent);
-                    const itemCategoryId = parentCategory.id;
-                    const searchableText = productTitle + ' ' + categoryTitle;
-
-                    const matchesSearch = searchTerm === '' || searchableText.includes(searchTerm);
-                    const matchesCategory = selectedCategoryId === 'all' || itemCategoryId === selectedCategoryId;
-                    
-                    item.style.display = (matchesSearch && matchesCategory) ? "flex" : "none";
-                });
-
-                productCategories.forEach(category => {
-                    const galleries = category.querySelectorAll('.gallery');
-                    galleries.forEach(gallery => {
-                        const visibleItems = gallery.querySelectorAll('.gallery-item[style*="display: flex"]');
-                        if (visibleItems.length === 1) {
-                            gallery.classList.add('single-item');
-                        } else {
-                            gallery.classList.remove('single-item');
-                        }
-                    });
-                    
-                    const visibleItemsInCategory = category.querySelectorAll('.gallery-item[style*="display: flex"]');
-                    const isVisible = visibleItemsInCategory.length > 0;
-                    category.style.display = isVisible ? "block" : "none";
-
-                    if (isVisible && !firstVisibleCategory) {
-                        firstVisibleCategory = category;
-                    }
-                });
-                
-                if (searchTerm && firstVisibleCategory) {
-                    firstVisibleCategory.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }
-                
-                highlightCategory(selectedCategoryId);
-                updateHomeVisibility();
-            }
-            
-            function highlightCategory(categoryId) {
-                categoryHeaders.forEach(h3 => {
-                    const isMatch = h3.parentElement.id === categoryId && categoryId !== 'all';
-                    h3.classList.toggle("highlight", isMatch);
-                });
-            }
-
-            function updateHomeVisibility() {
-                const isFiltered = navSearchInput.value.trim().length > 0 || navCategorySelect.value !== "all";
-                homeSection.style.opacity = isFiltered ? '0' : '1';
-                homeSection.style.height = isFiltered ? '0' : 'auto';
-                homeSection.style.padding = isFiltered ? '0' : '60px 0';
-                homeSection.style.margin = isFiltered ? '0' : '0 0 20px 0';
-                homeSection.style.overflow = isFiltered ? 'hidden' : 'visible';
-            }
-
-            function openProductModal(item) {
-                modalImage.src = item.querySelector('img')?.src || '';
-                modalTitle.textContent = item.querySelector('.product-title')?.textContent || 'Product';
-                modalDetail.textContent = item.querySelector('.product-detail')?.textContent || '';
-                modalDescription.textContent = item.querySelector('.product-description-box p')?.textContent || '';
-                
-                const productId = item.dataset.productId;
-                const productData = productDetails[productId];
-                modalExtraContent.innerHTML = ''; 
-
-                if (productData) {
-                    let html = '<div class="modal-extra-info">';
-                    if (productData.variants && productData.variants.length > 0) {
-                        html += `<h4>Available Varieties</h4><ul>`;
-                        productData.variants.forEach(variant => {
-                            html += `<li>${variant}</li>`;
-                        });
-                        html += `</ul>`;
-                    }
-                    if (productData.nutrition) {
-                        html += `<h4 style="margin-top: 20px;">Nutritional Highlights</h4><p>${productData.nutrition}</p>`;
-                    }
-                    if (productData.recipes && productData.recipes.length > 0) {
-                        html += `<h4 style="margin-top: 20px;">Recipe Ideas</h4>`;
-                        productData.recipes.forEach(recipe => {
-                            html += `<div class="recipe-item"><h5>${recipe.title}</h5><p>${recipe.description}</p></div>`;
-                        });
-                    }
-                    html += '</div>';
-                    modalExtraContent.innerHTML = html;
-                }
-                productModal.classList.add('visible');
-            }
-
-            function closeProductModal() {
-                productModal.classList.remove('visible');
-            }
-
-            function openNav() {
-                sideMenu.style.width = "250px";
-                hamburgerMenu.classList.add('open');
-                mainContent.classList.add('main-content-blurred');
-            }
-
-            function closeNav() {
-                sideMenu.style.width = "0";
-                hamburgerMenu.classList.remove('open');
-                mainContent.classList.remove('main-content-blurred');
-            }
-
-            function doGTranslate(lang) {
-                const googTr = document.querySelector('#google_translate_element select');
-                if (googTr && googTr.value !== lang) {
-                    googTr.value = lang;
-                    googTr.dispatchEvent(new Event('change'));
-                }
-                updateLangSelects(lang);
-            }
-
-            function updateLangSelects(lang) {
-                if (navLangSelect) navLangSelect.value = lang;
-                if (mobileLangSelect) mobileLangSelect.value = lang;
-            }
-
-            // --- 5. EVENT LISTENERS ---
-
-            [navSearchInput, mobileSearchInput].forEach(input => {
-                input.addEventListener("input", (e) => {
-                    const value = e.target.value;
-                    navSearchInput.value = value;
-                    mobileSearchInput.value = value;
-                    const showClear = value.length > 0;
-                    clearNavSearch.style.display = showClear ? 'block' : 'none';
-                    clearMobileSearch.style.display = showClear ? 'block' : 'none';
-                    if (value.trim() !== '') {
-                        navCategorySelect.value = "all"; 
-                        mobileCategorySelect.value = "all";
-                        showAllBtn.style.display = 'none';
-                    }
-                    filterAndDisplay();
-                });
-            });
-
-            [navCategorySelect, mobileCategorySelect].forEach(select => {
-                select.addEventListener("change", (e) => {
-                    const value = e.target.value;
-                    navCategorySelect.value = value;
-                    mobileCategorySelect.value = value;
-                    navSearchInput.value = ""; 
-                    mobileSearchInput.value = "";
-                    clearNavSearch.style.display = 'none';
-                    clearMobileSearch.style.display = 'none';
-                    showAllBtn.style.display = value === 'all' ? 'none' : 'inline-block';
-                    filterAndDisplay();
-                    if (value !== 'all') {
-                        document.getElementById(value).scrollIntoView({ behavior: 'smooth', block: 'start' });
-                    }
-                    if (e.target === mobileCategorySelect) closeNav();
-                });
-            });
-            
-            navLangSelect.addEventListener('change', (e) => doGTranslate(e.target.value));
-            mobileLangSelect.addEventListener('change', (e) => {
-                doGTranslate(e.target.value);
-                closeNav();
-            });
-
-            hamburgerMenu.addEventListener('click', (e) => {
-                e.stopPropagation(); 
-                sideMenu.style.width === "250px" ? closeNav() : openNav();
-            });
-            sidebarCloseBtn.addEventListener('click', closeNav);
-            sidebarLinks.forEach(link => link.addEventListener('click', closeNav));
-            sideMenu.addEventListener('mouseleave', closeNav);
-
-            document.addEventListener('click', (event) => {
-                if (sideMenu.style.width === "250px" && !sideMenu.contains(event.target) && !hamburgerMenu.contains(event.target)) {
-                    closeNav();
-                }
-            });
-
-            navBrandLink.addEventListener("click", () => {
-                navCategorySelect.value = "all";
-                mobileCategorySelect.value = "all";
-                navSearchInput.value = "";
-                mobileSearchInput.value = "";
-                showAllBtn.style.display = 'none';
-                clearNavSearch.style.display = 'none';
-                clearMobileSearch.style.display = 'none';
-                filterAndDisplay();
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            });
-
-            showAllBtn.addEventListener('click', () => {
-                navCategorySelect.value = "all";
-                mobileCategorySelect.value = "all";
-                navSearchInput.value = "";
-                mobileSearchInput.value = "";
-                showAllBtn.style.display = 'none';
-                filterAndDisplay();
-            });
-
-            function clearSearch(inputElement, clearButtonElement) {
-                inputElement.value = '';
-                clearButtonElement.style.display = 'none';
-                filterAndDisplay();
-                inputElement.focus();
-            }
-            clearNavSearch.addEventListener('click', () => clearSearch(navSearchInput, clearNavSearch));
-            clearMobileSearch.addEventListener('click', () => clearSearch(mobileSearchInput, clearMobileSearch));
-
-            allGalleryItems.forEach(item => item.addEventListener('click', () => openProductModal(item)));
-            modalCloseBtn.addEventListener('click', closeProductModal);
-            productModal.addEventListener('click', (e) => { if (e.target === productModal) closeProductModal(); });
-
-            contactForm.addEventListener('submit', async function(e) {
-                e.preventDefault();
-                const data = new FormData(contactForm);
-                formStatusMessage.textContent = "Sending...";
-                formStatusMessage.classList.add('show');
-                try {
-                    const response = await fetch("https://formspree.io/f/mnnzeaaj", { method: 'POST', body: data, headers: { 'Accept': 'application/json' } });
-                    formStatusMessage.textContent = response.ok ? "Message Sent!" : "Error! Please try again.";
-                    if (response.ok) contactForm.reset();
-                } catch (error) {
-                    formStatusMessage.textContent = "Network error. Please try again.";
-                } finally {
-                    setTimeout(() => formStatusMessage.classList.remove('show'), 3000);
-                }
-            });
-
-            modalWhatsappBtn.addEventListener('click', function(event) {
-                event.preventDefault();
-                const message = `Hello, I would like to order the product: ${modalTitle.textContent} (${modalDetail.textContent}). Please provide more details.`;
-                const whatsappUrl = `https://wa.me/918850401035?text=${encodeURIComponent(message)}`;
-                window.open(whatsappUrl, '_blank');
-            });
-            
-            let currentIndex = 0;
-            function showTestimonial(index) {
-                const testimonials = testimonialWrapper.querySelectorAll('.testimonial-card');
-                if (testimonials.length === 0) return;
-                currentIndex = (index + testimonials.length) % testimonials.length;
-                testimonialWrapper.style.transform = `translateX(-${currentIndex * 100}%)`;
-                dotsContainer.querySelectorAll('.dot').forEach((dot, i) => dot.classList.toggle('active', i === currentIndex));
-            }
-            if (testimonialWrapper) {
-                const testimonials = testimonialWrapper.querySelectorAll('.testimonial-card');
-                if (testimonials.length > 0) {
-                    dotsContainer.innerHTML = Array.from(testimonials).map((_, i) => `<span class="dot" data-index="${i}"></span>`).join('');
-                    dotsContainer.querySelectorAll('.dot').forEach(dot => dot.addEventListener('click', (e) => showTestimonial(parseInt(e.target.dataset.index))));
-                    showTestimonial(0);
-                    setInterval(() => showTestimonial(currentIndex + 1), 5000);
-                }
-            }
-
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
-                    } else {
-                        entry.target.classList.remove('visible');
-                    }
-                });
-            }, { threshold: 0.1 });
-            document.querySelectorAll('.animate-on-scroll').forEach(element => observer.observe(element));
-
-            filterAndDisplay(); 
+      // SCROLL REVEAL OBSERVER
+      const obs = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            e.target.classList.add('active');
+            // Trigger counters if it's a counter
+            if (e.target.querySelector('.counter')) startCounters(e.target);
+            obs.unobserve(e.target);
+          }
         });
-    </script>
+      }, { threshold: 0.1 });
+      document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+      // COUNTER LOGIC
+      function startCounters(parent) {
+        parent.querySelectorAll('.counter').forEach(c => {
+          const target = +c.dataset.target;
+          const duration = 2000;
+          const step = target / (duration / 16);
+          let cur = 0;
+          const up = () => {
+            cur += step;
+            if (cur < target) {
+              c.textContent = Math.ceil(cur) + "+";
+              requestAnimationFrame(up);
+            } else {
+              c.textContent = target + "+";
+            }
+          };
+          up();
+        });
+      }
+
+      // NAVBAR SCROLL EFFECT
+      window.addEventListener('scroll', () => {
+        const nav = document.getElementById('navbar');
+        if (window.scrollY > 50) nav.classList.add('scrolled');
+        else nav.classList.remove('scrolled');
+      });
+
+      // SPOTLIGHT CURSOR LOGIC
+      function wrapSpotlight(root) {
+        // Expanded selection for spotlight effect - REMOVED generic 'span' to prevent double-wrapping issues
+        root.querySelectorAll('h1, h2, h3, h4, p, a, .brand-main, .brand-sub, .hero-tag, .slide-name, .slide-badge, .sec-sub').forEach(el => {
+          if (el.dataset.wrapped || el.closest('.slide-card') || el.classList.contains('material-icons')) return;
+          el.dataset.wrapped = '1';
+          // Only wrap text nodes to avoid breaking HTML structure
+          const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT, null, false);
+          const textNodes = [];
+          while (walker.nextNode()) textNodes.push(walker.currentNode);
+
+          textNodes.forEach(node => {
+            if (!node.textContent.trim()) return;
+            const frag = document.createDocumentFragment();
+            [...node.textContent].forEach(ch => {
+              const span = document.createElement('span');
+              span.className = ch === ' ' ? 'char space' : 'char';
+              span.textContent = ch;
+              frag.appendChild(span);
+            });
+            node.replaceWith(frag);
+          });
+        });
+      }
+      wrapSpotlight(document.body);
+
+      /* CURSOR LOGIC REMOVED */
+
+      // MAGNETIC BUTTONS
+      document.querySelectorAll('.btn-p, .nav-cta').forEach(btn => {
+        btn.addEventListener('mousemove', (e) => {
+          const rect = btn.getBoundingClientRect();
+          const x = e.clientX - rect.left - rect.width / 2;
+          const y = e.clientY - rect.top - rect.height / 2;
+
+          btn.style.transform = `translate(${x * 0.3}px, ${y * 0.3}px)`;
+        });
+
+        btn.addEventListener('mouseleave', () => {
+          btn.style.transform = 'translate(0, 0)';
+        });
+      });
+
+      // BUILD SLIDESHOW (HERO)
+      // BUILD MOVIE REEL
+      const reelTrack = document.getElementById('reel-track');
+
+      const slideItems = [
+        { img: 'regular-soyabox.PNG', name: 'Soya Chunks', tag: 'BESTSELLER' },
+        { img: 'home_made-pickle.PNG', name: 'Pickles', tag: 'AUTHENTIC' },
+        { img: 'samosa-patti.PNG', name: 'Samosa Patti', tag: 'CRISPY' },
+        { img: 'ggpaste-1kg_jar.PNG', name: 'GG Paste', tag: 'CHEF CHOICE' },
+        { img: 'regular-tofu.jpg', name: 'Fresh Tofu', tag: 'HEALTHY' }
+      ];
+
+      // Duplicate list for infinite loop (4 sets for smooth continuous scroll on wide screens)
+      const reelData = [...slideItems, ...slideItems, ...slideItems, ...slideItems];
+
+      reelData.forEach(item => {
+        const div = document.createElement('div');
+        div.className = 'reel-item';
+        div.innerHTML = `
+            <img src="${item.img}" class="reel-img" onerror="this.src='https://via.placeholder.com/300?text=Product'">
+            <!-- Text Removed -->
+          `;
+        reelTrack.appendChild(div);
+      });
+
+
+      // BUILD PRODUCT LIST
+      const pList = document.getElementById('product-list');
+      // Fix: Use 'products' variable instead of old 'CATS'
+      products.forEach((cat, idx) => {
+        const blk = document.createElement('div');
+        blk.className = 'cblk';
+        blk.dataset.cat = cat.id; // For filtering
+
+        // Header
+        const hdr = document.createElement('div');
+        hdr.className = `chdr ${idx < 3 ? 'open' : ''}`; // Open first few by default
+        hdr.innerHTML = `<span class="chdr-ttl">${cat.label}</span><div class="chdr-icon"><i class="fas fa-chevron-right"></i></div>`;
+
+        // Body
+        const bdy = document.createElement('div');
+        bdy.className = `cbdy ${idx < 3 ? 'open' : ''}`;
+
+        const grid = document.createElement('div');
+        grid.className = 'pgrid';
+
+        cat.products.forEach((p, i) => {
+          const card = document.createElement('div');
+          card.className = 'pcard';
+          card.onclick = () => openModal(p);
+
+          // Staggered Entry
+          card.style.animationDelay = `${(i * 0.05)}s`;
+
+          // 3D Tilt Logic
+          card.addEventListener('mousemove', (e) => {
+            // Disable on mobile/touch if needed, or rely on hover capabilities
+            if (window.innerWidth < 1024) return;
+
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+
+            // Calculate rotation (max 8deg)
+            const xRot = ((y / rect.height) - 0.5) * -8;
+            const yRot = ((x / rect.width) - 0.5) * 8;
+
+            // Move glare
+            const glare = card.querySelector('.pcard-glare');
+            if (glare) {
+              glare.style.background = `radial-gradient(circle at ${x}px ${y}px, rgba(255,255,255,0.7), transparent 70%)`;
+              glare.style.opacity = '1';
+            }
+
+            // Instant transform for responsiveness
+            card.style.transition = 'none';
+            card.style.transform = `perspective(1000px) rotateX(${xRot}deg) rotateY(${yRot}deg) scale3d(1.02, 1.02, 1.02)`;
+          });
+
+          card.addEventListener('mouseleave', () => {
+            // Smooth reset
+            card.style.transition = 'transform 0.5s ease';
+            card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale3d(1, 1, 1)';
+
+            const glare = card.querySelector('.pcard-glare');
+            if (glare) glare.style.opacity = '0';
+          });
+
+          card.innerHTML = `
+        <div class="pcard-glare"></div>
+        <div class="pcard-img"><img src="${p.img}" alt="${p.name}" loading="lazy" onerror="this.src='https://via.placeholder.com/200?text=${p.name}'"></div>
+        <div class="pcard-info">
+          <span class="pcard-tag-pill">SERIAL FOODS</span>
+          <div class="pcard-name">${p.name}</div>
+          <div class="pcard-wt">${p.wt}</div>
+        </div>
+      `;
+          grid.appendChild(card);
+        });
+
+        bdy.appendChild(grid);
+        blk.appendChild(hdr);
+        blk.appendChild(bdy);
+        pList.appendChild(blk);
+
+        // Accordion Logic
+        hdr.addEventListener('click', () => {
+          const isOpen = hdr.classList.contains('open');
+          hdr.classList.toggle('open', !isOpen);
+          bdy.classList.toggle('open', !isOpen);
+        });
+      });
+
+      // FILTER LOGIC
+      window.filterProducts = (filter) => {
+        // Update Chips
+        document.querySelectorAll('.chip').forEach(c => {
+          if (c.dataset.filter === filter) c.classList.add('active');
+          else c.classList.remove('active');
+        });
+
+        // Filter Blocks
+        document.querySelectorAll('.cblk').forEach(blk => {
+          if (filter === 'all' || blk.dataset.cat === filter) {
+            blk.style.display = 'block';
+            if (filter !== 'all') {
+              // Open the accordion if specifically selected
+              blk.querySelector('.chdr').classList.add('open');
+              blk.querySelector('.cbdy').classList.add('open');
+            }
+          } else {
+            blk.style.display = 'none';
+          }
+        });
+      };
+
+      // CLICK ON CHIPS
+      /* FILTER CLIP LISTENERS REMOVED (UI DELETED) */
+
+      // GLOBAL FUNC FOR DROPDOWN
+      window.filterAndScroll = (catId) => {
+        // filterProducts(catId); // No more filtering needed if we show all
+        // Instead, scroll to the specific category block
+        const blk = document.querySelector(`.cblk[data-cat="${catId}"]`);
+        if (blk) {
+          const headerOffset = 100; // Adjust for fixed header
+          const elementPosition = blk.getBoundingClientRect().top;
+          const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: "smooth"
+          });
+
+          // Open it
+          blk.querySelector('.chdr').classList.add('open');
+          blk.querySelector('.cbdy').classList.add('open');
+        }
+      };
+
+      // MODAL LOGIC
+      const modal = document.getElementById('pmodal');
+      const mName = document.getElementById('m-name');
+      const mWt = document.getElementById('m-wt');
+      const mDesc = document.getElementById('m-desc');
+      const mImg = document.getElementById('m-img');
+      const mChips = document.getElementById('m-chips');
+      const mWa = document.getElementById('m-wa');
+      const mExtra = document.getElementById('m-extra');
+
+      window.openModal = (p) => {
+        mName.textContent = p.name;
+        mWt.textContent = p.wt;
+        mDesc.textContent = p.desc;
+        mImg.src = p.img;
+        mImg.onerror = function () { this.src = 'https://via.placeholder.com/200?text=' + p.name };
+
+        mChips.innerHTML = '';
+        if (p.variants) {
+          p.variants.forEach(v => {
+            const s = document.createElement('span');
+            s.className = 'm-chip';
+            s.textContent = v;
+            mChips.appendChild(s);
+          });
+        }
+
+        // Populate Extra Info
+        let html = '';
+
+        // Varieties
+        if (p.varieties && p.varieties.length > 0) {
+          html += `<h4>Available Varieties</h4><ul>`;
+          p.varieties.forEach(v => html += `<li>${v}</li>`);
+          html += `</ul>`;
+        }
+
+        // Nutrition
+        if (p.nutrition) {
+          html += `<h4>Nutritional Highlights</h4><p>${p.nutrition}</p>`;
+        }
+
+        // Recipes
+        if (p.recipes && p.recipes.length > 0) {
+          html += `<h4>Recipe Ideas</h4>`;
+          p.recipes.forEach(r => {
+            html += `<div class="recipe-item">
+                           <h5>${r.title}</h5>
+                           <p>${r.desc}</p>
+                         </div>`;
+          });
+        }
+
+        mExtra.innerHTML = html;
+
+        modal.classList.add('open');
+        document.body.style.overflow = 'hidden';
+
+        // Update WhatsApp Link
+        const msg = `Hello, I would like to order: ${p.name} (${p.wt}). Please provided details.`;
+        mWa.href = `https://wa.me/918850401035?text=${encodeURIComponent(msg)}`;
+      };
+
+      document.getElementById('m-close').onclick = () => modal.classList.remove('open');
+      modal.onclick = (e) => { if (e.target === modal) modal.classList.remove('open'); }
+
+      // DRAWER LOGIC
+      const ham = document.getElementById('ham');
+      const drawer = document.getElementById('drawer');
+      const dClose = document.getElementById('d-close');
+
+      ham.onclick = () => drawer.classList.add('open');
+      dClose.onclick = () => drawer.classList.remove('open');
+      window.closeDrawer = () => drawer.classList.remove('open');
+
+      // FORCE SCROLL TO TOP ON LOAD
+      window.onbeforeunload = function () {
+        window.scrollTo(0, 0);
+      }
+      if (history.scrollRestoration) {
+        history.scrollRestoration = 'manual';
+      }
+
+    });
+  </script>
 </body>
+
 </html>

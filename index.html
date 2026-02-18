@@ -12,6 +12,7 @@
     rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <style>
+    /* ─── VARIABLES ──────────────────────────────────────── */
     :root {
       --bg: #f4f1ea;
       --text: #1a1a1a;
@@ -20,61 +21,21 @@
       --white: #fff;
       --muted: #666;
       --border: rgba(0, 0, 0, 0.1);
-
       --ff-d: 'Bebas Neue', sans-serif;
       --ff-b: 'Syne', sans-serif;
-      --ff-s: 'Instrument Serif', serif;
+      --ff-s: 'Crimson Pro', serif;
     }
 
     body.dark-mode {
-      --bg: #121212;
+      --bg: #0f0f0f;
       --text: #e0e0e0;
-      --black: #fff;
-      /* Invert black/white for mainly text/borders */
-      --white: #1e1e1e;
-      /* Cards become dark grey */
-      --muted: #aaa;
-      --border: rgba(255, 255, 255, 0.1);
+      --black: #f0f0f0;
+      --white: #1a1a1a;
+      --muted: #999;
+      --border: rgba(255, 255, 255, 0.08);
     }
 
-    /* Specific overrides for Dark Mode */
-    body.dark-mode .pcard-img {
-      background: #252525;
-    }
-
-    body.dark-mode .pcard:hover .pcard-img {
-      background: #2a2a2a;
-    }
-
-    body.dark-mode .reel-item {
-      border-color: var(--black);
-    }
-
-    body.dark-mode nav {
-      background: rgba(18, 18, 18, 0.95);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-    }
-
-    body.dark-mode #partners,
-    body.dark-mode .con-l,
-    body.dark-mode .con-r {
-      background: #1a1a1a;
-      /* Dark background for contact/partners sections */
-      border-color: rgba(255, 255, 255, 0.05);
-    }
-
-    body.dark-mode .hero-r {
-      background: #1a1a1a;
-    }
-
-    body.dark-mode .part-item {
-      color: #444;
-    }
-
-    body.dark-mode .part-item:hover {
-      color: var(--orange);
-    }
-
+    /* ─── RESET ──────────────────────────────────────────── */
     *,
     *::before,
     *::after {
@@ -94,12 +55,85 @@
       font-family: var(--ff-b);
       overflow-x: hidden;
       -webkit-font-smoothing: antialiased;
-      cursor: none;
-      /* Hide default cursor */
       line-height: 1.6;
     }
 
-    /* UTILS */
+    /* ─── CURSOR NONE ON DESKTOP ─────────────────────────── */
+    @media (hover: hover) and (pointer: fine) {
+
+      body,
+      body * {
+        cursor: none !important;
+      }
+    }
+
+    /* ── LETTER SPLIT EFFECT ────────────────────────────────
+       Each .sp-char is one character, wrapped by JS.
+       Zoom + color swap happens via JS updating CSS vars.
+    ──────────────────────────────────────────────────────── */
+    .sp-word {
+      display: inline-block;
+      white-space: nowrap;
+    }
+
+    .sp-char {
+      display: inline-block;
+      transition: transform 0.12s cubic-bezier(0.34, 1.56, 0.64, 1),
+        color 0.12s ease;
+      will-change: transform;
+      /* preserve whitespace chars */
+    }
+
+    /* ─── CUSTOM CURSOR ──────────────────────────────────── */
+    .cursor-dot,
+    .cursor-ring {
+      position: fixed;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      z-index: 999999;
+      will-change: transform;
+      transform: translate(-999px, -999px);
+    }
+
+    .cursor-dot {
+      width: 7px;
+      height: 7px;
+      background: var(--orange);
+      border-radius: 50%;
+      box-shadow: 0 0 10px var(--orange), 0 0 24px rgba(232, 102, 10, 0.5);
+    }
+
+    .cursor-ring {
+      width: 38px;
+      height: 38px;
+      border: 2px solid rgba(232, 102, 10, 0.65);
+      border-radius: 50%;
+      background: rgba(232, 102, 10, 0.05);
+      transition: width .18s ease, height .18s ease, background .18s ease, border-color .18s ease;
+    }
+
+    body.hovering .cursor-ring {
+      width: 58px;
+      height: 58px;
+      background: rgba(232, 102, 10, 0.1);
+      border-color: var(--orange);
+    }
+
+    @media (hover: none),
+    (max-width: 1024px) {
+
+      .cursor-dot,
+      .cursor-ring {
+        display: none !important;
+      }
+    }
+
+    nav {
+      z-index: 9000;
+    }
+
+    /* ─── UTILS ──────────────────────────────────────────── */
     .container {
       max-width: 1400px;
       margin: 0 auto;
@@ -110,56 +144,33 @@
       padding: 100px 0;
     }
 
-    .char {
-      display: inline-block;
-      transition: color .1s ease, text-shadow .1s ease;
+    .sec-sub {
+      font-size: .7rem;
+      font-weight: 700;
+      color: var(--orange);
+      letter-spacing: .2em;
+      display: block;
+      margin-bottom: 14px;
+      text-transform: uppercase;
     }
 
-    .char.space {
-      display: inline;
+    .sec-h2 {
+      font-family: var(--ff-d);
+      font-size: clamp(2.8rem, 5vw, 4.5rem);
+      line-height: 1;
+      margin-bottom: 24px;
+      color: var(--black);
     }
 
-    /* CUSTOM CURSOR */
-    .cursor-dot,
-    .cursor-circle {
-      position: fixed;
-      top: 0;
-      left: 0;
-      transform: translate(-50%, -50%);
-      pointer-events: none;
-      z-index: 9999;
+    .sec-h2 span {
+      color: var(--orange);
     }
 
-    .cursor-dot {
-      width: 8px;
-      height: 8px;
-      background: var(--black);
-      border-radius: 50%;
-    }
-
-    .cursor-circle {
-      width: 40px;
-      height: 40px;
-      /* Explicit border as requested */
-      border: 1px solid var(--black);
-      border-radius: 50%;
-      transition: width 0.2s, height 0.2s, background-color 0.2s, transform 0.1s ease-out;
-      box-shadow: none;
-    }
-
-    /* Hover state for interactive elements */
-    body.hovering .cursor-circle {
-      width: 60px;
-      height: 60px;
-      background-color: rgba(232, 102, 10, 0.05);
-      border-color: var(--orange);
-    }
-
-    /* SCROLL REVEAL CLASS */
+    /* ─── SCROLL REVEAL ──────────────────────────────────── */
     .reveal {
       opacity: 0;
-      transform: translateY(40px);
-      transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+      transform: translateY(36px);
+      transition: opacity .8s ease, transform .8s cubic-bezier(.16, 1, .3, 1);
     }
 
     .reveal.active {
@@ -167,7 +178,17 @@
       transform: translateY(0);
     }
 
-    /* PRELOADER */
+    /* ─── NOISE ──────────────────────────────────────────── */
+    .noise-overlay {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 9001;
+      opacity: .04;
+      background: url('data:image/svg+xml;utf8,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="n"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23n)"/%3E%3C/svg%3E');
+    }
+
+    /* ─── PRELOADER ──────────────────────────────────────── */
     #preloader {
       position: fixed;
       inset: 0;
@@ -186,23 +207,10 @@
       pointer-events: none;
     }
 
-    /* NOISE OVERLAY */
-    .noise-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      z-index: 9000;
-      opacity: 0.05;
-      background: url('data:image/svg+xml;utf8,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)" opacity="1"/%3E%3C/svg%3E');
-    }
-
     .pre-big {
       font-family: var(--ff-d);
       font-size: clamp(3.5rem, 9vw, 8rem);
-      line-height: 0.9;
+      line-height: .9;
       text-align: center;
       color: var(--black);
       margin-bottom: 20px;
@@ -216,15 +224,15 @@
     .pre-row span {
       display: block;
       transform: translateY(110%);
-      animation: textRise 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      animation: textRise 1s cubic-bezier(.16, 1, .3, 1) forwards;
     }
 
     .pre-row:nth-child(1) span {
-      animation-delay: 0.1s;
+      animation-delay: .1s;
     }
 
     .pre-row:nth-child(2) span {
-      animation-delay: 0.2s;
+      animation-delay: .2s;
       color: var(--orange);
     }
 
@@ -258,25 +266,28 @@
       }
     }
 
-    /* NAV */
+    /* ─── NAV ────────────────────────────────────────────── */
     nav {
       position: fixed;
       top: 0;
       left: 0;
       right: 0;
-      z-index: 7000;
-      background: rgba(255, 255, 255, 0.9);
+      background: rgba(244, 241, 234, .95);
       backdrop-filter: blur(16px);
-      border-bottom: 1px solid rgba(0, 0, 0, 0.06);
-      height: 90px;
+      border-bottom: 1px solid rgba(0, 0, 0, .06);
+      height: 76px;
       display: flex;
       align-items: center;
       transition: all .3s ease;
     }
 
+    body.dark-mode nav {
+      background: rgba(15, 15, 15, .96);
+      border-color: rgba(255, 255, 255, .05);
+    }
+
     nav.scrolled {
-      background: rgba(255, 255, 255, 0.98);
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, .08);
     }
 
     .nav-in {
@@ -290,50 +301,46 @@
     .nav-brand {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
       text-decoration: none;
       color: var(--black);
-      cursor: none;
     }
 
     .nav-brand img {
-      width: 50px;
-      height: 50px;
+      width: 46px;
+      height: 46px;
       object-fit: contain;
-      /* Removed border for cleaner look */
     }
 
     .nav-brand-txt {
       font-family: var(--ff-d);
-      line-height: 0.9;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
+      line-height: .9;
     }
 
     .brand-main {
-      font-size: 1.6rem;
+      font-size: 1.5rem;
       letter-spacing: .03em;
       color: var(--black);
     }
 
     .brand-sub {
-      font-size: 0.65rem;
+      font-size: .6rem;
       color: var(--orange);
-      letter-spacing: 0.05em;
+      letter-spacing: .08em;
       font-weight: 700;
       text-transform: uppercase;
       margin-top: 4px;
+      display: block;
     }
 
     .nav-mid {
       display: flex;
-      gap: 32px;
+      gap: 28px;
+      align-items: center;
     }
 
-    .nav-mid a {
-      font-family: var(--ff-b);
-      font-size: .85rem;
+    .nav-mid>a {
+      font-size: .82rem;
       font-weight: 600;
       text-transform: uppercase;
       text-decoration: none;
@@ -341,13 +348,12 @@
       letter-spacing: .05em;
       transition: color .2s;
       position: relative;
-      cursor: none;
     }
 
-    .nav-mid a::after {
+    .nav-mid>a::after {
       content: '';
       position: absolute;
-      bottom: -4px;
+      bottom: -3px;
       left: 0;
       width: 0;
       height: 2px;
@@ -355,54 +361,74 @@
       transition: width .3s;
     }
 
-    .nav-mid a:hover::after {
+    .nav-mid>a:hover {
+      color: var(--orange);
+    }
+
+    .nav-mid>a:hover::after {
       width: 100%;
     }
 
     .nav-right {
       display: flex;
       align-items: center;
-      gap: 20px;
+      gap: 16px;
     }
 
-    .nav-cta {
-      background: var(--black);
-      color: var(--white);
-      padding: 12px 28px;
-      font-size: .8rem;
+    .catalogue-btn {
+      font-size: .78rem;
       font-weight: 700;
-      letter-spacing: .05em;
+      text-transform: uppercase;
+      color: var(--black);
       text-decoration: none;
-      border-radius: 50px;
-      transition: all .3s ease;
-      border: 2px solid var(--black);
-      cursor: none;
+      border-bottom: 2px solid var(--orange);
+      padding-bottom: 1px;
+      transition: color .2s;
+      white-space: nowrap;
     }
 
-    .nav-cta:hover {
-      background: transparent;
-      color: var(--black);
-      transform: translateY(-2px);
+    .catalogue-btn:hover {
+      color: var(--orange);
+    }
+
+    .theme-toggle {
+      background: none;
+      border: 1px solid var(--border);
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text);
+      transition: all .3s;
+      flex-shrink: 0;
+    }
+
+    .theme-toggle:hover {
+      background: var(--text);
+      color: var(--bg);
     }
 
     .ham {
       display: none;
       flex-direction: column;
-      gap: 6px;
-      cursor: pointer;
-      padding: 10px;
+      gap: 5px;
+      padding: 8px;
+      background: none;
+      border: none;
     }
 
     .ham span {
       display: block;
-      width: 24px;
+      width: 22px;
       height: 2px;
       background: var(--black);
       transition: all .3s;
     }
 
     .ham.open span:nth-child(1) {
-      transform: translateY(8px) rotate(45deg);
+      transform: translateY(7px) rotate(45deg);
     }
 
     .ham.open span:nth-child(2) {
@@ -410,48 +436,229 @@
     }
 
     .ham.open span:nth-child(3) {
-      transform: translateY(-8px) rotate(-45deg);
+      transform: translateY(-7px) rotate(-45deg);
     }
 
-    /* HERO */
+    /* ─── DROPDOWN ───────────────────────────────────────── */
+    .nav-dropdown {
+      position: relative;
+      height: 76px;
+      display: flex;
+      align-items: center;
+    }
+
+    .nav-drop-btn {
+      font-size: .82rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--black);
+      letter-spacing: .05em;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      height: 100%;
+      transition: color .2s;
+    }
+
+    .nav-drop-btn:hover {
+      color: var(--orange);
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--white);
+      min-width: 210px;
+      box-shadow: 0 12px 36px rgba(0, 0, 0, .12);
+      border-top: 3px solid var(--orange);
+      border-radius: 0 0 10px 10px;
+      z-index: 7001;
+      padding: 8px 0;
+      flex-direction: column;
+    }
+
+    .nav-dropdown:hover .dropdown-content {
+      display: flex;
+    }
+
+    .dropdown-content a {
+      padding: 13px 22px;
+      text-decoration: none;
+      color: var(--text);
+      font-size: 1rem;
+      font-family: var(--ff-s);
+      transition: all .2s;
+      border-bottom: 1px solid rgba(0, 0, 0, .04);
+    }
+
+    .dropdown-content a:last-child {
+      border-bottom: none;
+    }
+
+    .dropdown-content a:hover {
+      background: rgba(232, 102, 10, .05);
+      color: var(--orange);
+      padding-left: 30px;
+    }
+
+    /* ─── DRAWER ─────────────────────────────────────────── */
+    .drawer {
+      position: fixed;
+      top: 0;
+      right: -100%;
+      width: min(360px, 100%);
+      height: 100%;
+      background: var(--white);
+      z-index: 8000;
+      transition: right .4s cubic-bezier(.16, 1, .3, 1);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 40px 32px;
+      box-shadow: -20px 0 60px rgba(0, 0, 0, .15);
+    }
+
+    .drawer.open {
+      right: 0;
+    }
+
+    .d-close {
+      position: absolute;
+      top: 24px;
+      right: 24px;
+      font-size: 1.8rem;
+      background: none;
+      border: none;
+      color: var(--black);
+      transition: transform .3s, color .3s;
+    }
+
+    .d-close:hover {
+      transform: rotate(90deg);
+      color: var(--orange);
+    }
+
+    .d-links {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .d-links a {
+      display: block;
+      font-family: var(--ff-d);
+      font-size: 2.6rem;
+      color: var(--black);
+      text-decoration: none;
+      transition: all .25s;
+      transform: translateX(20px);
+      opacity: 0;
+      border-bottom: 1px solid var(--border);
+      padding: 10px 0;
+    }
+
+    .drawer.open .d-links a {
+      transform: translateX(0);
+      opacity: 1;
+    }
+
+    .drawer.open .d-links a:nth-child(1) {
+      transition-delay: .15s;
+    }
+
+    .drawer.open .d-links a:nth-child(2) {
+      transition-delay: .22s;
+    }
+
+    .drawer.open .d-links a:nth-child(3) {
+      transition-delay: .29s;
+    }
+
+    .drawer.open .d-links a:nth-child(4) {
+      transition-delay: .36s;
+    }
+
+    .d-links a:hover {
+      color: var(--orange);
+      padding-left: 8px;
+    }
+
+    .d-contact {
+      margin-top: 32px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+    }
+
+    .d-contact a {
+      font-size: .9rem;
+      color: var(--muted);
+      text-decoration: none;
+      display: block;
+      margin-bottom: 8px;
+      font-family: var(--ff-b);
+    }
+
+    .d-contact a:hover {
+      color: var(--orange);
+    }
+
+    /* Overlay behind drawer */
+    .drawer-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, .4);
+      z-index: 7999;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .3s;
+    }
+
+    .drawer-overlay.active {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    /* ─── HERO ───────────────────────────────────────────── */
     #hero {
-      padding-top: 90px;
+      padding-top: 76px;
       min-height: 100vh;
       display: grid;
       grid-template-columns: 1fr 1fr;
       align-items: center;
-      border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+      border-bottom: 1px solid rgba(0, 0, 0, .08);
       overflow: hidden;
     }
 
     .hero-l {
-      padding: 60px 80px;
+      padding: 60px 70px 60px 60px;
       display: flex;
       flex-direction: column;
       justify-content: center;
-      z-index: 10;
     }
 
     .hero-tag {
       display: inline-block;
-      padding: 6px 12px;
-      background: rgba(232, 102, 10, 0.1);
+      padding: 5px 11px;
+      background: rgba(232, 102, 10, .1);
       color: var(--orange);
-      font-size: .7rem;
+      font-size: .68rem;
       font-weight: 700;
       letter-spacing: .1em;
       border-radius: 4px;
-      margin-bottom: 24px;
+      margin-bottom: 22px;
       align-self: flex-start;
     }
 
     .hero-h1 {
       font-family: var(--ff-d);
-      font-size: clamp(4rem, 7vw, 7.5rem);
-      line-height: 0.9;
-      margin-bottom: 24px;
+      font-size: clamp(4rem, 7.5vw, 8rem);
+      line-height: .88;
+      margin-bottom: 22px;
       color: var(--black);
-      cursor: none;
     }
 
     .hero-h1 span {
@@ -460,535 +667,256 @@
 
     .hero-sub {
       font-family: var(--ff-s);
-      font-size: 1.35rem;
-      line-height: 1.6;
+      font-size: 1.25rem;
+      line-height: 1.65;
       color: var(--muted);
-      margin-bottom: 40px;
-      max-width: 480px;
+      margin-bottom: 38px;
+      max-width: 460px;
     }
 
     .hero-btns {
       display: flex;
-      gap: 16px;
+      gap: 14px;
+      flex-wrap: wrap;
     }
 
     .btn-p {
       background: var(--orange);
-      color: var(--white);
-      padding: 16px 38px;
+      color: #fff;
+      padding: 15px 36px;
       font-family: var(--ff-b);
-      font-size: .9rem;
+      font-size: .88rem;
       font-weight: 700;
       text-decoration: none;
       border-radius: 4px;
-      transition: all .2s;
-      box-shadow: 0 10px 20px -5px rgba(232, 102, 10, 0.4);
+      transition: all .25s;
       border: 2px solid var(--orange);
-      cursor: none;
+      box-shadow: 0 8px 20px -4px rgba(232, 102, 10, .4);
     }
 
     .btn-p:hover {
       background: transparent;
       color: var(--orange);
       transform: translateY(-3px);
-      box-shadow: 0 15px 30px -5px rgba(232, 102, 10, 0.2);
     }
 
     .hero-r {
-      flex: 1;
       height: 100%;
+      min-height: 500px;
       background: #eaddcf;
       position: relative;
       display: flex;
       align-items: center;
       justify-content: center;
       overflow: hidden;
-      /* Ensure reel doesn't spill over */
+    }
+
+    body.dark-mode .hero-r {
+      background: #1a1612;
     }
 
     .hero-r::before {
       content: '';
       position: absolute;
-      width: 600px;
-      height: 600px;
-      background: rgba(232, 102, 10, 0.05);
+      width: 500px;
+      height: 500px;
+      background: rgba(232, 102, 10, .06);
       border-radius: 50%;
-      filter: blur(80px);
+      filter: blur(60px);
       animation: pulse 8s infinite alternate;
     }
 
     @keyframes pulse {
       0% {
-        transform: scale(1);
+        transform: scale(1)
       }
 
       100% {
-        transform: scale(1.1);
+        transform: scale(1.12)
       }
     }
 
-    /* MOVIE REEL SLIDESHOW */
+    /* ─── REEL ───────────────────────────────────────────── */
     .reel-wrapper {
       position: absolute;
       width: 100%;
-      /* Fix alignment to container width */
       height: 100%;
       display: flex;
       align-items: center;
-      transform: rotate(-3deg) scale(1.1);
-      /* Scale up slightly to cover corners if needed */
+      transform: rotate(-4deg) scale(1.15);
       pointer-events: none;
-      /* Make non-interactable as requested */
       user-select: none;
+      overflow: hidden;
     }
 
     .reel-track {
       display: flex;
-      gap: 0;
-      /* Joint flow */
-      /* Continuous scroll logic */
-      animation: reelScroll 15s linear infinite;
-      /* Faster speed */
+      animation: reelScroll 18s linear infinite;
       will-change: transform;
-    }
-
-    .reel-track:hover {
-      /* No pause on hover for continuous flow feel? Or keep it? keeping it for usability */
-      animation-play-state: paused;
     }
 
     @keyframes reelScroll {
       0% {
-        transform: translateX(0);
+        transform: translateX(0)
       }
 
       100% {
-        transform: translateX(-25%);
+        transform: translateX(-25%)
       }
     }
 
     .reel-item {
-      position: relative;
-      width: 300px;
-      height: 420px;
+      width: 240px;
+      height: 360px;
       flex-shrink: 0;
       overflow: hidden;
-      /* The Slant + Black Border */
-      transform: skewX(-12deg);
-      border: 3px solid var(--black);
-      background: var(--black);
-      /* Gap fill */
-      /* Remove border connection duplication via negative margin if needed, or just let thick borders coexist */
+      transform: skewX(-10deg);
+      border: 3px solid #000;
+      background: #000;
       margin-right: -3px;
-    }
-
-    /* Ensure last visual item connects */
-    .reel-item:last-child {
-      margin-right: 0;
-    }
-
-    .reel-item:hover {
-      transform: skewX(-12deg) scale(1.02);
     }
 
     .reel-img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      /* Un-skew image so it looks normal inside slanted frame */
-      transform: skewX(12deg) scale(1.4);
-      filter: none;
-      /* Original color as requested */
-      transition: filter 0.3s;
+      transform: skewX(10deg) scale(1.35);
     }
 
-    .reel-item:hover .reel-img {
-      filter: grayscale(0%);
+    /* ─── PARTNERS ───────────────────────────────────────── */
+    #partners {
+      padding: 60px 0;
+      text-align: center;
+      border-bottom: 1px solid var(--border);
+      background: var(--white);
+      overflow: hidden;
     }
 
-    /* REMOVED TEXT OVERLAY AS REQUESTED */
-    .reel-info {
-      display: none;
+    .part-scroll-wrap {
+      overflow: hidden;
     }
 
-    /* ABOUT (Interactive Stats) */
+    .part-track {
+      display: flex;
+      gap: 60px;
+      align-items: center;
+      animation: partScroll 20s linear infinite;
+      width: max-content;
+      white-space: nowrap;
+    }
+
+    @keyframes partScroll {
+      0% {
+        transform: translateX(0)
+      }
+
+      100% {
+        transform: translateX(-50%)
+      }
+    }
+
+    .part-item {
+      font-family: var(--ff-b);
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      opacity: .6;
+      transition: opacity .3s, color .3s;
+      flex-shrink: 0;
+    }
+
+    .part-item:hover {
+      opacity: 1;
+      color: var(--orange);
+    }
+
+    /* ─── ABOUT ──────────────────────────────────────────── */
     #about {
       display: grid;
       grid-template-columns: 1.2fr 1fr;
-      border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+      border-bottom: 1px solid rgba(0, 0, 0, .08);
     }
 
     .about-l {
-      padding: 100px 80px;
+      padding: 100px 70px 100px 60px;
       background: var(--white);
-    }
-
-    .sec-sub {
-      font-size: .75rem;
-      font-weight: 700;
-      color: var(--orange);
-      letter-spacing: .2em;
-      display: block;
-      margin-bottom: 16px;
-      text-transform: uppercase;
-    }
-
-    .sec-h2 {
-      font-family: var(--ff-d);
-      font-size: clamp(3rem, 5vw, 4.5rem);
-      line-height: 1;
-      margin-bottom: 24px;
     }
 
     .about-txt {
       font-family: var(--ff-s);
       font-size: 1.2rem;
-      line-height: 1.7;
+      line-height: 1.75;
       color: var(--muted);
-      max-width: 550px;
+      max-width: 520px;
     }
 
     .about-r {
-      padding: 100px 60px;
-      background: #f4f4f4;
+      padding: 80px 50px;
+      background: #f0ede7;
       display: flex;
       flex-direction: column;
       justify-content: center;
-      gap: 40px;
+      gap: 24px;
     }
 
-    .stat-item {
-      position: relative;
-      padding-left: 20px;
-      border-left: 2px solid transparent;
-      transition: border-color 0.3s;
+    body.dark-mode .about-r {
+      background: #1a1a1a;
     }
 
-    .stat-item:hover {
-      border-left-color: var(--orange);
+    .stat-card {
+      background: var(--white);
+      padding: 28px 26px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      transition: transform .3s, border-color .3s, box-shadow .3s;
     }
 
-    .stat-item h3 {
-      font-family: var(--ff-d);
-      font-size: 3.5rem;
-      color: var(--black);
-      line-height: 1;
-      display: flex;
-      align-items: baseline;
+    .stat-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--orange);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, .06);
     }
 
-    .stat-item h3 span {
+    .stat-card h3 {
+      font-family: var(--ff-b);
+      font-size: 3rem;
       color: var(--orange);
-      font-size: 2rem;
-      margin-left: 5px;
+      line-height: 1;
+      margin-bottom: 6px;
+      font-weight: 800;
     }
 
-    .stat-item p {
-      font-size: 1rem;
+    .stat-card p {
+      font-size: .85rem;
+      font-weight: 700;
       color: var(--muted);
-      font-weight: 600;
-      letter-spacing: .05em;
+      letter-spacing: .1em;
+      text-transform: uppercase;
     }
 
-    /* PRODUCTS (Premium Minimalist) */
+    /* ─── PRODUCTS ───────────────────────────────────────── */
     #products {
       background: var(--bg);
     }
 
-    .cat-filter {
-      display: flex;
-      justify-content: center;
-      gap: 30px;
-      flex-wrap: wrap;
-      margin-bottom: 80px;
-      padding: 0 20px;
-      border-bottom: 1px solid rgba(0, 0, 0, 0.04);
-      padding-bottom: 20px;
-    }
-
-    .chip {
-      padding: 10px 24px;
-      border: 1px solid rgba(0, 0, 0, 0.1);
-      border-radius: 50px;
-      font-family: var(--ff-b);
-      font-size: 0.8rem;
-      font-weight: 600;
-      transition: all .3s ease;
-      background: transparent;
-      color: var(--muted);
-      letter-spacing: .05em;
-      text-transform: uppercase;
-    }
-
-    .chip:hover {
-      border-color: var(--black);
-      color: var(--black);
-      transform: translateY(-2px);
-    }
-
-    .chip.active {
-      background: var(--black);
-      color: var(--white);
-      border-color: var(--black);
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-      transform: translateY(-1px);
-    }
-
-    /* ACCORDION REFRESH (Minimal) */
     .cblk {
-      border: none;
-      margin-bottom: 40px;
-    }
-
-    /* REMOVING OLD HEADER STYLES TO PREVENT CONFLICT */
-
-    .chdr-icon {
-      width: 40px;
-      height: 40px;
-      background: transparent;
-      color: var(--black);
-      border: 1px solid #ddd;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: all .3s;
-      font-size: 0.9rem;
-    }
-
-    .chdr-icon:hover {
-      border-color: var(--orange);
-      color: var(--orange);
-    }
-
-    .chdr.open .chdr-icon {
-      transform: rotate(90deg);
-      background: var(--black);
-      color: var(--white);
-      border-color: var(--black);
-    }
-
-    .cbdy {
-      display: none;
-      padding: 20px 0;
-      animation: fadeIn .6s ease;
-    }
-
-    .cbdy.open {
-      display: block;
-    }
-
-    .pgrid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 60px 40px;
-      perspective: 1000px;
-    }
-
-    .pcard {
-      background: var(--white);
-      border-radius: 12px;
-      overflow: hidden;
-      transition: all .4s cubic-bezier(0.16, 1, 0.3, 1);
-      position: relative;
-      border: 1px solid rgba(0, 0, 0, 0.04);
-      box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.05);
-      display: flex;
-      flex-direction: column;
-      height: 100%;
-      transform-style: preserve-3d;
-      will-change: transform;
-      /* Separate transitions to prevent tilt lag */
-      transition: box-shadow 0.4s ease, border-color 0.4s ease, transform 0.1s ease-out;
-      /* Entry Animation */
-      opacity: 0;
-      animation: cardEnter 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
-    }
-
-    @keyframes cardEnter {
-      from {
-        opacity: 0;
-        transform: translateY(30px);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    /* 3D Glare Effect */
-    .pcard-glare {
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.8), transparent 60%);
-      opacity: 0;
-      pointer-events: none;
-      z-index: 5;
-      mix-blend-mode: overlay;
-      transition: opacity 0.3s;
-    }
-
-    .pcard:hover .pcard-glare {
-      opacity: 1;
-    }
-
-    .pcard:hover {
-      box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.15);
-      border-color: rgba(232, 102, 10, 0.2);
-    }
-
-    .pcard-img {
-      height: 320px;
-      background: #fafafa;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-      position: relative;
-      overflow: hidden;
-      margin-bottom: 0;
-      transition: background-color 0.3s;
-    }
-
-    /* Clean Background */
-    .pcard-img::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(circle at center, rgba(0, 0, 0, 0.03) 0%, transparent 70%);
-      opacity: 0;
-      transition: opacity 0.5s;
-    }
-
-    .pcard:hover .pcard-img {
-      background: #f0f0f0;
-    }
-
-    .pcard:hover .pcard-img::before {
-      opacity: 1;
-    }
-
-    .pcard-img::after {
-      display: none;
-    }
-
-    .pcard-img img {
-      max-width: 90%;
-      max-height: 90%;
-      object-fit: contain;
-      transition: transform .6s cubic-bezier(0.16, 1, 0.3, 1);
-      z-index: 1;
-      filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.05));
-    }
-
-    .pcard:hover .pcard-img img {
-      transform: scale(1.1) translateY(-4px);
-    }
-
-    .pcard-info {
-      padding: 24px;
-      text-align: left;
-      flex-grow: 1;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-start;
-      /* Changed from space-between */
-    }
-
-    .pcard-tag-pill {
-      display: inline-block;
-      font-size: 0.65rem;
-      font-weight: 700;
-      color: var(--black);
-      /* Light Mode: Orange -> Black */
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      margin-bottom: 8px;
-    }
-
-    .pcard-name {
-      font-family: var(--ff-b);
-      font-size: 1.4rem;
-      line-height: 1.2;
-      margin-bottom: 8px;
-      color: var(--orange);
-      /* Light Mode: Black -> Orange */
-      font-weight: 700;
-      letter-spacing: -0.01em;
-    }
-
-    .pcard {
-      background: var(--white);
-      border-radius: 12px;
-      overflow: hidden;
-      transition: all .4s cubic-bezier(0.16, 1, 0.3, 1);
-      position: relative;
-      border: 1px solid rgba(0, 0, 0, 0.04);
-      box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.05);
-      display: flex;
-      flex-direction: column;
-      height: 100%;
-      transform-style: preserve-3d;
-      will-change: transform;
-      /* Separate transitions to prevent tilt lag */
-      transition: box-shadow 0.4s ease, border-color 0.4s ease, transform 0.1s ease-out;
-      /* Entry Animation */
-      opacity: 0;
-      animation: cardEnter 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
-    }
-
-    /* Orange Shadow Request */
-    .pcard:hover {
-      box-shadow: 0 15px 40px rgba(232, 102, 10, 0.25);
-      /* Orange Shadow */
-      border-color: rgba(232, 102, 10, 0.4);
-    }
-
-    /* Dark Mode Overrides for Product Cards */
-    body.dark-mode .pcard-tag-pill {
-      color: var(--black);
-      /* Dark Mode: Tag becomes White (var--black is white in DM) */
-    }
-
-    body.dark-mode .pcard-name {
-      color: var(--orange);
-      /* Dark Mode: Name becomes Orange */
-    }
-
-    /* Dark Mode Shadow */
-    body.dark-mode .pcard:hover {
-      box-shadow: 0 15px 40px rgba(232, 102, 10, 0.15);
-    }
-
-    .pcard-wt {
-      font-size: .8rem;
-      color: var(--muted);
-      font-weight: 500;
-      margin-bottom: 0;
-      letter-spacing: 0.02em;
-      opacity: 0.7;
-    }
-
-    .pcard-link {
-      display: none;
-      /* Removing basic link */
+      margin-bottom: 32px;
     }
 
     .chdr {
-      padding: 20px 30px;
-      cursor: pointer;
+      padding: 18px 26px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      transition: all 0.3s;
       background: var(--white);
       border: 1px solid var(--border);
-      /* Boxed boundary */
-      margin-bottom: 20px;
-      /* Spacing */
+      margin-bottom: 16px;
       position: relative;
       overflow: hidden;
+      transition: all .3s;
+      border-radius: 8px;
     }
 
     .chdr::before {
@@ -1000,7 +928,7 @@
       height: 100%;
       background: var(--orange);
       transform: scaleY(0);
-      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      transition: transform .3s cubic-bezier(.16, 1, .3, 1);
       transform-origin: bottom;
     }
 
@@ -1011,27 +939,24 @@
 
     .chdr:hover,
     .chdr.open {
-      background: #f9f9f9;
-      /* Slight bg change */
       border-color: var(--orange);
-      padding-left: 40px;
-      /* Slight shift */
+      padding-left: 34px;
+      background: var(--bg);
     }
 
     body.dark-mode .chdr:hover,
     body.dark-mode .chdr.open {
-      background: #1f1f1f;
+      background: #1a1a1a;
     }
 
     .chdr-ttl {
       font-family: var(--ff-b);
-      font-size: 1.8rem;
-      /* Slightly smaller to fit box */
+      font-size: 1.6rem;
       color: var(--black);
       font-weight: 800;
       text-transform: uppercase;
-      letter-spacing: -0.02em;
-      transition: color 0.3s;
+      letter-spacing: -.01em;
+      transition: color .3s;
     }
 
     .chdr:hover .chdr-ttl,
@@ -1039,88 +964,149 @@
       color: var(--orange);
     }
 
-    /* PARTNERS (Static Grid) */
-    #partners {
-      padding: 80px 0;
-      text-align: center;
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-      background: var(--white);
-    }
-
-    .part-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 40px;
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 40px;
+    .chdr-icon {
+      width: 36px;
+      height: 36px;
+      border: 1px solid #ddd;
+      border-radius: 50%;
+      display: flex;
       align-items: center;
-      justify-items: center;
-      opacity: 0;
-      animation: fadeIn 1s forwards;
-      /* Simple fade in */
+      justify-content: center;
+      font-size: .85rem;
+      color: var(--black);
+      transition: all .3s;
+      flex-shrink: 0;
     }
 
-    @keyframes fadeIn {
+    .chdr.open .chdr-icon {
+      transform: rotate(90deg);
+      background: var(--black);
+      color: var(--white);
+      border-color: var(--black);
+    }
+
+    .cbdy {
+      display: none;
+      padding: 4px 0 20px;
+    }
+
+    .cbdy.open {
+      display: block;
+    }
+
+    .pgrid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 24px;
+    }
+
+    .pcard {
+      background: var(--white);
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid rgba(0, 0, 0, .05);
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      transition: box-shadow .35s ease, border-color .35s ease, transform .15s ease;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, .04);
+      opacity: 0;
+      animation: cardEnter .5s cubic-bezier(.2, .8, .2, 1) forwards;
+    }
+
+    @keyframes cardEnter {
+      from {
+        opacity: 0;
+        transform: translateY(20px)
+      }
+
       to {
         opacity: 1;
+        transform: translateY(0)
       }
     }
 
-    .part-item {
-      font-family: var(--ff-b);
-      font-size: 1.1rem;
+    .pcard:hover {
+      box-shadow: 0 12px 36px rgba(232, 102, 10, .2);
+      border-color: rgba(232, 102, 10, .35);
+    }
+
+    .pcard-glare {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      pointer-events: none;
+      z-index: 5;
+      mix-blend-mode: overlay;
+      transition: opacity .3s;
+      border-radius: 12px;
+    }
+
+    .pcard:hover .pcard-glare {
+      opacity: 1;
+    }
+
+    .pcard-img {
+      height: 260px;
+      background: #f7f5f2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      transition: background .3s;
+      overflow: hidden;
+    }
+
+    body.dark-mode .pcard-img {
+      background: #222;
+    }
+
+    .pcard:hover .pcard-img {
+      background: #f0ece6;
+    }
+
+    .pcard-img img {
+      max-width: 88%;
+      max-height: 88%;
+      object-fit: contain;
+      transition: transform .5s cubic-bezier(.16, 1, .3, 1);
+      filter: drop-shadow(0 6px 16px rgba(0, 0, 0, .08));
+    }
+
+    .pcard:hover .pcard-img img {
+      transform: scale(1.08) translateY(-4px);
+    }
+
+    .pcard-info {
+      padding: 18px 20px;
+      flex-grow: 1;
+    }
+
+    .pcard-tag-pill {
+      font-size: .62rem;
       font-weight: 700;
       color: var(--muted);
       text-transform: uppercase;
-      transition: all 0.3s;
-      letter-spacing: 0.05em;
-      opacity: 0.7;
-      cursor: default;
+      letter-spacing: .1em;
+      display: block;
+      margin-bottom: 5px;
     }
 
-    .part-item:hover {
-      color: var(--orange);
-      opacity: 1;
-      transform: scale(1.1);
-      letter-spacing: 0.1em;
-    }
-
-    /* Stats Redesign */
-    .stat-card {
-      background: var(--white);
-      padding: 30px;
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      transition: transform 0.3s;
-    }
-
-    .stat-card:hover {
-      transform: translateY(-5px);
-      border-color: var(--orange);
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-    }
-
-    .stat-card h3 {
+    .pcard-name {
       font-family: var(--ff-b);
-      font-size: 3.5rem;
-      color: var(--orange);
-      /* Pop color */
-      line-height: 1;
-      margin-bottom: 10px;
-      font-weight: 800;
-    }
-
-    .stat-card p {
-      font-family: var(--ff-b);
-      font-size: 0.9rem;
-      font-weight: 700;
+      font-size: 1.1rem;
+      line-height: 1.25;
       color: var(--black);
-      letter-spacing: 0.1em;
+      font-weight: 700;
+      margin-bottom: 5px;
     }
 
-    /* CONTACT (Clean) */
+    .pcard-wt {
+      font-size: .78rem;
+      color: var(--muted);
+    }
+
+    /* ─── CONTACT ────────────────────────────────────────── */
     #contact {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -1128,27 +1114,32 @@
     }
 
     .con-l {
-      padding: 100px 80px;
-      background: #f4f4f4;
+      padding: 90px 60px;
+      background: #f0ede7;
+    }
+
+    body.dark-mode .con-l {
+      background: #161616;
     }
 
     .c-item {
-      margin-bottom: 32px;
+      margin-bottom: 28px;
     }
 
     .c-lbl {
-      font-size: .7rem;
+      font-size: .66rem;
       font-weight: 700;
       color: var(--muted);
       text-transform: uppercase;
-      margin-bottom: 8px;
+      letter-spacing: .12em;
+      margin-bottom: 6px;
       display: block;
     }
 
     .c-val {
-      font-size: 1.2rem;
       font-family: var(--ff-d);
-      letter-spacing: .05em;
+      font-size: 1.15rem;
+      letter-spacing: .04em;
       color: var(--black);
       display: block;
       text-decoration: none;
@@ -1160,7 +1151,7 @@
     }
 
     .con-r {
-      padding: 100px 80px;
+      padding: 90px 60px;
     }
 
     .cform {
@@ -1172,145 +1163,68 @@
     .finp {
       width: 100%;
       border: none;
-      border-bottom: 2px solid #ddd;
-      padding: 16px 0;
+      border-bottom: 2px solid var(--border);
+      padding: 14px 0;
       font-family: var(--ff-b);
-      font-size: 1rem;
+      font-size: .95rem;
       background: transparent;
       outline: none;
       transition: border-color .3s;
+      color: var(--text);
     }
 
     .finp:focus {
       border-color: var(--orange);
     }
 
-    .cat-list {
-      display: flex;
-      flex-direction: column;
-      gap: 0;
-      /* Remove gap, use border/padding */
-    }
-
-    .cat-btn {
-      text-align: left;
-      background: none;
-      border: none;
-      border-bottom: 1px solid var(--border);
-      padding: 18px 0;
-      font-family: var(--ff-b);
-      font-size: 1.4rem;
-      font-weight: 700;
+    .finp::placeholder {
       color: var(--muted);
-      cursor: pointer;
-      transition: all 0.3s;
-      position: relative;
-    }
-
-    .cat-btn:hover,
-    .cat-btn.active {
-      color: var(--text);
-      padding-left: 10px;
-    }
-
-    .cat-btn::before {
-      content: '→';
-      position: absolute;
-      left: -20px;
-      opacity: 0;
-      transition: all 0.3s;
-      color: var(--orange);
-    }
-
-    .cat-btn:hover::before,
-    .cat-btn.active::before {
-      left: 0;
-      opacity: 1;
-    }
-
-    .cat-btn:first-child {
-      border-top: 1px solid var(--border);
-    }
-
-    .header-actions {
-      display: flex;
-      align-items: center;
-      gap: 20px;
-    }
-
-    .catalogue-btn {
-      font-family: var(--ff-b);
-      font-size: 0.85rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      color: var(--black);
-      text-decoration: none;
-      border-bottom: 2px solid var(--orange);
-      padding-bottom: 2px;
-      transition: all 0.3s;
-    }
-
-    .catalogue-btn:hover {
-      color: var(--orange);
-    }
-
-    .theme-toggle {
-      background: none;
-      border: 1px solid var(--border);
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      color: var(--text);
-      transition: all 0.3s;
-    }
-
-    .theme-toggle:hover {
-      background: var(--text);
-      color: var(--bg);
+      opacity: .7;
     }
 
     .fbtn {
       background: var(--black);
       color: var(--white);
       border: none;
-      padding: 16px 40px;
+      padding: 15px 38px;
       font-family: var(--ff-b);
       font-weight: 700;
-      font-size: .9rem;
+      font-size: .88rem;
       align-self: flex-start;
       border-radius: 4px;
-      margin-top: 20px;
-      transition: all .2s;
+      margin-top: 10px;
+      transition: all .25s;
     }
 
     .fbtn:hover {
       background: var(--orange);
       transform: translateY(-2px);
-      box-shadow: 0 8px 16px rgba(232, 102, 10, 0.3);
+      box-shadow: 0 8px 20px rgba(232, 102, 10, .3);
     }
 
-    /* FOOTER */
+    /* ─── FOOTER ─────────────────────────────────────────── */
     footer {
-      background: var(--black);
-      color: var(--white);
-      padding: 80px 40px;
+      background: #0a0a0a;
+      color: #ccc;
+      padding: 60px 40px 40px;
       text-align: center;
-      font-size: .9rem;
+      font-size: .88rem;
+    }
+
+    body.dark-mode footer {
+      background: #000;
     }
 
     .f-links {
       display: flex;
       justify-content: center;
-      gap: 30px;
-      margin-bottom: 30px;
+      gap: 28px;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
     }
 
     .f-links a {
-      color: #999;
+      color: #888;
       text-decoration: none;
       transition: color .2s;
     }
@@ -1319,81 +1233,17 @@
       color: var(--orange);
     }
 
-    /* DRAWER */
-    .drawer {
-      position: fixed;
-      top: 0;
-      right: -100%;
-      width: 100%;
-      height: 100%;
-      background: var(--white);
-      z-index: 8000;
-      transition: right .4s cubic-bezier(0.16, 1, 0.3, 1);
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      padding: 40px;
+    .f-bottom {
+      color: #555;
+      font-size: .8rem;
     }
 
-    .drawer.open {
-      right: 0;
-    }
-
-    .d-close {
-      position: absolute;
-      top: 30px;
-      right: 30px;
-      font-size: 2rem;
-      cursor: pointer;
-      transition: transform .3s;
-    }
-
-    .d-close:hover {
-      transform: rotate(90deg) scale(1.1);
-      color: var(--orange);
-    }
-
-    .d-links a {
-      display: block;
-      font-family: var(--ff-d);
-      font-size: 3rem;
-      color: var(--black);
-      text-decoration: none;
-      margin-bottom: 20px;
-      transition: all .2s;
-      transform: translateX(20px);
-      opacity: 0;
-    }
-
-    .drawer.open .d-links a {
-      transform: translateX(0);
-      opacity: 1;
-      transition-delay: 0.2s;
-    }
-
-    .drawer.open .d-links a:nth-child(2) {
-      transition-delay: 0.3s;
-    }
-
-    .drawer.open .d-links a:nth-child(3) {
-      transition-delay: 0.4s;
-    }
-
-    .drawer.open .d-links a:nth-child(4) {
-      transition-delay: 0.5s;
-    }
-
-    .d-links a:hover {
-      color: var(--orange);
-      padding-left: 10px;
-    }
-
-    /* MODAL */
+    /* ─── MODAL ──────────────────────────────────────────── */
     .modal {
       display: none;
       position: fixed;
       inset: 0;
-      background: rgba(0, 0, 0, 0.7);
+      background: rgba(0, 0, 0, .75);
       z-index: 9000;
       align-items: center;
       justify-content: center;
@@ -1407,102 +1257,102 @@
 
     .mbox {
       background: var(--white);
-      width: 100%;
-      max-width: 500px;
-      border-radius: 12px;
-      overflow: hidden;
+      width: 90%;
+      max-width: 560px;
+      max-height: 88vh;
+      overflow-y: auto;
+      border-radius: 14px;
       position: relative;
-      /* "Crazy" Transition */
-      animation: crazyPop .6s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
-      box-shadow: 20px 20px 0 var(--black);
-      border: 3px solid var(--black);
+      display: flex;
+      flex-direction: column;
+      box-shadow: 12px 12px 0 rgba(0, 0, 0, .9);
+      border: 2px solid var(--black);
+      animation: softPop .35s ease-out forwards;
     }
 
-    @keyframes crazyPop {
+    @keyframes softPop {
       0% {
-        transform: scale(0) rotate(-15deg);
-        opacity: 0;
-      }
-
-      60% {
-        transform: scale(1.1) rotate(5deg);
-        opacity: 1;
+        transform: scale(.95) translateY(10px);
+        opacity: 0
       }
 
       100% {
-        transform: scale(1) rotate(0deg);
-        opacity: 1;
+        transform: scale(1) translateY(0);
+        opacity: 1
       }
+    }
+
+    .mbox::-webkit-scrollbar {
+      width: 5px;
+    }
+
+    .mbox::-webkit-scrollbar-thumb {
+      background: var(--orange);
+      border-radius: 3px;
     }
 
     .m-img-w {
       background: #f4f4f4;
-      padding: 30px;
+      padding: 28px;
       display: flex;
       justify-content: center;
     }
 
     .m-img-w img {
-      height: 180px;
+      height: 160px;
       object-fit: contain;
     }
 
     .m-body {
-      padding: 30px;
+      padding: 24px 28px 28px;
     }
 
     .m-name {
       font-family: var(--ff-d);
-      font-size: 2rem;
+      font-size: 1.9rem;
       line-height: 1;
-      margin-bottom: 4px;
+      margin-bottom: 3px;
+      color: var(--black);
     }
 
     .m-wt {
-      font-size: .8rem;
+      font-size: .78rem;
       color: var(--muted);
       font-weight: 700;
-      margin-bottom: 16px;
+      margin-bottom: 14px;
       display: block;
     }
 
     .m-desc {
-      font-size: .95rem;
-      line-height: 1.6;
-      margin-bottom: 24px;
+      font-size: .92rem;
+      line-height: 1.65;
+      color: var(--text);
+      margin-bottom: 20px;
     }
 
-    /* Modal Extra Info */
     .m-extra {
-      text-align: left;
-      margin-top: 20px;
       border-top: 1px solid #eee;
-      padding-top: 20px;
-      width: 100%;
+      padding-top: 18px;
     }
 
     .m-extra h4 {
       font-family: var(--ff-b);
       color: var(--orange);
-      margin-top: 20px;
-      margin-bottom: 10px;
-      font-size: 1.1rem;
+      margin: 16px 0 8px;
+      font-size: 1rem;
     }
 
     .m-extra ul {
-      list-style-type: none;
-      padding-left: 0;
-      margin-top: 10px;
+      list-style: none;
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 5px 15px;
+      gap: 4px 12px;
     }
 
     .m-extra li {
-      margin-bottom: 5px;
-      padding-left: 15px;
+      padding-left: 14px;
       position: relative;
-      font-size: 0.9rem;
+      font-size: .87rem;
       color: #555;
     }
 
@@ -1511,42 +1361,25 @@
       color: var(--orange);
       position: absolute;
       left: 0;
-      font-weight: bold;
     }
 
     .recipe-item {
-      margin-bottom: 15px;
+      margin-bottom: 12px;
       background: #f9f9f9;
-      padding: 10px;
-      border-radius: 6px;
+      padding: 10px 12px;
+      border-radius: 8px;
     }
 
     .recipe-item h5 {
       font-family: var(--ff-b);
-      margin: 0 0 5px 0;
+      font-size: .95rem;
       color: var(--black);
-      font-size: 1rem;
+      margin-bottom: 3px;
     }
 
     .recipe-item p {
-      margin: 0;
-      font-size: 0.9rem;
+      font-size: .85rem;
       color: #666;
-    }
-
-    .m-chips {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-bottom: 24px;
-    }
-
-    .m-chip {
-      font-size: .7rem;
-      padding: 4px 10px;
-      background: #eee;
-      border-radius: 4px;
-      color: #555;
     }
 
     .m-wa {
@@ -1554,145 +1387,104 @@
       align-items: center;
       justify-content: center;
       gap: 10px;
-      background: #25D366;
-      color: var(--white);
+      /* Redesign: Orange border, black text (Green removed) */
+      background: transparent;
+      border: 2px solid var(--orange);
+      color: var(--black);
       text-decoration: none;
-      padding: 14px;
+      padding: 13px;
       border-radius: 8px;
       font-weight: 700;
-      transition: transform .2s;
-      cursor: none;
+      font-size: .95rem;
+      margin-top: 20px;
+      transition: all .2s;
+    }
+
+    .m-wa i {
+      color: var(--orange);
+      font-size: 1.2rem;
+      transition: color .2s;
     }
 
     .m-wa:hover {
-      transform: scale(1.02);
-      box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3);
+      background: var(--orange);
+      color: #fff;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 18px rgba(232, 102, 10, .3);
+    }
+
+    .m-wa:hover i {
+      color: #fff;
     }
 
     .m-close {
       position: absolute;
-      top: 15px;
-      right: 15px;
-      width: 32px;
-      height: 32px;
-      background: var(--white);
+      top: 12px;
+      right: 12px;
+      width: 30px;
+      height: 30px;
+      background: rgba(0, 0, 0, .08);
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      cursor: none;
       font-weight: bold;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-      transition: transform .2s;
+      font-size: 1.1rem;
+      transition: background .2s;
+      border: none;
+      color: var(--black);
     }
 
     .m-close:hover {
-      transform: scale(1.1);
-      color: var(--red);
+      background: rgba(0, 0, 0, .18);
     }
 
-    /* FLOATING BTN */
+    /* ─── FLOAT BUTTON ───────────────────────────────────── */
     .float-btn {
       position: fixed;
-      bottom: 30px;
-      right: 30px;
-      width: 60px;
-      height: 60px;
+      bottom: 28px;
+      right: 28px;
+      width: 56px;
+      height: 56px;
       background: var(--orange);
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      color: var(--white);
-      font-size: 1.5rem;
-      box-shadow: 0 10px 25px rgba(232, 102, 10, 0.5);
+      color: #fff;
+      font-size: 1.4rem;
       z-index: 6000;
-      transition: transform .2s;
-      cursor: none;
+      box-shadow: 0 8px 24px rgba(232, 102, 10, .5);
       text-decoration: none;
-      animation: float 3s ease-in-out infinite;
+      animation: floatAnim 3s ease-in-out infinite;
+      transition: transform .2s;
     }
 
     .float-btn:hover {
       transform: scale(1.1);
     }
 
-    @keyframes float {
+    @keyframes floatAnim {
 
       0%,
       100% {
-        transform: translateY(0);
+        transform: translateY(0)
       }
 
       50% {
-        transform: translateY(-6px);
+        transform: translateY(-5px)
       }
     }
 
-    /* Missing Keyframes for Card Entry */
-    @keyframes cardEnter {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
-      }
+    /* ═══════════════════════════════════════════════════════
+       MOBILE STYLES — Complete redesign for small screens
+       ═══════════════════════════════════════════════════════ */
 
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    /* RESPONSIVE */
-    @media(max-width:1024px) {
-      #hero {
-        grid-template-columns: 1fr;
-        text-align: center;
-        padding-top: 100px;
-      }
-
-      .hero-l {
-        align-items: center;
-        padding: 60px 20px;
-      }
-
-      .hero-r {
-        display: none;
-      }
-
-      #about,
-      #contact {
-        grid-template-columns: 1fr;
-      }
-
-      .about-l,
-      .about-r,
-      .con-l,
-      .con-r {
-        padding: 60px 20px;
-      }
-
-      /* Restore default cursor on touch/mobile */
-      body,
-      a,
-      button,
-      .pcard,
-      .chip,
-      select,
-      input,
-      textarea {
-        cursor: auto;
-      }
-
-      .cursor-dot,
-      .cursor-circle {
-        display: none;
-      }
-    }
-
-    @media(max-width:768px) {
+    /* Tablet: hide desktop nav items */
+    @media(max-width: 900px) {
 
       .nav-mid,
-      .nav-cta {
+      .catalogue-btn {
         display: none;
       }
 
@@ -1704,100 +1496,227 @@
         padding: 0 20px;
       }
 
+      .nav-dropdown:hover .dropdown-content {
+        display: none;
+      }
+    }
+
+    /* Hero: stack vertically on tablet */
+    @media(max-width: 960px) {
+      #hero {
+        grid-template-columns: 1fr;
+        padding-top: 76px;
+        min-height: auto;
+      }
+
+      .hero-l {
+        padding: 52px 28px 40px;
+        align-items: flex-start;
+      }
+
+      .hero-r {
+        min-height: 320px;
+      }
+
+      #about {
+        grid-template-columns: 1fr;
+      }
+
+      .about-l {
+        padding: 60px 28px;
+      }
+
+      .about-r {
+        padding: 40px 28px 60px;
+        flex-direction: row;
+        flex-wrap: wrap;
+      }
+
+      .stat-card {
+        flex: 1 1 140px;
+      }
+
+      #contact {
+        grid-template-columns: 1fr;
+      }
+
+      .con-l,
+      .con-r {
+        padding: 52px 28px;
+      }
+    }
+
+    /* Mobile: full single-column treatment */
+    @media(max-width: 640px) {
+
+      /* Nav */
+      nav {
+        height: 64px;
+      }
+
+      .nav-in {
+        padding: 0 16px;
+      }
+
+      .nav-brand img {
+        width: 38px;
+        height: 38px;
+      }
+
+      .brand-main {
+        font-size: 1.3rem;
+      }
+
+      .drawer {
+        width: 100%;
+      }
+
+      /* Hero */
+      #hero {
+        padding-top: 64px;
+      }
+
+      .hero-l {
+        padding: 36px 20px 32px;
+      }
+
       .hero-h1 {
-        font-size: 4rem;
+        font-size: clamp(3.2rem, 14vw, 5rem);
+      }
+
+      .hero-sub {
+        font-size: 1.05rem;
+      }
+
+      .hero-r {
+        min-height: 260px;
+      }
+
+      .reel-item {
+        width: 160px;
+        height: 240px;
+      }
+
+      /* Partners */
+      #partners {
+        padding: 40px 0;
+      }
+
+      /* About */
+      .about-l {
+        padding: 48px 20px;
+      }
+
+      .about-r {
+        padding: 32px 20px 48px;
+        flex-direction: column;
+        gap: 14px;
+      }
+
+      .stat-card {
+        padding: 20px;
+      }
+
+      .stat-card h3 {
+        font-size: 2.4rem;
+      }
+
+      /* Products section */
+      .section-pad {
+        padding: 60px 0;
+      }
+
+      .container {
+        padding: 0 16px;
+      }
+
+      .chdr {
+        padding: 14px 16px;
+        border-radius: 6px;
+      }
+
+      .chdr:hover,
+      .chdr.open {
+        padding-left: 22px;
+      }
+
+      .chdr-ttl {
+        font-size: 1.3rem;
       }
 
       .pgrid {
         grid-template-columns: 1fr 1fr;
+        gap: 14px;
       }
-    }
 
-    @media(max-width:480px) {
-      .pgrid {
+      .pcard-img {
+        height: 180px;
+        padding: 12px;
+      }
+
+      .pcard-info {
+        padding: 12px 14px;
+      }
+
+      .pcard-name {
+        font-size: .95rem;
+      }
+
+      /* Contact */
+      .con-l,
+      .con-r {
+        padding: 40px 20px;
+      }
+
+      .c-val {
+        font-size: 1rem;
+      }
+
+      /* Footer */
+      footer {
+        padding: 40px 20px 28px;
+      }
+
+      .f-links {
+        gap: 18px;
+      }
+
+      /* Float btn position */
+      .float-btn {
+        bottom: 20px;
+        right: 18px;
+        width: 50px;
+        height: 50px;
+        font-size: 1.2rem;
+      }
+
+      /* Modal */
+      .mbox {
+        width: 96%;
+        border-radius: 12px;
+      }
+
+      .m-body {
+        padding: 18px 20px 22px;
+      }
+
+      .m-extra ul {
         grid-template-columns: 1fr;
       }
     }
 
-    /* DROPDOWN MENU */
-    .nav-dropdown {
-      position: relative;
-      height: 100%;
-      display: flex;
-      align-items: center;
-    }
+    /* Tiny phones */
+    @media(max-width: 380px) {
+      .pgrid {
+        grid-template-columns: 1fr;
+      }
 
-    .nav-drop-btn {
-      font-family: var(--ff-b);
-      font-size: .85rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      text-decoration: none;
-      color: var(--black);
-      letter-spacing: .05em;
-      transition: color .2s;
-      cursor: none;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      height: 100%;
-    }
+      .hero-h1 {
+        font-size: 3rem;
+      }
 
-    .nav-drop-btn:hover {
-      color: var(--orange);
-    }
-
-    .dropdown-content {
-      display: none;
-      position: absolute;
-      top: 100%;
-      left: 50%;
-      transform: translateX(-50%);
-      background-color: var(--white);
-      min-width: 220px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-      border-top: 3px solid var(--orange);
-      border-radius: 0 0 8px 8px;
-      z-index: 7001;
-      padding: 10px 0;
-      flex-direction: column;
-    }
-
-    .nav-dropdown:hover .dropdown-content {
-      display: flex;
-    }
-
-    .dropdown-content a {
-      padding: 16px 24px;
-      text-decoration: none;
-      color: var(--black);
-      font-family: var(--ff-s);
-      /* Premium Serif */
-      font-size: 1.1rem;
-      font-weight: 500;
-      transition: all 0.2s;
-      white-space: nowrap;
-      cursor: pointer;
-      display: block;
-      text-align: left;
-      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-    }
-
-    .dropdown-content a:last-child {
-      border-bottom: none;
-    }
-
-    .dropdown-content a:hover {
-      background-color: rgba(232, 102, 10, 0.05);
-      color: var(--orange);
-      padding-left: 32px;
-    }
-
-    /* Mobile Dropdown Fix */
-    @media(max-width: 768px) {
-      .nav-dropdown:hover .dropdown-content {
-        display: none;
-        /* Hide on mobile, relying on drawer */
+      .pcard-img {
+        height: 200px;
       }
     }
   </style>
@@ -1805,33 +1724,17 @@
 
 <body>
 
-  <!-- CUSTOM CURSOR REMOVED -->
-  <style>
-    /* Ensure default cursor everywhere */
-    * {
-      cursor: auto !important;
-    }
-
-    /* Restore pointer for interaction */
-    a,
-    button,
-    .chdr,
-    .pcard,
-    select,
-    input,
-    textarea,
-    .cat-btn {
-      cursor: pointer !important;
-    }
-  </style>
-
   <div class="noise-overlay"></div>
+
+  <!-- CUSTOM CURSOR (desktop only) -->
+  <div class="cursor-dot" id="cursor-dot"></div>
+  <div class="cursor-ring" id="cursor-ring"></div>
 
   <!-- PRELOADER -->
   <div id="preloader">
     <div class="pre-big">
       <div class="pre-row"><span>SERIAL</span></div>
-      <div class="pre-row"><span>FOODS</span></div>
+      <div class="pre-row"><span>ENTERPRISE</span></div>
     </div>
     <div class="pre-bar-w">
       <div class="pre-bar"></div>
@@ -1845,14 +1748,14 @@
         <img src="logo.PNG" alt="SEF Logo" onerror="this.style.display='none'">
         <div class="nav-brand-txt">
           <div class="brand-main">SERIAL</div>
-          <div class="brand-sub">ENTERPRISE FOODS</div>
+          <span class="brand-sub">ENTERPRISE FOODS</span>
         </div>
       </a>
       <div class="nav-mid">
         <a href="#about">About</a>
         <div class="nav-dropdown">
           <a href="#products" class="nav-drop-btn">Products <i class="fas fa-chevron-down"
-              style="font-size:0.7em"></i></a>
+              style="font-size:.65em"></i></a>
           <div class="dropdown-content">
             <a href="javascript:void(0)" onclick="filterAndScroll('soya-chunks')">Soya Chunks</a>
             <a href="javascript:void(0)" onclick="filterAndScroll('pastes')">Pastes</a>
@@ -1861,43 +1764,54 @@
             <a href="javascript:void(0)" onclick="filterAndScroll('ready-cook')">Ready to Cook</a>
             <a href="javascript:void(0)" onclick="filterAndScroll('tofu')">Tofu</a>
             <a href="javascript:void(0)" onclick="filterAndScroll('pickles')">Pickles</a>
-            <a href="javascript:void(0)" onclick="filterAndScroll('sweets')">Pudding & Chocolates</a>
+            <a href="javascript:void(0)" onclick="filterAndScroll('chocolates')">Pudding & Chocolates</a>
           </div>
         </div>
         <a href="#contact">Contact</a>
       </div>
       <div class="nav-right">
-        <div class="header-actions">
-          <a href="catalog.html" class="catalogue-btn" download>Download Catalogue</a>
-          <button class="theme-toggle" id="theme-toggle" aria-label="Toggle Dark Mode">
-            <!-- Sun Icon -->
-            <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
-              fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="12" cy="12" r="5"></circle>
-              <line x1="12" y1="1" x2="12" y2="3"></line>
-              <line x1="12" y1="21" x2="12" y2="23"></line>
-              <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-              <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-              <line x1="1" y1="12" x2="3" y2="12"></line>
-              <line x1="21" y1="12" x2="23" y2="12"></line>
-              <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-              <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-            </svg>
-          </button>
-        </div>
-        <div class="ham" id="ham"><span></span><span></span><span></span></div>
+        <a href="catalog.html" class="catalogue-btn" download>Catalogue</a>
+        <button class="theme-toggle" id="theme-toggle" aria-label="Toggle Dark Mode">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="5" />
+            <line x1="12" y1="1" x2="12" y2="3" />
+            <line x1="12" y1="21" x2="12" y2="23" />
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
+            <line x1="1" y1="12" x2="3" y2="12" />
+            <line x1="21" y1="12" x2="23" y2="12" />
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
+          </svg>
+        </button>
+        <button class="ham" id="ham" aria-label="Menu"><span></span><span></span><span></span></button>
       </div>
     </div>
   </nav>
 
-  <!-- DRAWER (Mobile Menu) -->
+  <!-- DRAWER OVERLAY -->
+  <div class="drawer-overlay" id="drawer-overlay"></div>
+
+  <!-- DRAWER (Mobile) -->
   <div class="drawer" id="drawer">
-    <span class="d-close" id="d-close">×</span>
+    <button class="d-close" id="d-close" aria-label="Close menu">×</button>
     <div class="d-links">
       <a href="#hero" onclick="closeDrawer()">Home</a>
-      <a href="#about" onclick="closeDrawer()">About Us</a>
-      <a href="#products" onclick="closeDrawer()">Our Products</a>
+      <a href="#about" onclick="closeDrawer()">About</a>
+      <a href="#products" onclick="closeDrawer()">Products</a>
       <a href="#contact" onclick="closeDrawer()">Contact</a>
+    </div>
+    <div class="d-contact">
+      <a href="tel:Sanjay Savla - +917715844176"><i class="fas fa-phone"
+          style="margin-right:8px;color:var(--orange)"></i>+91 77158
+        44176</a>
+      <a href="mailto:serial.enterfoods@gmail.com"><i class="fas fa-envelope"
+          style="margin-right:8px;color:var(--orange)"></i>serial.enterfoods@gmail.com</a>
+      <a href="catalog.html" download
+        style="margin-top:12px;display:inline-block;background:var(--orange);color:#fff;padding:10px 20px;border-radius:4px;font-weight:700;text-decoration:none">
+        <i class="fas fa-download" style="margin-right:6px"></i>Download Catalogue
+      </a>
     </div>
   </div>
 
@@ -1905,35 +1819,28 @@
   <section id="hero">
     <div class="hero-l reveal">
       <span class="hero-tag">EST. 2024 · MUMBAI</span>
-      <h1 class="hero-h1">TASTE <br><span>IS OUR RECIPE.</span></h1>
-      <p class="hero-sub">Serial Enterprise Foods is a leading wholesale distributor of high-quality, 100% vegetarian
-        packed food products in India, including soya chunks, pickles, pastes, and snacks.</p>
+      <h1 class="hero-h1">TASTE<br><span>IS OUR<br>RECIPE.</span></h1>
+      <p class="hero-sub">Mumbai's leading wholesale distributor of 100% vegetarian packed food — soya chunks, pickles,
+        pastes, snacks and more, delivered across India.</p>
       <div class="hero-btns">
         <a href="#products" class="btn-p">EXPLORE PRODUCTS</a>
+        <a href="#contact" class="btn-p" style="background:transparent;color:var(--orange);box-shadow:none">CONTACT US
+          →</a>
       </div>
     </div>
     <div class="hero-r">
-      <!-- SLIDESHOW CONTAINER -->
-      <!-- MOVIE REEL CONTAINER -->
       <div class="reel-wrapper">
-        <div class="reel-track" id="reel-track">
-          <!-- Populated via JS -->
-        </div>
+        <div class="reel-track" id="reel-track"></div>
       </div>
     </div>
   </section>
 
-  <!-- PARTNERS GRID -->
+  <!-- PARTNERS MARQUEE -->
   <div id="partners">
-    <div class="part-grid">
-      <span class="part-item">Harnik General Foods</span>
-      <span class="part-item">Maharashtra Samosa</span>
-      <span class="part-item">Avanti Enterprise</span>
-      <span class="part-item">Vega Industries</span>
-      <span class="part-item">Eatsip Foods</span>
-      <span class="part-item">B 2 Bakery</span>
-      <span class="part-item">Special Homemade Pickle</span>
-      <span class="part-item">Serial Enterprise</span>
+    <div class="part-scroll-wrap">
+      <div class="part-track" id="part-track">
+        <!-- filled by JS with doubled list for infinite scroll -->
+      </div>
     </div>
   </div>
 
@@ -1942,9 +1849,9 @@
     <div class="about-l reveal">
       <span class="sec-sub">WHO WE ARE</span>
       <h2 class="sec-h2">PURE VEG.<br>PURE <span>QUALITY.</span></h2>
-      <p class="about-txt">We are a Mumbai-based wholesale distributor committed to delivering the freshest, highest
-        quality food products to retailers and restaurants across India. Our catalog is curated with one promise: 100%
-        Vegetarian, 100% Delicious.</p>
+      <p class="about-txt">We are a Mumbai-based wholesale distributor committed to delivering the freshest,
+        highest-quality food products to retailers and restaurants across India. Our catalog is curated with one
+        promise: 100% Vegetarian, 100% Delicious.</p>
     </div>
     <div class="about-r reveal">
       <div class="stat-card">
@@ -1956,7 +1863,7 @@
         <p>UNIQUE ITEMS</p>
       </div>
       <div class="stat-card">
-        <h3>PAN<span>+</span></h3>
+        <h3 style="color:var(--orange)">PAN<span style="color:var(--orange)">+</span></h3>
         <p>INDIA DELIVERY</p>
       </div>
     </div>
@@ -1965,16 +1872,12 @@
   <!-- PRODUCTS -->
   <section id="products" class="section-pad">
     <div class="container">
-      <div class="reveal" style="text-align:center;margin-bottom:40px;">
+      <div class="reveal products-head" style="text-align:center;margin-bottom:48px">
         <span class="sec-sub">DISCOVER TASTE</span>
         <h2 class="sec-h2">OUR <span>COLLECTION</span></h2>
-        <div style="width: 60px; height: 3px; background: var(--orange); margin: 20px auto 0;"></div>
+        <div style="width:50px;height:3px;background:var(--orange);margin:16px auto 0"></div>
       </div>
-
-      <div id="product-list" class="reveal">
-        <!-- Populated via JS -->
-      </div>
-
+      <div id="product-list" class="reveal"></div>
     </div>
   </section>
 
@@ -1982,26 +1885,26 @@
   <section id="contact">
     <div class="con-l reveal">
       <span class="sec-sub">GET IN TOUCH</span>
-      <h2 class="sec-h2" style="margin-bottom:40px">LET'S <span>WORK</span></h2>
-
+      <h2 class="sec-h2" style="margin-bottom:36px">LET'S <span>WORK</span></h2>
       <div class="c-item">
         <span class="c-lbl">CALL US</span>
-        <a href="tel:+917715844176" class="c-val">+91 77158 44176</a><br>
-        <a href="tel:+918850401035" class="c-val">+91 88504 01035</a>
+        <a href="tel:+917715844176" class="c-val">+91 77158 44176</a>
+        <a href="tel:+918850401035" class="c-val" style="margin-top:4px">+91 88504 01035</a>
       </div>
       <div class="c-item">
         <span class="c-lbl">EMAIL</span>
-        <a href="mailto:serial.enterfoods@gmail.com" class="c-val">serial.enterfoods@gmail.com</a>
+        <a href="mailto:serial.enterfoods@gmail.com" class="c-val"
+          style="font-size:.95rem;letter-spacing:0">serial.enterfoods@gmail.com</a>
       </div>
       <div class="c-item">
         <span class="c-lbl">VISIT</span>
-        <span class="c-val" style="font-size:1rem;line-height:1.5">14/110, Anand Nagar, Santacruz (E),<br>Mumbai 400057,
-          MH, India</span>
+        <span class="c-val" style="font-size:.95rem;line-height:1.6;letter-spacing:0">14/110, Anand Nagar,<br>Santacruz
+          (E), Mumbai 400057</span>
       </div>
     </div>
     <div class="con-r reveal">
       <form class="cform" action="https://formspree.io/f/mnnzeaaj" method="POST">
-        <input type="text" name="name" class="finp" placeholder="Name" required>
+        <input type="text" name="name" class="finp" placeholder="Your Name" required>
         <input type="email" name="email" class="finp" placeholder="Email Address" required>
         <input type="tel" name="phone" class="finp" placeholder="Phone Number" required>
         <input type="text" name="message" class="finp" placeholder="What are you looking for?">
@@ -2010,36 +1913,32 @@
     </div>
   </section>
 
-  <!-- GOOGLE MAP -->
-  <!-- GOOGLE MAP (Visible) -->
-  <section id="map" style="height: 450px; width: 100%; border-top: 1px solid var(--border);">
+  <!-- MAP -->
+  <section style="height:400px;width:100%;border-top:1px solid var(--border)">
     <iframe
       src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3770.81438902888!2d72.8468779!3d19.0718719!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7c8eacefb5703%3A0x629538317c76742!2sAnand%20Nagar%2C%20Santacruz%20East%2C%20Mumbai%2C%20Maharashtra%20400055!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin"
-      width="100%" height="450" style="border:0; display:block;" allowfullscreen="" loading="lazy"
+      width="100%" height="400" style="border:0;display:block" allowfullscreen loading="lazy"
       referrerpolicy="no-referrer-when-downgrade"></iframe>
   </section>
 
   <!-- FOOTER -->
   <footer>
     <div class="f-links">
-      <a href="#hero">Home</a>
-      <a href="#about">About</a>
-      <a href="#products">Products</a>
-      <a href="#contact">Contact</a>
+      <a href="#hero">Home</a><a href="#about">About</a>
+      <a href="#products">Products</a><a href="#contact">Contact</a>
     </div>
-    <p>&copy; 2025 Serial Enterprise Foods Pvt. Ltd. All Rights Reserved.</p>
+    <p class="f-bottom">&copy; 2025 Serial Enterprise Foods Pvt. Ltd. All Rights Reserved.</p>
   </footer>
 
   <!-- MODAL -->
   <div class="modal" id="pmodal">
     <div class="mbox">
-      <span class="m-close" id="m-close">×</span>
+      <button class="m-close" id="m-close">×</button>
       <div class="m-img-w"><img src="" alt="" id="m-img"></div>
       <div class="m-body">
         <h3 class="m-name" id="m-name"></h3>
         <span class="m-wt" id="m-wt"></span>
         <p class="m-desc" id="m-desc"></p>
-        <div class="m-chips" id="m-chips"></div> <!-- Keeping for backward compat if needed -->
         <div id="m-extra" class="m-extra"></div>
         <a href="#" class="m-wa" id="m-wa" target="_blank"><i class="fab fa-whatsapp"></i> Order on WhatsApp</a>
       </div>
@@ -2047,524 +1946,434 @@
   </div>
 
   <!-- FLOAT BTN -->
-  <a href="#contact" class="float-btn"><i class="fas fa-comment-dots"></i></a>
+  <a href="https://wa.me/918850401035" class="float-btn" target="_blank" title="WhatsApp Us">
+    <i class="fab fa-whatsapp"></i>
+  </a>
 
   <script>
-    // THEME TOGGLE
-    const toggleBtn = document.getElementById('theme-toggle');
-    const body = document.body;
+    // ══════════════════════════════════════════════════════════
+    //  CURSOR EFFECT — Character split + color swap + zoom
+    //
+    //  Strategy (the one that ACTUALLY works):
+    //  1. Split each target text element into individual .sp-char spans
+    //  2. Each frame, for every char: compute distance from cursor
+    //     → if inside radius: apply swapped color + scale zoom
+    //     → if outside: restore original color + scale(1)
+    //  3. Color swap rules:
+    //       Light: black/dark → orange | orange → black | muted → orange
+    //       Dark:  light/white → orange | orange → white | muted → orange
+    //  4. Scale: chars within ~80px of cursor get scale(1.4) with
+    //     falloff — closer = bigger. Springy CSS transition handles smoothing.
+    //
+    //  Nav, modal, preloader, buttons are excluded.
+    //  Works on ALL text because we read the computed color directly.
+    // ══════════════════════════════════════════════════════════
+    (function () {
+      const SWAP_R = 120;  // color-swap radius px
+      const ZOOM_R = 90;   // zoom effect radius px
+      const MAX_SCALE = 1.45;
 
-    // Check saved
-    if (localStorage.getItem('theme') === 'dark') {
-      body.classList.add('dark-mode');
-    }
+      let mx = -9999, my = -9999;
+      let rx = -9999, ry = -9999;
+      let ticking = false;
 
-    toggleBtn.addEventListener('click', () => {
-      body.classList.toggle('dark-mode');
-      localStorage.setItem('theme', body.classList.contains('dark-mode') ? 'dark' : 'light');
+      const dot = document.getElementById('cursor-dot');
+      const ring = document.getElementById('cursor-ring');
+
+      const isDesktop = () =>
+        window.matchMedia('(hover:hover) and (pointer:fine)').matches &&
+        window.innerWidth > 1024;
+
+      // ── Mouse tracking ──────────────────────────────────────
+      document.addEventListener('mousemove', e => {
+        mx = e.clientX; my = e.clientY;
+        if (!ticking) { ticking = true; requestAnimationFrame(frame); }
+      }, { passive: true });
+
+      document.addEventListener('mouseleave', () => {
+        mx = -9999; my = -9999;
+        if (!ticking) { ticking = true; requestAnimationFrame(frame); }
+      });
+
+      // ── Per-frame update ────────────────────────────────────
+      function frame() {
+        ticking = false;
+        if (!isDesktop()) return;
+
+        // Move cursor dot
+        if (dot) dot.style.transform =
+          `translate(calc(${mx}px - 50%), calc(${my}px - 50%))`;
+
+        // Update each character
+        chars.forEach(({ el, isOrange }) => {
+          const r = el.getBoundingClientRect();
+          const cx = r.left + r.width / 2;
+          const cy = r.top + r.height / 2;
+          const dist = Math.hypot(mx - cx, my - cy);
+
+          // Determine swap colors dynamically (fixes dark mode issue)
+          // Normal State: default CSS color (cleared inline style)
+          // Swap State:
+          //   - If char is essentially Orange -> Swap to Black (LightMode) or White (DarkMode)
+          //   - If char is Text (Black/White) -> Swap to Orange
+
+          if (dist < SWAP_R) {
+            const dark = document.body.classList.contains('dark-mode');
+
+            if (isOrange) {
+              // Orange -> White (Dark) or Black (Light)
+              el.style.color = dark ? '#ffffff' : '#000000';
+            } else {
+              // Text -> Orange
+              el.style.color = 'var(--orange)';
+            }
+          } else {
+            // Restore default (CSS handles it)
+            el.style.color = '';
+          }
+
+          if (dist < ZOOM_R) {
+            // Zoom: scale inversely proportional to distance
+            const t = 1 - dist / ZOOM_R;                      // 1 at center, 0 at edge
+            const s = 1 + (MAX_SCALE - 1) * t * t;            // quadratic falloff
+            el.style.transform = `scale(${s.toFixed(3)})`;
+          } else {
+            el.style.transform = 'scale(1)';
+          }
+        });
+      }
+
+      // ── Ring lerp ───────────────────────────────────────────
+      (function ringLoop() {
+        if (isDesktop() && ring) {
+          rx += (mx - rx) * 0.13;
+          ry += (my - ry) * 0.13;
+          ring.style.transform =
+            `translate(calc(${rx}px - 50%), calc(${ry}px - 50%))`;
+        }
+        requestAnimationFrame(ringLoop);
+      })();
+
+      // ── Hover expand ────────────────────────────────────────
+      function addHover(el) {
+        el.addEventListener('mouseenter',
+          () => document.body.classList.add('hovering'), { passive: true });
+        el.addEventListener('mouseleave',
+          () => document.body.classList.remove('hovering'), { passive: true });
+      }
+      document.querySelectorAll(
+        'a, button, .pcard, .chdr, .stat-card, input, textarea'
+      ).forEach(addHover);
+      window.reattachHover = () =>
+        document.querySelectorAll('.pcard, .chdr').forEach(addHover);
+
+      // ── Character splitter ──────────────────────────────────
+      let chars = [];
+
+      // Selectors for elements to split — nav/modal/preloader excluded
+      const TARGETS = [
+        '.hero-h1', '.hero-sub', '.hero-tag',
+        '.about-l .sec-h2', '.about-l .about-txt', '.about-l .sec-sub',
+        '.products-head .sec-h2', '.products-head .sec-sub',
+        '.chdr-ttl',
+        '.pcard-name', '.pcard-wt', '.pcard-tag-pill',
+        '.stat-card p',
+        '.con-l .sec-h2', '.con-l .sec-sub',
+        '.c-lbl', '.c-val',
+        'footer .f-links a', 'footer .f-bottom',
+      ];
+
+      function isOrangeColor(color) {
+        const m = color.match(/\d+/g);
+        if (!m) return false;
+        const [r, g, b] = [+m[0], +m[1], +m[2]];
+        // Approximate orange check (R>180, G~50-140, B<50)
+        return r > 180 && g > 50 && g < 140 && b < 100;
+      }
+
+      // Recursively split text nodes, wrapping WORDS to prevent mid-word breaks
+      function splitTextNodes(node) {
+        if (node.nodeType === Node.TEXT_NODE) {
+          const text = node.textContent;
+          if (!text.trim()) return; // skip pure whitespace
+
+          const frag = document.createDocumentFragment();
+          const words = text.split(/(\s+)/); // Split by whitespace, keeping delimiters
+
+          const parent = node.parentElement;
+          const compColor = window.getComputedStyle(parent).color;
+          const isOrange = isOrangeColor(compColor);
+
+          words.forEach(word => {
+            if (!word) return;
+
+            // If it's a space, just append text node (allowing line break)
+            if (/^\s+$/.test(word)) {
+              frag.appendChild(document.createTextNode(word));
+              return;
+            }
+
+            // Wrap word in .sp-word (inline-block)
+            const wSpan = document.createElement('span');
+            wSpan.className = 'sp-word';
+
+            for (const ch of word) {
+              const span = document.createElement('span');
+              span.className = 'sp-char';
+              span.textContent = ch;
+              chars.push({ el: span, isOrange });
+              wSpan.appendChild(span);
+            }
+            frag.appendChild(wSpan);
+          });
+
+          node.parentNode.replaceChild(frag, node);
+        } else if (node.nodeType === Node.ELEMENT_NODE) {
+          // Don't split inside .sp-word/.sp-char or icons/images
+          if (node.classList.contains('sp-word') || node.classList.contains('sp-char')) return;
+          if (['I', 'SVG', 'IMG', 'BR', 'SCRIPT', 'STYLE'].includes(node.tagName)) return;
+
+          // Convert live collection to array to safely iterate
+          Array.from(node.childNodes).forEach(c => splitTextNodes(c));
+        }
+      }
+
+      window.initCharSplit = function () {
+        if (!isDesktop()) return;
+
+        // Clear previous chars array
+        chars = [];
+
+        document.querySelectorAll(TARGETS.join(',')).forEach(el => {
+          if (el.dataset.split) return;
+          if (el.closest('nav, .modal, #preloader, .drawer')) return;
+
+          el.dataset.split = '1';
+          splitTextNodes(el);
+        });
+
+        if (window.reattachHover) window.reattachHover();
+      };
+
+      // Theme logic is now automatic via CSS variables + calc in frame loop
+    })();
+
+    // ── THEME ────────────────────────────────────────────
+    const themeBtn = document.getElementById('theme-toggle');
+    if (localStorage.getItem('theme') === 'dark') document.body.classList.add('dark-mode');
+    themeBtn.addEventListener('click', () => {
+      document.body.classList.toggle('dark-mode');
+      localStorage.setItem('theme', document.body.classList.contains('dark-mode') ? 'dark' : 'light');
+      document.dispatchEvent(new Event('themechange'));
     });
 
-    // If using feather icons, or just inline SVG above is fine.
-    // feather.replace(); 
-
-    /* DATA SOURCE */
-    const products = [
+    // ── PRODUCT DATA ─────────────────────────────────────
+    const CATS = [
       {
         id: 'soya-chunks', label: 'Soya Chunks', products: [
-          {
-            id: 'sc-reg-box', img: 'regular-soyabox.PNG', name: 'Soya Chunks – Regular (Box)', wt: '200 gm',
-            desc: 'A wholesome and nutritious protein alternative, our Soya Chunks are perfect for curries, stir-fries, and snacks. Made from high-quality soybeans, they are packed with protein and fiber to keep you energized.',
-            nutrition: 'High in protein (52g per 100g), rich in fiber, and a great source of iron and calcium.',
-            recipes: [
-              { title: 'Soya Matar Curry', desc: 'A classic North Indian curry with soya chunks and green peas in a rich tomato-onion gravy.' },
-              { title: 'Soya Manchurian', desc: 'An Indo-Chinese favorite, with crispy soya chunks tossed in a tangy and spicy Manchurian sauce.' }
-            ]
-          },
-          {
-            id: 'sc-gran-box', img: 'granules-soyabox.PNG', name: 'Soya Chunks – Granules (Box)', wt: '200 gm',
-            desc: 'Soya granules, a finely ground version of our classic chunks, are ideal for adding a rich, meaty texture to a variety of dishes like pasta sauces and cutlets.',
-            nutrition: 'Excellent source of plant-based protein, low in fat, and perfect for vegetarian keema.',
-            recipes: [
-              { title: 'Soya Keema Pav', desc: 'A delicious and healthy vegetarian take on the classic Mumbai street food.' },
-              { title: 'Soya Stuffed Paratha', desc: 'Wholesome flatbreads stuffed with a savory mixture of soya granules and spices.' }
-            ]
-          },
-          {
-            id: 'sc-mini-box', img: 'mini-soyabox.PNG', name: 'Soya Chunks – Mini (Box)', wt: '200 gm',
-            desc: 'Our mini soya chunks are bite-sized and perfect for quick cooking, salads, and kid-friendly recipes.'
-          },
-          {
-            id: 'sc-reg-pouch', img: 'regular-soyapouch.PNG', name: 'Soya Chunks (Pouch)', wt: '40 gm',
-            desc: 'The same great quality soya chunks, now in a convenient and affordable pouch for daily use.'
-          },
-          {
-            id: 'sc-mini-pouch', img: 'mini-soyapouch.PNG', name: 'Soya Mini Chunks (Pouch)', wt: '40 gm',
-            desc: 'Small-sized soya chunks, packed in a pouch, are great for a quick and easy protein boost in any meal.'
-          }
+          { img: 'regular-soyabox.PNG', name: 'Soya Chunks – Regular (Box)', wt: '200 gm', desc: 'Wholesome protein-rich chunks perfect for curries, stir-fries and snacks.', nutrition: '52g protein per 100g, rich in fiber, iron and calcium.', recipes: [{ title: 'Soya Matar Curry', desc: 'Classic North Indian curry with soya and green peas.' }, { title: 'Soya Manchurian', desc: 'Crispy Indo-Chinese soya in tangy Manchurian sauce.' }] },
+          { img: 'granules-soyabox.PNG', name: 'Soya Chunks – Granules (Box)', wt: '200 gm', desc: 'Finely ground granules ideal for pasta sauces, cutlets and keema dishes.', recipes: [{ title: 'Soya Keema Pav', desc: 'Vegetarian twist on Mumbai street food classic.' }, { title: 'Soya Stuffed Paratha', desc: 'Wholesome flatbreads with spiced soya filling.' }] },
+          { img: 'mini-soyabox.PNG', name: 'Soya Chunks – Mini (Box)', wt: '200 gm', desc: 'Bite-sized for quick cooking, salads and kid-friendly recipes.' },
+          { img: 'regular-soyapouch.PNG', name: 'Soya Chunks (Pouch)', wt: '40 gm', desc: 'Same great quality in a convenient, affordable everyday pouch.' },
+          { img: 'mini-soyapouch.PNG', name: 'Soya Mini Chunks (Pouch)', wt: '40 gm', desc: 'Small-sized soya for a quick protein boost in any meal.' }
         ]
       },
       {
         id: 'pastes', label: 'Pastes', products: [
-          {
-            id: 'gg-large', img: 'ggpaste-1kg_jar.PNG', name: 'Ginger Garlic Paste Jar (Large)', wt: '1 kg',
-            desc: 'Our signature Ginger Garlic Paste in a large, bulk-sized jar. A kitchen essential for authentic Indian flavors.',
-            recipes: [
-              { title: 'Vegetable Biryani', desc: 'The essential base for a fragrant and flavorful vegetable biryani.' },
-              { title: 'Chole Masala', desc: 'A must-have for creating a rich and aromatic chickpea curry.' }
-            ]
-          },
-          {
-            id: 'gg-small', img: 'ggpaste-200gm_jar.PNG', name: 'Ginger Garlic Paste Jar (Small)', wt: '200 gm',
-            desc: 'A convenient jar of our fresh ginger garlic paste, perfect for everyday cooking.'
-          },
-          {
-            id: 'gg-pouch', img: 'ggpaste-pouch.PNG', name: 'Ginger Garlic Paste – Pouch', wt: '25 gm',
-            desc: 'A single-serving pouch of our flavorful ginger garlic paste, great for travel or quick meals.'
-          }
+          { img: 'ggpaste-1kg_jar.PNG', name: 'Ginger Garlic Paste (Large Jar)', wt: '1 kg', desc: 'Bulk-sized jar of our signature paste — kitchen essential for authentic Indian flavors.', recipes: [{ title: 'Vegetable Biryani', desc: 'Essential base for fragrant biryani.' }, { title: 'Chole Masala', desc: 'Must-have for rich aromatic chickpea curry.' }] },
+          { img: 'ggpaste-200gm_jar.PNG', name: 'Ginger Garlic Paste (Small Jar)', wt: '200 gm', desc: 'Convenient jar of fresh ginger garlic paste for everyday cooking.' },
+          { img: 'ggpaste-pouch.PNG', name: 'Ginger Garlic Paste – Pouch', wt: '25 gm', desc: 'Single-serving pouch — great for travel or quick meals.' }
         ]
       },
       {
         id: 'seviyan', label: 'Seviyan', products: [
-          {
-            id: 'sev-rst', img: 'roasted-sevaiyan.PNG', name: 'Roasted Seviyan', wt: '150g / 100g',
-            desc: 'Perfectly roasted to a golden-brown finish, our seviyan are ready to use in your favorite sweet or savory dishes.',
-            recipes: [
-              { title: 'Meethi Seviyan', desc: 'A traditional sweet dish made during festivals, with roasted vermicelli, ghee, sugar, and nuts.' },
-              { title: 'Seviyan Upma', desc: 'A quick and savory breakfast dish made with roasted vermicelli and vegetables.' }
-            ]
-          },
-          {
-            id: 'sev-verm', img: 'uncooked-sevaiyan.PNG', name: 'Vermicelli Seviyan', wt: '150g / 100g',
-            desc: 'Uncooked seviyan for a traditional preparation. Cook them to your desired texture for a variety of recipes.'
-          }
+          { img: 'roasted-sevaiyan.PNG', name: 'Roasted Seviyan', wt: '150g / 100g', desc: 'Golden-brown roasted vermicelli ready for sweet or savory dishes.', recipes: [{ title: 'Meethi Seviyan', desc: 'Traditional festival sweet with ghee, sugar and nuts.' }, { title: 'Seviyan Upma', desc: 'Quick savory breakfast with vegetables.' }] },
+          { img: 'uncooked-sevaiyan.PNG', name: 'Vermicelli Seviyan', wt: '150g / 100g', desc: 'Uncooked seviyan for traditional preparations — cook to desired texture.' }
         ]
       },
       {
         id: 'bakery', label: 'Bakery & Dry Items', products: [
-          {
-            id: 'sugar', img: 'sugar_cubes.PNG', name: 'Sugar Cubes', wt: '500g',
-            desc: 'Premium sugar cubes, perfect for tea and coffee. A touch of elegance for your table.'
-          },
-          {
-            id: 'toast', img: 'suji-toast.PNG', name: 'Suji Toast', wt: '300g',
-            desc: 'A crispy, delicious suji toast that\'s perfect for a morning snack or with your evening chai.'
-          }
+          { img: 'sugar_cubes.PNG', name: 'Sugar Cubes', wt: '500g', desc: 'Premium cubes for tea and coffee — a touch of elegance for your table.' },
+          { img: 'suji-toast.PNG', name: 'Suji Toast', wt: '300g', desc: "Crispy delicious suji toast — perfect for morning snack or evening chai." }
         ]
       },
       {
         id: 'ready-cook', label: 'Ready to Cook', products: [
-          {
-            id: 'samosa', img: 'samosa-patti.PNG', name: 'Samosa Patti', wt: '500gm / 250 gm',
-            desc: 'Thin, crispy sheets ready to be filled with your favorite ingredients to create perfect samosas at home.',
-            recipes: [
-              { title: 'Classic Aloo Samosa', desc: 'Use our pattis to create the perfect crispy shell for the traditional spiced potato and pea filling.' },
-              { title: 'Paneer Tikka Samosa', desc: 'A modern twist with a spicy and tangy paneer filling wrapped in our crispy pattis.' }
-            ]
-          },
-          {
-            id: 'thread', img: 'crispy-thread.PNG', name: 'Crispy Thread', wt: '500gm',
-            desc: 'Delightfully crunchy threads for a unique texture in your snacks and appetizers.'
-          },
-          {
-            id: 'spring', img: 'spring-roll-sheets.PNG', name: 'Spring Roll Sheets', wt: '400gm',
-            desc: 'Versatile sheets that are perfect for making fresh, homemade spring rolls.'
-          }
+          { img: 'samosa-patti.PNG', name: 'Samosa Patti', wt: '500gm / 250gm', desc: 'Thin crispy sheets ready to fill and fry for perfect homemade samosas.', recipes: [{ title: 'Classic Aloo Samosa', desc: 'Perfect crispy shell for spiced potato filling.' }, { title: 'Paneer Tikka Samosa', desc: 'Modern twist with spicy paneer filling.' }] },
+          { img: 'crispy-thread.PNG', name: 'Crispy Thread', wt: '500gm', desc: 'Delightfully crunchy threads for unique texture in snacks and appetizers.' },
+          { img: 'spring-roll-sheets.PNG', name: 'Spring Roll Sheets', wt: '400gm', desc: 'Versatile sheets perfect for fresh homemade spring rolls.' }
         ]
       },
       {
         id: 'tofu', label: 'Tofu (Soya Paneer)', products: [
-          {
-            id: 'tf-reg', img: 'tofu-regular.jpg', name: 'Tofu – Regular', wt: '200gm',
-            desc: 'Our classic, firm tofu (soya paneer) is a versatile and healthy protein source for all your recipes.',
-            nutrition: 'A complete protein, containing all nine essential amino acids. Low in calories and rich in minerals.',
-            recipes: [
-              { title: 'Tofu Bhurji', desc: 'A simple and quick scrambled tofu dish, similar to paneer bhurji, spiced with Indian masalas.' },
-              { title: 'Palak Tofu', desc: 'A healthy and vegan alternative to Palak Paneer, with tofu cubes in a creamy spinach gravy.' }
-            ]
-          },
-          {
-            id: 'tf-chilli', img: 'tofu-chilli.jpg', name: 'Tofu – Red Chilli', wt: '200gm',
-            desc: 'A spicy twist on our classic tofu, infused with red chilli for an extra kick of flavor.'
-          },
-          {
-            id: 'tf-garlic', img: 'tofu-garlic.jpg', name: 'Tofu – Garlic Pepper', wt: '200gm',
-            desc: 'Infused with a rich blend of garlic and black pepper, this tofu adds a savory depth to any dish.'
-          }
+          { img: 'tofu-regular.jpg', name: 'Tofu – Regular', wt: '200gm', desc: 'Firm classic tofu — versatile, healthy protein for all recipes.', nutrition: 'Complete protein with all 9 essential amino acids. Low calorie, mineral-rich.', recipes: [{ title: 'Tofu Bhurji', desc: 'Scrambled tofu with Indian masalas.' }, { title: 'Palak Tofu', desc: 'Creamy spinach gravy — vegan Palak Paneer.' }] },
+          { img: 'tofu-chilli.jpg', name: 'Tofu – Red Chilli', wt: '200gm', desc: 'Spicy tofu infused with red chilli for an extra kick of flavor.' },
+          { img: 'tofu-garlic.jpg', name: 'Tofu – Garlic Pepper', wt: '200gm', desc: 'Rich garlic and black pepper infused tofu with savory depth.' }
         ]
       },
       {
         id: 'pickles', label: 'Pickles', products: [
-          {
-            id: 'pk-home', img: 'home_made-pickle.PNG', name: 'Special Homemade Pickle', wt: '250gm',
-            desc: 'A traditional homemade recipe with a mix of select spices, bringing authentic flavor to your meals.',
-            varieties: [
-              'Amla Murabba Pickle', 'Amla Pickle', 'Bijora Pickle', 'Dryfruit Mix Pickle', 'Garlic Bijora Pickle', 'Garlic Pickle', 'Green Chilli Pickle', 'Hot Lemon Pickle',
-              'Keri Chana Methi Pickle', 'Keri Gunda Pickle', 'Keri Chunda Pickle', 'Kharek Pickle', 'Lemon Chutney', 'Mango Pickle', 'Masala Ker Pickle', 'Methiya Mango Pickle',
-              'Mix Pickle', 'Rayta Ker Pickle', 'Red Stuff Chilly Pickle', 'Sweet Lemon Pickle', 'Sweet Mango Pickle', 'Sweet Red Chilly Pickle', 'Tikha Gunda Pickle'
-            ]
-          },
-          {
-            id: 'pk-silver', img: 'silver-pickle.PNG', name: 'Silver Pickle', wt: '40gm',
-            desc: 'A small, convenient pack of our classic pickle, perfect for a tangy treat on the go.',
-            varieties: ['Green Chilli Pickle', 'Hot Lemon Pickle', 'Mango Pickle', 'Mixed Pickle']
-          }
+          { img: 'home_made-pickle.PNG', name: 'Special Homemade Pickle', wt: '250gm', desc: 'Traditional homemade recipe with select spices — authentic flavor every time.', varieties: ['Amla Murabba', 'Amla Pickle', 'Bijora Pickle', 'Dryfruit Mix', 'Garlic Bijora', 'Garlic Pickle', 'Green Chilli', 'Hot Lemon', 'Keri Chana Methi', 'Keri Gunda', 'Keri Chunda', 'Kharek Pickle', 'Lemon Chutney', 'Mango Pickle', 'Masala Ker', 'Methiya Mango', 'Mix Pickle', 'Rayta Ker', 'Red Stuff Chilly', 'Sweet Lemon', 'Sweet Mango', 'Sweet Red Chilly', 'Tikha Gunda'] },
+          { img: 'silver-pickle.PNG', name: 'Silver Pickle', wt: '40gm', desc: 'Convenient pocket-sized tangy treat — perfect on the go.', varieties: ['Green Chilli', 'Hot Lemon', 'Mango', 'Mixed Pickle'] }
         ]
       },
       {
         id: 'pudding', label: 'Pudding', products: [
-          {
-            id: 'pudding', img: 'caramel-pudding.PNG', name: 'Caramel Pudding', wt: '90gm',
-            desc: 'A rich, delightful caramel pudding mix. Follow our simple instructions to create a silky, smooth dessert at home. A perfect sweet treat for any occasion.'
-          }
+          { img: 'caramel-pudding.PNG', name: 'Caramel Pudding', wt: '90gm', desc: 'Rich caramel pudding mix — follow simple instructions for a silky smooth dessert at home.' }
         ]
       },
       {
         id: 'chocolates', label: 'Chocolates', products: [
-          {
-            id: 'choco-l', img: 'choco-lush.PNG', name: 'Choco Lush & Gracia (Large)', wt: '770gm',
-            desc: 'A delightful mix of various chocolates in one pack, offering a treat for every taste bud.',
-            varieties: ['Assorted', 'Hazelnut', 'Milk', 'Orange', 'Pista', 'Strawberry', 'Gracia']
-          },
-          {
-            id: 'choco-s', img: 'assorted-chocolate.PNG', name: 'Choco Lush & Gracia (Small)', wt: '200gm / 250gm',
-            desc: 'A rich and creamy assortment of our finest chocolates, perfect for a sweet indulgence.',
-            varieties: ['Assorted', 'Hazelnut', 'Milk', 'Orange', 'Pista', 'Strawberry', 'Gracia']
-          }
+          { img: 'choco-lush.PNG', name: 'Choco Lush & Gracia (Large)', wt: '770gm', desc: 'Delightful mix of premium chocolates in one pack.', varieties: ['Assorted', 'Hazelnut', 'Milk', 'Orange', 'Pista', 'Strawberry', 'Gracia'] },
+          { img: 'assorted-chocolate.PNG', name: 'Choco Lush & Gracia (Small)', wt: '200gm / 250gm', desc: 'Rich creamy assortment of our finest chocolates.', varieties: ['Assorted', 'Hazelnut', 'Milk', 'Orange', 'Pista', 'Strawberry', 'Gracia'] }
         ]
       }
     ];
 
-    /* APP LOGIC */
+    // ── INIT ─────────────────────────────────────────────
     document.addEventListener('DOMContentLoaded', () => {
-      // REMOVE PRELOADER
+
+      // Preloader
       setTimeout(() => document.getElementById('preloader').classList.add('gone'), 1800);
 
-      // SCROLL REVEAL OBSERVER
-      const obs = new IntersectionObserver((entries) => {
+      // Scroll reveal
+      const obs = new IntersectionObserver(entries => {
         entries.forEach(e => {
           if (e.isIntersecting) {
             e.target.classList.add('active');
-            // Trigger counters if it's a counter
             if (e.target.querySelector('.counter')) startCounters(e.target);
             obs.unobserve(e.target);
           }
         });
-      }, { threshold: 0.1 });
+      }, { threshold: 0.08 });
       document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 
-      // COUNTER LOGIC
+      // Counters
       function startCounters(parent) {
         parent.querySelectorAll('.counter').forEach(c => {
-          const target = +c.dataset.target;
-          const duration = 2000;
-          const step = target / (duration / 16);
+          const target = +c.dataset.target, step = target / (2000 / 16);
           let cur = 0;
-          const up = () => {
-            cur += step;
-            if (cur < target) {
-              c.textContent = Math.ceil(cur) + "+";
-              requestAnimationFrame(up);
-            } else {
-              c.textContent = target + "+";
-            }
-          };
-          up();
+          const tick = () => { cur += step; c.textContent = cur < target ? Math.ceil(cur) + '+' : target + '+'; if (cur < target) requestAnimationFrame(tick); };
+          tick();
         });
       }
 
-      // NAVBAR SCROLL EFFECT
-      window.addEventListener('scroll', () => {
-        const nav = document.getElementById('navbar');
-        if (window.scrollY > 50) nav.classList.add('scrolled');
-        else nav.classList.remove('scrolled');
-      });
+      // Navbar scroll
+      window.addEventListener('scroll', () =>
+        document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 40), { passive: true });
 
-      // SPOTLIGHT CURSOR LOGIC
-      function wrapSpotlight(root) {
-        // Expanded selection for spotlight effect - REMOVED generic 'span' to prevent double-wrapping issues
-        root.querySelectorAll('h1, h2, h3, h4, p, a, .brand-main, .brand-sub, .hero-tag, .slide-name, .slide-badge, .sec-sub').forEach(el => {
-          if (el.dataset.wrapped || el.closest('.slide-card') || el.classList.contains('material-icons')) return;
-          el.dataset.wrapped = '1';
-          // Only wrap text nodes to avoid breaking HTML structure
-          const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT, null, false);
-          const textNodes = [];
-          while (walker.nextNode()) textNodes.push(walker.currentNode);
-
-          textNodes.forEach(node => {
-            if (!node.textContent.trim()) return;
-            const frag = document.createDocumentFragment();
-            [...node.textContent].forEach(ch => {
-              const span = document.createElement('span');
-              span.className = ch === ' ' ? 'char space' : 'char';
-              span.textContent = ch;
-              frag.appendChild(span);
-            });
-            node.replaceWith(frag);
-          });
-        });
-      }
-      wrapSpotlight(document.body);
-
-      /* CURSOR LOGIC REMOVED */
-
-      // MAGNETIC BUTTONS
-      document.querySelectorAll('.btn-p, .nav-cta').forEach(btn => {
-        btn.addEventListener('mousemove', (e) => {
-          const rect = btn.getBoundingClientRect();
-          const x = e.clientX - rect.left - rect.width / 2;
-          const y = e.clientY - rect.top - rect.height / 2;
-
-          btn.style.transform = `translate(${x * 0.3}px, ${y * 0.3}px)`;
-        });
-
-        btn.addEventListener('mouseleave', () => {
-          btn.style.transform = 'translate(0, 0)';
-        });
-      });
-
-      // BUILD SLIDESHOW (HERO)
-      // BUILD MOVIE REEL
+      // ── BUILD REEL ─────────────────────────────────────
       const reelTrack = document.getElementById('reel-track');
-
-      const slideItems = [
-        { img: 'regular-soyabox.PNG', name: 'Soya Chunks', tag: 'BESTSELLER' },
-        { img: 'home_made-pickle.PNG', name: 'Pickles', tag: 'AUTHENTIC' },
-        { img: 'samosa-patti.PNG', name: 'Samosa Patti', tag: 'CRISPY' },
-        { img: 'ggpaste-1kg_jar.PNG', name: 'GG Paste', tag: 'CHEF CHOICE' },
-        { img: 'regular-tofu.jpg', name: 'Fresh Tofu', tag: 'HEALTHY' }
-      ];
-
-      // Duplicate list for infinite loop (4 sets for smooth continuous scroll on wide screens)
-      const reelData = [...slideItems, ...slideItems, ...slideItems, ...slideItems];
-
-      reelData.forEach(item => {
-        const div = document.createElement('div');
-        div.className = 'reel-item';
-        div.innerHTML = `
-            <img src="${item.img}" class="reel-img" onerror="this.src='https://via.placeholder.com/300?text=Product'">
-            <!-- Text Removed -->
-          `;
-        reelTrack.appendChild(div);
+      const reelImgs = ['regular-soyabox.PNG', 'home_made-pickle.PNG', 'samosa-patti.PNG', 'ggpaste-1kg_jar.PNG', 'tofu-regular.jpg', 'granules-soyabox.PNG'];
+      [...reelImgs, ...reelImgs, ...reelImgs, ...reelImgs].forEach(img => {
+        const d = document.createElement('div'); d.className = 'reel-item';
+        d.innerHTML = `<img src="${img}" class="reel-img" onerror="this.src='https://placehold.co/240x360/eee/999?text=Product'">`;
+        reelTrack.appendChild(d);
       });
 
+      // ── BUILD PARTNERS MARQUEE ─────────────────────────
+      const partNames = ['Harnik General Foods', 'Maharashtra Samosa', 'Avanti Enterprise', 'Vega Industries', 'Eatsip Foods', 'B 2 Bakery', 'Special Homemade Pickle', 'Serial Enterprise'];
+      const pt = document.getElementById('part-track');
+      // Double for infinite scroll
+      [...partNames, ...partNames].forEach(n => {
+        const s = document.createElement('span'); s.className = 'part-item'; s.textContent = n; pt.appendChild(s);
+      });
 
-      // BUILD PRODUCT LIST
+      // ── BUILD PRODUCT LIST ─────────────────────────────
       const pList = document.getElementById('product-list');
-      // Fix: Use 'products' variable instead of old 'CATS'
-      products.forEach((cat, idx) => {
+      CATS.forEach((cat, idx) => {
         const blk = document.createElement('div');
-        blk.className = 'cblk';
-        blk.dataset.cat = cat.id; // For filtering
-
-        // Header
+        blk.className = 'cblk'; blk.dataset.cat = cat.id;
         const hdr = document.createElement('div');
-        hdr.className = `chdr ${idx < 3 ? 'open' : ''}`; // Open first few by default
+        hdr.className = `chdr ${idx < 3 ? 'open' : ''}`;
         hdr.innerHTML = `<span class="chdr-ttl">${cat.label}</span><div class="chdr-icon"><i class="fas fa-chevron-right"></i></div>`;
-
-        // Body
         const bdy = document.createElement('div');
         bdy.className = `cbdy ${idx < 3 ? 'open' : ''}`;
-
-        const grid = document.createElement('div');
-        grid.className = 'pgrid';
+        const grid = document.createElement('div'); grid.className = 'pgrid';
 
         cat.products.forEach((p, i) => {
           const card = document.createElement('div');
           card.className = 'pcard';
+          card.style.animationDelay = `${i * 0.06}s`;
           card.onclick = () => openModal(p);
-
-          // Staggered Entry
-          card.style.animationDelay = `${(i * 0.05)}s`;
-
-          // 3D Tilt Logic
-          card.addEventListener('mousemove', (e) => {
-            // Disable on mobile/touch if needed, or rely on hover capabilities
-            if (window.innerWidth < 1024) return;
-
-            const rect = card.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-
-            // Calculate rotation (max 8deg)
-            const xRot = ((y / rect.height) - 0.5) * -8;
-            const yRot = ((x / rect.width) - 0.5) * 8;
-
-            // Move glare
-            const glare = card.querySelector('.pcard-glare');
-            if (glare) {
-              glare.style.background = `radial-gradient(circle at ${x}px ${y}px, rgba(255,255,255,0.7), transparent 70%)`;
-              glare.style.opacity = '1';
-            }
-
-            // Instant transform for responsiveness
+          // 3D tilt (desktop only)
+          card.addEventListener('mousemove', e => {
+            if (window.innerWidth < 960) return;
+            const r = card.getBoundingClientRect();
+            const x = e.clientX - r.left, y = e.clientY - r.top;
+            const xR = ((y / r.height) - .5) * -7, yR = ((x / r.width) - .5) * 7;
+            const g = card.querySelector('.pcard-glare');
+            if (g) { g.style.background = `radial-gradient(circle at ${x}px ${y}px,rgba(255,255,255,.65),transparent 65%)`; g.style.opacity = '1'; }
             card.style.transition = 'none';
-            card.style.transform = `perspective(1000px) rotateX(${xRot}deg) rotateY(${yRot}deg) scale3d(1.02, 1.02, 1.02)`;
+            card.style.transform = `perspective(1000px) rotateX(${xR}deg) rotateY(${yR}deg) scale3d(1.02,1.02,1.02)`;
           });
-
           card.addEventListener('mouseleave', () => {
-            // Smooth reset
-            card.style.transition = 'transform 0.5s ease';
-            card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale3d(1, 1, 1)';
-
-            const glare = card.querySelector('.pcard-glare');
-            if (glare) glare.style.opacity = '0';
+            card.style.transition = 'transform .5s ease';
+            card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale3d(1,1,1)';
+            const g = card.querySelector('.pcard-glare'); if (g) g.style.opacity = '0';
           });
-
-          card.innerHTML = `
-        <div class="pcard-glare"></div>
-        <div class="pcard-img"><img src="${p.img}" alt="${p.name}" loading="lazy" onerror="this.src='https://via.placeholder.com/200?text=${p.name}'"></div>
-        <div class="pcard-info">
-          <span class="pcard-tag-pill">SERIAL FOODS</span>
-          <div class="pcard-name">${p.name}</div>
-          <div class="pcard-wt">${p.wt}</div>
-        </div>
-      `;
+          card.innerHTML = `<div class="pcard-glare"></div>
+        <div class="pcard-img"><img src="${p.img}" alt="${p.name}" loading="lazy" onerror="this.src='https://placehold.co/260x260/eee/999?text=${encodeURIComponent(p.name)}'"></div>
+        <div class="pcard-info"><span class="pcard-tag-pill">SERIAL FOODS</span><div class="pcard-name">${p.name}</div><div class="pcard-wt">${p.wt}</div></div>`;
           grid.appendChild(card);
         });
 
-        bdy.appendChild(grid);
-        blk.appendChild(hdr);
-        blk.appendChild(bdy);
-        pList.appendChild(blk);
-
-        // Accordion Logic
-        hdr.addEventListener('click', () => {
-          const isOpen = hdr.classList.contains('open');
-          hdr.classList.toggle('open', !isOpen);
-          bdy.classList.toggle('open', !isOpen);
-        });
+        bdy.appendChild(grid); blk.appendChild(hdr); blk.appendChild(bdy); pList.appendChild(blk);
+        hdr.addEventListener('click', () => { hdr.classList.toggle('open'); bdy.classList.toggle('open'); });
       });
 
-      // FILTER LOGIC
-      window.filterProducts = (filter) => {
-        // Update Chips
-        document.querySelectorAll('.chip').forEach(c => {
-          if (c.dataset.filter === filter) c.classList.add('active');
-          else c.classList.remove('active');
-        });
+      if (window.reattachHover) window.reattachHover();
 
-        // Filter Blocks
-        document.querySelectorAll('.cblk').forEach(blk => {
-          if (filter === 'all' || blk.dataset.cat === filter) {
-            blk.style.display = 'block';
-            if (filter !== 'all') {
-              // Open the accordion if specifically selected
-              blk.querySelector('.chdr').classList.add('open');
-              blk.querySelector('.cbdy').classList.add('open');
-            }
-          } else {
-            blk.style.display = 'none';
-          }
-        });
+      // Init character split for cursor color+zoom effect
+      if (window.initCharSplit) window.initCharSplit();
+
+      // ── FILTER + SCROLL ────────────────────────────────
+      window.filterAndScroll = catId => {
+        const blk = document.querySelector(`.cblk[data-cat="${catId}"]`); if (!blk) return;
+        blk.querySelector('.chdr').classList.add('open');
+        blk.querySelector('.cbdy').classList.add('open');
+        window.scrollTo({ top: blk.getBoundingClientRect().top + window.pageYOffset - 90, behavior: 'smooth' });
       };
 
-      // CLICK ON CHIPS
-      /* FILTER CLIP LISTENERS REMOVED (UI DELETED) */
-
-      // GLOBAL FUNC FOR DROPDOWN
-      window.filterAndScroll = (catId) => {
-        // filterProducts(catId); // No more filtering needed if we show all
-        // Instead, scroll to the specific category block
-        const blk = document.querySelector(`.cblk[data-cat="${catId}"]`);
-        if (blk) {
-          const headerOffset = 100; // Adjust for fixed header
-          const elementPosition = blk.getBoundingClientRect().top;
-          const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-
-          window.scrollTo({
-            top: offsetPosition,
-            behavior: "smooth"
-          });
-
-          // Open it
-          blk.querySelector('.chdr').classList.add('open');
-          blk.querySelector('.cbdy').classList.add('open');
-        }
-      };
-
-      // MODAL LOGIC
+      // ── MODAL ──────────────────────────────────────────
       const modal = document.getElementById('pmodal');
-      const mName = document.getElementById('m-name');
-      const mWt = document.getElementById('m-wt');
-      const mDesc = document.getElementById('m-desc');
-      const mImg = document.getElementById('m-img');
-      const mChips = document.getElementById('m-chips');
-      const mWa = document.getElementById('m-wa');
-      const mExtra = document.getElementById('m-extra');
-
-      window.openModal = (p) => {
-        mName.textContent = p.name;
-        mWt.textContent = p.wt;
-        mDesc.textContent = p.desc;
-        mImg.src = p.img;
-        mImg.onerror = function () { this.src = 'https://via.placeholder.com/200?text=' + p.name };
-
-        mChips.innerHTML = '';
-        if (p.variants) {
-          p.variants.forEach(v => {
-            const s = document.createElement('span');
-            s.className = 'm-chip';
-            s.textContent = v;
-            mChips.appendChild(s);
-          });
-        }
-
-        // Populate Extra Info
+      window.openModal = p => {
+        document.getElementById('m-name').textContent = p.name;
+        document.getElementById('m-wt').textContent = p.wt;
+        document.getElementById('m-desc').textContent = p.desc;
+        const img = document.getElementById('m-img'); img.src = p.img;
+        img.onerror = () => img.src = 'https://placehold.co/200?text=' + encodeURIComponent(p.name);
         let html = '';
-
-        // Varieties
-        if (p.varieties && p.varieties.length > 0) {
-          html += `<h4>Available Varieties</h4><ul>`;
-          p.varieties.forEach(v => html += `<li>${v}</li>`);
-          html += `</ul>`;
-        }
-
-        // Nutrition
-        if (p.nutrition) {
-          html += `<h4>Nutritional Highlights</h4><p>${p.nutrition}</p>`;
-        }
-
-        // Recipes
-        if (p.recipes && p.recipes.length > 0) {
-          html += `<h4>Recipe Ideas</h4>`;
-          p.recipes.forEach(r => {
-            html += `<div class="recipe-item">
-                           <h5>${r.title}</h5>
-                           <p>${r.desc}</p>
-                         </div>`;
-          });
-        }
-
-        mExtra.innerHTML = html;
-
-        modal.classList.add('open');
-        document.body.style.overflow = 'hidden';
-
-        // Update WhatsApp Link
-        const msg = `Hello, I would like to order: ${p.name} (${p.wt}). Please provided details.`;
-        mWa.href = `https://wa.me/918850401035?text=${encodeURIComponent(msg)}`;
+        if (p.varieties?.length) { html += `<h4>Available Varieties</h4><ul>`; p.varieties.forEach(v => html += `<li>${v}</li>`); html += `</ul>`; }
+        if (p.nutrition) html += `<h4>Nutritional Highlights</h4><p style="font-size:.88rem;color:#555">${p.nutrition}</p>`;
+        if (p.recipes?.length) { html += `<h4>Recipe Ideas</h4>`; p.recipes.forEach(r => html += `<div class="recipe-item"><h5>${r.title}</h5><p>${r.desc}</p></div>`); }
+        document.getElementById('m-extra').innerHTML = html;
+        modal.classList.add('open'); document.body.style.overflow = 'hidden';
+        document.querySelector('.mbox').scrollTop = 0;
+        // Update WhatsApp Link (Improved Message)
+        const msg = `Hi Serial Enterprise Foods, I'm interested in ordering *${p.name} (${p.wt})*. Could you please share the price and availability?`;
+        document.getElementById('m-wa').href = `https://wa.me/918850401035?text=${encodeURIComponent(msg)}`;
       };
+      document.getElementById('m-close').onclick = () => { modal.classList.remove('open'); document.body.style.overflow = ''; };
+      modal.onclick = e => { if (e.target === modal) { modal.classList.remove('open'); document.body.style.overflow = ''; } };
 
-      document.getElementById('m-close').onclick = () => modal.classList.remove('open');
-      modal.onclick = (e) => { if (e.target === modal) modal.classList.remove('open'); }
-
-      // DRAWER LOGIC
+      // ── DRAWER ─────────────────────────────────────────
       const ham = document.getElementById('ham');
       const drawer = document.getElementById('drawer');
-      const dClose = document.getElementById('d-close');
+      const overlay = document.getElementById('drawer-overlay');
+      const close = () => { drawer.classList.remove('open'); overlay.classList.remove('active'); ham.classList.remove('open'); document.body.style.overflow = ''; };
+      ham.onclick = () => { drawer.classList.add('open'); overlay.classList.add('active'); ham.classList.add('open'); document.body.style.overflow = 'hidden'; };
+      document.getElementById('d-close').onclick = close;
+      overlay.onclick = close;
+      window.closeDrawer = close;
 
-      ham.onclick = () => drawer.classList.add('open');
-      dClose.onclick = () => drawer.classList.remove('open');
-      window.closeDrawer = () => drawer.classList.remove('open');
+      // ── MAGNETIC BTNS ──────────────────────────────────
+      document.querySelectorAll('.btn-p').forEach(btn => {
+        btn.addEventListener('mousemove', e => { const r = btn.getBoundingClientRect(); btn.style.transform = `translate(${(e.clientX - r.left - r.width / 2) * .25}px,${(e.clientY - r.top - r.height / 2) * .25}px)`; });
+        btn.addEventListener('mouseleave', () => { btn.style.transform = 'translate(0,0)'; });
+      });
 
-      // FORCE SCROLL TO TOP ON LOAD
-      window.onbeforeunload = function () {
-        window.scrollTo(0, 0);
-      }
-      if (history.scrollRestoration) {
-        history.scrollRestoration = 'manual';
-      }
-
+      if (history.scrollRestoration) history.scrollRestoration = 'manual';
     });
   </script>
 </body>

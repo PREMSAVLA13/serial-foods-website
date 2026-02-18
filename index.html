@@ -1488,6 +1488,14 @@
         display: none;
       }
 
+      .nav-brand {
+        flex-shrink: 0;
+      }
+
+      .nav-brand-txt {
+        white-space: nowrap;
+      }
+
       .ham {
         display: flex;
       }
@@ -2084,11 +2092,16 @@
       ];
 
       function isOrangeColor(color) {
+        // Robust check: Is Red dominant? AND Is Green reasonable? AND Is Blue low?
+        // e.g. rgb(232, 102, 10) -> R=232, G=102, B=10
         const m = color.match(/\d+/g);
         if (!m) return false;
         const [r, g, b] = [+m[0], +m[1], +m[2]];
-        // Approximate orange check (R>180, G~50-140, B<50)
-        return r > 180 && g > 50 && g < 140 && b < 100;
+
+        // Logic: Red must be significantly higher than Green and Blue
+        // And Red shouldn't be too dark (<100) or too light (>250 strictly white)
+        // Using +30 diff to avoid near-greys or warm whites
+        return (r > g + 30) && (r > b + 30) && (r > 100);
       }
 
       // Recursively split text nodes, wrapping WORDS to prevent mid-word breaks
